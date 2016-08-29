@@ -1,0 +1,19 @@
+# -----------------------------------------------------------------
+#
+# Het doel van deze gitignore file is om alle bestanden en content
+# van de website buiten Git te houden. Alleen de bestanden behorend
+# bij de WordPress theme mogen in Git komen.
+#
+# -----------------------------------------------------------------
+
+# Standaard alles negeren, tenzij expliciet toegestaan
+*
+
+# Files van MartineHooptOpBeter theme niet negeren
+!wp-content/themes/martinehooptopbeter/
+
+# Dit gitignore file niet negeren
+!.gitignore
+
+# Readme file met uitleg van nut van deze directory
+!README.md

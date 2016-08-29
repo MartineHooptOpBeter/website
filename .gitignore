@@ -1,0 +1,3 @@
+# Windows of OS X specifieke bestanden negeren
+Thumbs.db
+.DS_Store

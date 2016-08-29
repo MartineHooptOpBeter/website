@@ -1,0 +1,2 @@
+# Negeer node modules. We vetrouwen op de dependancy manager ;-)
+node_modules/
