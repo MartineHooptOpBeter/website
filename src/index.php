@@ -101,7 +101,7 @@
 			<div class="text">
 
 				<h2>Stamceltherapie</h2>
-				<p>De stamceltherapie, welke in totaal vier weken duurt, in de <a href="http://www.clinicaruiz.com/inicio.php" target="_blank">Clínica Ruiz</a> kliniek in Mexico kost $54.500. Met de kosten van de nabehandeling, reiskosten en de benodigde MRI scan kan dit oplopen tot wel &euro; 65.000,-. Omdat ik dit niet alleen kan betalen ben ik een crowdfunding actie begonnen.</>
+				<p>De stamceltherapie, welke in totaal vier weken duurt, in de <a href="http://www.clinicaruiz.com/inicio.php" target="_blank">Clínica Ruiz</a> kliniek in Mexico kost $54.500. Met de kosten van de nabehandeling, reiskosten en de benodigde MRI scan kan dit oplopen tot wel &euro; 65.000,-. Omdat ik dit niet alleen kan betalen ben ik een crowdfunding actie begonnen.</p>
 				
 				<div class="buttons">
 					<a href="#" class="btn">Lees verder</a>
