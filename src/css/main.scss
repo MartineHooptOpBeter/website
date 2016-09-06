@@ -1,0 +1,65 @@
+@import 'colors';
+
+/*========================= TEXT STYLES =========================*/
+html										{ height: 100%; overflow-x: hidden; }
+body										{ font-family: 'Montserrat', sans-serif;; font-weight: normal; font-size: 15px; line-height: 22px; color: $bodyTextColor; height: 100%; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, h4, h5, h5, h6					{ margin: 20px 0 10px 0; font-family: 'Roboto', sans-serif; color: $accentColor; }
+h1											{ font-size: 40px; line-height: 50px; font-weight: normal; margin: 0 0 20px 0; }
+h2											{ font-size: 30px; line-height: 40px; font-weight: normal; }
+h3											{ font-size: 24px; line-height: 30px; font-weight: normal; }
+h4											{ font-size: 20px; line-height: 30px; }
+h5											{ font-size: 18px; line-height: 20px; }
+h6											{ font-size: 15px; line-height: 20px; }
+
+.sitewidth									{ margin: 0 auto; width: 1200px; }
+
+
+/*========================= NAVIGATION =========================*/
+.navigation									{ background-color: #fff; padding: 20px 0 10px 0; }
+.navigation nav								{ float: right; }
+.navigation .logo img						{ height: 50px; }
+
+.navigation nav ul							{ list-style: none; padding: 0; }
+.navigation nav ul li						{ display: inline; }
+.navigation nav ul li a						{ display: inline-block; margin-left: 10px; padding: 6px 10px; border: 1px solid #fff; }
+
+.navigation nav ul li a:link,
+.navigation nav ul li a:visited				{ text-decoration: none; }
+.navigation nav ul li a:active,
+.navigation nav ul li a:hover				{ border-color: $hoverColor; text-decoration: none; }
+
+.navigation nav ul li a.active				{ border-color: $accentColor; }
+
+
+/*========================= JUMBO PHOTO =========================*/
+.jumbophoto									{ text-align: center; background-color: #8dd8d0; }
+.jumbophoto .sitewidth						{ background-repeat: no-repeat; background-position: center; box-sizing: border-box; padding: 60px 0; height: 500px; }
+.jumbophoto .dimmed							{ position: relative; background-color: rgba(255, 255, 255, 0.5); height: 380px; }
+
+.jumbophoto .dimmed h1						{ margin-top: 40px; width: 60%; display: inline-block; text-shadow: 2px 2px #eee; }
+.jumbophoto .dimmed p						{ margin-left: 40px; width: 50%; margin-top: 90px; text-shadow: 1px 1px #eee; }
+.jumbophoto .dimmed .btn					{ position: absolute; right: 40px; bottom: 40px; }
+
+
+/*========================= ABOUT ME =========================*/
+.aboutme									{ background: url(../img/aboutme-background.png) repeat-y center; }
+.aboutme .sitewidth							{ position: relative; }
+.aboutme .text								{ box-sizing: border-box; width: 70%; padding: 20px 20px 20px 0; background-color: #fff; }
+.aboutme .portrait							{ position: absolute; width: 200px; border-radius: 100px; right: 15%; top: 50%; transform: translate(50%, -50%); }
+
+.aboutme .btn								{ margin-top: 30px; }
+
+
+/*========================= FORMS / BUTTONS =========================*/
+
+a.btn										{ clear: both; display: inline-block; padding: 10px 20px; background-color: $accentColor; color: #fff; border-radius: 5px; }
+a.btn:link,
+a.btn:viksited								{ text-decoration: none; }
+a.btn:hover,
+a.btn:active								{ text-decoration: none; }
+
+
+/*========================= MISCELLANEOUS =========================*/
+.clearfix:before,
+.clearfix:after								{ content: " "; display: table; }
+.clearfix:after								{ clear: both; }
