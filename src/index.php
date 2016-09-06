@@ -47,7 +47,7 @@
 					<li><a href="/" class="active">Home</a></li>
 					<li><a href="/">Over mij</a></li>
 					<li><a href="/">Help mij</a></li>
-					<li><a href="/">Multiple Sclerosis</a></li>
+					<li><a href="/">Multiple sclerose</a></li>
 					<li><a href="/">Contact</a></li>
 				</ul>
 			</nav>
