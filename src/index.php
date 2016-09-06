@@ -105,7 +105,7 @@
 				
 				<div class="buttons">
 					<a href="#" class="btn">Lees verder</a>
-				</div<
+				</div>
 
 			</div>
 	
