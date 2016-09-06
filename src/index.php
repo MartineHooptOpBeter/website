@@ -63,7 +63,10 @@
 		
 				<h1>Help mij in mijn strijd tegen MS en de hoop op een beter leven!</h1>
 				<p>Ondanks alle medicatie heeft MS na ruim zes jaar al heel veel van mijn mobiliteit afgenomen. Artsen in Nederland lijken mij niet te kunnen helpen en daarom heb ik mijn hoop volledig gevestigd op een stamceltherapie in Mexico. Help je mij mee op de kans op een beter leven?</p>
-				<a href="#" class="btn">Lees verder</a>
+				
+				<div class="buttons">
+					<a href="#" class="btn">Lees verder</a>
+				</div>
 
 			</div>
 		</div>
@@ -77,12 +80,37 @@
 			<div class="text">
 				<h2>Ik ben Martine</h2>
 				<p>Als 41-jarige vrouw met twee schatten van dochters hoor je toch volop van het leven te genieten? Toch? Maar daar kwam zes jaar abrupt een streep doorheen toen bij mijn toenmalige vriend keelkanker werd geconstateerd en een maand later bij mij de diagnose MS werd gesteld.</p>
-				<a href="#" class="btn">Lees verder</a>
+				
+				<div class="buttons">
+					<a href="#" class="btn">Lees verder</a>
+				</div>
+				
 				<img src="<?php bloginfo('template_url'); ?>/img/portret-martine.jpg" class="portrait" alt="Portret Martine" />
 			</div>
 
 		</div>
 	
+	</section>
+
+	<section class="crowdfunding clearfix">
+	
+		<div class="sitewidth">
+	
+			<img src="<?php bloginfo('template_url'); ?>/img/clinica-ruiz.jpg" class="photo" alt="Clínica Ruiz" />
+
+			<div class="text">
+
+				<h2>Stamceltherapie</h2>
+				<p>De stamceltherapie, welke in totaal vier weken duurt, in de <a href="http://www.clinicaruiz.com/inicio.php" target="_blank">Clínica Ruiz</a> kliniek in Mexico kost $54.500. Met de kosten van de nabehandeling, reiskosten en de benodigde MRI scan kan dit oplopen tot wel &euro; 65.000,-. Omdat ik dit niet alleen kan betalen ben ik een crowdfunding actie begonnen.</>
+				
+				<div class="buttons">
+					<a href="#" class="btn">Lees verder</a>
+				</div<
+
+			</div>
+	
+		</div>
+
 	</section>
 
 </body>

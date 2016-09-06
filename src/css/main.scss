@@ -44,15 +44,24 @@ h6											{ font-size: 15px; line-height: 20px; }
 /*========================= ABOUT ME =========================*/
 .aboutme									{ background: url(../img/aboutme-background.png) repeat-y center; }
 .aboutme .sitewidth							{ position: relative; }
-.aboutme .text								{ box-sizing: border-box; width: 70%; padding: 20px 20px 20px 0; background-color: #fff; }
+.aboutme .text								{ box-sizing: border-box; width: 70%; padding: 20px 20px 40px 0; background-color: #fff; }
 .aboutme .portrait							{ position: absolute; width: 200px; border-radius: 100px; right: 15%; top: 50%; transform: translate(50%, -50%); }
 
-.aboutme .btn								{ margin-top: 30px; }
+
+/*========================= CROWDFUNDING =========================*/
+.crowdfunding								{ background-color: $darkColor; }
+
+.crowdfunding .photo						{ float: left; width: 520px; }
+.crowdfunding .text							{ float: left; width: 680px; box-sizing: border-box; padding: 20px 0 0 40px }
+
+.crowdfunding p								{ color: #ddd; }
 
 
 /*========================= FORMS / BUTTONS =========================*/
 
-a.btn										{ clear: both; display: inline-block; padding: 10px 20px; background-color: $accentColor; color: #fff; border-radius: 5px; }
+.buttons									{ clear: both; margin-top: 20px; }
+
+a.btn										{ display: inline-block; padding: 10px 20px; background-color: $accentColor; color: #fff; border-radius: 5px; }
 a.btn:link,
 a.btn:viksited								{ text-decoration: none; }
 a.btn:hover,
