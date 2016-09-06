@@ -113,6 +113,37 @@
 
 	</section>
 
+	<section class="aboutms">
+	
+		<div class="sitewidth">
+
+			<div class="index accent">
+			
+				<ul>
+					<li><a href="#">Wat is MS</a></li>
+					<li><a href="#">Klachten bij MS</a></li>
+					<li><a href="#">Vormen van MS</a></li>
+					<li><a href="#">Hoe beïnvloed MS mijn leven</a></li>
+				</ul>
+				
+			</div>
+			
+			<div class="text">
+			
+				<h2>Multiple sclerose</h2>
+				<p>Multiple sclerose (MS) is een chronische aandoening van het centrale zenuwstelsel. Anders dan vaak wordt gedacht is multiple sclerose dus geen spierziekte. Bij MS gaat het isolerende laagje rondom de zenuwbanen (de myelineschede) langzaam stuk. Daardoor kunnen de zenuwprikkels niet meer goed geleid worden door de zenuwbanen.</p>
+				
+				<div class="buttons">
+					<a href="#" class="btn">Lees verder</a>
+				</div>
+
+			</div>
+
+		
+		</div>
+	
+	</section>
+
 </body>
 
 </html>

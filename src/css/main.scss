@@ -57,6 +57,14 @@ h6											{ font-size: 15px; line-height: 20px; }
 .crowdfunding p								{ color: #ddd; }
 
 
+/*========================= ABOUT MS =========================*/
+.aboutms									{ background: url(../img/aboutms-background.png) repeat-y center; }
+.aboutms ul									{ color: $darkColor; }
+.aboutms .sitewidth							{ position: relative; }
+.aboutms .text								{ box-sizing: border-box; width: 80%; margin-left: 20%; padding: 20px 260px 40px 20px; background: #fff url(../img/traplift.jpg) no-repeat right 0; }
+.aboutms .index								{ position: absolute; width: 20%; box-sizing: border-box; padding-right: 40px; left: 20px; top: 50%; transform: translate(0, -50%); }
+
+
 /*========================= FORMS / BUTTONS =========================*/
 
 .buttons									{ clear: both; margin-top: 20px; }

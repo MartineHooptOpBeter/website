@@ -10,3 +10,5 @@ ul											{ margin: 0px; padding: 0px; padding-left: 16px; }
 ol											{ margin: 0px; padding: 0px; padding-left: 20px; }
 a:link, a:visited							{ color: $accentColor; text-decoration: none; }
 a:hover, a:active							{ color: $accentColor; text-decoration: underline; }
+.accent a:link, .accent a:visited			{ color: #fff; text-decoration: none; }
+.accent a:hover, .accent a:active			{ color: $accentColorLight; text-decoration: none; }
