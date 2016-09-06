@@ -82,7 +82,7 @@ var files = {
 	root_img_dest : themeDir,
 
 	/* Copy Images */
-	copy_img_src : [srcDir + 'design/logo/martine-hoopt-op-beter.svg', srcDir + 'design/photos/martine-met-kinderen-op-strand.jpg', srcDir + 'img/*.*'],
+	copy_img_src : [srcDir + 'design/logo/martine-hoopt-op-beter.svg', srcDir + 'design/photos/*.jpg', srcDir + 'img/*.*'],
 	copy_img_dest : themeImgDir,
 
 	/* Style CSS file */
