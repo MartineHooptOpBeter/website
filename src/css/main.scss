@@ -85,3 +85,35 @@ a.btn:active								{ text-decoration: none; }
 .clearfix:before,
 .clearfix:after								{ content: " "; display: table; }
 .clearfix:after								{ clear: both; }
+
+
+/*========================= MISCELLANEOUS =========================*/
+@media (max-width: 767px) {
+    h1										{ font-size: 26px; line-height: 30px; }
+    h2										{ font-size: 24px; line-height: 30px; }
+    h3										{ font-size: 22px; line-height: 22px; }
+    h4										{ font-size: 20px; line-height: 20px; }
+    h5										{ font-size: 18px; line-height: 20px; }
+    h6										{ font-size: 15px; line-height: 20px; }
+
+    .sitewidth                              { width: 100%; }
+
+    .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 0 6px 30px 6px; }
+    .jumbophoto .dimmed                     { height: auto; background-color: transparent; padding-top: calc((100% / 1043) * 500); }
+    .jumbophoto .dimmed h1                  { width: 100%; color: #fff; text-shadow: none; margin-top: 30px; }
+    .jumbophoto .dimmed p                   { margin: 0px; width: 100%; box-sizing: border-box; text-shadow: none; }
+    .jumbophoto .dimmed .btn                { position: static; }
+
+    .aboutme                                { background-image: none; box-sizing: border-box; padding: calc(80% + 20px) 6px 30px 6px; }
+    .aboutme .text                          { width: 100%; padding: 0; }
+    .aboutme .portrait                      { width: 80%; border-radius: 50%; left: 50%; top: -20px; transform: translate(-50%, -100%); }
+
+    .crowdfunding .photo                    { width: 100%; }
+    .crowdfunding .text                     { width: 100%; padding: 0 6px 30px 6px; }
+
+    .aboutms,
+    .aboutms .text                          { background-image: none }
+    .aboutms .text                          { width: 100%; padding: 0 6px 30px 6px; margin: 0; }
+    .aboutms .index                         { position: static; width: 100%; padding: 20px 6px; background-color: $accentColor; transform: none; }
+
+}
