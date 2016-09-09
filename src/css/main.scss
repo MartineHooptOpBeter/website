@@ -51,8 +51,10 @@ h6											{ font-size: 15px; line-height: 20px; }
 /*========================= CROWDFUNDING =========================*/
 .crowdfunding								{ background-color: $darkColor; }
 
-.crowdfunding .photo						{ float: left; width: 520px; }
-.crowdfunding .text							{ float: left; width: 680px; box-sizing: border-box; padding: 20px 0 0 40px }
+.crowdfunding .sitewidth					{ display: flex; }
+.crowdfunding .photo						{ flex: 1; background-color: #f00; width: 40%; background: url(../img/clinica-ruiz.jpg) no-repeat right 0; background-size: cover; }
+.crowdfunding .photo img					{ display: none; }
+.crowdfunding .text							{ flex: 1; width: 60%; box-sizing: border-box; padding: 20px 0 30px 20px; }
 
 .crowdfunding p								{ color: #ddd; }
 
@@ -112,7 +114,9 @@ a.btn:active								{ text-decoration: none; }
     .aboutme .text                          { width: 100%; padding: 0; }
     .aboutme .portrait                      { width: 80%; border-radius: 50%; left: 50%; top: -20px; transform: translate(-50%, -100%); }
 
+	.crowdfunding .sitewidth				{ display: block; }
     .crowdfunding .photo                    { width: 100%; }
+	.crowdfunding .photo img				{ display: block; width: 100%; }
     .crowdfunding .text                     { width: 100%; padding: 0 6px 30px 6px; }
 
     .aboutms,

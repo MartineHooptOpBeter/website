@@ -97,8 +97,8 @@
 	
 		<div class="sitewidth">
 	
-			<img src="<?php bloginfo('template_url'); ?>/img/clinica-ruiz.jpg" class="photo" alt="Clínica Ruiz" />
-
+			<div class="photo"><img src="<?php bloginfo('template_url'); ?>/img/clinica-ruiz.jpg" alt="Clínica Ruiz" /></div>
+			
 			<div class="text">
 
 				<h2>Stamceltherapie</h2>
