@@ -88,6 +88,10 @@ a.btn:active								{ text-decoration: none; }
 
 
 /*========================= MISCELLANEOUS =========================*/
+@media (min-width: 1024px) and (max-width: 1199px) {
+	.sitewidth								{ margin: 0 auto; width: 992px; }	
+}
+
 @media (max-width: 767px) {
     h1										{ font-size: 26px; line-height: 30px; }
     h2										{ font-size: 24px; line-height: 30px; }
