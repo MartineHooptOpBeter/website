@@ -96,6 +96,26 @@ a.btn:active								{ text-decoration: none; }
 	.sitewidth								{ margin: 0 auto; width: 992px; }	
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+    .sitewidth                              { width: 100%; }
+	
+	.navigation .logo						{ margin-left: 20px; }
+
+    .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 60px 20px 40px 20px; }
+	.jumbophoto .dimmed						{ position: relative; padding-top: calc((((100% + 40px) * 500) / 1043) - 60px); height: auto; }
+	.jumbophoto .dimmed h1					{ position: absolute; top: 40%; left: 50%; transform: translate(-50%, -100%); }
+	.jumbophoto .dimmed p					{ width: 60%; margin: 0; padding: 30px 40px; }
+	
+    .aboutme .text                          { padding-left: 20px; }
+	
+	.crowdfunding .text						{ padding-right: 10px; }
+	
+	.aboutms								{ background: $accentColor; }
+	.aboutms .text							{ width: 100%; margin: 0; }
+	.aboutms .index							{ position: static; width: 100%; padding: 20px 20px; transform: none; }
+	.aboutms .index ul li					{ float: left; width: 50%; }
+}
+
 @media (max-width: 767px) {
     h1										{ font-size: 26px; line-height: 30px; }
     h2										{ font-size: 24px; line-height: 30px; }
@@ -105,11 +125,13 @@ a.btn:active								{ text-decoration: none; }
     h6										{ font-size: 15px; line-height: 20px; }
 
     .sitewidth                              { width: 100%; }
+	
+	.navigation .logo						{ margin-left: 20px; }
 
     .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 0 6px 30px 6px; }
     .jumbophoto .dimmed                     { height: auto; background-color: transparent; padding-top: calc((100% / 1043) * 500); }
     .jumbophoto .dimmed h1                  { width: 100%; color: #fff; text-shadow: none; margin-top: 30px; }
-    .jumbophoto .dimmed p                   { margin: 0px; width: 100%; box-sizing: border-box; text-shadow: none; }
+    .jumbophoto .dimmed p                   { margin: 0 0 20px 0; width: 100%; box-sizing: border-box; text-shadow: none; }
     .jumbophoto .dimmed .btn                { position: static; }
 
     .aboutme                                { background-image: none; box-sizing: border-box; padding: calc(80% + 20px) 6px 30px 6px; }

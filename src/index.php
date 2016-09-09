@@ -118,7 +118,7 @@
 	
 		<div class="sitewidth">
 
-			<div class="index accent">
+			<div class="index accent clearfix">
 			
 				<ul>
 					<li><a href="#">Wat is MS</a></li>
