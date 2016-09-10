@@ -1,3 +1,15 @@
+<?php
+
+	function martinehooptopbeter_show_excerpt_title() {
+
+		$fields = get_post_custom_values('excerpt_title');
+		foreach ( $fields as $key => $value ) {
+			echo '<h2>' . esc_attr($value) . '</h2>';
+		}
+
+	}
+
+?>
 <?php get_header(); ?>
 	
 	<section class="jumbophoto">
@@ -39,49 +51,66 @@
 		</div>
 
 	</section>
+
+	<?php
+
+		// Get top level pages
+		query_posts( array( 'post_parent' => 0, 'post_type' => 'page', 'order' => 'ASC', 'post_per_page' => -1 ) );
+
+	?>
+
+	<?php while (have_posts()) : the_post(); ?>
+	
+		<?php switch ($post->post_name):
+
+			case 'over-mij': ?>
 	
 	<section class="aboutme">
-	
 		<div class="sitewidth">
 	
 			<div class="text">
-				<h2>Ik ben Martine</h2>
-				<p>Als 41-jarige vrouw met twee schatten van dochters hoor je toch volop van het leven te genieten? Toch? Maar daar kwam zes jaar abrupt een streep doorheen toen bij mijn toenmalige vriend keelkanker werd geconstateerd en een maand later bij mij de diagnose MS werd gesteld.</p>
-				
+
+				<?php martinehooptopbeter_show_excerpt_title(); ?>
+				<?php the_excerpt(); ?>
+			
 				<div class="buttons">
-					<a href="#" class="btn">Lees verder</a>
+					<a href="<?php echo get_permalink() ?>" class="btn">Lees verder</a>
 				</div>
 				
 				<img src="<?php bloginfo('template_url'); ?>/img/portret-martine.jpg" class="portrait" alt="Portret Martine" />
 			</div>
 
 		</div>
-	
 	</section>
+	
+			<?php break; ?>
+
+			<?php case 'help-mij': ?>
 
 	<section class="crowdfunding clearfix">
-	
 		<div class="sitewidth">
 	
 			<div class="photo"><img src="<?php bloginfo('template_url'); ?>/img/clinica-ruiz.jpg" alt="Clínica Ruiz" /></div>
 			
 			<div class="text">
 
-				<h2>Stamceltherapie</h2>
-				<p>De stamceltherapie, welke in totaal vier weken duurt, in de <a href="http://www.clinicaruiz.com/inicio.php" target="_blank">Clínica Ruiz</a> kliniek in Mexico kost $54.500. Met de kosten van de nabehandeling, reiskosten en de benodigde MRI scan kan dit oplopen tot wel &euro; 65.000,-. Omdat ik dit niet alleen kan betalen ben ik een crowdfunding actie begonnen.</p>
+				<?php martinehooptopbeter_show_excerpt_title(); ?>
+				<?php the_excerpt(); ?>
 				
 				<div class="buttons">
-					<a href="#" class="btn">Lees verder</a>
+					<a href="<?php echo get_permalink() ?>" class="btn">Lees verder</a>
 				</div>
 
 			</div>
 	
 		</div>
-
 	</section>
 
-	<section class="aboutms">
+			<?php break; ?>
 	
+			<?php case 'multiple-sclerose': ?>
+
+	<section class="aboutms">
 		<div class="sitewidth">
 
 			<div class="index accent clearfix">
@@ -97,18 +126,23 @@
 			
 			<div class="text">
 			
-				<h2>Multiple sclerose</h2>
-				<p>Multiple sclerose (MS) is een chronische aandoening van het centrale zenuwstelsel. Anders dan vaak wordt gedacht is multiple sclerose dus geen spierziekte. Bij MS gaat het isolerende laagje rondom de zenuwbanen (de myelineschede) langzaam stuk. Daardoor kunnen de zenuwprikkels niet meer goed geleid worden door de zenuwbanen.</p>
+				<?php martinehooptopbeter_show_excerpt_title(); ?>
+				<?php the_excerpt(); ?>
 				
 				<div class="buttons">
-					<a href="#" class="btn">Lees verder</a>
+					<a href="<?php echo get_permalink() ?>" class="btn">Lees verder</a>
 				</div>
 
 			</div>
 
 		
 		</div>
-	
 	</section>
+	
+			<?php break; ?>
+
+		<?php endswitch; ?>
+
+	<?php endwhile; ?>
 
 <?php get_footer(); ?>
