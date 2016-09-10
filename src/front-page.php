@@ -4,12 +4,35 @@
 	
 		<div class="sitewidth" style="background-image: url(<?php bloginfo('template_url'); ?>/img/martine-met-kinderen-op-strand.jpg)">
 			<div class="dimmed">
-		
-				<h1>Help mij in mijn strijd tegen MS en de hoop op een beter leven!</h1>
-				<p>Ondanks alle medicatie heeft MS na ruim zes jaar al heel veel van mijn mobiliteit afgenomen. Artsen in Nederland lijken mij niet te kunnen helpen en daarom heb ik mijn hoop volledig gevestigd op een stamceltherapie in Mexico. Help je mij mee op de kans op een beter leven?</p>
+
+				<?php if (have_posts()) : ?>
+					<?php the_post(); ?>
+					<?php the_title( '<h1>', '</h1>' ); ?>
+					<?php the_content(); ?>
+				<?php endif ?>
 				
+				<?php
+
+					// Default to no URL
+					$url = "#";
+					
+					// Get all pages in the main navigation, but exclude the front page.
+					// We want the first page after the front page, so that we can link to it.
+					$location = 'main';
+					if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $location ] ) ) {
+						
+						$menu = wp_get_nav_menu_object( $locations[ $location ] );
+						$mainnav = wp_get_nav_menu_items( $menu->term_id, array() );
+						
+						if (sizeof($mainnav) >= 2) {
+							$url = $mainnav[1]->url;
+						}
+					}
+				
+				?>
+
 				<div class="buttons">
-					<a href="#" class="btn">Lees verder</a>
+					<a href="<?php echo esc_attr($url) ?>" class="btn">Lees verder</a>
 				</div>
 
 			</div>
