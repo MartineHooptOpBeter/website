@@ -28,7 +28,7 @@
 			$title = "$title $sep $site_description";
 
 		if ( $paged >= 2 || $page >= 2 )
-			$title .= esc_attr(sprintf( __( 'Pagina %s', 'martinehooptopbeter' ), max( $paged, $page ) ) );
+			$title .= esc_attr(sprintf( __( 'Page %s', 'martinehooptopbeter' ), max( $paged, $page ) ) );
 
 		return $title;
 	}
