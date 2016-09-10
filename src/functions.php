@@ -18,6 +18,9 @@
 		// Main Navitation
 		register_nav_menu( 'main', __( 'Main Navigation', 'martinehooptopbeter' ) );
 
+		// Add support for page excerpts
+		add_post_type_support( 'page', 'excerpt' );
+
 	}
 	add_action( 'after_setup_theme', 'martinehooptopbeter_setup' );
 
