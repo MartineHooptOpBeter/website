@@ -7,29 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="robots" content="index,follow" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title><?php
-
-	global $page, $paged;
-
-	if (function_exists('meta_title')) {
-		meta_title('|', true, 'right');
-	} else {
-		wp_title('|', true, 'right');
-	}
-
-	// Add the blog name.
-	bloginfo( 'name' );
-
-	// Add the blog description for the home/front page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-	echo ' | ' . esc_attr( $site_description );
-
-	// Add a page number if necessary:
-	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . esc_attr(sprintf( __( 'Pagina %s', 'martinehooptopbeter' ), max( $paged, $page ) ) );
-
-	?></title>
+	<title><?php wp_title( '-', true, 'right' ); ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/css/allpages.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php bloginfo('template_url'); ?>/favicon.ico" />
