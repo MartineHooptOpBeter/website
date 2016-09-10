@@ -28,7 +28,7 @@ h6											{ font-size: 15px; line-height: 20px; }
 .navigation nav ul li a:active,
 .navigation nav ul li a:hover				{ border-color: $hoverColor; text-decoration: none; }
 
-.navigation nav ul li a.active				{ border-color: $accentColor; }
+.navigation nav ul li.current-menu-item a	{ border-color: $accentColor; }
 
 
 /*========================= JUMBO PHOTO =========================*/
