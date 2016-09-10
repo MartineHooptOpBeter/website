@@ -20,3 +20,6 @@ msgstr "Pagina %s"
 
 msgid "Main Navigation"
 msgstr "Hoofdnavigatie"
+
+msgid "Read more"
+msgstr "Lees verder"

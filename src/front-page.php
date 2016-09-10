@@ -44,7 +44,7 @@
 				?>
 
 				<div class="buttons">
-					<a href="<?php echo esc_attr($url) ?>" class="btn">Lees verder</a>
+					<a href="<?php echo esc_attr($url) ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
 				</div>
 
 			</div>
@@ -74,7 +74,7 @@
 				<?php the_excerpt(); ?>
 			
 				<div class="buttons">
-					<a href="<?php echo get_permalink() ?>" class="btn">Lees verder</a>
+					<a href="<?php echo get_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
 				</div>
 				
 				<img src="<?php bloginfo('template_url'); ?>/img/portret-martine.jpg" class="portrait" alt="Portret Martine" />
@@ -98,7 +98,7 @@
 				<?php the_excerpt(); ?>
 				
 				<div class="buttons">
-					<a href="<?php echo get_permalink() ?>" class="btn">Lees verder</a>
+					<a href="<?php echo get_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
 				</div>
 
 			</div>
@@ -130,7 +130,7 @@
 				<?php the_excerpt(); ?>
 				
 				<div class="buttons">
-					<a href="<?php echo get_permalink() ?>" class="btn">Lees verder</a>
+					<a href="<?php echo get_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
 				</div>
 
 			</div>
