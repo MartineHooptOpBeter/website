@@ -1,5 +1,18 @@
 <?php
 
+	function martinehooptopbeter_setup() {
+
+		// Remove RSD link in the head
+		remove_action('wp_head', 'rsd_link');
+		
+		// Remove WLM manifest in the head
+		remove_action('wp_head', 'wlwmanifest_link');
+		
+		// Remove Wordpress generator in the head
+		remove_action('wp_head', 'wp_generator');
+	}
+	add_action( 'after_setup_theme', 'martinehooptopbeter_setup' );
+
 	function martinehooptopbeter_wp_title( $title, $sep ) {
 		global $paged, $page;
 
