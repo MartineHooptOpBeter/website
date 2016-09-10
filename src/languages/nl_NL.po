@@ -1,0 +1,19 @@
+#
+# Martine Hoopt Op Beter Website Translations
+# Copyright (C) 2016, Marco Miltenburg
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MrtineHooptOpBeterWebsite\n"
+"Report-Msgid-Bugs-To: martinehooptopbeter@gmail.com\n"
+"POT-Creation-Date: 2016-09-10 13:35+0100\n"
+"PO-Revision-Date: 2016-09-10 13:35+0100\n"
+"Last-Translator: Marco Miltenburg <marco.miltenburg@gmail.com>\n"
+"Language-Team: Dutch <martinehooptopbeter@gmail.com>\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Page %s"
+msgstr "Pagina %s"

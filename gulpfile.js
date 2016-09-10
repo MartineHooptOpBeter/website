@@ -21,6 +21,7 @@ var sass = require('gulp-sass')
 var watch = require('gulp-watch');
 var gulpif = require('gulp-if');
 var concat = require('gulp-concat');
+var gettext = require('gulp-gettext');
 var plumber = require('gulp-plumber');
 var cleancss = require('gulp-clean-css');
 
@@ -77,6 +78,10 @@ var files = {
 	php_files_src : [srcDir + '*.php'],
 	php_files_dest : themeDir,
 
+	/* Locale files */
+	localization_src : [srcDir + 'languages/*.po'],
+	localization_dest : themeDir + 'languages/',
+
 	/* Root images */
 	root_img_src : [srcDir + 'design/theme/screenshot.png'],
 	root_img_dest : themeDir,
@@ -111,6 +116,19 @@ gulp.task(php_files, function() {
     return gulp.src(files.php_files_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
         .pipe(gulp.dest(files.php_files_dest));
+});
+
+
+/*******************************************************************************
+** LOCALIZATION TASKS                                                         **
+*******************************************************************************/
+
+var localization = 'localization';
+gulp.task(localization, function() {
+    return gulp.src(files.localization_src)
+		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+		.pipe(gettext())
+        .pipe(gulp.dest(files.localization_dest));
 });
 
 
@@ -161,7 +179,7 @@ gulp.task(allpages_css, function() {
 *******************************************************************************/
 
 // Set up default task dependencies (i.e. the tasks we want to run by default)
-var defaultTaskDependencies = [php_files, root_img, copy_img, style_css, allpages_css];
+var defaultTaskDependencies = [php_files, localization, root_img, copy_img, style_css, allpages_css];
 
 // Run default task
 gulp.task('default', defaultTaskDependencies, function() {
@@ -170,6 +188,7 @@ gulp.task('default', defaultTaskDependencies, function() {
 	if (isDevelopmentBuild) {
 		browsersync.init({ proxy: developmentServerHostName });
 		gulp.watch(files.php_files_src, [php_files]).on('change', browsersync.reload);
+		gulp.watch(files.localization_src, [localization]);
 		gulp.watch(files.copy_img_src, [copy_img]).on('change', browsersync.reload);
 		gulp.watch(files.allpages_css_dep, [allpages_css]);
 	}

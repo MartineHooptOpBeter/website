@@ -21,6 +21,7 @@
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.12",
     "gulp-concat": "^2.6.0",
+    "gulp-gettext": "^0.3.0",
     "gulp-if": "^2.0.1",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.3.2",

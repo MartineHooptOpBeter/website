@@ -10,6 +10,11 @@
 		
 		// Remove Wordpress generator in the head
 		remove_action('wp_head', 'wp_generator');
+
+		// Make theme available for translation
+		// Translations can be filed in the /languages/ directory
+		load_theme_textdomain( 'martinehooptopbeter', get_template_directory() . '/languages' );
+
 	}
 	add_action( 'after_setup_theme', 'martinehooptopbeter_setup' );
 
