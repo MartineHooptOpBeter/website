@@ -17,3 +17,6 @@ msgstr ""
 
 msgid "Page %s"
 msgstr "Pagina %s"
+
+msgid "Main Navigation"
+msgstr "Hoofdnavigatie"

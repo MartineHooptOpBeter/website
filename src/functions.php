@@ -15,6 +15,9 @@
 		// Translations can be filed in the /languages/ directory
 		load_theme_textdomain( 'martinehooptopbeter', get_template_directory() . '/languages' );
 
+		// Main Navitation
+		register_nav_menu( 'main', __( 'Main Navigation', 'martinehooptopbeter' ) );
+
 	}
 	add_action( 'after_setup_theme', 'martinehooptopbeter_setup' );
 

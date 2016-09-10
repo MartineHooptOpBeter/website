@@ -20,16 +20,20 @@
 	
 		<div class="sitewidth">
 	
-			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter.svg" alt="Martine hoopt op beter"></a>
-		
-			<nav>
-				<ul>
-					<li><a href="/" class="active">Home</a></li>
-					<li><a href="/">Over mij</a></li>
-					<li><a href="/">Help mij</a></li>
-					<li><a href="/">Multiple sclerose</a></li>
-					<li><a href="/">Contact</a></li>
-				</ul>
+			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter.svg" alt="<?php bloginfo( 'name' ); ?>"></a>
+
+			<nav role="navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'martinehooptopbeter' ); ?>">
+				<?php
+					$location = 'main';
+					if ( has_nav_menu( $location ) ) {
+						wp_nav_menu(array(
+							'container' => false, 
+							'depth' => 0,
+							'menu_id' => 'mainnav',
+							'theme_location' => $location,
+						));
+					}
+				?>
 			</nav>
 
 		</div>
