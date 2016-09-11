@@ -2,9 +2,10 @@
 
 	function martinehooptopbeter_show_excerpt_title() {
 
-		$fields = get_post_custom_values('excerpt_title');
-		foreach ( $fields as $key => $value ) {
-			echo '<h2>' . esc_attr($value) . '</h2>';
+		if ($fields = get_post_custom_values('excerpt_title')) {
+			foreach ( $fields as $key => $value ) {
+				echo '<h2>' . esc_attr($value) . '</h2>';
+			}
 		}
 
 	}
