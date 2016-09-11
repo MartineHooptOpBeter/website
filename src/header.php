@@ -8,7 +8,7 @@
 	<meta name="robots" content="index,follow" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title><?php wp_title( '-', true, 'right' ); ?></title>
-	<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto:700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/css/allpages.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php bloginfo('template_url'); ?>/favicon.ico" />
 <?php wp_head(); ?>
