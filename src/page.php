@@ -47,6 +47,10 @@
 					include "template_text-with-photo-left.php";
 					break;
 
+				case "template_text-only.php":
+					include "template_text-only.php";
+					break;
+
 			}
 
 			$showDivider = false;
