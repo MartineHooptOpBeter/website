@@ -24,8 +24,7 @@
 
 <?php 
 
-	$blocks = new WP_Query( array( 'post_parent' => $post->ID, 'post_type' => 'page', 'order' => 'ASC' ) ); 
-
+	$blocks = new WP_Query( array( 'post_parent' => $post->ID, 'post_type' => 'page', 'orderby' => 'menu_order', 'order' => 'ASC' ) ); 
 	if ($blocks->have_posts()) {
 
 		$showDivider = !$hasContent;
