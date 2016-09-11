@@ -3,6 +3,9 @@
  * Template Name: Text with Large Photo
  */
 ?>
+	<section class="content<?php echo $showDivider ? '  divider' : ''; ?>">
+		<div class="sitewidth">
+
 <?php
 
     if ( has_post_thumbnail() ) { 
@@ -13,3 +16,5 @@
     the_content();
 
 ?>
+		</div>
+	</section>

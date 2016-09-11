@@ -28,22 +28,25 @@
 
 	if ($blocks->have_posts()) {
 
-?>	<section class="content<?php echo (!$hasContent) ? '  divider' : ''; ?>">
-		<div class="sitewidth">
+		$showDivider = !$hasContent;
 
-<?php
-
-		do {
+		while ($blocks->have_posts()) {
 			$blocks->the_post();
-			
+
 			switch (get_post_meta( $post->ID, '_wp_page_template', true )) {
 
 				case "template_text-with-large-photo.php":
-					require_once "template_text-with-large-photo.php";
+					include "template_text-with-large-photo.php";
+					break;
+
+				case "template_text-with-photo-right.php":
+					include "template_text-with-photo-right.php";
+					break;
 
 			}
 
-		} while ($blocks->have_posts());
+			$showDivider = false;
+		} 
 
 ?>		</div>
 	</section>
