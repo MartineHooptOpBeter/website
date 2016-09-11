@@ -55,10 +55,6 @@
 			$showDivider = false;
 		} 
 
-?>		</div>
-	</section>
-<?php
-
 	}
 
 ?>
