@@ -43,6 +43,10 @@
 					include "template_text-with-photo-right.php";
 					break;
 
+				case "template_text-with-photo-left.php":
+					include "template_text-with-photo-left.php";
+					break;
+
 			}
 
 			$showDivider = false;
