@@ -3,7 +3,7 @@
 /*========================= TEXT STYLES =========================*/
 html										{ height: 100%; overflow-x: hidden; }
 body										{ font-family: 'Montserrat', sans-serif;; font-weight: normal; font-size: 15px; line-height: 22px; color: $bodyTextColor; height: 100%; -webkit-text-size-adjust: 100%; }
-h1, h2, h3, h4, h5, h5, h6					{ margin: 20px 0 10px 0; font-family: 'Roboto', sans-serif; color: $accentColor; }
+h1, h2, h3, h4, h5, h5, h6					{ margin: 0 0 10px 0; font-family: 'Roboto', sans-serif; color: $accentColor; }
 h1											{ font-size: 40px; line-height: 50px; font-weight: normal; margin: 0 0 20px 0; }
 h2											{ font-size: 30px; line-height: 40px; font-weight: normal; }
 h3											{ font-size: 24px; line-height: 30px; font-weight: normal; }
@@ -72,17 +72,18 @@ p                                           { margin: 0 0 1.2em 0; }
 
 /*========================= CONTENT PAGES =========================*/
 .content                                    { margin-bottom: 20px; }
-.content .text                              { padding: 20px 0; }
-.content .intro                             { font-family: 'Open Sans', sans-serif; color: $accentColor; font-size: 15pt; }
+.content .text                              { padding: 0 0 20px 0; }
+.content.intro .text                        { padding-top: 20px; }
+.content.intro p                            { font-family: 'Open Sans', sans-serif; color: $accentColor; font-size: 15pt; }
 .content.right .wp-post-image               { float: right; }
 .content.left .wp-post-image                { float: left; margin-right: 20px; }
 
-.size-martinehooptopbeter_fullwidth         { width: 100%; height: auto; }
+.size-martinehooptopbeter_fullwidth         { display: block; width: 100%; height: auto; margin-bottom: 20px; }
 
 
 /*========================= FOOTER =========================*/
 footer										{ background-color: $accentColorLight; padding: 20px; }
-footer p									{ color: $darkColor; text-align: center; }
+footer p									{ color: $darkColor; text-align: center; margin: 0; }
 footer img									{ height: 24px; vertical-align: bottom; opacity: 0.65; }
 
 /*========================= FORMS / BUTTONS =========================*/

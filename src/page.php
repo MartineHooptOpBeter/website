@@ -5,14 +5,14 @@
 
 		<?php if ($hasContent) : ?>
 
-	<section class="content right dark divider">
+	<section class="content intro right dark divider">
 		<div class="sitewidth clearfix">
 
 			<?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'martinehooptopbeter_square-400' ); } ?>
 
 			<div class="text">
 				<?php the_title( '<h1>', '</h1>' ); ?>
-				<div class="intro"><?php the_content(); ?></div>
+				<?php the_content(); ?>
 			</div>
 
 		</div>
