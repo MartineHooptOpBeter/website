@@ -23,6 +23,10 @@
 			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter.svg" alt="<?php bloginfo( 'name' ); ?>"></a>
 
 			<nav role="navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'martinehooptopbeter' ); ?>">
+				
+				<label for="menu-toggle">Menu</label>
+				<input type="checkbox" id="menu-toggle"/> 
+				
 				<?php
 					$location = 'main';
 					if ( has_nav_menu( $location ) ) {
