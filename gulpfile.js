@@ -24,6 +24,7 @@ var concat = require('gulp-concat');
 var gettext = require('gulp-gettext');
 var plumber = require('gulp-plumber');
 var cleancss = require('gulp-clean-css');
+var autoprefixer = require('gulp-autoprefixer');
 
 
 /*******************************************************************************
@@ -167,6 +168,7 @@ gulp.task(allpages_css, function() {
     return gulp.src(files.allpages_css_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(sass())
+		.pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
         .pipe(gulpif(minifyCss, cleancss()))
         .pipe(concat(files.allpages_css_out))
         .pipe(gulp.dest(files.allpages_css_dest))
