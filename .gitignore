@@ -4,3 +4,6 @@ Thumbs.db
 
 # Node modules
 node_modules/
+
+# Composer vendor directory
+vendor/
