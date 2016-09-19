@@ -35,10 +35,10 @@
                             <span>&euro; </span><input type="text" class="textinput numberinput clearnone" id="donate_email" name="donate_email" value="" placeholder="<?php _e('00.00', 'martinehooptopbeter') ?>"/>
                         </p>
                         <p>
-                            <label for="donate_payment_method"><?php _e('Payment method', 'martinehooptopbeter'); ?></label>
+                            <label><?php _e('Payment method', 'martinehooptopbeter'); ?></label>
                             <ul>
-                                <li><input type="radio" class="radio" name="donate_payment_method" value="ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?></li>
-                                <li><input type="radio" class="radio" name="donate_payment_method" value="creditcard"><?php _e('Credit Card', 'martinehooptopbeter'); ?></li>
+                                <li><input type="radio" class="radio" id="donate_payment_method_ideal" name="donate_payment_method" value="ideal"><label for="donate_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?></label></li>
+                                <li><input type="radio" class="radio" id="donate_payment_method_creditcard" name="donate_payment_method" value="creditcard"><label for="donate_payment_method_creditcard"><?php _e('Credit Card', 'martinehooptopbeter'); ?></label></li>
                             </ul>
                         </p>
                         <ul>
