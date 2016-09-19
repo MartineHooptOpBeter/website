@@ -112,7 +112,7 @@ input.clearnone                             { clear: none; }
 input.numberinput                           { width: 40%; max-width: 200px; }
 input.checkbox                              { float: left; margin-right: 8px; }
 input.radio                                 { float: left; margin-right: 8px; }
-form p.options label                        { font-weight: normal; }
+form ul label                               { font-weight: normal; }
 
 .buttons									{ clear: both; margin-top: 20px; }
 form .buttons                               { text-align: right; }
