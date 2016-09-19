@@ -102,7 +102,7 @@ form                                        { margin-bottom: 20px; }
 form p,
 form fieldset                               { clear: both; float: left; margin-bottom: 14px; width: 100%; }
 form fieldset span                          { clear: both; float: left; line-height: 28px; margin-right: 8px; }
-form ul                                     { margin: 0 0 5px 0; padding: 0 0 0 4px; ; list-style: none; }
+form ul                                     { float: left; clear: both; width: 100%; box-sizing: border-box; margin: 0 0 20px 0; padding: 0 0 0 4px; ; list-style: none; }
 form ul li                                  { float: left; margin: 0; padding: 0; width: 100%; }
 
 label                                       { display: block; font-weight: bold; }
@@ -114,7 +114,12 @@ input.checkbox                              { float: left; margin-right: 8px; }
 input.radio                                 { float: left; margin-right: 8px; }
 form ul label                               { font-weight: normal; }
 
-.buttons									{ clear: both; margin-top: 20px; }
+p.error                                     { color: $errorColor; font-weight: bold; }
+p.error input.textinput,
+p.error textarea                            { border: 1px solid $errorColor; background-color: $errorColorLight; }
+ul.error label                              { color: $errorColor; }
+
+.buttons									{ clear: both; }
 form .buttons                               { text-align: right; }
 
 button.btn,
