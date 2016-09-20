@@ -79,7 +79,7 @@
 
             }
 
-            $conn = nothing;
+            $conn = null;
             return $result;
         }
 
@@ -109,7 +109,7 @@
 
             }
 
-            $conn = nothing;
+            $conn = null;
             return $result;
         }
 
@@ -143,7 +143,7 @@
 
             }
 
-            $conn = nothing;
+            $conn = null;
             return $result;
 
         }
@@ -170,7 +170,7 @@
 
             }
 
-            $conn = nothing;
+            $conn = null;
             return $result;
 		
 		}
@@ -194,7 +194,7 @@
 
             }
 
-            $conn = nothing;
+            $conn = null;
             return $result;
 			
 		}
@@ -218,7 +218,7 @@
 
             }
 
-            $conn = nothing;
+            $conn = null;
             return $result;
 			
 		}
