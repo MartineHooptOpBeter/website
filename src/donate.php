@@ -161,7 +161,7 @@
         function addDonation($donation) {
 
             $result = null;
-            $conn = $this->openConnection();
+            if ($conn = $this->openConnection()) {
 
             try {
                 $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous) VALUES(:amount, :emailaddress, :name, :message, :payment_verification, :show_no_amount, :show_anonymous)';
@@ -182,6 +182,8 @@
             catch(PDOException $ex)
             { }
 
+            }
+
             $conn = nothing;
             return $result;
         }
@@ -189,6 +191,8 @@
         function getDonation($id) {
 
             $result = null;
+
+            if ($conn = $this->openConnection()) {
 
             try {
                 $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations WHERE (id = :id)';
@@ -206,6 +210,8 @@
             catch(PDOException $ex)
             { }
 
+            }
+
             return $result;
         }
 
@@ -213,6 +219,8 @@
 
             $result = null;
             $orderBy = ($sortOrder == 'ASC') ? 'ASC' : 'DESC';
+
+            if ($conn = $this->openConnection()) {
 
             try {
                 $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
@@ -234,6 +242,8 @@
             }
             catch(PDOException $ex)
             { }
+
+            }
 
             return $result;
 
