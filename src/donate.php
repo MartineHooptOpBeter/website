@@ -45,7 +45,7 @@
 
         if (count($missingfields) == 0) {
 
-            $d = new Donation(0, $donate_amount_parsed, $donate_email, $donate_name, $donate_message, '', $donate_payment_method, $donate_no_amount, $donate_anonymous, null);
+            $d = new Donation(0, $donate_amount_parsed, $donate_email, $donate_name, $donate_message, '', $donate_payment_method, null, null, $donate_no_amount, $donate_anonymous, null);
 
             $donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
             if ($donation = $donations->addDonation($d)) {
@@ -166,11 +166,13 @@
         public $message;
         public $paymentVerification;
 		public $paymentMethod;
+		public $paymentId;
+		public $paymentStatus;
         public $showNoAmount;
         public $showAnonymous;
 		public $timestamp;
 
-        function Donation($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $paymentMethod = '', $showNoAmount = false, $showAnonymous = false, $timestamp = null)
+        function Donation($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $paymentMethod = '', $paymentId = null, $paymentStatus = null, $showNoAmount = false, $showAnonymous = false, $timestamp = null)
         {
             $this->id = $id;
             $this->amount = $amount;
@@ -179,6 +181,8 @@
             $this->message = $message;
             $this->paymentVerification = $paymentVerification;
 			$this->paymentMethod = $paymentMethod;
+			$this->paymentId = $paymentId;
+			$this->paymentStatus = $paymentStatus;
             $this->showNoAmount = $showNoAmount;
             $this->showAnonymous = $showAnonymous;
 			$this->timestamp = $timestamp;
@@ -204,7 +208,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, payment_method, show_no_amount, show_anonymous, timestamp) VALUES (:amount, :emailaddress, :name, :message, :payment_verification, :payment_method, :show_no_amount, :show_anonymous, NOW())';
+                    $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp) VALUES (:amount, :emailaddress, :name, :message, :payment_verification, :payment_method, :payment_id, :payment_status, :show_no_amount, :show_anonymous, NOW())';
                     $query = $conn->prepare($sql);
                     if ($query != null) {
 
@@ -216,6 +220,8 @@
                         $query->bindValue(':message', $donation->message);            
                         $query->bindValue(':payment_verification', $donation->paymentVerification);
                         $query->bindValue(':payment_method', $donation->paymentMethod);
+                        $query->bindValue(':payment_id', $donation->paymentId);
+                        $query->bindValue(':payment_status', $donation->paymentStatus);
                         $query->bindValue(':show_no_amount', $donation->showNoAmount ? '1' : '0');
                         $query->bindValue(':show_anonymous', $donation->showAnonymous ? '1' : '0');
                         if ($query->execute()) {
@@ -241,7 +247,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (id = :id)';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (id = :id)';
                     $query = $conn->prepare($sql);
 
                     $query->bindValue(':id', $id);            
@@ -249,7 +255,7 @@
 							
 						if ($row = $query->fetch(PDO::FETCH_NUM)) {
 
-							$result = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9]);
+							$result = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[11]);
 							
 						}
 
@@ -260,6 +266,7 @@
 
             }
 
+            $conn = nothing;
             return $result;
         }
 
@@ -271,7 +278,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, show_no_comment, show_anonymous, timestamp FROM tbl_donations ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_comment, show_anonymous, timestamp FROM tbl_donations ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
                     $query = $conn->prepare($sql);
 
                     $query->bindValue(':offset', $offset);            
@@ -283,7 +290,7 @@
 							$result = [];
 							
 							while ($row = $query->fetch(PDO::FETCH_NUM)) {
-								$result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9]);
+								$result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[11]);
 							}
 
 						}
