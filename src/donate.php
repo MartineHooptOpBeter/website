@@ -301,6 +301,7 @@
 
             }
 
+            $conn = nothing;
             return $result;
 
         }
