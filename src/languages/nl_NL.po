@@ -80,3 +80,6 @@ msgstr "Er zijn nog geen donaties gedaan."
 
 msgid "Anonymous"
 msgstr "Anoniem"
+
+msgid "This should point to mollie-webhook.php in the theme folder."
+msgstr "Dit moet verwijzen naar mollie-webhook.php in de theme folder."

@@ -63,6 +63,14 @@
 				'mollie-settings', 
 				'mollie_setting_api_section'
 			);      
+
+			add_settings_field(
+				'webhookurl', 
+				__('Webhook URL', 'martinehooptopbeter'), 
+				array( $this, 'webhookurl_callback' ), 
+				'mollie-settings', 
+				'mollie_setting_api_section'
+			);      
 		}
 
 		public function sanitize( $input )
@@ -70,6 +78,9 @@
 			$new_input = array();
 			if( isset( $input['apikey'] ) )
 				$new_input['apikey'] = sanitize_text_field( $input['apikey'] );
+
+			if( isset( $input['webhookurl'] ) )
+				$new_input['webhookurl'] = sanitize_text_field( $input['webhookurl'] );
 
 			return $new_input;
 		}
@@ -84,6 +95,14 @@
 			printf(
 				'<input type="text" id="apikey" name="mollie_options[apikey]" value="%s" class="regular-text" />',
 				isset( $this->options['apikey'] ) ? esc_attr( $this->options['apikey']) : ''
+			);
+		}
+
+		public function webhookurl_callback()
+		{
+			printf(
+				'<input type="text" id="webhookurl" name="mollie_options[webhookurl]" value="%s" class="regular-text" /><div><small>%s</small></div>',
+				isset( $this->options['webhookurl'] ) ? esc_attr( $this->options['webhookurl']) : '', __('This should point to mollie-webhook.php in the theme folder.', 'martinehooptopbeter')
 			);
 		}
 	}
