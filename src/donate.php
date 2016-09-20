@@ -1,4 +1,4 @@
-<?php require_once 'donations-class.php' ?><?php
+<?php require_once 'donations-class.php' ?><?php require_once 'Mollie/API/Autoloader.php'; ?><?php
 
     global $config;
 
@@ -50,7 +50,42 @@
             $donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
             if ($donation = $donations->addDonation($d)) {
 				
-				// Start payment
+				var_dump($donation);
+				
+				$mollie_options = get_option('mollie_options');
+				
+				$mollie = new Mollie_API_Client;
+				$mollie->setApiKey($mollie_options['apikey']);
+				
+				try
+				{
+					if ($payment = $mollie->payments->create(
+							array(
+								'amount'      => number_format($donation->amount / 100, 2, '.', ''),
+								'description' => __('Donation', 'martinehooptopbeter'),
+								'redirectUrl' => get_permalink() . '?donationid=' . $donation->id . '&verification=' . $donation->paymentVerification,
+								'locale'      => 'nl',
+								'method'      => $donation->paymentMethod,
+								'metadata'    => array(
+									'donation_id' => $donation->id,
+									'payment_verification' => $donation->paymentVerification
+								)
+							)
+						)) {
+						
+						if ($donations->updatePaymentId($donation->id, $payment->id)) {
+							header("Location: " . $payment->getPaymentUrl());
+							exit;
+						}
+					}
+					
+					$errorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
+				}
+				catch (Mollie_API_Exception $e)
+				{
+					var_dump($e);
+					$errorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
+				}
 
             } else {
                 $errorMessage = __('An error has occured while saving your donation.', 'martinehooptopbeter');
