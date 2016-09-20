@@ -1,4 +1,4 @@
-<?php require_once 'donations.php' ?><?php
+<?php require_once 'donations-class.php' ?><?php
 
     global $config;
 
