@@ -73,11 +73,17 @@ var themeDir = dstDir + 'wp-content/themes/martinehooptopbeter/';
 var themeCssDir = themeDir + 'css/';
 var themeImgDir = themeDir + 'img/';
 
+var vendorsDir = 'vendor/';
+
 var files = {
 	
 	/* PHP files */
 	php_files_src : [srcDir + '*.php'],
 	php_files_dest : themeDir,
+	
+	/* Vendor folders */
+	vendors_src : [vendorsDir + 'mollie/mollie-api-php/src/**/*'],
+	vendors_dest : themeDir,
 
 	/* Locale files */
 	localization_src : [srcDir + 'languages/*.po'],
@@ -117,6 +123,18 @@ gulp.task(php_files, function() {
     return gulp.src(files.php_files_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
         .pipe(gulp.dest(files.php_files_dest));
+});
+
+
+/*******************************************************************************
+** VENDOR FOLDERS                                                             **
+*******************************************************************************/
+
+var vendors = 'vendors';
+gulp.task(vendors, function() {
+    return gulp.src(files.vendors_src)
+		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+        .pipe(gulp.dest(files.vendors_dest));
 });
 
 
@@ -181,7 +199,7 @@ gulp.task(allpages_css, function() {
 *******************************************************************************/
 
 // Set up default task dependencies (i.e. the tasks we want to run by default)
-var defaultTaskDependencies = [php_files, localization, root_img, copy_img, style_css, allpages_css];
+var defaultTaskDependencies = [php_files, vendors, localization, root_img, copy_img, style_css, allpages_css];
 
 // Run default task
 gulp.task('default', defaultTaskDependencies, function() {
