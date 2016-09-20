@@ -240,8 +240,7 @@
         }
 
         public function generatePaymentVerification($donation) {
-            $toHash = date('c') . $donation->name . $donation->emailAddress . $email->message;
-            return password_hash($toHash, PASSWORD_BCRYPT, array());
+            return bin2hex(random_bytes(32));
         } 
 
         private function openConnection() {
