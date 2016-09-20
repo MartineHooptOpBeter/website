@@ -74,3 +74,9 @@ msgstr "Toon niet het bedrag wat ik doneer op de website."
 
 msgid "An error has occured while saving your donation."
 msgstr "Er is een fout opgetreden bij het opslaan van je donatie."
+
+msgid "There are no donations made yet."
+msgstr "Er zijn nog geen donaties gedaan."
+
+msgid "Anonymous"
+msgstr "Anoniem"

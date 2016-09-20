@@ -91,6 +91,16 @@ p                                           { margin: 0 0 1.2em 0; }
 .size-martinehooptopbeter_fullwidth         { display: block; width: 100%; height: auto; margin-bottom: 20px; }
 
 
+/*========================= DONATIONS =========================*/
+
+.donations article							{ background-color: $darkColorLight; padding: 10px; margin-bottom: 10px; }
+
+.donations article em						{ float: right; font-style: normal; color: $accentColor; }
+.donations article strong					{ display: block; }
+.donations article span  					{ display: block; }
+.donations article p						{ border-top: 1px dashed $accentColorLight; font-style: italic; margin: 10px 0 0 0; padding-top: 10px; }
+
+
 /*========================= FOOTER =========================*/
 footer										{ background-color: $accentColorLight; padding: 20px; }
 footer p									{ color: $darkColor; text-align: center; margin: 0; }
@@ -120,6 +130,8 @@ p.error textarea                            { border: 1px solid $errorColor; bac
 ul.error label                              { color: $errorColor; }
 
 .buttons									{ clear: both; }
+.buttons .left								{ float: left; }
+.buttons .right								{ float: right; }
 form .buttons                               { text-align: right; }
 
 button.btn,
