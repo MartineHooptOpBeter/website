@@ -63,7 +63,7 @@
 
 ?><?php
 
-    function show_donate_page($page = 1)
+    function show_donate_page()
     {
 		global $errorMessage;
 		global $missingfields;
