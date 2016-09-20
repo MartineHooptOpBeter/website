@@ -199,18 +199,20 @@
 			
 		}
 
-		function updatePaymentStatus($payment_id, $payment_status) {
+		function updatePaymentStatus($id, $payment_id, $payment_verification, $payment_status) {
 			
             $result = false;
 
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'UPDATE tbl_donations SET payment_status = :payment_status WHERE (payment_id = :payment_id)';
+                    $sql = 'UPDATE tbl_donations SET payment_status = :payment_status WHERE (id = :id) AND (payment_id = :payment_id) AND (payment_verification = :payment_verification)';
                     $query = $conn->prepare($sql);
 
                     $query->bindValue(':payment_status', $payment_status);            
+					$query->bindValue(':id', $id);
                     $query->bindValue(':payment_id', $payment_id);            
+					$query->bindValue(':payment_verification', $payment_verification);            
                     $result = $query->execute();
                 }
                 catch(PDOException $ex)
