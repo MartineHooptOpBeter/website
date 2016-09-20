@@ -305,6 +305,30 @@
             return $result;
 
         }
+		
+		function updatePaymentId($id, $payment_id) {
+			
+            $result = false;
+
+            if ($conn = $this->openConnection()) {
+
+                try {
+                    $sql = 'UPDATE tbl_donations SET payment_id = :payment_id WHERE (id = :id)';
+                    $query = $conn->prepare($sql);
+
+                    $query->bindValue(':payment_id', $payment_id);            
+                    $query->bindValue(':id', $id);            
+                    $result = $query->execute();
+                }
+                catch(PDOException $ex)
+                { }
+
+            }
+
+            $conn = nothing;
+            return $result;
+			
+		}
 
         public function generatePaymentVerification($donation) {
             return bin2hex(random_bytes(32));
