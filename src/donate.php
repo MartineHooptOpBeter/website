@@ -1,47 +1,78 @@
-<?php
+<?php include 'config.php' ?><?php
 
-    function show_donate_page($page = 1)
-    {
+    global $config;
 
-        $missingfields = [];
+    $showForm = true;
+    $missingfields = [];
 
-    	if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $donate_name = '';
+    $donate_email = '';
+    $donate_message = '';
+    $donate_amount = '';
+    $donate_payment_method = '';
+    $donate_anonymous = false;
+    $donate_no_amount = false;
 
-            $donate_name = isset($_POST['donate_name']) ? trim($_POST['donate_name']) : '';
-            $donate_email = isset($_POST['donate_email']) ? trim($_POST['donate_email']) : '';
-            $donate_message = isset($_POST['donate_message']) ? trim($_POST['donate_message']) : '';
-            $donate_amount = isset($_POST['donate_amount']) ? trim($_POST['donate_amount']) : 0;
-            $donate_payment_method = isset($_POST['donate_payment_method']) ? trim($_POST['donate_payment_method']) : '';
-            $donate_anonymous = isset($_POST['donate_anonymous']);
-            $donate_no_amount = isset($_POST['donate_no_amount']);
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-            if (empty($donate_name)) {
-                $missingfields['donate_name'] = __('Required field', 'martinehooptopbeter');
-            }
+        $donate_name = isset($_POST['donate_name']) ? trim($_POST['donate_name']) : $donate_name;
+        $donate_email = isset($_POST['donate_email']) ? trim($_POST['donate_email']) : $donate_email;
+        $donate_message = isset($_POST['donate_message']) ? trim($_POST['donate_message']) : $donate_message;
+        $donate_amount = isset($_POST['donate_amount']) ? trim($_POST['donate_amount']) : $donate_amount;
+        $donate_payment_method = isset($_POST['donate_payment_method']) ? trim($_POST['donate_payment_method']) : $donate_payment_method;
+        $donate_anonymous = isset($_POST['donate_anonymous']);
+        $donate_no_amount = isset($_POST['donate_no_amount']);
 
-            if (empty($donate_email)) {
-                $missingfields['donate_email'] = __('Required field', 'martinehooptopbeter');
-            }
+        if (empty($donate_name)) {
+            $missingfields['donate_name'] = __('Required field', 'martinehooptopbeter');
+        }
 
-            $donate_amount_parsed = parseAmount($donate_amount);
-            if ($donate_amount_parsed <= 0) {
-                $missingfields['donate_amount'] = __('Invalid amount', 'martinehooptopbeter');
-            }
-            if ($donate_amount_parsed < 500) {
-                $missingfields['donate_amount'] = __('Minimum required amount is 5 Euro', 'martinehooptopbeter');
-            }
+        if (empty($donate_email)) {
+            $missingfields['donate_email'] = __('Required field', 'martinehooptopbeter');
+        }
 
-            if (($donate_payment_method != 'ideal') && ($donate_payment_method != 'creditcard')) {
-                $missingfields['donate_payment_method'] = __('Required field', 'martinehooptopbeter');
-            }
+        $donate_amount_parsed = parseAmount($donate_amount);
+        if ($donate_amount_parsed <= 0) {
+            $missingfields['donate_amount'] = __('Invalid amount', 'martinehooptopbeter');
+        }
+        if ($donate_amount_parsed < 500) {
+            $missingfields['donate_amount'] = __('Minimum required amount is 5 Euro', 'martinehooptopbeter');
+        }
 
-    		if (count($missingfields) == 0) {
+        if (($donate_payment_method != 'ideal') && ($donate_payment_method != 'creditcard')) {
+            $missingfields['donate_payment_method'] = __('Required field', 'martinehooptopbeter');
+        }
 
-                $donation = new Donation(0, $donate_amount_parsed, $donate_email, $donate_name, $donate_message, '', $donate_no_amount, $donate_anonymous);
+        if (count($missingfields) == 0) {
 
+            $d = new Donation(0, $donate_amount_parsed, $donate_email, $donate_name, $donate_message, '', $donate_no_amount, $donate_anonymous);
+
+            $donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
+            if ($donation = $donations->addDonation($d)) {
+
+                header('Location: /help-mij/', true, 302);
+                exit();
+
+            } else {
+                $errorMessage = __('An error has occured while saving your donation.', 'martinehooptopbeter');
             }
 
         }
+
+    }
+
+?><?php
+
+    function show_donate_page($page = 1)
+    {
+        global $donate_name;
+        global $donate_name;
+        global $donate_email;
+        global $donate_message;
+        global $donate_amount;
+        global $donate_payment_method;
+        global $donate_anonymous;
+        global $donate_no_amount;
 
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
@@ -55,6 +86,9 @@
 
                     <?php if (count($missingfields) > 0) : ?>
                         <p class="error"><?php _e('One or more fields are not filled in or incorrect. Please check and correct the entered data.', 'martinehooptopbeter'); ?>
+                    <?php endif ?>
+                    <?php if ($errorMessage) : ?>
+                        <p class="error"><?php echo esc_attr($errorMessage); ?></p>
                     <?php endif ?>
 
                     <fieldset>
@@ -139,7 +173,7 @@
             $this->emailAddress = $emailAddress;
             $this->name = $name;
             $this->message = $message;
-            $this->paymentVerifcation = $paymentVerification;
+            $this->paymentVerification = $paymentVerification;
             $this->showNoAmount = $showNoAmount;
             $this->showAnonymous = $showAnonymous;
         }
@@ -163,24 +197,29 @@
             $result = null;
             if ($conn = $this->openConnection()) {
 
-            try {
-                $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous) VALUES(:amount, :emailaddress, :name, :message, :payment_verification, :show_no_amount, :show_anonymous)';
-                $query = $conn->prepare($sql);
+                try {
+                    $sql = 'INSERT INTO tbl_donations (id, amount, emailaddress, name, message, payment_verification, show_no_amount, show_anonymous) VALUES (0, :amount, :emailaddress, :name, :message, :payment_verification, :show_no_amount, :show_anonymous)';
+                    $query = $conn->prepare($sql);
+                    if ($query != null) {
 
-                $query->bindParam(':amount', $donation->$amount);            
-                $query->bindParam(':emailaddress', $donation->$emailaddress);            
-                $query->bindParam(':name', $donation->$name);            
-                $query->bindParam(':message', $donation->$message);            
-                $query->bindParam(':payment_verification', $this->generatePaymentVerification($donation));            
-                $query->bindParam(':show_no_comment', $donation->$showNoAmount);            
-                $query->bindParam(':show_anonymous', $donation->$showAnonymous);
-                $query->execute();
+                        $donation->paymentVerification = $this->generatePaymentVerification($donation);
 
-                $result = $donation;
-                $result->id = $conn->lastInsertId();
-            }
-            catch(PDOException $ex)
-            { }
+                        $query->bindValue(':amount', $donation->amount, PDO::PARAM_INT);
+                        $query->bindValue(':emailaddress', $donation->emailAddress);
+                        $query->bindValue(':name', $donation->name);            
+                        $query->bindValue(':message', $donation->message);            
+                        $query->bindValue(':payment_verification', $donation->paymentVerification);            
+                        $query->bindValue(':show_no_amount', $donation->showNoAmount, PDO::PARAM_BOOL);            
+                        $query->bindValue(':show_anonymous', $donation->showAnonymous, PDO::PARAM_BOOL);
+                        if ($query->execute()) {
+                            $result = $donation;
+                            $result->id = $conn->lastInsertId();
+                        }
+
+                    }
+                }
+                catch(PDOException $ex)
+                { }
 
             }
 
@@ -194,21 +233,21 @@
 
             if ($conn = $this->openConnection()) {
 
-            try {
-                $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations WHERE (id = :id)';
-                $query = $conn->prepare($sql);
+                try {
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations WHERE (id = :id)';
+                    $query = $conn->prepare($sql);
 
-                $query->bindParam(':id', $id);            
-                $query->execute();
+                    $query->bindParam(':id', $id);            
+                    $query->execute();
 
-                if ($query->rowCount() > 0) {
+                    if ($query->rowCount() > 0) {
 
-                    $result = new Donation($query[0], $query[1], $query[2], $query[3], $query[4], $query[5], $query[6], $query[7]);
+                        $result = new Donation($query[0], $query[1], $query[2], $query[3], $query[4], $query[5], $query[6], $query[7]);
 
+                    }
                 }
-            }
-            catch(PDOException $ex)
-            { }
+                catch(PDOException $ex)
+                { }
 
             }
 
@@ -222,26 +261,26 @@
 
             if ($conn = $this->openConnection()) {
 
-            try {
-                $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
-                $query = $conn->prepare($sql);
+                try {
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
+                    $query = $conn->prepare($sql);
 
-                $query->bindParam(':offset', $offset);            
-                $query->bindParam(':numberOfItems', $numberOfItems);            
-                $query->bindParam(':sortOrder', $sortOrder);            
-                $rows = $query->execute();
+                    $query->bindParam(':offset', $offset);            
+                    $query->bindParam(':numberOfItems', $numberOfItems);            
+                    $query->bindParam(':sortOrder', $sortOrder);            
+                    $rows = $query->execute();
 
-                if ($query->rowCount() > 0) {
+                    if ($query->rowCount() > 0) {
 
-                    $result = [];
+                        $result = [];
 
-                    foreach($rows as $row) {
-                        $result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
+                        foreach($rows as $row) {
+                            $result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
+                        }
                     }
                 }
-            }
-            catch(PDOException $ex)
-            { }
+                catch(PDOException $ex)
+                { }
 
             }
 

@@ -1,9 +1,9 @@
+<?php include 'donate.php'; ?>
 <?php
 /**
  * Template Name: Donation Page
  */
 ?>
-<?php include 'donate.php'; ?>
 <?php get_header(); ?>
 
 	<?php if (have_posts()) : the_post(); ?>

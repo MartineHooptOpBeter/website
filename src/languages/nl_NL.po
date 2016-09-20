@@ -71,3 +71,6 @@ msgstr "Ik wil anoniem blijven, toon mijn naam niet op de website."
 
 msgid "Do not show the amount that I donate on the website."
 msgstr "Toon niet het bedrag wat ik doneer op de website."
+
+msgid "An error has occured while saving your donation."
+msgstr "Er is een fout opgetreden bij het opslaan van je donatie."
