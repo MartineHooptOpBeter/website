@@ -45,7 +45,7 @@
 
         if (count($missingfields) == 0) {
 
-            $d = new Donation(0, $donate_amount_parsed, $donate_email, $donate_name, $donate_message, '', $donate_no_amount, $donate_anonymous);
+            $d = new Donation(0, $donate_amount_parsed, $donate_email, $donate_name, $donate_message, '', $donate_payment_method, $donate_no_amount, $donate_anonymous, null);
 
             $donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
             if ($donation = $donations->addDonation($d)) {
@@ -166,10 +166,12 @@
         public $name;
         public $message;
         public $paymentVerification;
+		public $paymentMethod;
         public $showNoAmount;
         public $showAnonymous;
+		public $timestamp;
 
-        function Donation($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $showNoAmount = false, $showAnonymous = false)
+        function Donation($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $paymentMethod = '', $showNoAmount = false, $showAnonymous = false, $timestamp = null)
         {
             $this->id = $id;
             $this->amount = $amount;
@@ -177,8 +179,10 @@
             $this->name = $name;
             $this->message = $message;
             $this->paymentVerification = $paymentVerification;
+			$this->paymentMethod = $paymentMethod;
             $this->showNoAmount = $showNoAmount;
             $this->showAnonymous = $showAnonymous;
+			$this->timestamp = $timestamp;
         }
     }
 
@@ -201,7 +205,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, show_no_amount, show_anonymous) VALUES (:amount, :emailaddress, :name, :message, :payment_verification, :show_no_amount, :show_anonymous)';
+                    $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, payment_method, show_no_amount, show_anonymous, timestamp) VALUES (:amount, :emailaddress, :name, :message, :payment_verification, :payment_method, :show_no_amount, :show_anonymous, NOW())';
                     $query = $conn->prepare($sql);
                     if ($query != null) {
 
@@ -211,12 +215,13 @@
                         $query->bindValue(':emailaddress', $donation->emailAddress);
                         $query->bindValue(':name', $donation->name);            
                         $query->bindValue(':message', $donation->message);            
-                        $query->bindValue(':payment_verification', $donation->paymentVerification);            
-                        $query->bindValue(':show_no_amount', $donation->showNoAmount);        
-                        $query->bindValue(':show_anonymous', $donation->showAnonymous);
+                        $query->bindValue(':payment_verification', $donation->paymentVerification);
+                        $query->bindValue(':payment_method', $donation->paymentMethod);
+                        $query->bindValue(':show_no_amount', $donation->showNoAmount ? '1' : '0');
+                        $query->bindValue(':show_anonymous', $donation->showAnonymous ? '1' : '0');
                         if ($query->execute()) {
-                            $result = $donation;
-                            $result->id = $conn->lastInsertId();
+							$newId = $conn->lastInsertId();
+                            $result = $this->getDonation($newId);
                         }
 
                     }
@@ -237,17 +242,19 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations WHERE (id = :id)';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (id = :id)';
                     $query = $conn->prepare($sql);
 
-                    $query->bindParam(':id', $id);            
-                    $query->execute();
+                    $query->bindValue(':id', $id);            
+                    if ($query->execute()) {
+							
+						if ($row = $query->fetch(PDO::FETCH_NUM)) {
 
-                    if ($query->rowCount() > 0) {
+							$result = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9]);
+							
+						}
 
-                        $result = new Donation($query[0], $query[1], $query[2], $query[3], $query[4], $query[5], $query[6], $query[7]);
-
-                    }
+					}
                 }
                 catch(PDOException $ex)
                 { }
@@ -265,21 +272,22 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, show_no_comment, show_anonymous FROM tbl_donations ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, show_no_comment, show_anonymous, timestamp FROM tbl_donations ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
                     $query = $conn->prepare($sql);
 
-                    $query->bindParam(':offset', $offset);            
-                    $query->bindParam(':numberOfItems', $numberOfItems);            
-                    $query->bindParam(':sortOrder', $sortOrder);            
-                    $rows = $query->execute();
+                    $query->bindValue(':offset', $offset);            
+                    $query->bindValue(':numberOfItems', $numberOfItems);            
+                    $query->bindValue(':sortOrder', $sortOrder);            
+                    if ($query->execute()) {
+						if ($query->rowCount() > 0) {
 
-                    if ($query->rowCount() > 0) {
+							$result = [];
+							
+							while ($row = $query->fetch(PDO::FETCH_NUM)) {
+								$result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9]);
+							}
 
-                        $result = [];
-
-                        foreach($rows as $row) {
-                            $result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
-                        }
+						}
                     }
                 }
                 catch(PDOException $ex)
