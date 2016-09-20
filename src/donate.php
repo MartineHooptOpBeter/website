@@ -49,9 +49,8 @@
 
             $donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
             if ($donation = $donations->addDonation($d)) {
-
-                header('Location: /help-mij/', true, 302);
-                exit();
+				
+				// Start payment
 
             } else {
                 $errorMessage = __('An error has occured while saving your donation.', 'martinehooptopbeter');
