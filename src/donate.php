@@ -198,19 +198,19 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'INSERT INTO tbl_donations (id, amount, emailaddress, name, message, payment_verification, show_no_amount, show_anonymous) VALUES (0, :amount, :emailaddress, :name, :message, :payment_verification, :show_no_amount, :show_anonymous)';
+                    $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, show_no_amount, show_anonymous) VALUES (:amount, :emailaddress, :name, :message, :payment_verification, :show_no_amount, :show_anonymous)';
                     $query = $conn->prepare($sql);
                     if ($query != null) {
 
                         $donation->paymentVerification = $this->generatePaymentVerification($donation);
 
-                        $query->bindValue(':amount', $donation->amount, PDO::PARAM_INT);
+                        $query->bindValue(':amount', $donation->amount);
                         $query->bindValue(':emailaddress', $donation->emailAddress);
                         $query->bindValue(':name', $donation->name);            
                         $query->bindValue(':message', $donation->message);            
                         $query->bindValue(':payment_verification', $donation->paymentVerification);            
-                        $query->bindValue(':show_no_amount', $donation->showNoAmount, PDO::PARAM_BOOL);            
-                        $query->bindValue(':show_anonymous', $donation->showAnonymous, PDO::PARAM_BOOL);
+                        $query->bindValue(':show_no_amount', $donation->showNoAmount);        
+                        $query->bindValue(':show_anonymous', $donation->showAnonymous);
                         if ($query->execute()) {
                             $result = $donation;
                             $result->id = $conn->lastInsertId();
