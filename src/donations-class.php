@@ -121,12 +121,11 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (payment_status = \'paid\') ORDER BY :sortOrder LIMIT :numberOfItems OFFSET :offset';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (payment_status = \'paid\') ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
                     $query = $conn->prepare($sql);
 					
                     $query->bindValue(':offset', $offset);            
                     $query->bindValue(':numberOfItems', $numberOfItems);            
-                    $query->bindValue(':sortOrder', $sortOrder);            
                     if ($query->execute()) {
 						if ($query->rowCount() > 0) {
 
