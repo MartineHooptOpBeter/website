@@ -2,7 +2,7 @@
 
     global $config;
 
-    $showForm = true;
+	$errorMessage = null;
     $missingfields = [];
 
     $donate_name = '';
@@ -65,6 +65,9 @@
 
     function show_donate_page($page = 1)
     {
+		global $errorMessage;
+		global $missingfields;
+		
         global $donate_name;
         global $donate_name;
         global $donate_email;
@@ -86,10 +89,10 @@
 
                     <?php if (count($missingfields) > 0) : ?>
                         <p class="error"><?php _e('One or more fields are not filled in or incorrect. Please check and correct the entered data.', 'martinehooptopbeter'); ?>
-                    <?php endif ?>
+                    <?php endif; ?>
                     <?php if ($errorMessage) : ?>
                         <p class="error"><?php echo esc_attr($errorMessage); ?></p>
-                    <?php endif ?>
+                    <?php endif; ?>
 
                     <fieldset>
                         <p class="<?php if (isset($missingfields['donate_name'])) { echo 'error'; } ?>">
