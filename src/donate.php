@@ -248,15 +248,9 @@
             $conn = null;
 
             try {
-                $conn = new PDO(
-                    $this->dsn,
-                    $this->username,
-                    $this->password,
-                    array(
-                        PDO::ATTR_EMULATE_PREPARES => false,
-                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-                    )
-                );
+                $conn = new PDO($this->dsn, $this->username, $this->password);
+                $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch(PDOException $ex)
             { }
