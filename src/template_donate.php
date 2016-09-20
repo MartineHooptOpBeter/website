@@ -65,6 +65,6 @@
 
 ?>
 	
-	<?php show_donate_page($_GET['page']) ?>
+	<?php show_donate_page() ?>
 	
 <?php get_footer(); ?>
