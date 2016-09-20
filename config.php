@@ -21,4 +21,12 @@
     /* Wachtwoord om in te loggen op database server */
     $config['donate_password'] = '';
 
+	
+    // ======
+    // MOLLIE
+    // ======
+
+    /* De API key voor Mollie */
+    $config['mollie_apikey'] = '';
+
 ?>
