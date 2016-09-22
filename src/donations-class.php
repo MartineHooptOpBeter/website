@@ -121,7 +121,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (payment_status = \'paid\') ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_method, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (payment_status = \'paid\') ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
                     $query = $conn->prepare($sql);
 					
                     $query->bindValue(':offset', $offset);            
@@ -132,7 +132,7 @@
 							$result = [];
 							
 							while ($row = $query->fetch(PDO::FETCH_NUM)) {
-								$result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], strtotime($row[11]));
+								$result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], '***', $row[5], '***', $row[6], $row[7], $row[8], strtotime($row[9]));
 							}
 
 						}
