@@ -86,7 +86,7 @@
 	
 			<?php break; ?>
 
-			<?php case 'help-mij': ?>
+			<?php case 'stamceltransplantatie': ?>
 
 	<section class="crowdfunding clearfix">
 		<div class="sitewidth">
