@@ -50,8 +50,6 @@
             $donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
             if ($donation = $donations->addDonation($d)) {
 				
-				var_dump($donation);
-				
 				$mollie_options = get_option('mollie_options');
 				
 				$mollie = new Mollie_API_Client;
