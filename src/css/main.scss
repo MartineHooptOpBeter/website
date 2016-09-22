@@ -78,10 +78,13 @@ p                                           { margin: 0 0 1.2em 0; }
 /*========================= CONTENT PAGES =========================*/
 .content                                    { margin-bottom: 20px; }
 .content .text                              { padding: 0; }
+.content .text ul							{ margin-bottom: 1em; }
+.content .text h2							{ margin-top: 30px; }
+.content .text h2:first-child				{ margin-top: 0; }
 .content .wp-post-image            			{ margin-bottom: 20px; }
 
 .content.intro .text                        { padding-top: 20px; }
-.content.intro p                            { font-family: 'Open Sans', sans-serif; color: $accentColor; font-size: 15pt; }
+.content.intro p                            { font-family: 'Open Sans', sans-serif; color: $accentColor; font-size: 18px; line-height: 130%; }
 .content.right .wp-post-image               { float: right; }
 .content.left .wp-post-image                { float: left; margin-right: 20px; }
 
