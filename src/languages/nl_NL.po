@@ -89,3 +89,6 @@ msgstr "Donatie"
 
 msgid "This should point to mollie-webhook.php in the theme folder."
 msgstr "Dit moet verwijzen naar mollie-webhook.php in de theme folder."
+
+msgid "The specified donation could not be found."
+msgstr "De opgegeven donatie kan niet worden gevonden."
