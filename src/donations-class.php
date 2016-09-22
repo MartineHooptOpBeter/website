@@ -69,7 +69,7 @@
                         $query->bindValue(':show_anonymous', $donation->showAnonymous ? '1' : '0');
                         if ($query->execute()) {
 							$newId = $conn->lastInsertId();
-                            $result = $this->getDonation($newId);
+                            $result = $this->getDonation($newId, $donation->paymentVerification);
                         }
 
                     }
@@ -83,17 +83,19 @@
             return $result;
         }
 
-        function getDonation($id) {
+        function getDonation($id, $verification) {
 
             $result = null;
 
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (id = :id)';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (id = :id) AND (payment_verification = :payment_verification)';
                     $query = $conn->prepare($sql);
 
                     $query->bindValue(':id', $id);            
+                    $query->bindValue(':payment_verification', $verification);            
+					
                     if ($query->execute()) {
 							
 						if ($row = $query->fetch(PDO::FETCH_NUM)) {
