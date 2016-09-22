@@ -12,7 +12,9 @@
 		public $donate_email = '';
 		public $donate_message = '';
 		public $donate_amount = '';
+		public $donate_amount_decimal = 0.0;
 		public $donate_payment_method = '';
+		public $donate_payment_status = '';
 		public $donate_anonymous = false;
 		public $donate_no_amount = false;
 		
@@ -35,6 +37,7 @@
 				$this->donate_payment_method = isset($post['donate_payment_method']) ? trim($post['donate_payment_method']) : $this->donate_payment_method;
 				$this->donate_anonymous = isset($post['donate_anonymous']);
 				$this->donate_no_amount = isset($post['donate_no_amount']);
+				$noSubmit = isset($post['donate_nosubmit']);
 
 				if (empty($this->donate_name)) {
 					$this->missingfields['donate_name'] = __('Required field', 'martinehooptopbeter');
@@ -44,11 +47,11 @@
 					$this->missingfields['donate_email'] = __('Required field', 'martinehooptopbeter');
 				}
 
-				$donate_amount_parsed = $this->parseAmount($this->donate_amount);
-				if ($donate_amount_parsed <= 0) {
+				$this->donate_amount_decimal = $this->parseAmount($this->donate_amount);
+				if ($this->donate_amount_decimal <= 0) {
 					$this->missingfields['donate_amount'] = __('Invalid amount', 'martinehooptopbeter');
 				}
-				if ($donate_amount_parsed < 500) {
+				if ($this->donate_amount_decimal < 500) {
 					$this->missingfields['donate_amount'] = __('Minimum required amount is 5 Euro', 'martinehooptopbeter');
 				}
 
@@ -56,9 +59,9 @@
 					$this->missingfields['donate_payment_method'] = __('Required field', 'martinehooptopbeter');
 				}
 
-				if (count($this->missingfields) == 0) {
+				if ((count($this->missingfields) == 0) && (!$noSubmit)) {
 
-					$d = new Donation(0, $donate_amount_parsed, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, null);
+					$d = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, null);
 
 					$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
 					if ($donation = $donations->addDonation($d)) {
@@ -106,20 +109,24 @@
 
 			} else {
 				
-				$donationId = isset($get['donationid']) ? trim($get['donateid']) : 0;
+				$donationId = isset($get['donationid']) ? trim($get['donationid']) : 0;
 				$paymentVerification = isset($get['verification']) ? trim($get['verification']) : 0;
-				
+
 				if ($donationId && $paymentVerification) {
-					
+
 					$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
-					if ($donation = $donations->getDonation($donationID, $paymentVerification)) {
-						
+					if ($donation = $donations->getDonation($donationId, $paymentVerification)) {
+
+						$this->donate_id = $donation->id;
 						$this->donate_name = $donation->name;
 						$this->donate_email = $donation->emailAddress;
 						$this->donate_message = $donation->message;
-						$this->donate_amount = $donation->amount;
+						$this->donate_amount_decimal = $donation->amount;
+						$this->donate_amount = $this->formatPrice($this->donate_amount_decimal);
+						$this->donate_payment_id = $donation->paymentId;
 						$this->donate_payment_method = $donation->paymentMethod;
-						$this->donate_status = $donation->paymentStatus;
+						$this->donate_payment_status = $donation->paymentStatus;
+						$this->donate_payment_verification = $donation->paymentVerification;
 						$this->donate_anonymous = $donation->showAnonymous;
 						$this->donate_no_amount = $donation->showNoAmount;
 						
@@ -131,7 +138,7 @@
 					$this->doShowDonationConfirmation = true;
 					
 				}
-				
+
 			}
 			
 		}
@@ -207,6 +214,70 @@
 <?php
 
 		}
+		
+		function showDonationConfirmation() {
+			
+?>	<section class="content">
+		<div class="sitewidth clearfix">
+
+            <div class="text">
+			
+				<?php if ($this->errorMessage) : ?>
+					<p class="error"><?php echo esc_attr($this->errorMessage); ?></p>
+				<?php else : ?>
+			
+					<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
+					
+					<?php if ($this->donate_payment_status == 'paid') :  ?>
+					
+						<p><?php echo esc_attr(vsprintf(__('Your donation of %1$s has been received. We thank you for supporting Martine!', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?></p>
+					
+						<div class="buttons">
+							<a href="/help-mij/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
+						</div>
+						
+					<?php else : ?>
+
+						<p><?php echo esc_attr(vsprintf(__('We have not received confirmation of your donation of %1$s yet.', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?>
+						
+						<?php if ($this->donate_payment_method == 'ideal') { _e('Normally an iDEAL payment is processed immediately so maybe something went wrong?', 'martinehooptopbeter'); } ?>
+						<?php if ($this->donate_payment_method == 'creditcard') { _e('Because you paid with a creditcard it could take a little bit longer before we receive confirmation of your donation.', 'martinehooptopbeter'); } ?></p>
+						
+						<p><?php _e('You can press the \'Refresh\' button to reload the page to show the latest status of your donation. In case something went wrong, you can press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'); ?>
+						
+						</p>
+						
+						<form action="<?php echo esc_attr(get_permalink()); ?>" method="post">
+							<div class="buttons">
+								<a href="<?php echo esc_attr(get_permalink() . '?donationid=' . $this->donate_id . '&verification=' . $this->donate_payment_verification); ?>" class="btn left"><?php _e('Refresh', 'martinehooptopbeter'); ?></a>
+								<button type="submit" class="btn right"><?php _e('Donate Again', 'martinehooptopbeter'); ?></button>
+							</div>
+							<input type="hidden" name="donate_name" value="<?php echo esc_attr($this->donate_name); ?>" />
+							<input type="hidden" name="donate_email" value="<?php echo esc_attr($this->donate_email); ?>" />
+							<input type="hidden" name="donate_message" value="<?php echo esc_attr($this->donate_message); ?>" />
+							<input type="hidden" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" />
+							<input type="hidden" name="donate_payment_method" value="<?php echo esc_attr($this->donate_payment_method); ?>" />
+							<?php if ($this->donate_anonymous) : ?>
+								<input type="hidden" name="donate_anonymous" value="ON" />
+							<?php endif; ?>
+							<?php if ($this->donate_no_amount) : ?>
+								<input type="hidden" name="donate_no_amount" value="ON" />
+							<?php endif; ?>
+							<input type="hidden" name="donate_nosubmit" value="ON" />
+						</form>
+
+					<?php endif; ?>
+				
+				<?php endif; ?>
+
+			</div>
+
+        </div>
+    </section>
+
+<?php
+			
+		}
 
 		private function parseAmount($amount) {
 			$amount = str_replace(',', '.', $amount);
@@ -215,6 +286,14 @@
 				return (int)($amound_parsed * 100);
 			}
 			return 0;
+		}
+		
+		private function formatPrice($amount) {
+			return number_format((float)$amount / 100, 2, ',', '.');
+		}
+		
+		private function formatEuroPrice($amount) {
+			return '€ ' . $this->formatPrice($amount);
 		}
 		
 	}

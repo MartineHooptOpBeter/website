@@ -77,8 +77,7 @@
 
 	if ($donationPage->doShowDonationConfirmation) {
 
-		
-		
+		$donationPage->showDonationConfirmation();
 		
 	}
 
