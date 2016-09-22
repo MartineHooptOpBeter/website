@@ -82,6 +82,7 @@ p                                           { margin: 0 0 1.2em 0; }
 .content .text h2							{ margin-top: 30px; }
 .content .text h2:first-child				{ margin-top: 0; }
 .content .wp-post-image            			{ margin-bottom: 20px; }
+.content.intro .wp-post-image            	{ margin-bottom: 0; margin-left: 20px; }
 
 .content.intro .text                        { padding-top: 20px; }
 .content.intro p                            { font-family: 'Open Sans', sans-serif; color: $accentColor; font-size: 18px; line-height: 130%; }
@@ -196,5 +197,6 @@ a.btn:active								{ text-decoration: none; }
     .content.right .text                    { float: left; }
     .content.left .wp-post-image            { width: 100%; height: auto; }
     .content.left .text                     { float: left; }
+	.content.intro .wp-post-image           { margin: 0; }
 
 }
