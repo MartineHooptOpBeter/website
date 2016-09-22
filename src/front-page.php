@@ -117,10 +117,10 @@
 			<div class="index accent clearfix">
 			
 				<ul>
-					<li><a href="#">Wat is MS</a></li>
-					<li><a href="#">Klachten bij MS</a></li>
-					<li><a href="#">Vormen van MS</a></li>
-					<li><a href="#">Hoe beïnvloed MS mijn leven</a></li>
+					<li><a href="<?php echo get_permalink() ?>">Wat is MS?</a></li>
+					<li><a href="<?php echo get_permalink() ?>#vormenms">Vormen van MS</a></li>
+					<li><a href="<?php echo get_permalink() ?>#klachtenms">Klachten bij MS</a></li>
+					<li><a href="<?php echo get_permalink() ?>#msvoormartine">Wat betekent MS voor Martine?</a></li>
 				</ul>
 				
 			</div>
