@@ -119,3 +119,12 @@ msgstr "Verversen"
 
 msgid "Donate Again"
 msgstr "Doneer Opnieuw"
+
+msgid "Sorry"
+msgstr "Sorry"
+
+msgid "The payment for you donation has been cancelled, expired or has failed. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation."
+msgstr "De betaling voor je donatie is geannuleerd, verlopen of mislukt. Helaas hebben we je donatie van %1$s dus niet ontvangen. Klik op de knop 'Opnieuw doneren' om een nieuwe donatie te starten."
+
+msgid "The payment for you donation has been refunded or charged back. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation."
+msgstr "De betaling voor je donatie is gestorneerd of teruggevorderd. Helaas hebben we je donatie van %1$s dus niet ontvangen. Klik op de knop 'Opnieuw doneren' om een nieuwe donatie te starten."

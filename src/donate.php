@@ -214,6 +214,9 @@
 		
 		function showDonationConfirmation() {
 			
+			$showRefresh = false;
+			$showDonateAgain = false;
+			
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
 
@@ -223,48 +226,75 @@
 					<p class="error"><?php echo esc_attr($this->errorMessage); ?></p>
 				<?php else : ?>
 			
-					<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
+					<?php if (($this->donate_payment_status == 'paid') || ($this->donate_payment_status == 'paidout')) :  ?>
 					
-					<?php if ($this->donate_payment_status == 'paid') :  ?>
-					
+						<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
+						
 						<p><?php echo esc_attr(vsprintf(__('Your donation of %1$s has been received. We thank you for supporting Martine!', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?></p>
 					
 						<div class="buttons">
-							<a href="/help-mij/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
+							<a href="/donaties/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
 						</div>
 						
-					<?php else : ?>
+					<?php elseif (($this->donate_payment_status == 'cancelled') || ($this->donate_payment_status == 'expired') || ($this->donate_payment_status == 'failed')) :  ?>
+						<?php $showDonateAgain = true; ?>
 
+						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
+					
+						<p><?php echo esc_attr(vsprintf(__('The payment for you donation has been cancelled, expired or has failed. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?></p>
+					
+					<?php elseif (($this->donate_payment_status == 'refunded') || ($this->donate_payment_status == 'charged_back')) :  ?>
+						<?php $showDonateAgain = true; ?>
+						
+						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
+					
+						<p><?php echo esc_attr(vsprintf(__('The payment for you donation has been refunded or charged back. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?></p>
+					
+					<?php else : ?>
+						<?php $showRefresh = true; ?>
+						<?php $showDonateAgain = true; ?>
+						
 						<p><?php echo esc_attr(vsprintf(__('We have not received confirmation of your donation of %1$s yet.', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?>
 						
 						<?php if ($this->donate_payment_method == 'ideal') { _e('Normally an iDEAL payment is processed immediately so maybe something went wrong?', 'martinehooptopbeter'); } ?>
 						<?php if ($this->donate_payment_method == 'creditcard') { _e('Because you paid with a creditcard it could take a little bit longer before we receive confirmation of your donation.', 'martinehooptopbeter'); } ?></p>
 						
-						<p><?php _e('You can press the \'Refresh\' button to reload the page to show the latest status of your donation. In case something went wrong, you can press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'); ?>
+						<p><?php _e('You can press the \'Refresh\' button to reload the page to show the latest status of your donation. In case something went wrong, you can press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'); ?></p>
 						
-						</p>
-						
+					<?php endif; ?>
+					
+					<?php if ($showRefresh || $showDonateAgain) : ?>
+				
 						<form action="<?php echo esc_attr(get_permalink()); ?>" method="post">
 							<div class="buttons">
-								<a href="<?php echo esc_attr(get_permalink() . '?donationid=' . $this->donate_id . '&verification=' . $this->donate_payment_verification); ?>" class="btn left"><?php _e('Refresh', 'martinehooptopbeter'); ?></a>
-								<button type="submit" class="btn right"><?php _e('Donate Again', 'martinehooptopbeter'); ?></button>
+							
+								<?php if ($showRefresh) : ?>
+									<a href="<?php echo esc_attr(get_permalink() . '?donationid=' . $this->donate_id . '&verification=' . $this->donate_payment_verification); ?>" class="btn left"><?php _e('Refresh', 'martinehooptopbeter'); ?></a>
+								<?php endif; ?>
+								
+								<?php if ($showDonateAgain) : ?>
+									<button type="submit" class="btn right"><?php _e('Donate Again', 'martinehooptopbeter'); ?></button>
+								<?php endif; ?>
+								
 							</div>
-							<input type="hidden" name="donate_name" value="<?php echo esc_attr($this->donate_name); ?>" />
-							<input type="hidden" name="donate_email" value="<?php echo esc_attr($this->donate_email); ?>" />
-							<input type="hidden" name="donate_message" value="<?php echo esc_attr($this->donate_message); ?>" />
-							<input type="hidden" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" />
-							<input type="hidden" name="donate_payment_method" value="<?php echo esc_attr($this->donate_payment_method); ?>" />
-							<?php if ($this->donate_anonymous) : ?>
-								<input type="hidden" name="donate_anonymous" value="ON" />
+							<?php if ($showDonateAgain) : ?>
+								<input type="hidden" name="donate_name" value="<?php echo esc_attr($this->donate_name); ?>" />
+								<input type="hidden" name="donate_email" value="<?php echo esc_attr($this->donate_email); ?>" />
+								<input type="hidden" name="donate_message" value="<?php echo esc_attr($this->donate_message); ?>" />
+								<input type="hidden" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" />
+								<input type="hidden" name="donate_payment_method" value="<?php echo esc_attr($this->donate_payment_method); ?>" />
+								<?php if ($this->donate_anonymous) : ?>
+									<input type="hidden" name="donate_anonymous" value="ON" />
+								<?php endif; ?>
+								<?php if ($this->donate_no_amount) : ?>
+									<input type="hidden" name="donate_no_amount" value="ON" />
+								<?php endif; ?>
+								<input type="hidden" name="donate_nosubmit" value="ON" />
 							<?php endif; ?>
-							<?php if ($this->donate_no_amount) : ?>
-								<input type="hidden" name="donate_no_amount" value="ON" />
-							<?php endif; ?>
-							<input type="hidden" name="donate_nosubmit" value="ON" />
 						</form>
 
 					<?php endif; ?>
-				
+
 				<?php endif; ?>
 
 			</div>
