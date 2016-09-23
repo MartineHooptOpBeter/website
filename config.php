@@ -20,6 +20,9 @@
 
     /* Wachtwoord om in te loggen op database server */
     $config['donate_password'] = '';
+	
+	/* Het doel bedrag op te halen met donaties (in euro centen) */
+	$config['donate_goal'] = 1000000;
 
 	
     // ======
