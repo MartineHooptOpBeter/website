@@ -177,6 +177,33 @@
 		
 		}
 		
+		function getTotalDonationsAmount() {
+
+            $result = null;
+
+            if ($conn = $this->openConnection()) {
+
+                try {
+                    $sql = 'SELECT SUM(amount) as total_amount FROM tbl_donations WHERE (payment_status = \'paid\')';
+                    $query = $conn->prepare($sql);
+                    if ($query->execute()) {
+						if ($row = $query->fetch(PDO::FETCH_NUM)) {
+
+							$result = intval($row[0]);
+
+						}
+                    }
+                }
+                catch(PDOException $ex)
+                { }
+
+            }
+
+            $conn = null;
+            return $result;
+		
+		}
+
 		function updatePaymentId($id, $payment_id) {
 			
             $result = false;
