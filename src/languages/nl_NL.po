@@ -100,7 +100,7 @@ msgid "Continue"
 msgstr "Ga verder"
 
 msgid "Your donation of %1$s has been received. We thank you for supporting Martine!"
-msgstr "Je donatie van %1$s is ontvangen. We danken je voor het steuen van Martine!"
+msgstr "Je donatie van %1$s is ontvangen. We danken je voor het steunen van Martine!"
 
 msgid "We have not received confirmation of your donation of %1$s yet."
 msgstr "We hebben nog geen bevestiging ontvangen van je donatie van %1$s."
