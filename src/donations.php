@@ -1,6 +1,6 @@
 <?php require_once 'donations-class.php' ?><?php
 
-    function show_donations_page($page = 1)
+    function show_donations_page($donationsUrl, $page = 1)
     {
 		global $config;
 		
@@ -58,8 +58,8 @@
 			}
 			
 ?>				<div class="buttons">
-					<?php if ($page > 1) : ?><a href="<?php echo esc_url( get_permalink() . ($page > 2 ? "?donationpage=" . ($page - 1) : '') ); ?>" class="btn left"><?php _e('Back', 'martinehooptopbeter'); ?></a><?php endif ?>
-					<?php if ($page < $pageMax) : ?><a href="<?php echo esc_url( get_permalink() . "?donationpage=" . ($page + 1) ); ?>" class="btn right"><?php _e('More', 'martinehooptopbeter'); ?></a><?php endif ?>
+					<?php if ($page > 1) : ?><a href="<?php echo esc_url( $donationsUrl . ($page > 2 ? "?donationpage=" . ($page - 1) : '') ); ?>" class="btn left"><?php _e('Previous', 'martinehooptopbeter'); ?></a><?php endif ?>
+					<?php if ($page < $pageMax) : ?><a href="<?php echo esc_url( $donationsUrl . "?donationpage=" . ($page + 1) ); ?>" class="btn right"><?php _e('More', 'martinehooptopbeter'); ?></a><?php endif ?>
 				</div>
 				
 <?php				

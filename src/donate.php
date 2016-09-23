@@ -21,7 +21,7 @@
 		function DonationPage() {
 		}
 		
-		function processRequest($server, $post, $get) {
+		function processRequest($donateUrl, $server, $post, $get) {
 			
 			global $config;
 
@@ -75,7 +75,7 @@
 									array(
 										'amount'      => number_format($donation->amount / 100, 2, '.', ''),
 										'description' => __('Donation', 'martinehooptopbeter'),
-										'redirectUrl' => get_permalink() . '?donationid=' . $donation->id . '&verification=' . $donation->paymentVerification,
+										'redirectUrl' => $donateUrl . '?donationid=' . $donation->id . '&verification=' . $donation->paymentVerification,
 										'webhookUrl'  => $config['mollie_webhookurl'],
 										'locale'      => 'nl',
 										'method'      => $donation->paymentMethod,

@@ -3,7 +3,7 @@
 	include 'donate.php'; 
 
 	$donationPage = new DonationPage();
-	$donationPage->processRequest($_SERVER, $_POST, $_GET);
+	$donationPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
 ?>
 <?php

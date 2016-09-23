@@ -27,6 +27,8 @@
 		<?php endif ?>
 
 	<?php endif ?>
+	
+	<?php $donationsUrl = get_permalink(); ?>
 
 <?php 
 
@@ -65,6 +67,6 @@
 
 ?>
 	
-	<?php show_donations_page($_GET['donationpage']) ?>
+	<?php show_donations_page($donationsUrl, $_GET['donationpage']) ?>
 	
 <?php get_footer(); ?>
