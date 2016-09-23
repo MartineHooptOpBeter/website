@@ -1,0 +1,6 @@
+{
+	"name": "martinehooptopbeter/website",
+	"require": {
+		"mollie/mollie-api-php": "1.6.*"
+	}
+}
