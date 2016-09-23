@@ -1,5 +1,13 @@
 <?php require_once 'donations-class.php' ?><?php
 
+	function formatPrice($amount) {
+		return number_format((float)$amount / 100, 2, ',', '.');
+	}
+	
+	function formatEuroPrice($amount) {
+		return '€ ' . formatPrice($amount);
+	}
+
     function show_donations_page($donationsUrl, $page = 1)
     {
 		global $config;
@@ -16,6 +24,15 @@
 		$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
 		
 		$itemCount = $donations->getDonationsListCount();
+		$totalValue = $donations->getTotalDonationsAmount();
+		
+		$goalValue = $config['donate_goal'];
+		if ($goalValue > 0) {
+			$goalPercentage = ((float)$totalValue / (float)$goalValue) * 100;
+			if ($goalPercentage > 100) { $goalPercentage = 100.0; }
+		} else {
+			$goalPercentage = 0;
+		}
 
 		$pageSize = 10;
 		$pageMax = intval($itemCount / $pageSize) + 1;
@@ -34,6 +51,16 @@
 			
 		} else {
 			
+?>				<div class="meter">
+					<span style="width: <?php echo number_format($goalPercentage, 2, '.', '') ?>%"><span></span></span>
+				</div>
+				<div class="metertext clearfix">
+					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(formatEuroPrice($totalValue)) . '</strong>', esc_attr(formatEuroPrice($goalValue)))); ?></span>
+					<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $itemCount)); ?></span>
+				</div>
+
+<?php
+
 			foreach($items as $item) {
 
 ?>				<article>

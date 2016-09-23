@@ -134,3 +134,9 @@ msgstr "Meer"
 
 msgid "Previous"
 msgstr "Vorige"
+
+msgid "%1$s donations"
+msgstr "%1$s donaties"
+
+msgid "Total: %1$s of %2$s"
+msgstr "Totaal: %1$s van %2$s"
