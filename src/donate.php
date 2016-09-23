@@ -66,10 +66,8 @@
 					$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
 					if ($donation = $donations->addDonation($d)) {
 						
-						$mollie_options = get_option('mollie_options');
-						
 						$mollie = new Mollie_API_Client;
-						$mollie->setApiKey($mollie_options['apikey']);
+						$mollie->setApiKey($config['mollie_apikey']);
 						
 						try
 						{
