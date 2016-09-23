@@ -120,8 +120,8 @@ input.textinput,
 textarea                                    { clear: both; float: left; box-sizing: border-box; border: 1px solid $hoverColor; color: $accentColor; font-size: 18px; padding: 3px 6px; width: 100%; max-width: 600px; }
 input.clearnone                             { clear: none; }
 input.numberinput                           { width: 40%; max-width: 200px; }
-input.checkbox                              { float: left; margin-right: 8px; }
-input.radio                                 { float: left; margin-right: 8px; }
+input.checkbox                              { float: left; margin-right: 0.5em; margin-top: 0.25em; }
+input.radio                                 { float: left; margin-right: 0.5em; margin-top: 0.25em; }
 form ul label                               { font-weight: normal; }
 
 p.error                                     { color: $errorColor; font-weight: bold; }
