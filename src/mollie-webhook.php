@@ -11,20 +11,17 @@
 			$transaction_id = isset($_POST["id"]) ? $_POST["id"] : '';
 			
 			if ($payment = $mollie->payments->get($transaction_id)) {
-				if ($payment->isPaid()) {
 
-					$donation_id = $payment->metadata->donation_id;
-					$payment_id = $payment->id;
-					$payment_verification = $payment->metadata->payment_verification;
-					
-					$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
-					if (!$donations->updatePaymentStatus($donation_id, $payment_id, $payment_verification, 'paid')) {
-						header('HTTP/1.1 403 Forbidden');
-						exit;
-					}
-
-				}
+				$donation_id = $payment->metadata->donation_id;
+				$payment_id = $payment->id;
+				$payment_verification = $payment->metadata->payment_verification;
 				
+				$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
+				if (!$donations->updatePaymentStatus($donation_id, $payment_id, $payment_verification, $payment->status)) {
+					header('HTTP/1.1 403 Forbidden');
+					exit;
+				}
+
 				header('HTTP/1.1 200 OK');
 				exit;
 			}
