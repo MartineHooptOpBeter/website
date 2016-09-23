@@ -4,7 +4,7 @@
 html										{ height: 100%; overflow-x: hidden; }
 body,
 button,
-input,
+input.textinput,
 textarea									{ font-family: 'Montserrat', sans-serif;; font-weight: normal; font-size: 15px; line-height: 22px; color: $bodyTextColor; height: 100%; -webkit-text-size-adjust: 100%; }
 h1, h2, h3, h4, h5, h5, h6					{ margin: 0 0 10px 0; font-family: 'Roboto', sans-serif; color: $accentColor; }
 h1											{ font-size: 40px; line-height: 50px; font-weight: normal; margin: 0 0 20px 0; }
