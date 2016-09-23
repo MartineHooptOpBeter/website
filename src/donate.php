@@ -150,8 +150,6 @@
 		<div class="sitewidth clearfix">
 
             <div class="text">
-                <h2><?php _e('Donate', 'martinehooptopbeter'); ?></h2>
-
                 <form action="" method="post">
                     
                     <p><?php _e('Enter your details and the amount you want to donate below. Optionally you can make your donation anonymously or hide the amount of money you donate.', 'martinehooptopbeter'); ?>
@@ -201,7 +199,7 @@
                     </fieldset>
 
                     <div class="buttons">
-                        <button type="submit" class="btn"><?php _e('Donate', 'martinehooptopbeter'); ?></button>
+                        <button type="submit" class="btn left"><?php _e('Donate', 'martinehooptopbeter'); ?></button>
                     </div>
 
                 </form>
