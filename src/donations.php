@@ -46,7 +46,7 @@
 		if (count($items) < 1) {
 
 ?>				<p><?php _e('There are no donations made yet.', 'martinehooptopbeter'); ?></p>
-				<a href="/doneer/" class="btn"><?php _e('Donate', 'martinehooptopbeter'); ?></a>
+
 <?php
 			
 		} else {
@@ -56,7 +56,11 @@
 				</div>
 				<div class="metertext clearfix">
 					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(formatEuroPrice($totalValue)) . '</strong>', esc_attr(formatEuroPrice($goalValue)))); ?></span>
-					<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $itemCount)); ?></span>
+					<?php if ($itemCount == 1) : ?>
+						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $itemCount)); ?></span>
+					<?php else : ?>
+						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $itemCount)); ?></span>
+					<?php endif; ?>
 				</div>
 
 <?php
