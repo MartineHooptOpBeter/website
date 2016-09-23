@@ -106,7 +106,7 @@ msgid "We have not received confirmation of your donation of %1$s yet."
 msgstr "We hebben nog geen bevestiging ontvangen van je donatie van %1$s."
 
 msgid "Normally an iDEAL payment is processed immediately so maybe something went wrong?"
-msgstr "Normaal wordt een iDEAL betaling gerlijk verwerkt dus misschien is er wat fout gegaan?"
+msgstr "Normaal wordt een iDEAL betaling gelijk verwerkt dus misschien is er wat fout gegaan?"
 
 msgid "Because you paid with a creditcard it could take a little bit longer before we receive confirmation of your donation."
 msgstr "Omdat je met een creditcard hebt betaald kan het wat langer duren voordat we een bevestiging ontvangen van je donatie."
