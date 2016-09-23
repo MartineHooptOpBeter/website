@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9524954b65604918a34f898b898bf580",
-    "content-hash": "a7c87bfda3df8c58ff5d26b7647eb734",
+    "hash": "304655b2dd86e9a18b5024537c51594d",
+    "content-hash": "0237a133caf278924273b71e4aa80780",
     "packages": [
         {
             "name": "mollie/mollie-api-php",
