@@ -29,4 +29,7 @@
     /* De API key voor Mollie */
     $config['mollie_apikey'] = '';
 
+	/* De webhookr URL voor Mollie */
+	$config['mollie_webhookurl'] = '';
+
 ?>
