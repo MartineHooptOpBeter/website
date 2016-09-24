@@ -69,6 +69,9 @@ msgstr "Creditcard"
 msgid "I want to remain anonymous, do not show my name on the website."
 msgstr "Ik wil anoniem blijven, toon mijn naam niet op de website."
 
+msgid "Your e-mail address will never be shown on the website, if you do not donate anonymously only your name will be shown."
+msgstr "Je e-mailadres zal nooit op de website worden getoond, als je niet anoniem doneert wordt alleen je naam getoond."
+
 msgid "Do not show the amount that I donate on the website."
 msgstr "Toon niet het bedrag wat ik doneer op de website."
 

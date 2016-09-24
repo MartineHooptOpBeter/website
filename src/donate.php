@@ -172,6 +172,7 @@
                         <ul>
                             <li><input type="checkbox" class="checkbox" id="donate_anonymous" name="donate_anonymous"<?php if ($this->donate_anonymous) { echo ' checked="checked"'; } ?> /><label for="donate_anonymous"><?php _e('I want to remain anonymous, do not show my name on the website.', 'martinehooptopbeter'); ?></label></li>
                         </ul>
+						<p><?php _e('Your e-mail address will never be shown on the website, if you do not donate anonymously only your name will be shown.', 'martinehooptopbeter'); ?></p>
                         <p><?php _e('Do you want to support Martine?  Leave her a message that will show up on the website.', 'martinehooptopbeter'); ?></p>
                         <p class="<?php if (isset($this->missingfields['donate_message'])) { echo 'error'; } ?>">
                             <label for="donate_name"><?php _e('Message', 'martinehooptopbeter'); ?></label>
