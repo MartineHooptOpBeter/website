@@ -78,6 +78,7 @@ p                                           { margin: 0 0 1.2em 0; }
 .donate .action p                           { color: $accentColor; font-size: 20px; }
 .donate .meter                              { background-color: $darkColorLight; box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.6) inset; }
 .donate .metertext                          { color: #fff; margin: 0; }
+.donate .metertext a                        { font-weight: bold; }
 
 /*========================= ABOUT MS =========================*/
 .aboutms									{ background: url(../img/aboutms-background.png) repeat-y center; }
