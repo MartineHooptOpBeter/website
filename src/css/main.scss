@@ -188,8 +188,6 @@ a.btn:active								{ text-decoration: none; }
 @media (min-width: 768px) and (max-width: 1023px) {
     .sitewidth                              { width: 100%; }
 	
-	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
-
     .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 60px 20px 40px 20px; }
 	.jumbophoto .dimmed						{ position: relative; padding-top: calc((((100% + 40px) * 500) / 1043) - 60px); height: auto; }
 	.jumbophoto .dimmed h1					{ position: absolute; top: 40%; left: 50%; transform: translate(-50%, -100%); font-size: 32px; }
@@ -223,6 +221,8 @@ a.btn:active								{ text-decoration: none; }
 	.navigation nav ul li a:active			{ padding: 12px 20px; display: block; margin: 0; border: none; border-bottom: 1px solid $accentColorLight; color: #fff; }
 	.navigation nav ul li:last-child a		{ border: none; }
 	.navigation nav label					{ display: inline-block; }
+
+	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
 }
 
 @media (max-width: 767px) {
