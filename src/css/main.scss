@@ -184,7 +184,7 @@ a.btn:active								{ text-decoration: none; }
 @media (min-width: 768px) and (max-width: 1023px) {
     .sitewidth                              { width: 100%; }
 	
-	.navigation .logo						{ margin-left: 20px; }
+	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
 
     .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 60px 20px 40px 20px; }
 	.jumbophoto .dimmed						{ position: relative; padding-top: calc((((100% + 40px) * 500) / 1043) - 60px); height: auto; }
@@ -209,6 +209,18 @@ a.btn:active								{ text-decoration: none; }
     .content.left .wp-post-image            { width: 40%; height: auto; }
 }
 
+@media (max-width: 1023px) {
+	.navigation .logo						{ margin-left: 20px; }
+	.navigation nav ul						{ display: none; width: calc(100% - 40px); background-color: $accentColor; left: 20px; }
+	.navigation nav ul li					{ display: block; }
+	.navigation nav ul li a:link,
+	.navigation nav ul li a:visited,
+	.navigation nav ul li a:hover,
+	.navigation nav ul li a:active			{ padding: 12px 20px; display: block; margin: 0; border: none; border-bottom: 1px solid $accentColorLight; color: #fff; }
+	.navigation nav ul li:last-child a		{ border: none; }
+	.navigation nav label					{ display: inline-block; }
+}
+
 @media (max-width: 767px) {
     h1										{ font-size: 26px; line-height: 30px; }
     h2										{ font-size: 24px; line-height: 30px; }
@@ -219,18 +231,6 @@ a.btn:active								{ text-decoration: none; }
 
     .sitewidth                              { width: 100%; }
 	
-	.navigation .logo						{ margin-left: 20px; }
-	.navigation nav ul						{ display: none; width: calc(100% - 40px); background-color: $accentColor; left: 20px; }
-	.navigation nav ul li					{ display: block; }
-	.navigation nav ul li a:link,
-	.navigation nav ul li a:visited,
-	.navigation nav ul li a:hover,
-	.navigation nav ul li a:active			{ padding: 12px 20px; display: block; margin: 0; border: none; border-bottom: 1px solid $accentColorLight; color: #fff; }
-	.navigation nav ul li:last-child a		{ border: none; }
-	.navigation nav label					{ display: inline-block; }
-	
-	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
-
     .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 0 6px 30px 6px; }
     .jumbophoto .dimmed                     { height: auto; background-color: transparent; padding-top: calc((100% / 1043) * 500); }
     .jumbophoto .dimmed h1                  { width: 100%; color: #fff; text-shadow: none; margin-top: 30px; }
