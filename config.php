@@ -35,4 +35,12 @@
 	/* De webhookr URL voor Mollie */
 	$config['mollie_webhookurl'] = '';
 
+	
+    // =======
+    // CONTACT
+    // =======
+
+    /* Het e-mailadres waar het contact formulier naar toe gestuurd moet worden */
+    $config['contact_sendmailto'] = '';
+
 ?>
