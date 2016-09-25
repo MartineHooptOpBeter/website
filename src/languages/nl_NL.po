@@ -146,3 +146,15 @@ msgstr "%1$s donatie"
 
 msgid "Total: %1$s of %2$s"
 msgstr "Totaal: %1$s van %2$s"
+
+msgid "Enter your details below and the message or question you would like to send."
+msgstr "Vul onderstaand je gegevens in en de vraag of het bericht welke je wilt versturen."
+
+msgid "Send"
+msgstr "Versturen"
+
+msgid "Your message has been sent. We try to respond within 24 hours."
+msgstr "Je bericht is verstuurd. We streven er naar om binnen 24 uur te reageren."
+
+msgid "An error has occured while sending your e-mail. Please try again..."
+msgstr "Er is een fout opgetreden bij het versturen van je e-mail. Probeer het nog een keer..."
