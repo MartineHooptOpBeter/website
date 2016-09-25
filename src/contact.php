@@ -1,4 +1,4 @@
-<?php
+<?php require_once 'config.php' ?><?php
 
 	class ContactPage {
 	
@@ -40,7 +40,7 @@
 					$this->missingfields['contact_message'] = __('Required field', 'martinehooptopbeter');
 				}
 
-				if ((count($this->missingfields) == 0) && (!$noSubmit)) {
+				if (count($this->missingfields) == 0) {
 
 					if ($this->sendContactEMail()) {
 						
@@ -64,11 +64,13 @@
 
         function sendContactEMail() {
 
-			$to      = $config['contact_sendmailto'];
-			$subject = __('Contact via website Martine Hoopt Op Beter', 'martinehooptopbeter');
-			$headers = 'From: ' . $contact_name . ' <' . $contact_email . '>';
+			global $config;
 
-			return mail($to, $subject, $contact_message, $headers);
+			$to      = $config['contact_sendmailto'];
+			$subject = __('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter');
+			$headers = 'From: ' . $this->contact_name . ' <' . $this->contact_email . '>';
+
+			return mail($to, $subject, $this->contact_message, $headers);
         }
 		
 		function showContactForm()

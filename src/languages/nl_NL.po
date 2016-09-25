@@ -158,3 +158,6 @@ msgstr "Je bericht is verstuurd. We streven er naar om binnen 24 uur te reageren
 
 msgid "An error has occured while sending your e-mail. Please try again..."
 msgstr "Er is een fout opgetreden bij het versturen van je e-mail. Probeer het nog een keer..."
+
+msgid "Contact through website Martine Hoopt Op Beter"
+msgstr "Contact via website Martine Hoopt Op Beter"
