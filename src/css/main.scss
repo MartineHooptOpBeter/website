@@ -102,7 +102,7 @@ p                                           { margin: 0 0 1.2em 0; }
 
 .content.intro .text                        { padding-top: 20px; }
 .content.intro p                            { font-family: 'Open Sans', sans-serif; color: $accentColor; font-size: 18px; line-height: 130%; }
-.content.right .wp-post-image               { float: right; }
+.content.right .wp-post-image               { float: right; margin-left: 20px; }
 .content.left .wp-post-image                { float: left; margin-right: 20px; }
 
 .size-martinehooptopbeter_fullwidth         { display: block; width: 100%; height: auto; margin-bottom: 20px; }
@@ -263,9 +263,9 @@ a.btn:active								{ text-decoration: none; }
 
     .content .text                          { padding-left: 6px; padding-right: 6px; }
     .content .intro                         { font-size: 13pt; }
-    .content.right .wp-post-image           { width: 100%; height: auto; float: left; }
+    .content.right .wp-post-image           { width: 100%; height: auto; margin-left: 0; float: left; }
     .content.right .text                    { float: left; }
-    .content.left .wp-post-image            { width: 100%; height: auto; }
+    .content.left .wp-post-image            { width: 100%; height: auto; margin-right: 0; }
     .content.left .text                     { float: left; }
 
 	.content.intro .wp-post-image           { margin: 0; }
