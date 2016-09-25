@@ -181,14 +181,21 @@
 		<div class="sitewidth">
 
 			<div class="index accent clearfix">
+
+				<?php $aboutMsPage = get_permalink(); ?>
 			
+				<?php $subposts = new WP_Query( array( 'post_parent' => $post->ID, 'post_type' => 'page', 'order' => 'ASC' ) ); ?>
+				<?php if ($subposts->have_posts()) : ?>
 				<ul>
-					<li><a href="<?php echo get_permalink() ?>">Wat is MS?</a></li>
-					<li><a href="<?php echo get_permalink() ?>#vormenms">Vormen van MS</a></li>
-					<li><a href="<?php echo get_permalink() ?>#klachtenms">Klachten bij MS</a></li>
-					<li><a href="<?php echo get_permalink() ?>#msvoormartine">Wat betekent MS voor Martine?</a></li>
+					<?php while ($subposts->have_posts()) : $subposts->the_post(); $subpostTile = get_the_title(); ?>
+						<?php if ($subpostTile) : ?>
+							<li><a href="<?php echo esc_attr($aboutMsPage); ?>#<?php echo esc_attr(rawurlencode($post->post_name)); ?>"><?php echo esc_attr($subpostTile); ?></a></li>
+						<?php endif ;?>
+					<?php endwhile; ?>
 				</ul>
-				
+				<?php endif; ?>
+				<?php wp_reset_postdata(); ?>
+
 			</div>
 			
 			<div class="text">
