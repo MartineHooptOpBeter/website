@@ -1,4 +1,4 @@
-<?php
+<?php require_once 'donations-class.php' ?><?php
 
 	function martinehooptopbeter_show_excerpt_title() {
 
@@ -8,6 +8,14 @@
 			}
 		}
 
+	}
+
+	function formatPrice($amount) {
+		return number_format((float)$amount / 100, 2, ',', '.');
+	}
+	
+	function formatEuroPrice($amount) {
+		return '€ ' . formatPrice($amount);
 	}
 
 ?>
@@ -52,6 +60,64 @@
 		</div>
 
 	</section>
+
+<?php
+
+		$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
+		
+		$itemCount = $donations->getDonationsListCount();
+		$totalValue = $donations->getTotalDonationsAmount();
+		
+		$goalValue = $config['donate_goal'];
+		if ($goalValue > 0) {
+			$goalPercentage = ((float)$totalValue / (float)$goalValue) * 100;
+			if ($goalPercentage > 100) { $goalPercentage = 100.0; }
+		} else {
+			$goalPercentage = 0;
+		}
+
+		$pageSize = 10;
+		$pageMax = intval($itemCount / $pageSize) + 1;
+
+		$page = intval($page);
+		$page = $page > 0 ? $page : 1;
+		$page = $page > $pageMax ? $pageMax : $page;
+
+		$items = $donations->getDonationsList(($page - 1) * $pageSize, $pageSize, 'DESC');
+
+		if (count($items) > 0) :
+
+?>	<section class="donate">
+		<div class="sitewidth clearfix">
+
+			<div class="text">
+			
+				<div class="meter">
+					<span style="width: <?php echo number_format($goalPercentage, 2, '.', '') ?>%"><span></span></span>
+				</div>
+				<div class="metertext clearfix">
+					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(formatEuroPrice($totalValue)) . '</strong>', esc_attr(formatEuroPrice($goalValue)))); ?></span>
+					<?php if ($itemCount == 1) : ?>
+						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $itemCount)); ?></span>
+					<?php else : ?>
+						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $itemCount)); ?></span>
+					<?php endif; ?>
+				</div>
+				
+			</div>
+
+			<div class="action">
+			
+				<p>Help je ook mee?</p>
+				<div class="buttons">
+					<a href="/doneren/" class="btn"><?php _e('Donate', 'martinehooptopbeter'); ?></a>
+				</div>
+				
+			</div>
+		
+		</div>
+	</section>
+	<?php endif; ?>
 
 	<?php
 

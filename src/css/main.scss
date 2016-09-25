@@ -70,6 +70,15 @@ p                                           { margin: 0 0 1.2em 0; }
 .crowdfunding p								{ color: #ddd; }
 
 
+/*========================= DONATE =========================*/
+.donate									    { background: $darkColor; }
+.donate .sitewidth							{ position: relative; }
+.donate .text								{ float: right; box-sizing: border-box; width: 80%; padding: 40px 0 40px 0; }
+.donate .action 							{ float: left; width: 20%; box-sizing: border-box; padding-top: 40px; }
+.donate .action p                           { color: $accentColor; font-size: 20px; }
+.donate .meter                              { background-color: $darkColorLight; box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.6) inset; }
+.donate .metertext                          { color: #fff; margin: 0; }
+
 /*========================= ABOUT MS =========================*/
 .aboutms									{ background: url(../img/aboutms-background.png) repeat-y center; }
 .aboutms ul									{ color: $darkColor; }
@@ -182,6 +191,10 @@ a.btn:active								{ text-decoration: none; }
 	.jumbophoto .dimmed h1					{ position: absolute; top: 40%; left: 50%; transform: translate(-50%, -100%); font-size: 32px; }
 	.jumbophoto .dimmed p					{ width: 60%; margin: 0; padding: 30px 40px; }
 	
+    .donate .sitewidth                      { padding: 0 20px; box-sizing: border-box; }
+    .donate .text							{ width: 70%; }
+    .donate .action     					{ width: 30%; }
+
     .aboutme .text                          { padding-left: 20px; }
 	
 	.crowdfunding .text						{ padding-right: 10px; }
@@ -223,6 +236,12 @@ a.btn:active								{ text-decoration: none; }
     .jumbophoto .dimmed h1                  { width: 100%; color: #fff; text-shadow: none; margin-top: 30px; }
     .jumbophoto .dimmed p                   { margin: 0 0 20px 0; width: 100%; box-sizing: border-box; text-shadow: none; }
     .jumbophoto .dimmed .btn                { position: static; }
+
+    .donate .sitewidth                      { padding: 0 6px; box-sizing: border-box; }
+    .donate .text							{ width: 100%; float: left; padding-bottom: 20px; }
+    .donate .action     					{ width: 100%; float: right; clear: both; padding: 0 0 20px 0; }
+    .donate .action p                       { float: left; }
+    .donate .action .buttons                { float: right; clear: none; }
 
     .aboutme                                { background-image: none; box-sizing: border-box; padding: calc(80% + 20px) 6px 30px 6px; }
     .aboutme .text                          { width: 100%; padding: 0; }
