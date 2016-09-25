@@ -4,6 +4,7 @@
 *******************************************************************************/
 
 var defaultDevelopmentServerHostName = '127.0.0.1';
+var defaultdevelopmentServerHostIsSecure = false; 
 var defaultMinifyCss = false;
 var defaultMinifyJs = false;
 
@@ -44,13 +45,16 @@ function isEnabled(s) {
 var isProductionBuild = util.env.build === 'production';
 var isDevelopmentBuild = !isProductionBuild
 
+// Is development server secure?
+var developmentServerHostIsSecure = defaultdevelopmentServerHostIsSecure || isEnabled(util.env.devhostsecure);
+
 // Development Server
 var developmentServerHostName = '';
 if (!(developmentServerHostName = (util.env.devhostname ? util.env.devhostname : defaultDevelopmentServerHostName))) {
 	console.log('ERROR: Specify development hostname using: --devhostname=<hostname>');
 	process.exit(1);
 }
-var developmentServerHostURL = 'http://' + developmentServerHostName + '/';
+var developmentServerHostURL = 'http' + (developmentServerHostIsSecure ? 's' : '') + '://' + developmentServerHostName + '/';
 
 // Minify CSS
 var minifyCss = isEnabled(util.env.minifycss) || defaultMinifyCss || isProductionBuild;
@@ -206,7 +210,7 @@ gulp.task('default', defaultTaskDependencies, function() {
 
 	/* Start watch tasks for development environment only */
 	if (isDevelopmentBuild) {
-		browsersync.init({ proxy: developmentServerHostName });
+		browsersync.init({ proxy: developmentServerHostURL, secure: developmentServerHostIsSecure });
 		gulp.watch(files.php_files_src, [php_files]).on('change', browsersync.reload);
 		gulp.watch(files.localization_src, [localization]);
 		gulp.watch(files.copy_img_src, [copy_img]).on('change', browsersync.reload);
