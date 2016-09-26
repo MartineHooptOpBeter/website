@@ -92,7 +92,7 @@ p                                           { margin: 0 0 1.2em 0; }
 .content                                    { margin-bottom: 20px; }
 .content .text                              { padding: 0; }
 .content .text ul,
-.content .text ol							{ margin-bottom: 1em; }
+.content .text ol							{ margin-bottom: 1em; margin-left: 0.5em; overflow: auto; }
 .content .text ol li                        { margin-bottom: 0.5em; }
 .content .text h2							{ margin-top: 30px; }
 .content .text h2:first-child				{ margin-top: 0; }
