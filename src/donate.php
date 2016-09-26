@@ -173,15 +173,7 @@
                             <input type="email" class="textinput" id="donate_email" name="donate_email" value="<?php echo esc_attr($this->donate_email); ?>" placeholder="<?php _e('youremail@domain.com', 'martinehooptopbeter') ?>" />
                         </p>
 						<p><?php _e('Your e-mail address will never be shown on the website, if you do not donate anonymously only your name will be shown.', 'martinehooptopbeter'); ?></p>
-                        <p><?php _e('Do you want to support Martine?  Leave her a message that will show up on the website.', 'martinehooptopbeter'); ?></p>
-                        <p class="<?php if (isset($this->missingfields['donate_message'])) { echo 'error'; } ?>">
-                            <label for="donate_name"><?php _e('Message', 'martinehooptopbeter'); ?></label>
-                            <textarea id="donate_message" name="donate_message" rows="10"><?php echo esc_attr($this->donate_message); ?></textarea>
-                        </p>
-                    </fieldset>
-
-                    <p><?php _e('Enter the amount you want to donate and choose your prefered payment method. You can donate immediately online.', 'martinehooptopbeter'); ?>
-                    <fieldset>
+						<p><?php _e('Enter the amount you want to donate and choose your prefered payment method. You can donate immediately online.', 'martinehooptopbeter'); ?>
                         <p class="<?php if (isset($this->missingfields['donate_amount'])) { echo 'error'; } ?>">
                             <label for="donate_amount"><?php _e('Amount to donate', 'martinehooptopbeter'); ?></label>
                             <span>&euro; </span><input type="text" class="textinput numberinput clearnone" id="donate_amount" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" placeholder="<?php _e('00.00', 'martinehooptopbeter') ?>"/>
@@ -196,6 +188,11 @@
                             <li><input type="radio" class="radio" id="donate_payment_method_ideal" name="donate_payment_method" value="ideal"<?php if ($this->donate_payment_method == 'ideal') { echo ' checked="checked"'; } ?>><label for="donate_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?></label></li>
                             <li><input type="radio" class="radio" id="donate_payment_method_creditcard" name="donate_payment_method" value="creditcard"<?php if ($this->donate_payment_method == 'creditcard') { echo ' checked="checked"'; } ?>><label for="donate_payment_method_creditcard"><?php _e('Credit Card', 'martinehooptopbeter'); ?></label></li>
                         </ul>
+                        <p><?php _e('Do you want to support Martine?  Leave her a message that will show up on the website.', 'martinehooptopbeter'); ?></p>
+                        <p class="<?php if (isset($this->missingfields['donate_message'])) { echo 'error'; } ?>">
+                            <label for="donate_name"><?php _e('Message', 'martinehooptopbeter'); ?></label>
+                            <textarea id="donate_message" name="donate_message" rows="10"><?php echo esc_attr($this->donate_message); ?></textarea>
+                        </p>
                     </fieldset>
 
                     <div class="buttons">
