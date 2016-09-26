@@ -161,3 +161,6 @@ msgstr "Er is een fout opgetreden bij het versturen van je e-mail. Probeer het n
 
 msgid "Contact through website Martine Hoopt Op Beter"
 msgstr "Contact via website Martine Hoopt Op Beter"
+
+msgid "Donate Online"
+msgstr "Doneer Online"

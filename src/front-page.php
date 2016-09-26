@@ -110,7 +110,7 @@
 			
 				<p>Help je ook mee?</p>
 				<div class="buttons">
-					<a href="/doneren/" class="btn"><?php _e('Donate', 'martinehooptopbeter'); ?></a>
+					<a href="/doneren/" class="btn"><?php _e('Donate Online', 'martinehooptopbeter'); ?></a>
 				</div>
 				
 			</div>
