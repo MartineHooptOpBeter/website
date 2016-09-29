@@ -176,3 +176,9 @@ msgstr "Minimumbedrag is %1$s"
 
 msgid "Maximum amount is %1$s"
 msgstr "Maximumbedrag is %1$s"
+
+msgid "Required field"
+msgstr "Verplicht veld"
+
+msgid "Invalid amount"
+msgstr "Ongeldig bedrag"

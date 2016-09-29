@@ -166,20 +166,20 @@
 
                     <fieldset>
                         <p class="<?php if (isset($this->missingfields['donate_name'])) { echo 'error'; } ?>">
-                            <label for="donate_name"><?php _e('Your name', 'martinehooptopbeter'); ?></label>
+                            <label for="donate_name"><?php _e('Your name', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_name'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_name'])); ?>)</em><?php endif; ?></label>
                             <input type="text" class="textinput" id="donate_name" name="donate_name" value="<?php echo esc_attr($this->donate_name); ?>" />
                         </p>
                         <ul>
                             <li><input type="checkbox" class="checkbox" id="donate_anonymous" name="donate_anonymous"<?php if ($this->donate_anonymous) { echo ' checked="checked"'; } ?> /><label for="donate_anonymous"><?php _e('I want to remain anonymous, do not show my name on the website.', 'martinehooptopbeter'); ?></label></li>
                         </ul>
                         <p class="<?php if (isset($this->missingfields['donate_email'])) { echo 'error'; } ?>">
-                            <label for="donate_email"><?php _e('Your E-mail address', 'martinehooptopbeter'); ?></label>
+                            <label for="donate_email"><?php _e('Your E-mail address', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_email'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_email'])); ?>)</em><?php endif; ?></label>
                             <input type="email" class="textinput" id="donate_email" name="donate_email" value="<?php echo esc_attr($this->donate_email); ?>" placeholder="<?php _e('youremail@domain.com', 'martinehooptopbeter') ?>" />
                         </p>
 						<p><?php _e('Your e-mail address will never be shown on the website, if you do not donate anonymously only your name will be shown.', 'martinehooptopbeter'); ?></p>
 						<p><?php _e('Enter the amount you want to donate and choose your prefered payment method. You can donate immediately online.', 'martinehooptopbeter'); ?>
                         <p class="<?php if (isset($this->missingfields['donate_amount'])) { echo 'error'; } ?>">
-                            <label for="donate_amount"><?php _e('Amount to donate', 'martinehooptopbeter'); ?></label>
+                            <label for="donate_amount"><?php _e('Amount to donate', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_amount'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_amount'])); ?>)</em><?php endif; ?></label>
                             <span>&euro; </span><input type="text" class="textinput numberinput clearnone" id="donate_amount" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" placeholder="<?php _e('00.00', 'martinehooptopbeter') ?>"/>
                         </p>
 						<?php if (isset($this->missingfields['donate_amount']) && ($this->donate_amount_decimal > $config['donate_maxamount'])) : ?>
@@ -189,7 +189,7 @@
                             <li><input type="checkbox" class="checkbox" id="donate_no_amount" name="donate_no_amount"<?php if ($this->donate_no_amount) { echo ' checked="checked"'; } ?> /><label for="donate_no_amount"><?php _e('Do not show the amount that I donate on the website.', 'martinehooptopbeter'); ?></label></li>
                         </ul>
                         <p class="<?php if (isset($this->missingfields['donate_payment_method'])) { echo 'error'; } ?>">
-                            <label><?php _e('Payment method', 'martinehooptopbeter'); ?></label>
+                            <label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_payment_method'])); ?>)</em><?php endif; ?></label>
                         </p>
                         <ul class="<?php if (isset($this->missingfields['donate_payment_method'])) { echo 'error'; } ?>">
                             <li><input type="radio" class="radio" id="donate_payment_method_ideal" name="donate_payment_method" value="ideal"<?php if ($this->donate_payment_method == 'ideal') { echo ' checked="checked"'; } ?>><label for="donate_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?></label></li>
@@ -197,7 +197,7 @@
                         </ul>
                         <p><?php _e('Do you want to support Martine?  Leave her a message that will show up on the website.', 'martinehooptopbeter'); ?></p>
                         <p class="<?php if (isset($this->missingfields['donate_message'])) { echo 'error'; } ?>">
-                            <label for="donate_name"><?php _e('Message', 'martinehooptopbeter'); ?></label>
+                            <label for="donate_name"><?php _e('Message', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_message'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_message'])); ?>)</em><?php endif; ?></label>
                             <textarea id="donate_message" name="donate_message" rows="10"><?php echo esc_attr($this->donate_message); ?></textarea>
                         </p>
                     </fieldset>
