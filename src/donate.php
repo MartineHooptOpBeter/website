@@ -46,6 +46,9 @@
 				if (empty($this->donate_email)) {
 					$this->missingfields['donate_email'] = __('Required field', 'martinehooptopbeter');
 				}
+				elseif (!$this->validEMailAddress($this->donate_email)) {
+					$this->missingfields['donate_email'] = __('Invalid e-mail address', 'martinehooptopbeter');
+				}
 
 				$this->donate_amount_decimal = $this->parseAmount($this->donate_amount);
 				if ($this->donate_amount_decimal <= 0) {
@@ -326,6 +329,10 @@
 		
 		private function formatEuroPrice($amount) {
 			return '€ ' . $this->formatPrice($amount);
+		}
+		
+		private function validEMailAddress($emailaddress) {
+			return preg_match('/^([0-9a-zA-Z_]([-.\w\+]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,})$/', $emailaddress);
 		}
 		
 	}
