@@ -41,7 +41,15 @@
 	/* De webhookr URL voor Mollie */
 	$config['mollie_webhookurl'] = '';
 
-	
+
+    // ================
+    // GOOGLE ANALYTICS
+    // ================
+
+	/* Google Analytics tracking ID */
+	$config['googleanalytics_trackingid'] = '';
+
+
     // =======
     // CONTACT
     // =======

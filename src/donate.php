@@ -222,6 +222,8 @@
 		
 		function showDonationConfirmation() {
 			
+			global $config;
+
 			$showRefresh = false;
 			$showDonateAgain = false;
 			
@@ -243,6 +245,19 @@
 						<div class="buttons">
 							<a href="/donaties/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
 						</div>
+						
+						<?php if (isset($config['googleanalytics_trackingid'])) : ?>
+						<script>
+
+							ga('require', 'ecommerce');
+							ga('ecommerce:addTransaction', {
+								'id': '<?php echo $this->donate_id; ?>',
+								'revenue': '<?php echo number_format((float)$this->donate_amount_decimal / 100, 2, '.', ''); ?>',
+							});
+							ga('ecommerce:send');
+
+						</script>
+						<?php endif; ?>
 						
 					<?php elseif (($this->donate_payment_status == 'cancelled') || ($this->donate_payment_status == 'expired') || ($this->donate_payment_status == 'failed')) :  ?>
 						<?php $showDonateAgain = true; ?>
