@@ -164,3 +164,15 @@ msgstr "Contact via website Martine Hoopt Op Beter"
 
 msgid "Donate Online"
 msgstr "Doneer Online"
+
+msgid "Unfortunately we can't accept donations higher than %1$s due to tax regulations. If you want to donate more, please %2$s for possibilities."
+msgstr "Helaas kunnen we in verband met schenkbelasting geen donaties accepteren van meer dan %1$s. Als je meer wilt doneren neem dan %2$s met ons op voor de mogelijkheden."
+
+msgid "contact us"
+msgstr "contact"
+
+msgid "Minimum required amount is %1$s"
+msgstr "Minimumbedrag is %1$s"
+
+msgid "Maximum amount is %1$s"
+msgstr "Maximumbedrag is %1$s"

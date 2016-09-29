@@ -51,8 +51,11 @@
 				if ($this->donate_amount_decimal <= 0) {
 					$this->missingfields['donate_amount'] = __('Invalid amount', 'martinehooptopbeter');
 				}
-				if ($this->donate_amount_decimal < 500) {
-					$this->missingfields['donate_amount'] = __('Minimum required amount is 5 Euro', 'martinehooptopbeter');
+				if ($this->donate_amount_decimal < $config['donate_minamount']) {
+					$this->missingfields['donate_amount'] = vsprintf(__('Minimum required amount is %1$s', 'martinehooptopbeter'), $this->formatEuroPrice($config['donate_minamount']));
+				}
+				if ($this->donate_amount_decimal > $config['donate_maxamount']) {
+					$this->missingfields['donate_amount'] = vsprintf(__('Maximum amount is %1$s', 'martinehooptopbeter'), $this->formatEuroPrice($config['donate_maxamount']));
 				}
 
 				if (($this->donate_payment_method != 'ideal') && ($this->donate_payment_method != 'creditcard')) {
@@ -144,6 +147,7 @@
 		
 		function showDonationForm()
 		{
+			global $config;
 
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
@@ -178,6 +182,9 @@
                             <label for="donate_amount"><?php _e('Amount to donate', 'martinehooptopbeter'); ?></label>
                             <span>&euro; </span><input type="text" class="textinput numberinput clearnone" id="donate_amount" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" placeholder="<?php _e('00.00', 'martinehooptopbeter') ?>"/>
                         </p>
+						<?php if (isset($this->missingfields['donate_amount']) && ($this->donate_amount_decimal > $config['donate_maxamount'])) : ?>
+							<p class="error"><?php echo vsprintf(esc_attr(__('Unfortunately we can\'t accept donations higher than %1$s due to tax regulations. If you want to donate more, please %2$s for possibilities.', 'martinehooptopbeter')), array(esc_attr($this->formatEuroPrice($config['donate_maxamount'])), '<a href="/contact/">' . esc_attr(__('contact us', 'martinehooptopbeter')) . '</a>')); ?></p>
+						<?php endif; ?>
                         <ul>
                             <li><input type="checkbox" class="checkbox" id="donate_no_amount" name="donate_no_amount"<?php if ($this->donate_no_amount) { echo ' checked="checked"'; } ?> /><label for="donate_no_amount"><?php _e('Do not show the amount that I donate on the website.', 'martinehooptopbeter'); ?></label></li>
                         </ul>

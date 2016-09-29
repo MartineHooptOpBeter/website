@@ -24,7 +24,13 @@
 	/* Het doel bedrag op te halen met donaties (in euro centen) */
 	$config['donate_goal'] = 1000000;
 
+	/* Het minimum bedrag van een donatie (in euro centen) */
+	$config['donate_minamount'] = 500;
 	
+	/* Het maximum bedrag van een donatie (in euro centen) */
+	$config['donate_maxamount'] = 212200;
+
+
     // ======
     // MOLLIE
     // ======
