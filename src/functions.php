@@ -56,4 +56,6 @@
 	}
 	add_filter( 'wp_title', 'martinehooptopbeter_wp_title', 10, 2 );
 
+	include 'settings-donations.php';
+
 ?>

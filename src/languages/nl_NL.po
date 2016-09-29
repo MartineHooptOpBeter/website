@@ -185,3 +185,21 @@ msgstr "Ongeldig bedrag"
 
 msgid "Invalid e-mail address"
 msgstr "Ongeldig e-mailadres"
+
+msgid "Enter the amount in Euro cents."
+msgstr "Vul het bedrag in Euro centen in."
+
+msgid "Donations"
+msgstr "Donaties"
+
+msgid "Offline donations"
+msgstr "Offline donaties"
+
+msgid "Count"
+msgstr "Aantal"
+
+msgid "Amount"
+msgstr "Bedrag"
+
+msgid "Enter the total amount and number of offline donations below. These will be added to the online donations."
+msgstr "Vul het totaalbedrag en het aantal offline donaties hieonder in. Dit wordt opgeteld bij de online donaties."

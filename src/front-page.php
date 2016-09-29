@@ -66,8 +66,14 @@
 		$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
 		
 		$itemCount = $donations->getDonationsListCount();
+		$totalCount = $itemCount;
 		$totalValue = $donations->getTotalDonationsAmount();
 		
+		if ($donations_options = get_option('donations_options')) {
+			$totalCount += intval($donations_options['offline_number']);
+			$totalValue += intval($donations_options['offline_amount']);
+		}
+
 		$goalValue = $config['donate_goal'];
 		if ($goalValue > 0) {
 			$goalPercentage = ((float)$totalValue / (float)$goalValue) * 100;
@@ -97,10 +103,10 @@
 				</div>
 				<div class="metertext clearfix">
 					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<a href="/donaties/">' . esc_attr(formatEuroPrice($totalValue)) . '</a>', esc_attr(formatEuroPrice($goalValue)))); ?></span>
-					<?php if ($itemCount == 1) : ?>
-						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $itemCount)); ?></span>
+					<?php if ($totalCount == 1) : ?>
+						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
 					<?php else : ?>
-						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $itemCount)); ?></span>
+						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
 					<?php endif; ?>
 				</div>
 				
