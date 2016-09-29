@@ -51,10 +51,10 @@
 				if ($this->donate_amount_decimal <= 0) {
 					$this->missingfields['donate_amount'] = __('Invalid amount', 'martinehooptopbeter');
 				}
-				if ($this->donate_amount_decimal < $config['donate_minamount']) {
+				elseif ($this->donate_amount_decimal < $config['donate_minamount']) {
 					$this->missingfields['donate_amount'] = vsprintf(__('Minimum required amount is %1$s', 'martinehooptopbeter'), $this->formatEuroPrice($config['donate_minamount']));
 				}
-				if ($this->donate_amount_decimal > $config['donate_maxamount']) {
+				elseif ($this->donate_amount_decimal > $config['donate_maxamount']) {
 					$this->missingfields['donate_amount'] = vsprintf(__('Maximum amount is %1$s', 'martinehooptopbeter'), $this->formatEuroPrice($config['donate_maxamount']));
 				}
 
