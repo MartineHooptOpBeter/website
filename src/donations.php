@@ -45,7 +45,7 @@
 		} else {
 			
 ?>				<div class="meter">
-					<span style="width: <?php echo number_format($goalPercentage, 2, '.', '') ?>%"><span></span></span>
+					<span style="width: <?php echo Donation::formatDecimal($goalPercentage * 100.0); ?>%"><span></span></span>
 				</div>
 				<div class="metertext clearfix">
 					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</strong>', esc_attr(Donation::formatEuroPrice($goalValue)))); ?></span>
@@ -62,7 +62,7 @@
 
 ?>				<article>
 					
-					<?php if (!$item->showNoAmount) : ?><em>&euro; <?php echo number_format($item->amount / 100, 2, ',', '.'); ?></em><?php endif; ?>
+					<?php if (!$item->showNoAmount) : ?><em><?php echo Donation::formatEuroPrice($item->amount); ?></em><?php endif; ?>
 					<?php if ($item->showAnonymous) : ?><strong><?php _e('Anonymous', 'martinehooptopbeter'); ?></strong><?php else : ?><strong><?php echo esc_attr($item->name); ?></strong><?php endif; ?>
 					
 					<?php

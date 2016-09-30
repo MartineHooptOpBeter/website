@@ -40,6 +40,12 @@
 			return 0;
 		}
 		
+		public static function formatDecimal($amount) {
+			if (!is_numeric($amount))
+				$amount = 0.0;
+			return number_format((float)$amount / 100, 2, '.', '');
+		}
+		
 		public static function formatPrice($amount) {
 			return number_format((float)$amount / 100, 2, ',', '.');
 		}

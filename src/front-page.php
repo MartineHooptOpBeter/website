@@ -77,7 +77,7 @@
 			<div class="text">
 			
 				<div class="meter">
-					<span style="width: <?php echo number_format($goalPercentage, 2, '.', '') ?>%"><span></span></span>
+					<span style="width: <?php echo Donation::formatDecimal($goalPercentage * 100.0); ?>%"><span></span></span>
 				</div>
 				<div class="metertext clearfix">
 					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<a href="/donaties/">' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</a>', esc_attr(Donation::formatEuroPrice($goalValue)))); ?></span>
