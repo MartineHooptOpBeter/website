@@ -203,3 +203,6 @@ msgstr "Bedrag"
 
 msgid "Enter the total amount and number of offline donations below. These will be added to the online donations."
 msgstr "Vul het totaalbedrag en het aantal offline donaties hieonder in. Dit wordt opgeteld bij de online donaties."
+
+msgid "Website built for free by %1$s"
+msgstr "Website gratis gemaakt door %1$s"

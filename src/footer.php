@@ -1,5 +1,5 @@
 	<footer>
-		<p>&copy <?php echo Date("Y"); ?> - Website gratis aangeboden door <a href="http://www.virtualpages.nl" target="_blank"><img src="<?php bloginfo('template_url'); ?>/img/virtualpages.svg" class="logo" alt="Virtual Pages" /></a></p>
+		<p>© <?php echo Date("Y"); ?> - <?php echo vsprintf(esc_attr(__('Website built for free by %1$s', 'martinehooptopbeter')), '<a href="http://www.virtualpages.nl" target="_blank"><img src="' . get_bloginfo('template_url') . '/img/virtualpages.svg" class="logo" alt="Virtual Pages" /></a>'); ?></p>
 	</footer>
 
 </body>
