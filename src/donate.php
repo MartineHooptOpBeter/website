@@ -46,19 +46,19 @@
 				if (empty($this->donate_email)) {
 					$this->missingfields['donate_email'] = __('Required field', 'martinehooptopbeter');
 				}
-				elseif (!$this->validEMailAddress($this->donate_email)) {
+				elseif (!Donation::validEMailAddress($this->donate_email)) {
 					$this->missingfields['donate_email'] = __('Invalid e-mail address', 'martinehooptopbeter');
 				}
 
-				$this->donate_amount_decimal = $this->parseAmount($this->donate_amount);
+				$this->donate_amount_decimal = Donation::parseAmount($this->donate_amount);
 				if ($this->donate_amount_decimal <= 0) {
 					$this->missingfields['donate_amount'] = __('Invalid amount', 'martinehooptopbeter');
 				}
 				elseif ($this->donate_amount_decimal < $config['donate_minamount']) {
-					$this->missingfields['donate_amount'] = vsprintf(__('Minimum required amount is %1$s', 'martinehooptopbeter'), $this->formatEuroPrice($config['donate_minamount']));
+					$this->missingfields['donate_amount'] = vsprintf(__('Minimum required amount is %1$s', 'martinehooptopbeter'), Donation::formatEuroPrice($config['donate_minamount']));
 				}
 				elseif ($this->donate_amount_decimal > $config['donate_maxamount']) {
-					$this->missingfields['donate_amount'] = vsprintf(__('Maximum amount is %1$s', 'martinehooptopbeter'), $this->formatEuroPrice($config['donate_maxamount']));
+					$this->missingfields['donate_amount'] = vsprintf(__('Maximum amount is %1$s', 'martinehooptopbeter'), Donation::formatEuroPrice($config['donate_maxamount']));
 				}
 
 				if (($this->donate_payment_method != 'ideal') && ($this->donate_payment_method != 'creditcard')) {
@@ -127,7 +127,7 @@
 						$this->donate_email = $donation->emailAddress;
 						$this->donate_message = $donation->message;
 						$this->donate_amount_decimal = $donation->amount;
-						$this->donate_amount = $this->formatPrice($this->donate_amount_decimal);
+						$this->donate_amount = Donation::formatPrice($this->donate_amount_decimal);
 						$this->donate_payment_id = $donation->paymentId;
 						$this->donate_payment_method = $donation->paymentMethod;
 						$this->donate_payment_status = $donation->paymentStatus;
@@ -186,7 +186,7 @@
                             <span>&euro; </span><input type="text" class="textinput numberinput clearnone" id="donate_amount" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" placeholder="<?php _e('00.00', 'martinehooptopbeter') ?>"/>
                         </p>
 						<?php if (isset($this->missingfields['donate_amount']) && ($this->donate_amount_decimal > $config['donate_maxamount'])) : ?>
-							<p class="error"><?php echo vsprintf(esc_attr(__('Unfortunately we can\'t accept donations higher than %1$s due to tax regulations. If you want to donate more, please %2$s for possibilities.', 'martinehooptopbeter')), array(esc_attr($this->formatEuroPrice($config['donate_maxamount'])), '<a href="/contact/">' . esc_attr(__('contact us', 'martinehooptopbeter')) . '</a>')); ?></p>
+							<p class="error"><?php echo vsprintf(esc_attr(__('Unfortunately we can\'t accept donations higher than %1$s due to tax regulations. If you want to donate more, please %2$s for possibilities.', 'martinehooptopbeter')), array(esc_attr(Donation::formatEuroPrice($config['donate_maxamount'])), '<a href="/contact/">' . esc_attr(__('contact us', 'martinehooptopbeter')) . '</a>')); ?></p>
 						<?php endif; ?>
                         <ul>
                             <li><input type="checkbox" class="checkbox" id="donate_no_amount" name="donate_no_amount"<?php if ($this->donate_no_amount) { echo ' checked="checked"'; } ?> /><label for="donate_no_amount"><?php _e('Do not show the amount that I donate on the website.', 'martinehooptopbeter'); ?></label></li>
@@ -240,7 +240,7 @@
 					
 						<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
 						
-						<p><?php echo esc_attr(vsprintf(__('Your donation of %1$s has been received. We thank you for supporting Martine!', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?></p>
+						<p><?php echo esc_attr(vsprintf(__('Your donation of %1$s has been received. We thank you for supporting Martine!', 'martinehooptopbeter'), Donation::formatEuroPrice($this->donate_amount_decimal))); ?></p>
 					
 						<div class="buttons">
 							<a href="/donaties/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
@@ -264,20 +264,20 @@
 
 						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
 					
-						<p><?php echo esc_attr(vsprintf(__('The payment for you donation has been cancelled, expired or has failed. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?></p>
+						<p><?php echo esc_attr(vsprintf(__('The payment for you donation has been cancelled, expired or has failed. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'), Donation::formatEuroPrice($this->donate_amount_decimal))); ?></p>
 					
 					<?php elseif (($this->donate_payment_status == 'refunded') || ($this->donate_payment_status == 'charged_back')) :  ?>
 						<?php $showDonateAgain = true; ?>
 						
 						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
 					
-						<p><?php echo esc_attr(vsprintf(__('The payment for you donation has been refunded or charged back. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?></p>
+						<p><?php echo esc_attr(vsprintf(__('The payment for you donation has been refunded or charged back. Unfortunately we did not receive your donation of %1$s. Please press the \'Donate Again\' button to start a new donation.', 'martinehooptopbeter'), Donation::formatEuroPrice($this->donate_amount_decimal))); ?></p>
 					
 					<?php else : ?>
 						<?php $showRefresh = true; ?>
 						<?php $showDonateAgain = true; ?>
 						
-						<p><?php echo esc_attr(vsprintf(__('We have not received confirmation of your donation of %1$s yet.', 'martinehooptopbeter'), $this->formatEuroPrice($this->donate_amount_decimal))); ?>
+						<p><?php echo esc_attr(vsprintf(__('We have not received confirmation of your donation of %1$s yet.', 'martinehooptopbeter'), Donation::formatEuroPrice($this->donate_amount_decimal))); ?>
 						
 						<?php if ($this->donate_payment_method == 'ideal') { _e('Normally an iDEAL payment is processed immediately so maybe something went wrong?', 'martinehooptopbeter'); } ?>
 						<?php if ($this->donate_payment_method == 'creditcard') { _e('Because you paid with a creditcard it could take a little bit longer before we receive confirmation of your donation.', 'martinehooptopbeter'); } ?></p>
@@ -329,27 +329,6 @@
 			
 		}
 
-		private function parseAmount($amount) {
-			$amount = str_replace(',', '.', $amount);
-			if (is_numeric($amount)) {
-				$amound_parsed = floatval($amount);
-				return (int)($amound_parsed * 100);
-			}
-			return 0;
-		}
-		
-		private function formatPrice($amount) {
-			return number_format((float)$amount / 100, 2, ',', '.');
-		}
-		
-		private function formatEuroPrice($amount) {
-			return '€ ' . $this->formatPrice($amount);
-		}
-		
-		private function validEMailAddress($emailaddress) {
-			return preg_match('/^([0-9a-zA-Z_]([-.\w\+]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,})$/', $emailaddress);
-		}
-		
 	}
 
 ?>

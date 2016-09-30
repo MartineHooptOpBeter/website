@@ -30,6 +30,27 @@
             $this->showAnonymous = $showAnonymous;
 			$this->timestamp = $timestamp;
         }
+		
+		public static function parseAmount($amount) {
+			$amount = str_replace(',', '.', $amount);
+			if (is_numeric($amount)) {
+				$amound_parsed = floatval($amount);
+				return (int)($amound_parsed * 100);
+			}
+			return 0;
+		}
+		
+		public static function formatPrice($amount) {
+			return number_format((float)$amount / 100, 2, ',', '.');
+		}
+		
+		public static function formatEuroPrice($amount) {
+			return '€ ' . Donation::formatPrice($amount);
+		}
+		
+		public static function validEMailAddress($emailaddress) {
+			return preg_match('/^([0-9a-zA-Z_]([-.\w\+]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,})$/', $emailaddress);
+		}
     }
 
     class Donations

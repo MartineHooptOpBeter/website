@@ -10,14 +10,6 @@
 
 	}
 
-	function formatPrice($amount) {
-		return number_format((float)$amount / 100, 2, ',', '.');
-	}
-	
-	function formatEuroPrice($amount) {
-		return '€ ' . formatPrice($amount);
-	}
-
 ?>
 <?php get_header(); ?>
 	
@@ -102,7 +94,7 @@
 					<span style="width: <?php echo number_format($goalPercentage, 2, '.', '') ?>%"><span></span></span>
 				</div>
 				<div class="metertext clearfix">
-					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<a href="/donaties/">' . esc_attr(formatEuroPrice($totalValue)) . '</a>', esc_attr(formatEuroPrice($goalValue)))); ?></span>
+					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<a href="/donaties/">' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</a>', esc_attr(Donation::formatEuroPrice($goalValue)))); ?></span>
 					<?php if ($totalCount == 1) : ?>
 						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
 					<?php else : ?>
