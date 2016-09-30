@@ -68,9 +68,9 @@
 
 			$to      = $config['contact_sendmailto'];
 			$subject = __('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter');
-			$headers = 'From: ' . $this->contact_name . ' <' . $this->contact_email . '>';
+			$headers[] = 'From: ' . $this->contact_name . ' <' . $this->contact_email . '>';
 
-			return mail($to, $subject, $this->contact_message, $headers);
+			return mb_send_mail($to, $subject, $this->contact_message, implode("\r\n", $headers));
         }
 		
 		function showContactForm()
