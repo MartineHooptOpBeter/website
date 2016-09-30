@@ -30,6 +30,12 @@
 	/* Het maximum bedrag van een donatie (in euro centen) */
 	$config['donate_maxamount'] = 212200;
 
+    /* Het e-mailadres waarmee een bevestiging wordt gestuurd na ontvangst van de donatie */
+    $config['donate_email_fromaddress'] = '';
+
+    /* De afzender van de e-mail waarmee een bevestiging wordt gestuurd na ontvangst van de donatie */
+    $config['donate_email_fromname'] = '';
+
 
     // ======
     // MOLLIE

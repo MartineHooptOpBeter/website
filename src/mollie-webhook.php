@@ -22,6 +22,29 @@
 					exit;
 				}
 
+				if ($payment->isPaid()) {
+					if ($donation = $donations->getDonation($donation_id, $payment_verification)) {
+
+						$from_emailaddress = $config['donate_email_fromaddress'];
+						$from_emailname = $config['donate_email_fromname'];
+
+						if ($from_emailaddress) {
+
+							$subject = __('Confirmation of your donation to Stichting Martine Hoopt Op Beter', 'martinehooptopbeter');
+							if ($from_emailname) {
+								$headers = 'From: ' . $from_emailname . ' <' . $from_emailaddress . '>';
+							} else {
+								$headers = 'From: ' . $from_emailaddress;
+							}
+
+							$message = vsprintf(__("Hello %1$s\n\nThank you for your donation of %2$s to the Stichting Martine Hoopt Op Beter. We have received your donation.\n\nPlease visit the website regularly for updates about the treatment of Martine: <https://www.martinehoooptopbeter.nl/>", 'martinehooptopbeter'), array($donation->name, formatEuroPrice($donation->amount)));
+							
+							mail($donation->emailaddress, $subject, $message, $headers);
+						}
+					
+					}
+				}
+
 				header('HTTP/1.1 200 OK');
 				exit;
 			}
@@ -35,6 +58,14 @@
 			exit;
 		}
 	
+	}
+
+	function formatPrice($amount) {
+		return number_format((float)$amount / 100, 2, ',', '.');
+	}
+	
+	function formatEuroPrice($amount) {
+		return '€ ' . $this->formatPrice($amount);
 	}
 
 ?>
