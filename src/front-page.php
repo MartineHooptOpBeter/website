@@ -74,16 +74,7 @@
 			$goalPercentage = 0;
 		}
 
-		$pageSize = 10;
-		$pageMax = intval($itemCount / $pageSize) + 1;
-
-		$page = intval($page);
-		$page = $page > 0 ? $page : 1;
-		$page = $page > $pageMax ? $pageMax : $page;
-
-		$items = $donations->getDonationsList(($page - 1) * $pageSize, $pageSize, 'DESC');
-
-		if (count($items) > 0) :
+		if ($totalCount > 0) :
 
 ?>	<section class="donate">
 		<div class="sitewidth clearfix">
