@@ -30,16 +30,16 @@
 
 						if ($from_emailaddress) {
 
-							$subject = __('Confirmation of your donation to Stichting Martine Hoopt Op Beter', 'martinehooptopbeter');
+							$subject = "Bevestiging van jouw donatie aan de Stichting Martine Hoopt Op Beter";
 							if ($from_emailname) {
-								$headers = 'From: ' . $from_emailname . ' <' . $from_emailaddress . '>';
+								$headers[] = 'From: ' . $from_emailname . ' <' . $from_emailaddress . '>';
 							} else {
-								$headers = 'From: ' . $from_emailaddress;
+								$headers[] = 'From: ' . $from_emailaddress;
 							}
 
-							$message = vsprintf(__("Hello %1$s\n\nThank you for your donation of %2$s to the Stichting Martine Hoopt Op Beter. We have received your donation.\n\nPlease visit the website regularly for updates about the treatment of Martine: <https://www.martinehoooptopbeter.nl/>", 'martinehooptopbeter'), array($donation->name, formatEuroPrice($donation->amount)));
-							
-							mail($donation->emailaddress, $subject, $message, $headers);
+							$message = vsprintf('Hallo %1$s,' . "\n\n" . 'Bedankt voor je donatie van %2$s aan de Stichting Martine Hoopt Op Beter. We hebben de donatie ontvangen.' . "\n\n" . 'We zouden het leuk vinden als je de website regelmatig blijft bezoeken voor updates over de behandeling van Martine: <https://www.martinehoooptopbeter.nl/>' . "\n\n" . 'Bedankt voor je hulp, ook namens Martine!' . "\n\n", array($donation->name, formatEuroPrice($donation->amount)));
+
+							mb_send_mail($donation->emailAddress, $subject, $message, implode("\r\n", $headers));
 						}
 					
 					}
@@ -65,7 +65,7 @@
 	}
 	
 	function formatEuroPrice($amount) {
-		return '€ ' . $this->formatPrice($amount);
+		return '€ ' . formatPrice($amount);
 	}
 
 ?>
