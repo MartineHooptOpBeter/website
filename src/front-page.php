@@ -67,12 +67,7 @@
 		}
 
 		$goalValue = $config['donate_goal'];
-		if ($goalValue > 0) {
-			$goalPercentage = ((float)$totalValue / (float)$goalValue) * 100;
-			if ($goalPercentage > 100) { $goalPercentage = 100.0; }
-		} else {
-			$goalPercentage = 0;
-		}
+		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
 
 		if ($totalCount > 0) :
 

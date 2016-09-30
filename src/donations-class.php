@@ -293,6 +293,21 @@
 
             return $conn;
         }
+		
+		public function percentageOfGoal($current, $goal, $max) {
+			
+			$goalPercentage = 0;
+			
+			if ($goal > 0) {
+				
+				$goalPercentage = ((float)$current / (float)$goal) * 100;
+					
+				if ($goalPercentage > $max)
+					$goalPercentage = $max;
+			}
+
+			return $goalPercentage;
+		}
 
     }
 
