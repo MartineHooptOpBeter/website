@@ -179,7 +179,7 @@
                             <label for="donate_email"><?php _e('Your E-mail address', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_email'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_email'])); ?>)</em><?php endif; ?></label>
                             <input type="email" class="textinput" id="donate_email" name="donate_email" value="<?php echo esc_attr($this->donate_email); ?>" placeholder="<?php _e('youremail@domain.com', 'martinehooptopbeter') ?>" />
                         </p>
-						<p><?php _e('Your e-mail address will never be shown on the website, if you do not donate anonymously only your name will be shown.', 'martinehooptopbeter'); ?></p>
+						<p><?php _e('Your e-mail address will never be shown on the website.', 'martinehooptopbeter'); ?></p>
 						<p><?php _e('Enter the amount you want to donate and choose your prefered payment method. You can donate immediately online.', 'martinehooptopbeter'); ?>
                         <p class="<?php if (isset($this->missingfields['donate_amount'])) { echo 'error'; } ?>">
                             <label for="donate_amount"><?php _e('Amount to donate', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_amount'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_amount'])); ?>)</em><?php endif; ?></label>
