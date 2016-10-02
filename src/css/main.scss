@@ -127,6 +127,12 @@ p                                           { margin: 0 0 1.2em 0; }
 .metertext span.number						{ float: right; }
 
 
+/*========================= SPONSORS =========================*/
+
+ul.sponsors                                 { padding: 0; margin: 0; }
+ul.sponsors li                              { display: inline-block; padding: 0 10px; width: 33%; box-sizing: border-box; }
+ul.sponsors li img                          { width: 100%; height: auto; }
+
 /*========================= FOOTER =========================*/
 footer										{ background-color: $accentColorLight; padding: 20px; }
 footer p									{ color: $darkColor; text-align: center; margin: 0; }
@@ -274,4 +280,10 @@ a.btn:active								{ text-decoration: none; }
 	.metertext span.value,
 	.metertext span.number					{ float: left; clear: both; }
 
+    ul.sponsors li                          { width: 50%; }
+
+}
+
+@media (max-width: 479px) {
+    ul.sponsors li                          { width: 100%; }
 }

@@ -79,6 +79,9 @@ var themeImgDir = themeDir + 'img/';
 
 var vendorsDir = 'vendor/';
 
+var sponsorsSrcDir = srcDir + 'sponsors/';
+var sponsorsDstDir = themeDir + 'sponsors/';
+
 var files = {
 	
 	/* PHP files */
@@ -92,6 +95,10 @@ var files = {
 	/* Locale files */
 	localization_src : [srcDir + 'languages/*.po'],
 	localization_dest : themeDir + 'languages/',
+
+	/* Sponsors files */
+	sponsors_src: [sponsorsSrcDir + '*.svg', sponsorsSrcDir + '*.png'],
+	sponsors_dest : sponsorsDstDir,
 
 	/* Root images */
 	root_img_src : [srcDir + 'design/theme/screenshot.png'],
@@ -156,6 +163,18 @@ gulp.task(localization, function() {
 
 
 /*******************************************************************************
+** SPONSOR TASK                                                               **
+*******************************************************************************/
+
+var sponsors = 'sponsors';
+gulp.task(sponsors, function() {
+    return gulp.src(files.sponsors_src)
+		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+        .pipe(gulp.dest(files.sponsors_dest));
+});
+
+
+/*******************************************************************************
 ** IMAGE TASKS                                                                **
 *******************************************************************************/
 
@@ -203,7 +222,7 @@ gulp.task(allpages_css, function() {
 *******************************************************************************/
 
 // Set up default task dependencies (i.e. the tasks we want to run by default)
-var defaultTaskDependencies = [php_files, vendors, localization, root_img, copy_img, style_css, allpages_css];
+var defaultTaskDependencies = [php_files, vendors, localization, sponsors, root_img, copy_img, style_css, allpages_css];
 
 // Run default task
 gulp.task('default', defaultTaskDependencies, function() {
@@ -213,6 +232,7 @@ gulp.task('default', defaultTaskDependencies, function() {
 		browsersync.init({ proxy: developmentServerHostURL, secure: developmentServerHostIsSecure });
 		gulp.watch(files.php_files_src, [php_files]).on('change', browsersync.reload);
 		gulp.watch(files.localization_src, [localization]);
+		gulp.watch(files.sponsors_src, [sponsors]);
 		gulp.watch(files.copy_img_src, [copy_img]).on('change', browsersync.reload);
 		gulp.watch(files.allpages_css_dep, [allpages_css]);
 	}
