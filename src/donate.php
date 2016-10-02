@@ -39,7 +39,7 @@
 				$this->donate_no_amount = isset($post['donate_no_amount']);
 				$noSubmit = isset($post['donate_nosubmit']);
 
-				if (empty($this->donate_name)) {
+				if ((empty($this->donate_name)) && !$this->donate_anonymous) {
 					$this->missingfields['donate_name'] = __('Required field', 'martinehooptopbeter');
 				}
 
