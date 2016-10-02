@@ -231,7 +231,7 @@ gulp.task('default', defaultTaskDependencies, function() {
 	if (isDevelopmentBuild) {
 		browsersync.init({ proxy: developmentServerHostURL, secure: developmentServerHostIsSecure });
 		gulp.watch(files.php_files_src, [php_files]).on('change', browsersync.reload);
-		gulp.watch(files.localization_src, [localization]);
+		gulp.watch(files.localization_src, [localization]).on('change', browsersync.reload);
 		gulp.watch(files.sponsors_src, [sponsors]);
 		gulp.watch(files.copy_img_src, [copy_img]).on('change', browsersync.reload);
 		gulp.watch(files.allpages_css_dep, [allpages_css]);
