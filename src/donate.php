@@ -79,7 +79,7 @@
 						{
 							if ($payment = $mollie->payments->create(
 									array(
-										'amount'      => Donation::formatDecimal($donation-amount),
+										'amount'      => Donation::formatDecimal($donation->amount),
 										'description' => __('Donation', 'martinehooptopbeter'),
 										'redirectUrl' => $donateUrl . '?donationid=' . $donation->id . '&verification=' . $donation->paymentVerification,
 										'webhookUrl'  => $config['mollie_webhookurl'],
@@ -252,7 +252,7 @@
 							ga('require', 'ecommerce');
 							ga('ecommerce:addTransaction', {
 								'id': '<?php echo $this->donate_id; ?>',
-								'revenue': '<?php echo Donation::formatDecimal($donation-donate_amount_decimal); ?>',
+								'revenue': '<?php echo Donation::formatDecimal($donation->donate_amount_decimal); ?>',
 							});
 							ga('ecommerce:send');
 
