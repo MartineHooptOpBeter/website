@@ -144,10 +144,12 @@ form                                        { margin-bottom: 20px; }
 form p,
 form fieldset                               { clear: both; float: left; margin-bottom: 0.8em; width: 100%; }
 form fieldset span                          { clear: both; float: left; line-height: 28px; margin-right: 8px; }
-form ul                                     { float: left; clear: both; width: 100%; box-sizing: border-box; margin: 0 0 20px 0; padding: 0 0 0 4px; ; list-style: none; }
-form ul li                                  { float: left; margin: 0; padding: 0; width: 100%; }
+.content .text form ul                              { float: left; clear: both; width: 100%; box-sizing: border-box; margin: 0 0 20px 0; padding: 0 0 0 5px; list-style: none; }
+.content .text form ul li                           { float: left; margin: 0; padding: 0; width: 100%; }
+.content .text form ul.paymentmethods li			{ margin: 0 0 20px 0; }
+.content .text form ul.paymentmethods li label img	{ display: block; height: 40px; margin-top: 4px; }
 
-label                                       { display: block; font-weight: bold; }
+label                                       { display: block; font-weight: bold; float: left; }
 input.textinput,
 textarea                                    { clear: both; float: left; box-sizing: border-box; border: 1px solid $hoverColor; color: $accentColor; font-size: 18px; padding: 3px 6px; width: 100%; max-width: 600px; }
 input.clearnone                             { clear: none; }
