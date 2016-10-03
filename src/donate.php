@@ -252,7 +252,7 @@
 							ga('require', 'ecommerce');
 							ga('ecommerce:addTransaction', {
 								'id': '<?php echo $this->donate_id; ?>',
-								'revenue': '<?php echo Donation::formatDecimal($donation->donate_amount_decimal); ?>',
+								'revenue': '<?php echo Donation::formatDecimal($this->donate_amount_decimal); ?>',
 							});
 							ga('ecommerce:send');
 

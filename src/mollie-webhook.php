@@ -37,7 +37,8 @@
 								$headers[] = 'From: ' . $from_emailaddress;
 							}
 
-							$message = vsprintf('Hallo %1$s,' . "\n\n" . 'Bedankt voor je donatie van %2$s aan de Stichting Martine Hoopt Op Beter. We hebben de donatie ontvangen.' . "\n\n" . 'We zouden het leuk vinden als je de website regelmatig blijft bezoeken voor updates over de behandeling van Martine: <https://www.martinehoooptopbeter.nl/>' . "\n\n" . 'Bedankt voor je hulp, ook namens Martine!' . "\n\n", array($donation->name, Donation::formatEuroPrice($donation->amount)));
+							// This comment is here to force this page to be saved in UTF-8 because the next line will need to display a € sign correctly.
+							$message = vsprintf('Hallo %1$s,' . "\n\n" . 'Bedankt voor je donatie van %2$s aan de Stichting Martine Hoopt Op Beter. We hebben de donatie ontvangen.' . "\n\n" . 'We zouden het leuk vinden als je de website regelmatig blijft bezoeken voor updates over de behandeling van Martine: <https://www.martinehooptopbeter.nl/>' . "\n\n" . 'Bedankt voor je hulp, ook namens Martine!' . "\n\n", array($donation->name, Donation::formatEuroPrice($donation->amount)));
 
 							mb_send_mail($donation->emailAddress, $subject, $message, implode("\r\n", $headers));
 						}
