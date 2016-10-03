@@ -28,7 +28,7 @@
 		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
 
 		$pageSize = 10;
-		$pageMax = intval($itemCount / $pageSize) + 1;
+		$pageMax = intval(($itemCount - 1) / $pageSize) + 1;
 
 		$page = intval($page);
 		$page = $page > 0 ? $page : 1;
