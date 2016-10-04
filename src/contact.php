@@ -24,6 +24,8 @@
 			
 			if ($server['REQUEST_METHOD'] == "POST") {
 
+				$post = stripslashes_deep($post);
+
 				$this->contact_name = isset($post['contact_name']) ? trim($post['contact_name']) : $this->contact_name;
 				$this->contact_email = isset($post['contact_email']) ? trim($post['contact_email']) : $this->contact_email;
 				$this->contact_message = isset($post['contact_message']) ? trim($post['contact_message']) : $this->contact_message;

@@ -29,6 +29,8 @@
 			$this->doShowDonationForm = true;
 			
 			if ($server['REQUEST_METHOD'] == "POST") {
+				
+				$post = stripslashes_deep($post);
 
 				$this->donate_name = isset($post['donate_name']) ? trim($post['donate_name']) : $this->donate_name;
 				$this->donate_email = isset($post['donate_email']) ? trim($post['donate_email']) : $this->donate_email;
