@@ -228,7 +228,7 @@ a.btn:active								{ text-decoration: none; }
 	.navigation nav ul li a:hover,
 	.navigation nav ul li a:active			{ padding: 12px 20px; display: block; margin: 0; border: none; border-bottom: 1px solid $accentColorLight; color: #fff; }
 	.navigation nav ul li:last-child a		{ border: none; }
-	.navigation nav label					{ display: inline-block; }
+	.navigation nav label					{ display: inline-block; float: none; }
 
 	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
 }
