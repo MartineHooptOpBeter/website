@@ -130,8 +130,8 @@ p                                           { margin: 0 0 1.2em 0; }
 /*========================= SPONSORS =========================*/
 
 ul.sponsors                                 { padding: 0; margin: 0; }
-ul.sponsors li                              { display: inline-block; padding: 0 10px; width: 33%; box-sizing: border-box; }
-ul.sponsors li img                          { width: 100%; height: auto; }
+ul.sponsors li                              { display: inline-block; padding: 0 10px 20px 10px; width: 33%; box-sizing: border-box; float: left; }
+ul.sponsors li img                          { width: 100%; height: auto; max-height: 70px; }
 
 /*========================= FOOTER =========================*/
 footer										{ background-color: $accentColorLight; padding: 20px; }

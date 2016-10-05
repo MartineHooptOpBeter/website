@@ -73,7 +73,7 @@
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
 
-            <ul class="sponsors">
+            <ul class="sponsors clearfix">
 <?php
 
         foreach ($json->sponsors as $sponsor) {
