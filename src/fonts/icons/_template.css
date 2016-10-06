@@ -11,7 +11,7 @@
 
 .<%= className %>:before {
   display: inline-block;
-  font-family: "<%= fontName %>";
+  font-family: '<%= fontName %>';
   font-style: normal;
   font-size: 115%;
   font-weight: normal;
