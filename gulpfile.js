@@ -260,7 +260,7 @@ gulp.task(allpages_css, [font_icon], function() {
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(sass())
 		.pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
-        .pipe(gulpif(minifyCss, cleancss()))
+        .pipe(gulpif(minifyCss, cleancss({ rebase: false })))
         .pipe(concat(files.allpages_css_out))
         .pipe(gulp.dest(files.allpages_css_dest))
         .pipe(reload({ stream: true }));
