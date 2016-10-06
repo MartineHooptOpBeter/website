@@ -233,8 +233,8 @@ a.btn:active								{ text-decoration: none; }
 }
 
 @media (max-width: 1023px) {
-	.navigation .logo						{ margin-left: 10px; }
-    .navigation nav label					{ margin-right: 10px; }
+	.navigation .logo						{ margin-left: 20px; }
+    .navigation nav label					{ margin-right: 20px; }
 }
 
 @media (max-width: 767px) {
@@ -247,7 +247,9 @@ a.btn:active								{ text-decoration: none; }
 
     .sitewidth                              { width: 100%; }
 	
+	.navigation .logo						{ margin-left: 6px; }
     .navigation .logo img					{ height: 50px; }
+    .navigation nav label					{ margin-right: 6px; }
 
     .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 0 6px 30px 6px; }
     .jumbophoto .dimmed                     { height: auto; background-color: transparent; padding-top: calc((100% / 1043) * 500); }
