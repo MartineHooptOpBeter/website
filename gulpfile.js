@@ -220,7 +220,13 @@ var font_icon = 'font-icon';
 gulp.task(font_icon, function() {
     return gulp.src(files.font_icon_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
-		.pipe(iconfont({ fontName: files.font_icon_dest, fontHeight: 1000, normalize: true, appendCodepoints: true }))
+		.pipe(iconfont({
+			fontName: files.font_icon_dest,
+			fontHeight: 1000,
+			formats: ['ttf', 'eot', 'woff', 'woff2'],
+			normalize: true,
+			appendCodepoints: true
+		}))
 		.on('glyphs', function(glyphs, options) {
 			gulp.src(files.font_icon_tpl)
 				.pipe(consolidate('lodash', {
