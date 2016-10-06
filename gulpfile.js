@@ -14,6 +14,7 @@ var defaultMinifyJs = false;
 *******************************************************************************/
 
 var gulp = require('gulp');
+var lodash = require('lodash');
 
 var browsersync = require('browser-sync').create();
 
@@ -22,9 +23,12 @@ var sass = require('gulp-sass')
 var watch = require('gulp-watch');
 var gulpif = require('gulp-if');
 var concat = require('gulp-concat');
+var rename = require('gulp-rename');
 var gettext = require('gulp-gettext');
 var plumber = require('gulp-plumber');
+var iconfont = require('gulp-iconfont');
 var cleancss = require('gulp-clean-css');
+var consolidate = require('gulp-consolidate');
 var autoprefixer = require('gulp-autoprefixer');
 
 
@@ -71,11 +75,13 @@ var reload = browsersync.reload;
 
 var srcDir = 'src/';
 var srcCssDir = srcDir + 'css/';
+var srcCssFontDir = srcCssDir + 'fonts/';
 
 var dstDir = 'wwwroot/';
 var themeDir = dstDir + 'wp-content/themes/martinehooptopbeter/';
 var themeCssDir = themeDir + 'css/';
 var themeImgDir = themeDir + 'img/';
+var themeFontDir = themeDir + 'fonts/';
 
 var vendorsDir = 'vendor/';
 
@@ -113,12 +119,25 @@ var files = {
 	style_css_dest : themeDir,
 	
 	/* Style CSS file */
-	allpages_css_src : [srcCssDir + 'reset.scss', srcCssDir + 'main.scss'],
+	allpages_css_src : [srcCssDir + 'reset.scss', srcCssFontDir + '*.css', srcCssDir + 'main.scss'],
 	allpages_css_dep : [],
 	allpages_css_out : 'allpages.css',
 	allpages_css_dest : themeCssDir,
 
+	/* Icon font */
+	font_icon_src : srcDir + 'fonts/icons/*.svg',
+	font_icon_dest : 'icons',
+	font_icon_tpl : srcDir + 'fonts/icons/_template.css',
+	font_icon_class : 'icon',
+
+	/* General for all fonts */
+	font_dest : themeFontDir,
+	font_css_dest : srcCssFontDir,
+
 }
+
+/* Read package file */
+var package = require('./package.json');
 
 /* Fix up properties in files object */
 files.allpages_css_dep = files.allpages_css_src
@@ -194,6 +213,31 @@ gulp.task(copy_img, function() {
 
 
 /*******************************************************************************
+** FONT TASKS                                                                 **
+*******************************************************************************/
+
+var font_icon = 'font-icon';
+gulp.task(font_icon, function() {
+    return gulp.src(files.font_icon_src)
+		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+		.pipe(iconfont({ fontName: files.font_icon_dest, fontHeight: 1000, normalize: true, appendCodepoints: true }))
+		.on('glyphs', function(glyphs, options) {
+			gulp.src(files.font_icon_tpl)
+				.pipe(consolidate('lodash', {
+					glyphs: glyphs,
+					fontName: options.fontName,
+					fontPath: '../fonts/',
+					className: files.font_icon_class,
+					packageVersion: package.version
+				}))
+				.pipe(rename({ basename: files.font_icon_dest }))
+				.pipe(gulp.dest(files.font_css_dest));
+		})
+		.pipe(gulp.dest(files.font_dest));
+});
+
+
+/*******************************************************************************
 ** CSS TASKS                                                                  **
 *******************************************************************************/
 
@@ -205,7 +249,7 @@ gulp.task(style_css, function() {
 });
 
 var allpages_css = 'allpages_css';
-gulp.task(allpages_css, function() {
+gulp.task(allpages_css, [font_icon], function() {
     return gulp.src(files.allpages_css_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(sass())
@@ -222,7 +266,7 @@ gulp.task(allpages_css, function() {
 *******************************************************************************/
 
 // Set up default task dependencies (i.e. the tasks we want to run by default)
-var defaultTaskDependencies = [php_files, vendors, localization, sponsors, root_img, copy_img, style_css, allpages_css];
+var defaultTaskDependencies = [php_files, vendors, localization, sponsors, root_img, copy_img, style_css, font_icon, allpages_css];
 
 // Run default task
 gulp.task('default', defaultTaskDependencies, function() {

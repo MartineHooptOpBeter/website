@@ -26,7 +26,7 @@
 
 	<section class="navigation clearfix">
 	
-		<div class="sitewidth">
+		<div class="sitewidth clearfix">
 	
 			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter.svg" alt="<?php bloginfo( 'name' ); ?>"></a>
 
@@ -47,6 +47,12 @@
 					}
 				?>
 			</nav>
+
+			<ul class="social">
+				<li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode(get_permalink()); ?>" target="_blank" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" title="<?php echo vsprintf(__('Share this page on %1$s', 'martinehooptopbeter'), array(__('Facebook', 'martinehooptopbeter'))); ?>">&#xF799;</a>
+				<li><a href="https://twitter.com/share?url=<?php echo rawurlencode(get_permalink()); ?>&amp;text=<?php echo rawurlencode(__('Help my friend Martine in her fight against MS. #ms #multiplesclerosis #fundraiser', 'martinehooptopbeter')); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" title="<?php echo vsprintf(__('Share this page on %1$s', 'martinehooptopbeter'), array(__('Twitter', 'martinehooptopbeter'))); ?>">&#xF798;</a>
+				<li><a href="https://www.linkedin.com/shareArticle?url=<?php echo rawurlencode(get_permalink()); ?>&amp;title=<?php echo rawurlencode(__('I would like to ask you to support my co-worker / business affiliate Martine Siemelink in her fight against Multiple Sclerose (MS) and make a small (or large) donation. Thank you!', 'martinehooptopbeter')); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" title="<?php echo vsprintf(__('Share this page on %1$s', 'martinehooptopbeter'), array(__('LinkedIn', 'martinehooptopbeter'))); ?>">&#xF797;</a>
+			</ul>
 
 		</div>
 	

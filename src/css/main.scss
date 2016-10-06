@@ -21,7 +21,8 @@ p                                           { margin: 0 0 1.2em 0; }
 /*========================= NAVIGATION =========================*/
 .navigation									{ background-color: #fff; padding: 20px 0 10px 0; }
 .navigation nav								{ float: right; }
-.navigation .logo img						{ height: 50px; }
+.navigation .logo                           { float: left; }
+.navigation .logo img						{ height: 70px; }
 
 .navigation nav ul							{ list-style: none; padding: 0; }
 .navigation nav ul li						{ display: inline; }
@@ -34,10 +35,16 @@ p                                           { margin: 0 0 1.2em 0; }
 
 .navigation nav ul li.current-menu-item a	{ border-color: $accentColor; }
 
-.navigation nav label						{ display: none; cursor: pointer; user-select: none; margin-right: 20px; padding: 6px 10px; color: $accentColor; border: 1px solid $accentColor; }
+.navigation nav label						{ display: none; cursor: pointer; user-select: none; margin-right: 0px; padding: 6px 10px; color: $accentColor; border: 1px solid $accentColor; }
 
 #menu-toggle								{ display: none; }
 
+ul.social                                   { float: right; clear: right; margin: 10px 0 0 0; padding: 0; font-family: 'icons'; font-size: 36px; list-style: none; }
+ul.social li                                { display: inline; padding-left: 6px; font-style: normal; font-weight: normal; vertical-align: middle; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+ul.social li a:link,
+ul.social li a:visited                      { color: $accentColor; text-decoration: none; }
+ul.social li a:hover,
+ul.social li a:active                       { color: $accentColorLight; text-decoration: none; }
 
 
 /*========================= JUMBO PHOTO =========================*/
@@ -219,8 +226,7 @@ a.btn:active								{ text-decoration: none; }
     .content.left .wp-post-image            { width: 40%; height: auto; }
 }
 
-@media (max-width: 1023px) {
-	.navigation .logo						{ margin-left: 20px; }
+@media (max-width: 1199px) {
 	.navigation nav ul						{ display: none; width: calc(100% - 40px); background-color: $accentColor; left: 20px; }
 	.navigation nav ul li					{ display: block; }
 	.navigation nav ul li a:link,
@@ -228,9 +234,16 @@ a.btn:active								{ text-decoration: none; }
 	.navigation nav ul li a:hover,
 	.navigation nav ul li a:active			{ padding: 12px 20px; display: block; margin: 0; border: none; border-bottom: 1px solid $accentColorLight; color: #fff; }
 	.navigation nav ul li:last-child a		{ border: none; }
-	.navigation nav label					{ display: inline-block; float: none; }
+	.navigation nav label					{ float: none; display: inline-block; }
+
+    ul.social                               { clear: none; margin: 0 40px 0 0; }
 
 	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
+}
+
+@media (max-width: 1023px) {
+	.navigation .logo						{ margin-left: 20px; }
+    .navigation nav label					{ margin-right: 20px; }
 }
 
 @media (max-width: 767px) {
@@ -243,6 +256,12 @@ a.btn:active								{ text-decoration: none; }
 
     .sitewidth                              { width: 100%; }
 	
+	.navigation .logo						{ margin-left: 6px; }
+    .navigation .logo img					{ height: 50px; }
+    .navigation nav label					{ margin-right: 6px; }
+
+    ul.social                               { display: none; }
+
     .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 0 6px 30px 6px; }
     .jumbophoto .dimmed                     { height: auto; background-color: transparent; padding-top: calc((100% / 1043) * 500); }
     .jumbophoto .dimmed h1                  { width: 100%; color: #fff; text-shadow: none; margin-top: 30px; }
