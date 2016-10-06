@@ -21,6 +21,7 @@ p                                           { margin: 0 0 1.2em 0; }
 /*========================= NAVIGATION =========================*/
 .navigation									{ background-color: #fff; padding: 20px 0 10px 0; }
 .navigation nav								{ float: right; }
+.navigation .logo                           { float: left; }
 .navigation .logo img						{ height: 70px; }
 
 .navigation nav ul							{ list-style: none; padding: 0; }
@@ -38,6 +39,12 @@ p                                           { margin: 0 0 1.2em 0; }
 
 #menu-toggle								{ display: none; }
 
+ul.social                                   { float: right; clear: right; margin: 10px 0 0 0; padding: 0; font-family: 'icons'; font-size: 36px; list-style: none; }
+ul.social li                                { display: inline; padding-left: 6px; font-style: normal; font-weight: normal; vertical-align: middle; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+ul.social li a:link,
+ul.social li a:visited                      { color: $accentColor; text-decoration: none; }
+ul.social li a:hover,
+ul.social li a:active                       { color: $accentColorLight; text-decoration: none; }
 
 
 /*========================= JUMBO PHOTO =========================*/
@@ -229,6 +236,8 @@ a.btn:active								{ text-decoration: none; }
 	.navigation nav ul li:last-child a		{ border: none; }
 	.navigation nav label					{ float: none; display: inline-block; }
 
+    ul.social                               { clear: none; margin: 0 40px 0 0; }
+
 	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
 }
 
@@ -250,6 +259,8 @@ a.btn:active								{ text-decoration: none; }
 	.navigation .logo						{ margin-left: 6px; }
     .navigation .logo img					{ height: 50px; }
     .navigation nav label					{ margin-right: 6px; }
+
+    ul.social                               { display: none; }
 
     .jumbophoto .sitewidth                  { height: auto; background-size: contain; background-position: 0 0; padding: 0 6px 30px 6px; }
     .jumbophoto .dimmed                     { height: auto; background-color: transparent; padding-top: calc((100% / 1043) * 500); }
