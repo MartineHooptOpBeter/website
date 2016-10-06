@@ -107,7 +107,7 @@ var files = {
 	sponsors_dest : sponsorsDstDir,
 
 	/* Root images */
-	root_img_src : [srcDir + 'design/theme/screenshot.png'],
+	root_img_src : [srcDir + 'design/theme/*.png', srcDir + 'design/theme/*.ico'],
 	root_img_dest : themeDir,
 
 	/* Copy Images */
