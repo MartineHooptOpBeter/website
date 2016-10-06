@@ -5,6 +5,14 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="robots" content="index,follow" />
+	<meta property="og:title" content="<?php wp_title( '-', true, 'right' ); ?>" />
+	<meta property="og:description" content="<?php bloginfo( 'description' ); ?>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="1200" />
+	<meta property="og:url" content="<?php echo esc_attr(get_permalink()); ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title><?php wp_title( '-', true, 'right' ); ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto:700" rel="stylesheet">
