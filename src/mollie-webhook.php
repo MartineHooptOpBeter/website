@@ -1,5 +1,7 @@
 <?php require_once 'donations-class.php' ?><?php require_once 'Mollie/API/Autoloader.php'; ?><?php
 
+	mb_internal_encoding('UTF-8');
+	
     global $config;
 
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -32,9 +34,9 @@
 
 							$subject = "Bevestiging van jouw donatie aan de Stichting Martine Hoopt Op Beter";
 							if ($from_emailname) {
-								$headers[] = 'From: ' . $from_emailname . ' <' . $from_emailaddress . '>';
+								$headers[] = 'From: ' . mb_encode_mimeheader($from_emailname) . ' <' . $from_emailaddress . '>';
 							} else {
-								$headers[] = 'From: ' . $from_emailaddress;
+								$headers[] = 'From: ' . mb_encode_mimeheader($from_emailaddress);
 							}
 
 							// This comment is here to force this page to be saved in UTF-8 because the next line will need to display a € sign correctly.
