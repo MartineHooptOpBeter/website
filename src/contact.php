@@ -69,8 +69,8 @@
 			global $config;
 
 			$to      = $config['contact_sendmailto'];
-			$subject = __('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter');
-			$headers[] = 'From: ' . $this->contact_name . ' <' . $this->contact_email . '>';
+			$subject = mb_encode_mimeheader(__('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter'));
+			$headers[] = 'From: ' . mb_encode_mimeheader($this->contact_name) . ' <' . $this->contact_email . '>';
 
 			return mb_send_mail($to, $subject, $this->contact_message, implode("\r\n", $headers));
         }
