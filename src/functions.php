@@ -29,6 +29,7 @@
 
 		// Add support for post thumbnails
 		add_theme_support( 'post-thumbnails' );
+		add_image_size( 'martinehooptopbeter_square-200', 200, 200, true );
 		add_image_size( 'martinehooptopbeter_square-400', 400, 400, true );
 		add_image_size( 'martinehooptopbeter_fullwidth', 1200, 600, true );
 
