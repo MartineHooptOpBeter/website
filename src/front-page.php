@@ -109,7 +109,7 @@
 	<?php
 
 		// Get top level pages
-		query_posts( array( 'post_parent' => 0, 'post_type' => 'page', 'order' => 'ASC', 'orderby' => 'menu_order', 'post_per_page' => -1 ) );
+		query_posts( array( 'post_parent' => 0, 'post_type' => 'page', 'order' => 'ASC', 'orderby' => 'menu_order', 'posts_per_page' => -1 ) );
 
 	?>
 

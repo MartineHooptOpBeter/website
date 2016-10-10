@@ -112,7 +112,13 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .content.right .wp-post-image               { float: right; margin-left: 20px; }
 .content.left .wp-post-image                { float: left; margin-right: 20px; }
 
+.content .meta                              { color: $accentColor; margin-bottom: 20px; }
 .size-martinehooptopbeter_fullwidth         { display: block; width: 100%; height: auto; margin-bottom: 20px; }
+
+.pagenavigation                             { margin-bottom: 20px; }
+.pagenavigation a,
+.pagenavigation span                        { padding: 0 6px; }
+.pagenavigation .sitewidth                  { text-align: center; }
 
 
 /*========================= DONATIONS =========================*/
@@ -226,6 +232,23 @@ a.btn:active								{ text-decoration: none; }
     .content.left .wp-post-image            { width: 40%; height: auto; }
 }
 
+@media (min-width: 768px) {
+    .pagenavigation a,
+    .pagenavigation span                        { display: inline-block; padding: 8px 14px; border-radius: 5px; border: 1px; text-align: center; }
+    .pagenavigation a:link,
+    .pagenavigation a:visited,
+    .pagenavigation a:active,
+    .pagenavigation a:hover                     { text-decoration: none; }
+
+    .pagenavigation a.page-numbers        		{ background-color: #fff; color: $accentColor; border: 1px solid $accentColor; }
+    .pagenavigation span.current,
+    .pagenavigation a.next,
+    .pagenavigation a.prev   	        		{ background-color: $accentColor; color: #fff; border: 1px solid $accentColor; }
+
+    .pagenavigation .prev                       { float: left; }
+    .pagenavigation .next                       { float: right; }
+}
+
 @media (max-width: 1199px) {
 	.navigation nav ul						{ display: none; width: calc(100% - 40px); background-color: $accentColor; left: 20px; }
 	.navigation nav ul li					{ display: block; }
@@ -296,6 +319,8 @@ a.btn:active								{ text-decoration: none; }
     .content.left .text                     { float: left; }
 
 	.content.intro .wp-post-image           { margin: 0; }
+
+    .pagenavigation span                    { padding: 0 6px; background-color: $accentColor; color: #fff; }
 		
 	.metertext								{ font-size: 100%; }
 	.metertext span.value,
