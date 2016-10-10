@@ -215,3 +215,6 @@ msgstr "Help mijn vriendin Martine in haar strijd tegen MS. #ms #multiplescleros
 
 msgid "I would like to ask you to support my co-worker / business affiliate Martine Siemelink in her fight against Multiple Sclerose (MS) and make a small (or large) donation. Thank you!" 
 msgstr "Graag wil ik je vragen om mijn collega / relatie Martine Siemelink te helpen in haar strijd tegen Multiple Sclerose (MS) en haar te steunen met een kleine (of grote) donatie. Bedankt!"
+
+msgid "Back"
+msgstr "Terug"

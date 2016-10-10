@@ -26,21 +26,24 @@
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
-	<section class="content right">
-		<div class="sitewidth clearfix">
+	<article class="blogpost">
+		<section class="content right">
+			<div class="sitewidth clearfix">
 
-			<?php if ( has_post_thumbnail() ) { echo '<a href="' . get_the_permalink() . '">', the_post_thumbnail('martinehooptopbeter_square-200'), '</a>'; } ?>
+			<?php if ( has_post_thumbnail() ) { echo '<a href="', the_permalink(), '">', the_post_thumbnail('martinehooptopbeter_square-200'), '</a>'; } ?>
 
-			<div class="text">
-				<?php the_title( '<h2><a href="' . get_the_permalink() .  '">', '</a></h2>' ); ?>
-				<div class="meta">
-					<?php echo the_time('l, j F Y', '<time datetime="' . esc_attr(date('c', time($post->post_date))) . '">', '</time>'); ?> door <?php the_author(); ?> 
+				<div class="text">
+					<?php the_title( '<h2><a href="' . get_the_permalink() .  '">', '</a></h2>' ); ?>
+					<div class="meta">
+						<?php echo the_time('l, j F Y', '<time datetime="' . esc_attr(date('c', time($post->post_date))) . '">', '</time>'); ?> door <?php the_author(); ?> 
+					</div>
+					<?php the_excerpt(); ?>
+					<a href="<?php the_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
 				</div>
-				<?php the_excerpt(); ?>
-			</div>
 
-		</div>
-	</section>
+			</div>
+		</section>
+	</article>
 
 	<?php endwhile; ?>
 
