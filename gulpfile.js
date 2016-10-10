@@ -16,6 +16,9 @@ var defaultMinifyJs = false;
 var gulp = require('gulp');
 var lodash = require('lodash');
 
+var ejs = require('ejs');
+var dateformat = require('dateformat');
+
 var browsersync = require('browser-sync').create();
 
 var util = require('gulp-util');
@@ -24,6 +27,8 @@ var watch = require('gulp-watch');
 var gulpif = require('gulp-if');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
+var replace = require('gulp-replace');
+var gulpejs = require('gulp-ejs');
 var gettext = require('gulp-gettext');
 var plumber = require('gulp-plumber');
 var iconfont = require('gulp-iconfont');
@@ -136,8 +141,43 @@ var files = {
 
 }
 
+/* Set release date to now */
+var release_date = new Date();
+var release_year = dateformat(release_date, 'yyyy');
+var copyright_firstyear = '2016';
+
 /* Read package file */
 var package = require('./package.json');
+var release = {
+	version : package.version,
+	description : package.description,
+	date : dateformat(release_date, 'dddd, d mmmm yyyy, HH:MM:ss'),
+	author : package.author,
+	copyright : 'Copyright (c) ' + copyright_firstyear + (copyright_firstyear != release_year ? ('-' + release_year) : '') + ' Stichting Martine Hoopt Op Beter',
+	homepage : package.homepage,
+	license : 'MIT License (https://github.com/MartineHooptOpBeter/website/LICENSE)'
+};
+
+/* MIT License */
+var license_text = ['MIT License',
+  '<%= release.copyright %>','',
+  'Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:','',
+  'The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.','',
+  'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'
+].join('\n');
+
+/* Header tex to be include in every PHP file */
+var php_header_text = ['/**',
+  ' * <%= release.description %>',
+  ' *',
+  ' * @version   v<%= release.version %>',
+  ' * @released  <%= release.date %>',
+  ' *',
+  ' * @author    <%= release.author %>',
+  ' * @copyright <%= release.copyright %>',
+  ' * @license   <%= release.license %>',
+  ' * @link      <%= release.homepage %>',
+  ' */'].join('\n    ');
 
 /* Fix up properties in files object */
 files.allpages_css_dep = files.allpages_css_src
@@ -152,6 +192,8 @@ var php_files = 'php_files';
 gulp.task(php_files, function() {
     return gulp.src(files.php_files_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+		.pipe(replace('@@HEADER@@', php_header_text))
+		.pipe(gulpejs({ release : release }))
         .pipe(gulp.dest(files.php_files_dest));
 });
 
