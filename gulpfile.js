@@ -138,6 +138,9 @@ var files = {
 	/* General for all fonts */
 	font_dest : themeFontDir,
 	font_css_dest : srcCssFontDir,
+	
+	/* License */
+	license_src : srcDir + 'LICENSE',
 
 }
 
@@ -310,11 +313,26 @@ gulp.task(allpages_css, [font_icon], function() {
 
 
 /*******************************************************************************
+** LICENSE FILE                                                               **
+*******************************************************************************/
+
+var license = 'license';
+gulp.task(license, function() {
+    return gulp.src(files.license_src)
+		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+		.pipe(replace('@@LICENSE@@', license_text))
+		.pipe(gulpejs({ release : release }))
+        .pipe(gulp.dest('./'))
+		.pipe(gulp.dest(themeDir));
+});
+
+
+/*******************************************************************************
 ** GULP TASKS                                                                 **
 *******************************************************************************/
 
 // Set up default task dependencies (i.e. the tasks we want to run by default)
-var defaultTaskDependencies = [php_files, vendors, localization, sponsors, root_img, copy_img, style_css, font_icon, allpages_css];
+var defaultTaskDependencies = [license, php_files, vendors, localization, sponsors, root_img, copy_img, style_css, font_icon, allpages_css];
 
 // Run default task
 gulp.task('default', defaultTaskDependencies, function() {
