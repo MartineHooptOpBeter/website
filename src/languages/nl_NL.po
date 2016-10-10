@@ -213,8 +213,8 @@ msgstr "Deel deze pagina op %1$s"
 msgid "Help my friend Martine in her fight against MS. #ms #multiplesclerosis #fundraiser"
 msgstr "Help mijn vriendin Martine in haar strijd tegen MS. #ms #multiplesclerosis #fundraiser"
 
-msgid "I would like to ask you to support my co-worker / business affiliate Martine Siemelink in her fight against Multiple Sclerose (MS) and make a small (or large) donation. Thank you!" 
-msgstr "Graag wil ik je vragen om mijn collega / relatie Martine Siemelink te helpen in haar strijd tegen Multiple Sclerose (MS) en haar te steunen met een kleine (of grote) donatie. Bedankt!"
+msgid "Help Martine in her fight against MS and give her hope for a better life! Her MS is aggressive and increasingly limits her abilities. Because she is the only parent and thus must be able to financially and pratically care for her two daughters of 11 and 9 years old, she wants to go a clinic in Mexico for a stem cell transplantation as soon as possible. However, this is very expensive! Would you like to help her?" 
+msgstr "Help Martine in haar strijd tegen MS en geef haar de hoop op een beter leven! Haar MS is agressief en beperkt haar steeds meer. Omdat ze nog de enige ouder is en dus financieel en praktisch voor haar twee dochters van 11 en 9 jaar moet kunnen blijven zorgen, wil ze met spoed naar een kliniek in Mexico voor een stamceltransplantatie. Dit is echter erg duur! Wil je haar helpen?"
 
 msgid "Back"
 msgstr "Terug"
