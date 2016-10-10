@@ -1,4 +1,8 @@
-<?php require_once 'donations-class.php' ?><?php
+<?php
+
+    @@HEADER@@
+
+	require_once 'donations-class.php';
 
 	function martinehooptopbeter_show_excerpt_title() {
 
@@ -10,8 +14,7 @@
 
 	}
 
-?>
-<?php get_header(); ?>
+?><?php get_header(); ?>
 	
 	<section class="jumbophoto">
 	

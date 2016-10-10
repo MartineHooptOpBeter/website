@@ -1,10 +1,11 @@
-<?php include 'donations.php'; ?>
+<?php /* Template Name: Donations Overview Page */ ?>
 <?php
-/**
- * Template Name: Donations Overview Page
- */
-?>
-<?php get_header(); ?>
+
+    @@HEADER@@
+	
+    include 'donations.php';
+	
+?><?php get_header(); ?>
 
 	<?php if (have_posts()) : the_post(); ?>
 		<?php $hasContent = (strlen(get_the_content()) > 0); ?>

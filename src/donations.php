@@ -1,10 +1,12 @@
-<?php require_once 'donations-class.php' ?><?php
+<?php
+
+    @@HEADER@@
+
+	require_once 'donations-class.php';
 
     function show_donations_page($donationsUrl, $page = 1)
     {
 		global $config;
-		
-		
 
 ?>	<section class="content donations">
 		<div class="sitewidth clearfix">

@@ -1,4 +1,8 @@
-<?php require_once 'config.php' ?><?php
+<?php
+
+    @@HEADER@@
+
+	require_once 'config.php';
 
 	class ContactPage {
 	

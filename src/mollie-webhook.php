@@ -1,4 +1,9 @@
-<?php require_once 'donations-class.php' ?><?php require_once 'Mollie/API/Autoloader.php'; ?><?php
+<?php
+
+    @@HEADER@@
+
+	require_once 'donations-class.php';
+	require_once 'Mollie/API/Autoloader.php';
 
 	mb_internal_encoding('UTF-8');
 	

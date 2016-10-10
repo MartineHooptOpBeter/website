@@ -1,17 +1,14 @@
+<?php /* Template Name: Contact Page */ ?>
 <?php
+
+    @@HEADER@@
 
 	include 'contact.php'; 
 
 	$contactPage = new ContactPage();
 	$contactPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
-?>
-<?php
-/**
- * Template Name: Contact Page
- */
-?>
-<?php get_header(); ?>
+?><?php get_header(); ?>
 
 	<?php if (have_posts()) : the_post(); ?>
 		<?php $hasContent = (strlen(get_the_content()) > 0); ?>

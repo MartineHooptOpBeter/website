@@ -1,17 +1,14 @@
+<?php /* Template Name: Donation Page */ ?>
 <?php
+
+    @@HEADER@@
 
 	include 'donate.php'; 
 
 	$donationPage = new DonationPage();
 	$donationPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
-?>
-<?php
-/**
- * Template Name: Donation Page
- */
-?>
-<?php get_header(); ?>
+?><?php get_header(); ?>
 
 	<?php if (have_posts()) : the_post(); ?>
 		<?php $hasContent = (strlen(get_the_content()) > 0); ?>

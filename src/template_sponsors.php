@@ -1,9 +1,9 @@
+<?php /* Template Name: Sponsors Page */ ?>
 <?php
-/**
- * Template Name: Sponsors Page
- */
-?>
-<?php get_header(); ?>
+
+    @@HEADER@@
+	
+?><?php get_header(); ?>
 
 	<?php if (have_posts()) : the_post(); ?>
 		<?php $hasContent = (strlen(get_the_content()) > 0); ?>
