@@ -1,7 +1,7 @@
 {
   "name": "martinehooptopbeter",
   "version": "1.1.4",
-  "description": "Martine Hoopt Op Beter Website",
+  "description": "Martine Hoopt Op Beter WordPress Theme",
   "main": "/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
