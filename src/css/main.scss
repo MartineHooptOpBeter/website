@@ -142,9 +142,9 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 
 /*========================= SPONSORS =========================*/
 
-ul.sponsors                                 { padding: 0; margin: 0; }
-ul.sponsors li                              { display: inline-block; padding: 0 10px 20px 10px; width: 33%; box-sizing: border-box; float: left; }
-ul.sponsors li img                          { width: 100%; height: auto; max-height: 70px; }
+ul.sponsors                                 { padding: 0; margin: 0; list-style: none; }
+ul.sponsors li                              { padding: 0 10px 20px 10px; width: 33%; box-sizing: border-box; display: block; float: left; text-align: center; line-height: 80px; }
+ul.sponsors li img                          { display: inline; width: 100%; height: auto; vertical-align: middle; }
 
 /*========================= FOOTER =========================*/
 footer										{ background-color: $accentColorLight; padding: 20px; }
