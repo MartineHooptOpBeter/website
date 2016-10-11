@@ -78,7 +78,7 @@
 
         foreach ($json->sponsors as $sponsor) {
 
-?>              <li><a href="<?php echo esc_attr($sponsor->website); ?>" target="_blank"><img src="<?php echo esc_attr($sponsors_url . '/' . $sponsor->logo); ?>" alt="<?php echo esc_attr($sponsor->name); ?>" /></a></li>
+?>              <li><a href="<?php echo esc_attr($sponsor->website); ?>" target="_blank"><img src="<?php echo esc_attr($sponsors_url . '/' . $sponsor->logo); ?>" alt="<?php echo esc_attr($sponsor->name); ?>"<?php if (isset($sponsor->logowidth)) { echo sprintf(' style="max-width: %1$s"', esc_attr($sponsor->logowidth)); } ?> /></a></li>
 <?php
 
         }
