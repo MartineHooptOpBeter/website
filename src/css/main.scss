@@ -149,7 +149,13 @@ ul.sponsors li img                          { display: inline; width: 100%; heig
 /*========================= FOOTER =========================*/
 footer										{ background-color: $accentColorLight; padding: 20px; }
 footer p									{ color: $darkColor; text-align: center; margin: 0; }
+footer p.small								{ font-size: 70%; }
 footer img									{ height: 24px; vertical-align: bottom; opacity: 0.65; }
+footer a:link,
+footer a:visited							{ color: $darkColor; text-decoration: none; }
+footer a:hover,
+footer a:active								{ color: $accentColor; text-decoration: none; }
+
 
 /*========================= FORMS / BUTTONS =========================*/
 
