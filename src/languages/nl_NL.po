@@ -147,6 +147,9 @@ msgstr "%1$s donatie"
 msgid "Total: %1$s of %2$s"
 msgstr "Totaal: %1$s van %2$s"
 
+msgid "Total: %1$s"
+msgstr "Totaal: %1$s"
+
 msgid "Enter your details below and the message or question you would like to send."
 msgstr "Vul onderstaand je gegevens in en de vraag of het bericht welke je wilt versturen."
 

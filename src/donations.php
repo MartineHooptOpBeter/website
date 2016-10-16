@@ -50,7 +50,11 @@
 					<span style="width: <?php echo Donation::formatDecimal($goalPercentage * 100.0); ?>%"><span></span></span>
 				</div>
 				<div class="metertext clearfix">
-					<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</strong>', esc_attr(Donation::formatEuroPrice($goalValue)))); ?></span>
+					<?php if (isset($goalValue) && is_numeric($goalValue) && ($goalValue > 0)) : ?>
+						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</strong>', esc_attr(Donation::formatEuroPrice($goalValue)))); ?></span>
+					<?php else : ?>
+						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</strong>')); ?></span>
+					<?php endif; ?>
 					<?php if ($totalCount == 1) : ?>
 						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
 					<?php else : ?>
