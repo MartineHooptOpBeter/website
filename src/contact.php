@@ -45,6 +45,9 @@
 				if (empty($this->contact_email)) {
 					$this->missingfields['contact_email'] = __('Required field', 'martinehooptopbeter');
 				}
+				elseif (!$this->validEMailAddress($this->contact_email)) {
+					$this->missingfields['contact_email'] = __('Invalid e-mail address', 'martinehooptopbeter');
+				}
 
 				if (empty($this->contact_message)) {
 					$this->missingfields['contact_message'] = __('Required field', 'martinehooptopbeter');
