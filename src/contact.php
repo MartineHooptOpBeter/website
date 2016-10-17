@@ -77,7 +77,7 @@
 
 		function isContactFormEnabled() {
 			global $config;
-			return ContactPage::validEmailAddress($config['contact_sendmailto']);
+			return $this->validEmailAddress($config['contact_sendmailto']);
 		}
 
 		public static function validEMailAddress($emailaddress) {
