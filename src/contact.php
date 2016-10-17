@@ -23,9 +23,13 @@
 			
 			global $config;
 
+			// Check if the contact form is enabled
+			if (!$this->isContactFormEnabled())
+				return;
+
 			// We show the form by default, unless we decide otherwise
 			$this->doShowContactForm = true;
-			
+
 			if ($server['REQUEST_METHOD'] == "POST") {
 
 				$post = stripslashes_deep($post);
@@ -66,6 +70,15 @@
 
 			}
 			
+		}
+
+		function isContactFormEnabled() {
+			global $config;
+			return ContactPage::validEmailAddress($config['contact_sendmailto']);
+		}
+
+		public static function validEMailAddress($emailaddress) {
+			return preg_match('/^([0-9a-zA-Z_]([-.\w\+]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,})$/', $emailaddress);
 		}
 
         function sendContactEMail() {
