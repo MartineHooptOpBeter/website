@@ -2,8 +2,9 @@
 
 	<?php if (have_posts()) : the_post(); ?>
 		<?php $hasExcerpt = (strlen($post->post_excerpt) > 0) ?>
+		<?php $showIntro = $hasExcerpt || has_post_thumbnail(); ?>  
 
-	<section class="content <?php if ($hasExcerpt) { echo "intro "; } ?>right dark divider">
+	<section class="content <?php if ($showIntro) { echo "intro dark "; } ?>right divider">
 		<div class="sitewidth clearfix">
 
 			<?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'martinehooptopbeter_square-400' ); } ?>
@@ -15,6 +16,7 @@
 				</div>
 				<?php if ($hasExcerpt) : ?>
 					<?php the_excerpt(); ?>
+				<?php endif; ?>
 			</div>
 
 		</div>
@@ -24,7 +26,6 @@
 		<div class="sitewidth clearfix">
 
 			<div class="text">
-				<?php endif; ?>
 				<?php the_content(); ?>
 				<a href="<?php
 				
