@@ -4,7 +4,7 @@
 		<?php $hasExcerpt = (strlen($post->post_excerpt) > 0) ?>
 		<?php $showIntro = $hasExcerpt || has_post_thumbnail(); ?>  
 
-	<section class="content <?php if ($showIntro) { echo "intro dark "; } ?>right divider">
+	<section class="content intro <?php if ($showIntro) { echo "dark "; } ?>right divider">
 		<div class="sitewidth clearfix">
 
 			<?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'martinehooptopbeter_square-400' ); } ?>
