@@ -114,7 +114,7 @@
 	
 		<?php switch ($post->post_name):
 
-			case 'over-mij': ?>
+			case 'over-mij': case 'about-martine': ?>
 	
 	<section class="aboutme">
 		<div class="sitewidth">
@@ -136,7 +136,7 @@
 	
 			<?php break; ?>
 
-			<?php case 'stamceltransplantatie': ?>
+			<?php case 'stamceltransplantatie': case 'stem-cell-transplantation': ?>
 
 	<section class="crowdfunding clearfix">
 		<div class="sitewidth">
@@ -159,7 +159,7 @@
 
 			<?php break; ?>
 	
-			<?php case 'multiple-sclerose': ?>
+			<?php case 'multiple-sclerose': case 'multiple-sclerosis' ?>
 
 	<section class="aboutms">
 		<div class="sitewidth">
