@@ -92,7 +92,7 @@
 
 			<div class="action">
 			
-				<p>Help je ook mee?</p>
+				<p><?php _e('Do you help as well?', 'martinehooptopbeter'); ?></p>
 				<div class="buttons">
 					<a href="/doneren/" class="btn"><?php _e('Donate Online', 'martinehooptopbeter'); ?></a>
 				</div>
