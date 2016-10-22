@@ -27,7 +27,7 @@ msgstr "Lees verder"
 msgid "Donate"
 msgstr "Doneren"
 
-msgid "Enter your details and the amount you want to donate below. Optionally you can make your donation anonymously or hide the amount of money you donate."
+msgid "Enter your details and the amount you want to donate below. Optionally you can make your donation anonymously or hide the amount you donate."
 msgstr "Vul onderstaand je gegevens in en het bedrag dat je wilt doneren. Optioneel kan je anoniem doneren of het bedrag dat je doneert niet laten tonen."
 
 msgid "One or more fields are not filled in or incorrect. Please check and correct the entered data."
