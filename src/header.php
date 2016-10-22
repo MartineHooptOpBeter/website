@@ -39,7 +39,7 @@
 	
 		<div class="sitewidth clearfix">
 	
-			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter.svg" alt="<?php bloginfo( 'name' ); ?>"></a>
+			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/<?php echo martinehooptopbeter_current_locale(); ?>/logo.svg" alt="<?php bloginfo( 'name' ); ?>"></a>
 
 			<nav role="navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'martinehooptopbeter' ); ?>">
 				
