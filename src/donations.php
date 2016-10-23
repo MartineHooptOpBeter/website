@@ -2,11 +2,11 @@
 
     @@HEADER@@
 
+	require_once 'configuration.php';
 	require_once 'donations-class.php';
 
     function show_donations_page($donationsUrl, $page = 1)
     {
-		global $config;
 
 ?>	<section class="content donations">
 		<div class="sitewidth clearfix">
@@ -15,7 +15,8 @@
 		
 <?php
 
-		$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
+		$configuration = new Configuration();
+		$donations = new Donations($configuration->getDonationsDatabaseDataSourceName(), $configuration->getDonationsDatabaseUsername(), $configuration->getDonationsDatabasePassword());
 		
 		$itemCount = $donations->getDonationsListCount();
 		$totalCount = $itemCount;
@@ -26,7 +27,7 @@
 			$totalValue += intval($donations_options['offline_amount']);
 		}
 		
-		$goalValue = $config['donate_goal'];
+		$goalValue = $configuration->getDonationsGoalValue();
 		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
 
 		$pageSize = 10;

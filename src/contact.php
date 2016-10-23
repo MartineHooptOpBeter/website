@@ -2,10 +2,10 @@
 
     @@HEADER@@
 
-	require_once 'config.php';
-
 	class ContactPage {
 	
+		protected $_configuration = null;
+
         public $doShowContactForm = false;
         public $doShowContactConfirmation = false;
 		
@@ -16,13 +16,12 @@
 		public $contact_email = '';
 		public $comtact_message = '';
 		
-		function ContactPage() {
+		function ContactPage($configuration) {
+			$this->_configuration = $configuration;
 		}
 		
 		function processRequest($contactUrl, $server, $post, $get) {
 			
-			global $config;
-
 			// Check if the contact form is enabled
 			if (!$this->isContactFormEnabled())
 				return;
@@ -76,8 +75,7 @@
 		}
 
 		function isContactFormEnabled() {
-			global $config;
-			return $this->validEmailAddress($config['contact_sendmailto']);
+			return $this->validEmailAddress($this->_configuration->getContactSendMailTo());
 		}
 
 		public static function validEMailAddress($emailaddress) {
@@ -86,9 +84,7 @@
 
         function sendContactEMail() {
 
-			global $config;
-
-			$to      = $config['contact_sendmailto'];
+			$to      = $this->_configuration->getContactSendMailTo();
 			$subject = __('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter');
 			$headers[] = 'From: ' . mb_encode_mimeheader($this->contact_name) . ' <' . $this->contact_email . '>';
 

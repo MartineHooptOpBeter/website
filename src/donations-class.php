@@ -2,8 +2,6 @@
 
     @@HEADER@@
 
-	require_once 'config.php';
-
     class Donation
     {
         public $id;

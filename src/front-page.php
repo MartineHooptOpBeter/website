@@ -3,6 +3,7 @@
     @@HEADER@@
 
 	require_once 'donations-class.php';
+	require_once 'configuration.php';
 
 	function martinehooptopbeter_show_excerpt_title() {
 
@@ -58,7 +59,8 @@
 
 <?php
 
-		$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
+		$configuration = new Configuration();
+		$donations = new Donations($configuration->getDonationsDatabaseDataSourceName(), $configuration->getDonationsDatabaseUsername(), $configuration->getDonationsDatabasePassword());
 		
 		$itemCount = $donations->getDonationsListCount();
 		$totalCount = $itemCount;
@@ -69,7 +71,7 @@
 			$totalValue += intval($donations_options['offline_amount']);
 		}
 
-		$goalValue = $config['donate_goal'];
+		$goalValue = $configuration->getDonationsGoalValue();
 		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
 
 		if ($totalCount > 0) :

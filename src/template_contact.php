@@ -3,9 +3,12 @@
 
     @@HEADER@@
 
-	include 'contact.php'; 
+	require_once 'contact.php';
+	require_once 'configuration.php';
 
-	$contactPage = new ContactPage();
+    $configuration = new Configuration();
+
+	$contactPage = new ContactPage($configuration);
 	$contactPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
 ?><?php get_header(); ?>

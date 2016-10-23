@@ -7,6 +7,8 @@
 
 	class DonationPage {
 	
+		protected $_configuration = null;
+
         public $doShowDonationForm = false;
         public $doShowDonationConfirmation = false;
 		
@@ -23,13 +25,12 @@
 		public $donate_anonymous = false;
 		public $donate_no_amount = false;
 		
-		function DonationPage() {
+		function DonationPage($configuration) {
+			$this->_configuration = $configuration;
 		}
-		
+
 		function processRequest($donateUrl, $server, $post, $get) {
 			
-			global $config;
-
 			// We show the form by default, unless we decide otherwise
 			$this->doShowDonationForm = true;
 			
@@ -61,11 +62,11 @@
 				if ($this->donate_amount_decimal <= 0) {
 					$this->missingfields['donate_amount'] = __('Invalid amount', 'martinehooptopbeter');
 				}
-				elseif ($this->donate_amount_decimal < $config['donate_minamount']) {
-					$this->missingfields['donate_amount'] = vsprintf(__('Minimum required amount is %1$s', 'martinehooptopbeter'), Donation::formatEuroPrice($config['donate_minamount']));
+				elseif ($this->donate_amount_decimal < $this->_configuration->getDonationMinimumAmount()) {
+					$this->missingfields['donate_amount'] = vsprintf(__('Minimum required amount is %1$s', 'martinehooptopbeter'), Donation::formatEuroPrice($this->_configuration->getDonationMinimumAmount()));
 				}
-				elseif ($this->donate_amount_decimal > $config['donate_maxamount']) {
-					$this->missingfields['donate_amount'] = vsprintf(__('Maximum amount is %1$s', 'martinehooptopbeter'), Donation::formatEuroPrice($config['donate_maxamount']));
+				elseif ($this->donate_amount_decimal > $this->_configuration->getDonationMaximumAmount()) {
+					$this->missingfields['donate_amount'] = vsprintf(__('Maximum amount is %1$s', 'martinehooptopbeter'), Donation::formatEuroPrice($this->_configuration->getDonationMaximumAmount()));
 				}
 
 				if (($this->donate_payment_method != 'ideal') && ($this->donate_payment_method != 'creditcard')) {
@@ -76,11 +77,11 @@
 
 					$d = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, null);
 
-					$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
+					$donations = new Donations($this->_configuration->getDonationsDatabaseDataSourceName(), $this->_configuration->getDonationsDatabaseUsername(), $this->_configuration->getDonationsDatabasePassword());
 					if ($donation = $donations->addDonation($d)) {
 						
 						$mollie = new Mollie_API_Client;
-						$mollie->setApiKey($config['mollie_apikey']);
+						$mollie->setApiKey($this->_configuration->getMollieApiKey());
 						
 						try
 						{
@@ -89,7 +90,7 @@
 										'amount'      => Donation::formatDecimal($donation->amount),
 										'description' => __('Donation', 'martinehooptopbeter'),
 										'redirectUrl' => $donateUrl . '?donationid=' . $donation->id . '&verification=' . $donation->paymentVerification,
-										'webhookUrl'  => $config['mollie_webhookurl'],
+										'webhookUrl'  => $this->_configuration->getMollieWebhookUrl(),
 										'locale'      => 'nl',
 										'method'      => $donation->paymentMethod,
 										'metadata'    => array(
@@ -126,7 +127,7 @@
 
 				if ($donationId && $paymentVerification) {
 
-					$donations = new Donations($config['donate_dsn'], $config['donate_username'], $config['donate_password']);
+					$donations = new Donations($this->_configuration->getDonationsDatabaseDataSourceName(), $this->_configuration->getDonationsDatabaseUsername(), $this->_configuration->getDonationsDatabasePassword());
 					if ($donation = $donations->getDonation($donationId, $paymentVerification)) {
 
 						$this->donate_id = $donation->id;
@@ -157,8 +158,6 @@
 		
 		function showDonationForm()
 		{
-			global $config;
-
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
 
@@ -192,8 +191,8 @@
                             <label for="donate_amount"><?php _e('Amount to donate', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_amount'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_amount'])); ?>)</em><?php endif; ?></label>
                             <span>&euro; </span><input type="text" class="textinput numberinput clearnone" id="donate_amount" name="donate_amount" value="<?php echo esc_attr($this->donate_amount); ?>" placeholder="<?php _e('00.00', 'martinehooptopbeter') ?>"/>
                         </p>
-						<?php if (isset($this->missingfields['donate_amount']) && ($this->donate_amount_decimal > $config['donate_maxamount'])) : ?>
-							<p class="error"><?php echo vsprintf(esc_attr(__('Unfortunately we can\'t accept donations higher than %1$s due to tax regulations. If you want to donate more, please %2$s for possibilities.', 'martinehooptopbeter')), array(esc_attr(Donation::formatEuroPrice($config['donate_maxamount'])), '<a href="/contact/">' . esc_attr(__('contact us', 'martinehooptopbeter')) . '</a>')); ?></p>
+						<?php if (isset($this->missingfields['donate_amount']) && ($this->donate_amount_decimal > $this-_configuration->getDonationMaximumAmount())) : ?>
+							<p class="error"><?php echo vsprintf(esc_attr(__('Unfortunately we can\'t accept donations higher than %1$s due to tax regulations. If you want to donate more, please %2$s for possibilities.', 'martinehooptopbeter')), array(esc_attr(Donation::formatEuroPrice($this-_configuration->getDonationMaximumAmount())), '<a href="/contact/">' . esc_attr(__('contact us', 'martinehooptopbeter')) . '</a>')); ?></p>
 						<?php endif; ?>
                         <ul>
                             <li><input type="checkbox" class="checkbox" id="donate_no_amount" name="donate_no_amount"<?php if ($this->donate_no_amount) { echo ' checked="checked"'; } ?> /><label for="donate_no_amount"><?php _e('Do not show the amount that I donate on the website.', 'martinehooptopbeter'); ?></label></li>
@@ -229,8 +228,6 @@
 		
 		function showDonationConfirmation() {
 			
-			global $config;
-
 			$showRefresh = false;
 			$showDonateAgain = false;
 			
@@ -253,7 +250,7 @@
 							<a href="/donaties/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
 						</div>
 						
-						<?php if (isset($config['googleanalytics_trackingid'])) : ?>
+						<?php if (isset($this->_configuration->getGoogleAnalyticsTrackingId())) : ?>
 						<script>
 
 							ga('require', 'ecommerce');
