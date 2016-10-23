@@ -3,9 +3,12 @@
 
     @@HEADER@@
 
-	include 'donate.php'; 
-
-	$donationPage = new DonationPage();
+	include_once 'donate.php'; 
+	include_once 'configuration.php';
+	
+	$configuration = new Configuration();
+	
+	$donationPage = new DonationPage($configuration);
 	$donationPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
 ?><?php get_header(); ?>
