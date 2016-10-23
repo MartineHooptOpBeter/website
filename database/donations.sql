@@ -28,6 +28,7 @@ CREATE TABLE `tbl_donations` (
   `payment_method` varchar(40) NOT NULL,
   `payment_id` varchar(40) DEFAULT NULL,
   `payment_status` varchar(40) DEFAULT NULL,
+  `locale` varchar(20) DEFAULT 'nl_NL',
   `timestamp` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_payment_verification` (`id`,`payment_id`,`payment_verification`),
