@@ -101,7 +101,7 @@
 
 			<div class="action">
 			
-				<p>Help je ook mee?</p>
+				<p><?php _e('Do you help as well?', 'martinehooptopbeter'); ?></p>
 				<div class="buttons">
 					<a href="/doneren/" class="btn"><?php _e('Donate Online', 'martinehooptopbeter'); ?></a>
 				</div>
@@ -123,7 +123,7 @@
 	
 		<?php switch ($post->post_name):
 
-			case 'over-mij': ?>
+			case 'over-mij': case 'about-martine': ?>
 	
 	<section class="aboutme">
 		<div class="sitewidth">
@@ -145,7 +145,7 @@
 	
 			<?php break; ?>
 
-			<?php case 'stamceltransplantatie': ?>
+			<?php case 'stamceltransplantatie': case 'stem-cell-transplantation': ?>
 
 	<section class="crowdfunding clearfix">
 		<div class="sitewidth">
@@ -168,7 +168,7 @@
 
 			<?php break; ?>
 	
-			<?php case 'multiple-sclerose': ?>
+			<?php case 'multiple-sclerose': case 'multiple-sclerosis' ?>
 
 	<section class="aboutms">
 		<div class="sitewidth">

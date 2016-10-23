@@ -59,6 +59,18 @@
 	}
 	add_filter( 'wp_title', 'martinehooptopbeter_wp_title', 10, 2 );
 
+	function martinehooptopbeter_current_locale() {
+
+		// Check if the Polylang plugin is installed
+		if (function_exists('pll_default_language')) {
+			$current_locale = pll_current_language('locale');
+		} else {
+			$current_locale = get_locale();
+		}
+
+		return $current_locale;
+	}
+
 	include 'settings-donations.php';
 
 ?>

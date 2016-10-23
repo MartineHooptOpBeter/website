@@ -165,7 +165,7 @@
             <div class="text">
                 <form action="" method="post">
                     
-                    <p><?php _e('Enter your details and the amount you want to donate below. Optionally you can make your donation anonymously or hide the amount of money you donate.', 'martinehooptopbeter'); ?>
+                    <p><?php _e('Enter your details and the amount you want to donate below. Optionally you can make your donation anonymously or hide the amount you donate.', 'martinehooptopbeter'); ?>
 
                     <?php if (count($this->missingfields) > 0) : ?>
                         <p class="error"><?php _e('One or more fields are not filled in or incorrect. Please check and correct the entered data.', 'martinehooptopbeter'); ?>
