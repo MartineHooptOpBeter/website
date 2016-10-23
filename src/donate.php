@@ -250,7 +250,7 @@
 							<a href="/donaties/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
 						</div>
 						
-						<?php if (isset($this->_configuration->getGoogleAnalyticsTrackingId())) : ?>
+						<?php if ($this->_configuration->getGoogleAnalyticsTrackingId() !== null) : ?>
 						<script>
 
 							ga('require', 'ecommerce');
