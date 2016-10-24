@@ -68,6 +68,18 @@
     ];
 
 
+    // =====================
+    // GOOGLE SEARCH CONSOLE
+    // =====================
+
+	/* Google Search Console site verification */
+	$config['googlesearch_siteverification'] = [
+        ['locale' => 'en_US', 'value' => 'verification_en_US'],
+        ['locale' => 'nl_NL', 'value' => 'verification_nl_NL'],
+        ['locale' => '*',     'value' => 'verification_other']
+    ];
+
+
     // =======
     // CONTACT
     // =======

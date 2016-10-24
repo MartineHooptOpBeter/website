@@ -104,13 +104,19 @@ Als je gebruik wilt maken van Google Analytics kan je de Tracking ID configurere
 | --------- | --------- | --------------- | ------------ |
 | `$config['googleanalytics_trackingid']` | Nee | *Array* | De Google Analytics Tracking ID van de website. Als er geen Tracking ID wordt opgegeven wordt er Google Analytics gebruikt. In plaats van een `string` met een enkele Tracking ID kan ook een `array` worden opgegeven met verschillende Tracking ID's per locale (zie uitleg verderop). |
 
+Als je gebruik wilt maken van Google Search Console (voorheen Google Webmaster Tools) kan je de site verification tag configureren welke door Google wordt gegeven.
+
+| Parameter | Verplicht | Standaardwaarde | Omschrijving |
+| --------- | --------- | --------------- | ------------ |
+| `$config['googlesearch_siteverification']` | Nee | *Array* | De Google Search Console site verification tag van de website. Als er geen site verification tag wordt opgegeven wordt deze niet toegevoegd aan de meta tags. In plaats van een `string` met een enkele site verification tag kan ook een `array` worden opgegeven met verschillende site verification tags per locale (zie uitleg verderop). |
+
 Het theme heeft een eenvoudig contactformulier ingebouwd. Met dit formulier kunnen bezoekers eenvoudig en snel een e-mail sturen met een vraag of opmerking. Het contactformulier werkt op iedere pagina welke het **Contact Page** template gebruikt.
 
 | Parameter | Verplicht | Standaardwaarde | Omschrijving |
 | --------- | --------- | --------------- | ------------ |
 | `$config['contact_sendmailto']` | Nee | *Array* | Het e-mailadres waar het contact formulier naar toe gestuurd moet worden. Als er geen e-mailadres is geconfiureerd dan zal het contactformulier zijn uitgeschakeld. In plaats van een `string` met een enkel e-mailadres kan ook een `array` worden opgegeven met verschillende e-mailadressen per locale (zie uitleg hieronder). |
 
-Bij `$config['donate_email_fromaddress']`, `$config['donate_email_fromname']`, `$config['googleanalytics_trackingid']` en `$config['contact_sendmailto']` kan in plaats van een `string` ook een `array` worden opgegeven om per locale een ander e-mailadres, naam of Tracking ID te kunnen opgeven. Het formaat voor de array is:
+Bij `$config['donate_email_fromaddress']`, `$config['donate_email_fromname']`, `$config['googleanalytics_trackingid']`, `$config['googlesearch_siteverification']` en `$config['contact_sendmailto']` kan in plaats van een `string` ook een `array` worden opgegeven om per locale een ander e-mailadres, naam of Tracking ID te kunnen opgeven. Het formaat voor de array is:
 
 ```php
 $config['configuration_property'] = [

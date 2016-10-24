@@ -13,6 +13,9 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="robots" content="index,follow" />
+<?php if ($siteverification = $configuration->getGoogleSearchConsoleSiteVerification()) : ?>
+	<meta name="google-site-verification" content="<?php echo esc_attr($siteverification); ?>" />
+<?php endif; ?>
 	<meta property="og:title" content="<?php wp_title( '-', true, 'right' ); ?>" />
 	<meta property="og:description" content="<?php _e('Help Martine in her fight against MS and give her hope for a better life! Her MS is aggressive and increasingly limits her abilities. Because she is the only parent and thus must be able to financially and pratically care for her two daughters of 11 and 9 years old, she wants to go a clinic in Mexico for a stem cell transplantation as soon as possible. However, this is very expensive! Would you like to help her?', 'martinehooptopbeter'); ?>" />
 	<meta property="og:type" content="website" />
