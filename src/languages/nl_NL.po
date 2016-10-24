@@ -225,7 +225,7 @@ msgstr "Help Martine in haar strijd tegen MS en geef haar de hoop op een beter l
 msgid "Back"
 msgstr "Terug"
 
-msgid "Do you help as well?"
+msgid "Want to help?"
 msgstr "Help je ook mee?"
 
 msgid "%1$s at %2$s"

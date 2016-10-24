@@ -103,7 +103,7 @@
 
 			<div class="action">
 			
-				<p><?php _e('Do you help as well?', 'martinehooptopbeter'); ?></p>
+				<p><?php _e('Want to help?', 'martinehooptopbeter'); ?></p>
 				<div class="buttons">
 					<a href="<?php _e('/donate/', 'martinehooptopbeter'); ?>" class="btn"><?php _e('Donate Online', 'martinehooptopbeter'); ?></a>
 				</div>
