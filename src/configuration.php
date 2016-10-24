@@ -142,8 +142,16 @@
 
 	    protected function _getPropertyForLocale($locale, $propertyname, $propertiesarray) {
 
-            if (!$propertiesarray || !is_array($propertiesarray))
+            if (!$propertiesarray)
+				return null;
+			
+			if (!is_array($propertiesarray)) {
+				
+				if (is_string($propertiesarray))
+					return $propertiesarray;
+				
                 return null;
+			}
             
             foreach($propertiesarray as $property) {
 
