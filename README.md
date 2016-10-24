@@ -65,7 +65,7 @@ of
 gulp --devhostname=www.mijnwebsite.nl
 ```
 
-Omdat WordPress automatisch links aanmaakt met de domeinnaam welke geconfigureerd is in WordPress kan het belangrijk zijn om de juiste ontwikkelserver op te geven en deze servernaam te laten verwijzen naar het IP adres van de ontwikkelserver.
+Omdat WordPress automatisch links aanmaakt met de domeinnaam welke geconfigureerd is in WordPress is het belangrijk om de juiste ontwikkelserver op te geven en deze servernaam te laten verwijzen naar het IP adres van de ontwikkelserver. De Browsersync proxy vervangt de URL's van de ontwikkelserver on-the-fly zodat je toch gewoon op links kan blijven klikken tijdens het ontwikkelen en testen.
 
 Als de WordPress website gebruik maakt van SSL/TLS kan een extra optie worden meegegeven om de website over HTTPS te laden:
 
@@ -73,7 +73,7 @@ Als de WordPress website gebruik maakt van SSL/TLS kan een extra optie worden me
 gulp --devhostname=www.mijnwebsite.nl --devhostsecure=yes
 ```
 
-De browser zal op de lokale machine zal de website nog steeds inladen via HTTP vanaf de Browsersync proxy maar deze zal de website wel via HTTPS inladen. De Browsersync proxy vervangt de URL's on-the-fly zodat je toch gewoon op links kan blijven klikken tijdens het ontwikkelen en testen.
+Browsesync zal de website ook via HTTPS proxy'en en de browser kan daarom een foutmelding geven dat het certificaat van de site niet klopt. Je kunt hiervoor in de meeste browsers een tijdelijke (of permanente) uitzondering opgegeven. 
 
 # Configuratie
 De configuratie wordt gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/config.php`. Een voorbeeldbestand `config.php` staat in de root folder van het project.
