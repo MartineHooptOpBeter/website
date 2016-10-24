@@ -6,10 +6,13 @@
     class Configuration
     {
         protected $_config = null;
+		
+		protected $_overrideLocale = null;
 
         public function __construct() {
         	include 'config.php';
             $this->_config = $config;
+			$this->_setPhpLocale();
         }
 
         public function getDonationsDatabaseDataSourceName() {
@@ -64,17 +67,78 @@
             return $this->_getPropertyForLocale($locale, 'trackingid', $this->_config['googleanalytics_trackingid']);
         }
 
+		public function overrideLocale($locale) {
+			if (!$locale || !is_string($locale))
+				return;
+			
+			$this->_overrideLocale = $locale;
+			$this->_setPhpLocale();
+		}
+		
         public function getCurrentLocale() {
+
+			if (isset($this->_overrideLocale))
+				return $this->_overrideLocale;
+
+			$current_locale = null;
 
 		    // Check if the Polylang plugin is installed
 		    if (function_exists('pll_default_language')) {
                 $current_locale = pll_current_language('locale');
-            } else {
+
+			// Otherwise use WordPress
+            } elseif (function_exists('get_locale')) {
                 $current_locale = get_locale();
-            }
+
+			}
 
     		return $current_locale;
 	    }
+		
+		protected function _setPhpLocale() {
+			if ($locale = $this->_getLocaleForPhp())
+				setlocale(LC_ALL, $locale);
+		}
+
+		protected function _getLocaleForPhp() {
+			
+			if ($this->_isUnixOS()) {
+				return $this->getCurrentLocale();
+				
+			} elseif ($this->_isMacOS()) {
+				return $this->getCurrentLocale() . '.UTF-8';
+				
+			} elseif ($this->_isWindowsOS()) {
+				return $this->_getWindowsLocale();
+				
+			}
+			
+			return null;
+		}
+		
+		protected function _isUnixOS() {
+			return (stripos(PHP_OS, 'win') === false);
+		}
+
+		protected function _isMacOS() {
+			return (stripos(PHP_OS, 'darwin') === 0);
+		}
+
+		protected function _isWindowsOS() {
+			return (stripos(PHP_OS, 'win') === 0) || (stripos(PHP_OS, 'cygwin') === 0);
+		}
+
+		protected function _getWindowsLocale() {
+			if (!$locale = $this->getCurrentLocale())
+				return null;
+			
+			switch ($locale) {
+				case 'nl_NL' : return 'nld'; break;
+				case 'en_US' : return 'usa'; break;
+				default:
+					return null;
+			}
+		}
 
 	    protected function _getPropertyForLocale($locale, $propertyname, $propertiesarray) {
 

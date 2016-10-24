@@ -15,9 +15,10 @@
 		public $paymentStatus;
         public $showNoAmount;
         public $showAnonymous;
+		public $locale;
 		public $timestamp;
 
-        function Donation($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $paymentMethod = '', $paymentId = null, $paymentStatus = null, $showNoAmount = false, $showAnonymous = false, $timestamp = null)
+        function Donation($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $paymentMethod = '', $paymentId = null, $paymentStatus = null, $showNoAmount = false, $showAnonymous = false, $locale = '', $timestamp = null)
         {
             $this->id = $id;
             $this->amount = $amount;
@@ -30,6 +31,7 @@
 			$this->paymentStatus = $paymentStatus;
             $this->showNoAmount = $showNoAmount;
             $this->showAnonymous = $showAnonymous;
+			$this->locale = $locale;
 			$this->timestamp = $timestamp;
         }
 		
@@ -49,11 +51,28 @@
 		}
 		
 		public static function formatPrice($amount) {
-			return number_format((float)$amount / 100, 2, ',', '.');
+			$decimal_point = '.';
+			$thousand_sep = ',';
+
+			if (($li = localeconv()) && is_array($li)) {
+				$decimal_point = $li['mon_decimal_point'];
+				$thousand_sep = $li['mon_thousands_sep'];
+			}
+			return number_format((float)$amount / 100, 2, $decimal_point, $thousand_sep);
 		}
 		
 		public static function formatEuroPrice($amount) {
-			return '€ ' . Donation::formatPrice($amount);
+			$currencySymbol = '€';
+			$isNegative = ($amound < 0);
+			$symbolInFront = true;
+			$spaceBeforeSymbol = true;
+			
+			if (($li = localeconv()) && is_array($li)) {
+				$symbolInFront = $isNegative ? isset($li['n_cs_precedes']) : isset($li['p_cs_precedes']);
+				$spaceBeforeSymbol = $isNegative ? isset($li['n_sep_by_space']) : isset($li['p_sep_by_space']);
+			}
+
+			return ($symbolInFront ? $currencySymbol . ($spaceBeforeSymbol ? ' ' : '') : '') . Donation::formatPrice($amount) . (!$symbolInFront ? ($spaceBeforeSymbol ? ' ' : '') . $currencySymbol : '');
 		}
 		
 		public static function validEMailAddress($emailaddress) {
@@ -80,7 +99,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp) VALUES (:amount, :emailaddress, :name, :message, :payment_verification, :payment_method, :payment_id, :payment_status, :show_no_amount, :show_anonymous, NOW())';
+                    $sql = 'INSERT INTO tbl_donations (amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp) VALUES (:amount, :emailaddress, :name, :message, :payment_verification, :payment_method, :payment_id, :payment_status, :show_no_amount, :show_anonymous, :locale, NOW())';
                     $query = $conn->prepare($sql);
                     if ($query != null) {
 
@@ -96,6 +115,7 @@
                         $query->bindValue(':payment_status', $donation->paymentStatus);
                         $query->bindValue(':show_no_amount', $donation->showNoAmount ? '1' : '0');
                         $query->bindValue(':show_anonymous', $donation->showAnonymous ? '1' : '0');
+						$query->bindValue(':locale', $donation->locale);
                         if ($query->execute()) {
 							$newId = $conn->lastInsertId();
                             $result = $this->getDonation($newId, $donation->paymentVerification);
@@ -119,7 +139,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (id = :id) AND (payment_verification = :payment_verification)';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_verification, payment_method, payment_id, payment_status, show_no_amount, show_anonymous, locale, timestamp FROM tbl_donations WHERE (id = :id) AND (payment_verification = :payment_verification)';
                     $query = $conn->prepare($sql);
 
                     $query->bindValue(':id', $id);            
@@ -129,7 +149,7 @@
 							
 						if ($row = $query->fetch(PDO::FETCH_NUM)) {
 
-							$result = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], strtotime($row[11]));
+							$result = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[11], strtotime($row[12]));
 							
 						}
 
@@ -152,7 +172,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_method, payment_status, show_no_amount, show_anonymous, timestamp FROM tbl_donations WHERE (payment_status = \'paid\') ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
+                    $sql = 'SELECT id, amount, emailaddress, name, message, payment_method, payment_status, show_no_amount, show_anonymous, locale, timestamp FROM tbl_donations WHERE (payment_status = \'paid\') ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
                     $query = $conn->prepare($sql);
 					
                     $query->bindValue(':offset', $offset);            
@@ -163,7 +183,7 @@
 							$result = [];
 							
 							while ($row = $query->fetch(PDO::FETCH_NUM)) {
-								$result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], '***', $row[5], '***', $row[6], $row[7], $row[8], strtotime($row[9]));
+								$result[] = new Donation($row[0], $row[1], $row[2], $row[3], $row[4], '***', $row[5], '***', $row[6], $row[7], $row[8], $row[9], strtotime($row[10]));
 							}
 
 						}

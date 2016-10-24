@@ -24,6 +24,7 @@
 		public $donate_payment_status = '';
 		public $donate_anonymous = false;
 		public $donate_no_amount = false;
+		public $donate_locale = '';
 		
 		function DonationPage($configuration) {
 			$this->_configuration = $configuration;
@@ -75,7 +76,7 @@
 
 				if ((count($this->missingfields) == 0) && (!$noSubmit)) {
 
-					$d = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, null);
+					$d = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, $this->_configuration->getCurrentLocale(), null);
 
 					$donations = new Donations($this->_configuration->getDonationsDatabaseDataSourceName(), $this->_configuration->getDonationsDatabaseUsername(), $this->_configuration->getDonationsDatabasePassword());
 					if ($donation = $donations->addDonation($d)) {
@@ -91,7 +92,7 @@
 										'description' => __('Donation', 'martinehooptopbeter'),
 										'redirectUrl' => $donateUrl . '?donationid=' . $donation->id . '&verification=' . $donation->paymentVerification,
 										'webhookUrl'  => $this->_configuration->getMollieWebhookUrl(),
-										'locale'      => 'nl',
+										'locale'      => $donation->locale,
 										'method'      => $donation->paymentMethod,
 										'metadata'    => array(
 											'donation_id' => $donation->id,
@@ -141,6 +142,7 @@
 						$this->donate_payment_status = $donation->paymentStatus;
 						$this->donate_payment_verification = $donation->paymentVerification;
 						$this->donate_anonymous = $donation->showAnonymous;
+						$this->donate_locale = $donation->locale;
 						$this->donate_no_amount = $donation->showNoAmount;
 						
 					} else {
