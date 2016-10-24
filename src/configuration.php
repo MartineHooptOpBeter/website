@@ -41,12 +41,12 @@
 
         public function getDonationConfirmationFromEmailAddress() { 
             $locale = $this->getCurrentLocale();
-            return $this->_getPropertyForLocale($locale, 'emailaddress', $this->_config['donate_email_fromaddress']);
+            return $this->_getPropertyForLocale($locale, $this->_config['donate_email_fromaddress']);
         }
 
         public function getDonationConfirmationFromName() { 
             $locale = $this->getCurrentLocale();
-            return $this->_getPropertyForLocale($locale, 'name', $this->_config['donate_email_fromname']);
+            return $this->_getPropertyForLocale($locale, $this->_config['donate_email_fromname']);
         }
 
         public function getMollieApiKey() {
@@ -59,12 +59,12 @@
 
         public function getContactSendMailTo() {
             $locale = $this->getCurrentLocale();
-            return $this->_getPropertyForLocale($locale, 'emailaddress', $this->_config['contact_sendmailto']);
+            return $this->_getPropertyForLocale($locale, $this->_config['contact_sendmailto']);
         }
 
         public function getGoogleAnalyticsTrackingId() {
             $locale = $this->getCurrentLocale();
-            return $this->_getPropertyForLocale($locale, 'trackingid', $this->_config['googleanalytics_trackingid']);
+            return $this->_getPropertyForLocale($locale, $this->_config['googleanalytics_trackingid']);
         }
 
 		public function overrideLocale($locale) {
@@ -140,7 +140,7 @@
 			}
 		}
 
-	    protected function _getPropertyForLocale($locale, $propertyname, $propertiesarray) {
+	    protected function _getPropertyForLocale($locale, $propertiesarray) {
 
             if (!$propertiesarray)
 				return null;
@@ -161,8 +161,8 @@
                 if (!isset($property['locale']) || !fnmatch($property['locale'], $locale))
                     continue;
 
-                if (isset($property[$propertyname]))
-                    return $property[$propertyname];
+                if (isset($property['value']))
+                    return $property['value'];
             }
 
         }
