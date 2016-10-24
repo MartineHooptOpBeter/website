@@ -111,7 +111,6 @@
 						}
 						catch (Mollie_API_Exception $e)
 						{
-							var_dump($e);
 							$this->errorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
 						}
 
