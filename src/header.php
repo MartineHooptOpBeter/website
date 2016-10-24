@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+
+    @@HEADER@@
+
+?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
@@ -25,11 +29,11 @@
 </head>
 
 <body>
-	<?php require_once('config.php'); ?>
-	<?php if (isset($config['googleanalytics_trackingid'])) : ?>
+	<?php require_once 'configuration.php'; $configuration = new Configuration(); ?>
+	<?php if ($trackingid = $configuration->getGoogleAnalyticsTrackingId()) : ?>
 	<script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	
-		ga('create', '<?php echo $config['googleanalytics_trackingid']; ?>', 'auto');
+		ga('create', '<?php echo $trackingid ?>', 'auto');
 		ga('send', 'pageview');
 
 	</script>
@@ -39,7 +43,7 @@
 	
 		<div class="sitewidth clearfix">
 	
-			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter.svg" alt="<?php bloginfo( 'name' ); ?>"></a>
+			<a href="/" class="logo"><img src="<?php bloginfo('template_url'); ?>/img/<?php echo $configuration->getCurrentLocale(); ?>/logo.svg" alt="<?php bloginfo( 'name' ); ?>"></a>
 
 			<nav role="navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'martinehooptopbeter' ); ?>">
 				

@@ -1,9 +1,9 @@
+<?php /* Template Name: Text with Photo Left */ ?>
 <?php
-/**
- * Template Name: Text with Photo Left
- */
-?>
-	<section class="content left<?php echo $showDivider ? ' divider' : ''; ?>" id="<?php echo esc_attr(rawurlencode($post->post_name)); ?>">
+
+    @@HEADER@@
+	
+?>	<section class="content left<?php echo $showDivider ? ' divider' : ''; ?>" id="<?php echo esc_attr(rawurlencode($post->post_name)); ?>">
 		<div class="sitewidth clearfix">
 
 			<?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'martinehooptopbeter_square-400' ); } ?>

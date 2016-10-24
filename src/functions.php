@@ -1,5 +1,7 @@
 <?php
 
+    @@HEADER@@
+
 	function martinehooptopbeter_setup() {
 
 		// Remove RSD link in the head

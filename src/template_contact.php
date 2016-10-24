@@ -1,17 +1,17 @@
+<?php /* Template Name: Contact Page */ ?>
 <?php
 
-	include 'contact.php'; 
+    @@HEADER@@
 
-	$contactPage = new ContactPage();
+	require_once 'contact.php';
+	require_once 'configuration.php';
+
+    $configuration = new Configuration();
+
+	$contactPage = new ContactPage($configuration);
 	$contactPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
-?>
-<?php
-/**
- * Template Name: Contact Page
- */
-?>
-<?php get_header(); ?>
+?><?php get_header(); ?>
 
 	<?php if (have_posts()) : the_post(); ?>
 		<?php $hasContent = (strlen(get_the_content()) > 0); ?>

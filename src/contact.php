@@ -1,7 +1,11 @@
-<?php require_once 'config.php' ?><?php
+<?php
+
+    @@HEADER@@
 
 	class ContactPage {
 	
+		protected $_configuration = null;
+
         public $doShowContactForm = false;
         public $doShowContactConfirmation = false;
 		
@@ -12,16 +16,19 @@
 		public $contact_email = '';
 		public $comtact_message = '';
 		
-		function ContactPage() {
+		function ContactPage($configuration) {
+			$this->_configuration = $configuration;
 		}
 		
 		function processRequest($contactUrl, $server, $post, $get) {
 			
-			global $config;
+			// Check if the contact form is enabled
+			if (!$this->isContactFormEnabled())
+				return;
 
 			// We show the form by default, unless we decide otherwise
 			$this->doShowContactForm = true;
-			
+
 			if ($server['REQUEST_METHOD'] == "POST") {
 
 				$post = stripslashes_deep($post);
@@ -36,6 +43,9 @@
 
 				if (empty($this->contact_email)) {
 					$this->missingfields['contact_email'] = __('Required field', 'martinehooptopbeter');
+				}
+				elseif (!$this->validEMailAddress($this->contact_email)) {
+					$this->missingfields['contact_email'] = __('Invalid e-mail address', 'martinehooptopbeter');
 				}
 
 				if (empty($this->contact_message)) {
@@ -64,11 +74,17 @@
 			
 		}
 
+		function isContactFormEnabled() {
+			return $this->validEmailAddress($this->_configuration->getContactSendMailTo());
+		}
+
+		public static function validEMailAddress($emailaddress) {
+			return preg_match('/^([0-9a-zA-Z_]([-.\w\+]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,})$/', $emailaddress);
+		}
+
         function sendContactEMail() {
 
-			global $config;
-
-			$to      = $config['contact_sendmailto'];
+			$to      = $this->_configuration->getContactSendMailTo();
 			$subject = __('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter');
 			$headers[] = 'From: ' . mb_encode_mimeheader($this->contact_name) . ' <' . $this->contact_email . '>';
 

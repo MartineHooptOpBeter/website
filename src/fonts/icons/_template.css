@@ -15,7 +15,8 @@
   font-style: normal;
   font-size: 115%;
   font-weight: normal;
-  vertical-align: middle;
+  vertical-align: top;
+  padding-right: 0.15em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

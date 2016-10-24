@@ -1,5 +1,7 @@
 <?php
 
+    @@HEADER@@
+
 	class DonationsSettingsPage
 	{
 		private $options;
