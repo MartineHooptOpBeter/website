@@ -38,8 +38,8 @@
 		public static function parseAmount($amount) {
 			$amount = str_replace(',', '.', $amount);
 			if (is_numeric($amount)) {
-				$amound_parsed = floatval($amount);
-				return (int)($amound_parsed * 100);
+				$amount_parsed = floatval($amount);
+				return (int)($amount_parsed * 100);
 			}
 			return 0;
 		}
@@ -63,7 +63,7 @@
 		
 		public static function formatEuroPrice($amount) {
 			$currencySymbol = '€';
-			$isNegative = ($amound < 0);
+			$isNegative = ($amount < 0);
 			$symbolInFront = true;
 			$spaceBeforeSymbol = true;
 			
