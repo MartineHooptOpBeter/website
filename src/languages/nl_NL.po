@@ -210,6 +210,9 @@ msgstr "Vul het totaalbedrag en het aantal offline donaties hieonder in. Dit wor
 msgid "Website built for free by %1$s"
 msgstr "Website gratis gemaakt door %1$s"
 
+msgid "Source code available on %1$s"
+msgstr "Broncode beschikbaar op %1$s"
+
 msgid "Share this page on %1$s"
 msgstr "Deel deze pagina op %1$s"
 
