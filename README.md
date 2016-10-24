@@ -88,8 +88,8 @@ Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op de
 | `$config['donate_goal']` | Nee | 7500000 | Het doelbedrag op te halen met donaties (in euro centen). Dit bedrag is optioneel en als het niet is opgegeven wordt alleen het opgehaalde bedrag getoond zonder een doelbedrag en zonder een grafische weergave van hoeveel van het doelbedrag al is opgehaald. |
 | `$config['donate_minamount']` | Nee | 500 | Het minimumbedrag van een donatie (in euro centen). Als er geen minimumbedrag is opgegeven dan is dit 0. |
 | `$config['donate_maxamount']` | Nee | 211200 | Het maximumbedrag van een donatie (in euro centen). Als er geen maximumbedrag is opgegeven dan geldt er geen maximum. |
-| `$config['donate_email_fromaddress']` | Nee | *Geen* | Het e-mailadres waarmee een bevestigingse-mail wordt gestuurd na ontvangst van de donatie. Als er geen e-mailadres is gedefinieerd wordt er geen bevestigingse-mail verstuurd. |
-| `$config['donate_email_fromname']` | Nee | *Geen* | De afzender van de e-mail waarmee een bevestiging wordt gestuurd na ontvangst van de donatie. Als er geen naam is gedefinieerd dan zal alleen het e-mailadres worden gebruikt (`$config['donate_email_fromaddress']`). |
+| `$config['donate_email_fromaddress']` | Nee | *Array* | Het e-mailadres waarmee een bevestigingse-mail wordt gestuurd na ontvangst van de donatie. Als er geen e-mailadres is gedefinieerd wordt er geen bevestigingse-mail verstuurd. In plaats van een `string` met een enkel e-mailadres kan ook een `array` worden opgegeven met verschillende e-mailadressen per locale (zie uitleg verderop). |
+| `$config['donate_email_fromname']` | Nee | *Array* | De afzender van de e-mail waarmee een bevestiging wordt gestuurd na ontvangst van de donatie. Als er geen naam is gedefinieerd dan zal alleen het e-mailadres worden gebruikt (`$config['donate_email_fromaddress']`). In plaats van een `string` met een enkele naam kan ook een `array` worden opgegeven met verschillende namen per locale (zie uitleg verderop). |
 
 Er wordt gebruik gemaakt van online betalingen via [Mollie](https://www.mollie.com/nl/). Hiervoor moet een account worden aangemaakt en een website worden gedefinieerd waarvan de volgende gegevens moeten worden ingevuld:
 
@@ -102,13 +102,32 @@ Als je gebruik wilt maken van Google Analytics kan je de Tracking ID configurere
 
 | Parameter | Verplicht | Standaardwaarde | Omschrijving |
 | --------- | --------- | --------------- | ------------ |
-| `$config['googleanalytics_trackingid']` | Nee | *Geen* | De Google Analytics Tracking ID van de website. Als er geen Tracking ID wordt opgegeven wordt er Google Analytics gebruikt. |
+| `$config['googleanalytics_trackingid']` | Nee | *Array* | De Google Analytics Tracking ID van de website. Als er geen Tracking ID wordt opgegeven wordt er Google Analytics gebruikt. In plaats van een `string` met een enkele Tracking ID kan ook een `array` worden opgegeven met verschillende Tracking ID's per locale (zie uitleg verderop). |
 
 Het theme heeft een eenvoudig contactformulier ingebouwd. Met dit formulier kunnen bezoekers eenvoudig en snel een e-mail sturen met een vraag of opmerking. Het contactformulier werkt op iedere pagina welke het **Contact Page** template gebruikt.
 
 | Parameter | Verplicht | Standaardwaarde | Omschrijving |
 | --------- | --------- | --------------- | ------------ |
-| `$config['contact_sendmailto']` | Nee | *Geen* | Het e-mailadres waar het contact formulier naar toe gestuurd moet worden. Als er geen e-mailadres is geconfiureerd dan zal het contactformulier zijn uitgeschakeld. |
+| `$config['contact_sendmailto']` | Nee | *Array* | Het e-mailadres waar het contact formulier naar toe gestuurd moet worden. Als er geen e-mailadres is geconfiureerd dan zal het contactformulier zijn uitgeschakeld. In plaats van een `string` met een enkel e-mailadres kan ook een `array` worden opgegeven met verschillende e-mailadressen per locale (zie uitleg hieronder). |
+
+Bij `$config['donate_email_fromaddress']`, `$config['donate_email_fromname']`, `$config['googleanalytics_trackingid']` en `$config['contact_sendmailto']` kan in plaats van een `string` ook een `array` worden opgegeven om per locale een ander e-mailadres, naam of Tracking ID te kunnen opgeven. Het formaat voor de array is:
+
+```php
+$config['configuration_property'] = [
+    ['locale' => 'en_US', 'value' => 'value_for_en_US'],
+    ['locale' => 'nl_NL', 'value' => 'value_for_nl_NL'],
+    ['locale' => '*',     'value' => 'value_for_other_locales']
+];
+```
+Bijvoorbeeld:
+```php
+$config['contact_sendmailto'] = [
+    ['locale' => 'en_US', 'value' => 'somebody@domain.com'],
+    ['locale' => 'nl_NL', 'value' => 'iemand@domein.nl'],
+    ['locale' => '*',     'value' => 'somebody.else@domain.org']
+];
+```
+Er kunnen meerdere locale's worden opgegeven of er kan een fallback worden opgegeven met een `*` welke voor iedere andere niet gespecificeerde locale zal worden gebruikt. De fallback met een `*` moet als laatste element in de array worden opgenomen. Als er geen match is met één van de opgegeven locale's dan is dit hetzelfde alsof er geen waarde is opgegeven.  
 
 # Sponsors
 De sponsors worden gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/sponsors/sponsors.json`. Een voorbeeldbestand `sponsors.json` staat in de root folder van het project.
