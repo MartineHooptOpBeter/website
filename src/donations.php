@@ -67,14 +67,8 @@
 					<?php if (!$item->showNoAmount) : ?><em><?php echo Donation::formatEuroPrice($item->amount); ?></em><?php endif; ?>
 					<?php if ($item->showAnonymous) : ?><strong><?php _e('Anonymous', 'martinehooptopbeter'); ?></strong><?php else : ?><strong><?php echo esc_attr($item->name); ?></strong><?php endif; ?>
 					
-					<?php
-					
-						$dateFormat = 'j F';
-						if (date('Y', $item->timestamp) != date('Y')) { $dateFormat .= ' Y'; }
-						$dateFormat .= ', G:i';
-					
-					?><span><?php echo date($dateFormat, $item->timestamp); ?></span>
-					
+					<span><?php echo Donation::formatShortDateTime($item->timestamp, __('%1$s at %2$s', 'martinehooptopbeter')); ?></span>
+
 					<?php if ($item->message) : ?><p><?php echo nl2br(esc_attr($item->message)); ?></p><?php endif ?>
 					
 				</article>

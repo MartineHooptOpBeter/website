@@ -75,6 +75,12 @@
 			return ($symbolInFront ? $currencySymbol . ($spaceBeforeSymbol ? ' ' : '') : '') . Donation::formatPrice($amount) . (!$symbolInFront ? ($spaceBeforeSymbol ? ' ' : '') . $currencySymbol : '');
 		}
 		
+		public static function formatShortDateTime($datetime, $format) {
+			$fmt_date = new IntlDateFormatter(get_locale(), IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+			$fmt_time = new IntlDateFormatter(get_locale(), IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
+			return sprintf($format, $fmt_date->format($datetime), $fmt_time->format($datetime));
+		}
+
 		public static function validEMailAddress($emailaddress) {
 			return preg_match('/^([0-9a-zA-Z_]([-.\w\+]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,})$/', $emailaddress);
 		}
