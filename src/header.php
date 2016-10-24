@@ -2,6 +2,10 @@
 
     @@HEADER@@
 
+	require_once 'configuration.php';
+	
+	$configuration = new Configuration();
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -12,7 +16,7 @@
 	<meta property="og:title" content="<?php wp_title( '-', true, 'right' ); ?>" />
 	<meta property="og:description" content="<?php _e('Help Martine in her fight against MS and give her hope for a better life! Her MS is aggressive and increasingly limits her abilities. Because she is the only parent and thus must be able to financially and pratically care for her two daughters of 11 and 9 years old, she wants to go a clinic in Mexico for a stem cell transplantation as soon as possible. However, this is very expensive! Would you like to help her?', 'martinehooptopbeter'); ?>" />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="<?php bloginfo('template_url'); ?>/img/martine-hoopt-op-beter_1054x550.jpg" />
+	<meta property="og:image" content="<?php bloginfo('template_url'); ?>/img/opengraph_<?php echo $configuration->getCurrentLocale(); ?>_1054x550.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1054" />
 	<meta property="og:image:height" content="550" />
@@ -29,7 +33,6 @@
 </head>
 
 <body>
-	<?php require_once 'configuration.php'; $configuration = new Configuration(); ?>
 	<?php if ($trackingid = $configuration->getGoogleAnalyticsTrackingId()) : ?>
 	<script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	
