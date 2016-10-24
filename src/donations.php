@@ -8,7 +8,7 @@
     function show_donations_page($donationsUrl, $page = 1)
     {
 
-?>	<section class="content donations">
+?>	<section id="donations" class="content donations">
 		<div class="sitewidth clearfix">
 
             <div class="text">
@@ -76,8 +76,8 @@
 					<?php endforeach; ?>
 
 				<div class="buttons">
-					<?php if ($page > 1) : ?><a href="<?php echo esc_url( $donationsUrl . ($page > 2 ? "?donationpage=" . ($page - 1) : '') ); ?>" class="btn left"><?php _e('Previous', 'martinehooptopbeter'); ?></a><?php endif ?>
-					<?php if ($page < $pageMax) : ?><a href="<?php echo esc_url( $donationsUrl . "?donationpage=" . ($page + 1) ); ?>" class="btn right"><?php _e('More', 'martinehooptopbeter'); ?></a><?php endif ?>
+					<?php if ($page > 1) : ?><a href="<?php echo esc_url( $donationsUrl . ($page > 2 ? "?donationpage=" . ($page - 1) : '') ); ?>#donations" class="btn left"><?php _e('Previous', 'martinehooptopbeter'); ?></a><?php endif ?>
+					<?php if ($page < $pageMax) : ?><a href="<?php echo esc_url( $donationsUrl . "?donationpage=" . ($page + 1) ); ?>#donations" class="btn right"><?php _e('More', 'martinehooptopbeter'); ?></a><?php endif ?>
 				</div>
 				
 			<?php endif; ?>
