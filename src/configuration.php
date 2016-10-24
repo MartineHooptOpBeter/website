@@ -67,6 +67,11 @@
             return $this->_getPropertyForLocale($locale, $this->_config['googleanalytics_trackingid']);
         }
 
+        public function getGoogleSearchConsoleSiteVerification() {
+            $locale = $this->getCurrentLocale();
+            return $this->_getPropertyForLocale($locale, $this->_config['googlesearch_siteverification']);
+        }
+
 		public function overrideLocale($locale) {
 			if (!$locale || !is_string($locale))
 				return;
