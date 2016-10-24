@@ -227,3 +227,9 @@ msgstr "Help je ook mee?"
 
 msgid "%1$s at %2$s"
 msgstr "%1$s, %2$s"
+
+msgid "/donations/"
+msgstr "/donaties/"
+
+msgid "/donate/"
+msgstr "/doneren/"

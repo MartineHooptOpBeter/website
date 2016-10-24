@@ -88,9 +88,9 @@
 					<?php endif; ?>
 				<div class="metertext clearfix">
 					<?php if (isset($goalValue) && is_numeric($goalValue) && ($goalValue > 0)) : ?>
-						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<a href="/donaties/">' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</a>', esc_attr(Donation::formatEuroPrice($goalValue)))); ?></span>
+						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s of %2$s', 'martinehooptopbeter')), array('<a href="' . __('/donations/', 'martinehooptopbeter') . '">' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</a>', esc_attr(Donation::formatEuroPrice($goalValue)))); ?></span>
 					<?php else : ?>
-						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s', 'martinehooptopbeter')), array('<a href="/donaties/">' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</a>')); ?></span>
+						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s', 'martinehooptopbeter')), array('<a href="' . __('/donations/', 'martinehooptopbeter') . '">' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</a>')); ?></span>
 					<?php endif; ?>
 					<?php if ($totalCount == 1) : ?>
 						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
@@ -105,7 +105,7 @@
 			
 				<p><?php _e('Do you help as well?', 'martinehooptopbeter'); ?></p>
 				<div class="buttons">
-					<a href="/doneren/" class="btn"><?php _e('Donate Online', 'martinehooptopbeter'); ?></a>
+					<a href="<?php _e('/donate/', 'martinehooptopbeter'); ?>" class="btn"><?php _e('Donate Online', 'martinehooptopbeter'); ?></a>
 				</div>
 				
 			</div>

@@ -249,7 +249,7 @@
 						<p><?php echo esc_attr(vsprintf(__('Your donation of %1$s has been received. We thank you for supporting Martine!', 'martinehooptopbeter'), Donation::formatEuroPrice($this->donate_amount_decimal))); ?></p>
 					
 						<div class="buttons">
-							<a href="/donaties/" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
+							<a href="<?php _e('/donations/', 'martinehooptopbeter'); ?>" class="btn"><?php _e('Continue', 'martinehooptopbeter'); ?></a>
 						</div>
 						
 						<?php if ($this->_configuration->getGoogleAnalyticsTrackingId() !== null) : ?>
