@@ -43,38 +43,6 @@ Alhoewel het niet noodzakelijk is, is het verstandig om voor de tabel voor de do
 
 De tabel voor de donaties kan worden aangemaakt met het SQL script `database/donations.sql`. Maak eerst een nieuwe database aan in MySQL en maak een gebruikersaccount aan welke `DELETE, INSERT, SELECT, UPDATE` rechten heeft in deze database. Open vervolgens het script in MySQL Workbench (of een ander database management tool voor MySQL) en voor dit uit in de zojuist aangemaakte database. De tabel voor de donaties wordt nu aangemaakt. 
 
-# Ontwikkelen
-Om het WordPress theme zelf te kunnen aanpassen kan Gulp gebruikt worden tijdens het ontwikkelen. Om het theme
-kan nu simpelweg worden gegenereerd met Gulp zonder extra opties:
-
-```
-gulp
-```
-
-Het Gulp script `gulpfile.js` maakt gebruik van de [gulp-watch](https://www.npmjs.com/package/gulp-watch) en [BrowserSync](https://www.browsersync.io/) modules zodat bij wijzigingen in bronbestanden de bestanden van het WordPress theme direct worden gewijzigd en de wijzigingen in de browser worden geinjecteerd of de pagina automatisch wordt herladen. 
-
-Als ontwikkelserver wordt standaard `http://127.0.0.1/` gebruikt. Het is mogelijk om een andere ontwikkelserver op te geven:
-
-```
-gulp --devhostname=192.168.1.12
-```
-
-of
-
-```
-gulp --devhostname=www.mijnwebsite.nl
-```
-
-Omdat WordPress automatisch links aanmaakt met de domeinnaam welke geconfigureerd is in WordPress is het belangrijk om de juiste ontwikkelserver op te geven en deze servernaam te laten verwijzen naar het IP adres van de ontwikkelserver. De Browsersync proxy vervangt de URL's van de ontwikkelserver on-the-fly zodat je toch gewoon op links kan blijven klikken tijdens het ontwikkelen en testen.
-
-Als de WordPress website gebruik maakt van SSL/TLS kan een extra optie worden meegegeven om de website over HTTPS te laden:
-
-```
-gulp --devhostname=www.mijnwebsite.nl --devhostsecure=yes
-```
-
-Browsesync zal de website ook via HTTPS proxy'en en de browser kan daarom een foutmelding geven dat het certificaat van de site niet klopt. Je kunt hiervoor in de meeste browsers een tijdelijke (of permanente) uitzondering opgegeven. 
-
 # Configuratie
 De configuratie wordt gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/config.php`. Een voorbeeldbestand `config.php` staat in de root folder van het project.
 
@@ -171,3 +139,41 @@ De bestanden van de logo's moeten ook in in de folder `wwwroot/wp-content/themes
 ```
 
 De logo's van de sponsors worden weergegeven op de pagina welke gebruik maakt van de **Sponsors Page** template.
+
+# Ontwikkelen
+Om het WordPress theme zelf te kunnen aanpassen kan Gulp worden gebruikt tijdens het ontwikkelen. Een ontwikkelversie van het theme
+kan simpelweg worden gegenereerd met Gulp zonder extra opties:
+
+```
+gulp
+```
+
+of specifiek met de `development` build optie:
+
+```
+gulp --build=development
+```
+
+Het Gulp script `gulpfile.js` maakt gebruik van de [gulp-watch](https://www.npmjs.com/package/gulp-watch) en [BrowserSync](https://www.browsersync.io/) modules zodat bij wijzigingen in bronbestanden de bestanden van het WordPress theme direct worden gewijzigd en de wijzigingen in de browser worden geinjecteerd of de pagina automatisch wordt herladen. 
+
+Als ontwikkelserver wordt standaard `http://127.0.0.1/` gebruikt. Het is mogelijk om een andere ontwikkelserver op te geven:
+
+```
+gulp --devhostname=192.168.1.12
+```
+
+of
+
+```
+gulp --devhostname=www.mijnwebsite.nl
+```
+
+Omdat WordPress automatisch links aanmaakt met de domeinnaam welke geconfigureerd is in WordPress is het belangrijk om de juiste ontwikkelserver op te geven en deze servernaam te laten verwijzen naar het IP adres van de ontwikkelserver. De Browsersync proxy vervangt de URL's van de ontwikkelserver on-the-fly zodat je toch gewoon op links kan blijven klikken tijdens het ontwikkelen en testen.
+
+Als de WordPress website gebruik maakt van SSL/TLS kan een extra optie worden meegegeven om de website over HTTPS te laden:
+
+```
+gulp --devhostname=www.mijnwebsite.nl --devhostsecure=yes
+```
+
+Browsesync zal de website ook via HTTPS proxy'en en de browser kan daarom een foutmelding geven dat het certificaat van de site niet klopt. Je kunt hiervoor in de meeste browsers een tijdelijke (of permanente) uitzondering opgegeven. 
