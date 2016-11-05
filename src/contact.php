@@ -2,9 +2,12 @@
 
     @@HEADER@@
 
+	require_once 'xsrf.php';
+
 	class ContactPage {
 	
 		protected $_configuration = null;
+		protected $_xsrf = null;
 
         public $doShowContactForm = false;
         public $doShowContactConfirmation = false;
@@ -18,6 +21,7 @@
 		
 		function ContactPage($configuration) {
 			$this->_configuration = $configuration;
+			$this->_xsrf = new XSRF();
 		}
 		
 		function processRequest($contactUrl, $server, $post, $get) {
@@ -50,6 +54,12 @@
 
 				if (empty($this->contact_message)) {
 					$this->missingfields['contact_message'] = __('Required field', 'martinehooptopbeter');
+				}
+
+				$token = isset($post[$this->_xsrf->getSessionKey()]) ? trim($post[$this->_xsrf->getSessionKey()]) : '';
+				if (!$this->_xsrf->verifyToken($token)) {
+					$this->errorMessage = __('The posted data could not be validated. Please try again.', 'martinehooptopbeter');
+					$this->missingfields[$this->_xsrf->getSessionKey()] = $this->errorMessage; 
 				}
 
 				if (count($this->missingfields) == 0) {
@@ -123,6 +133,8 @@
                             <textarea id="contact_message" name="contact_message" rows="10"><?php echo esc_attr($this->contact_message); ?></textarea>
                         </p>
                     </fieldset>
+
+					<input type="hidden" name="<?php echo esc_attr($this->_xsrf->getSessionKey()); ?>" value="<?php echo esc_attr($this->_xsrf->generateToken()); ?>" />
 
                     <div class="buttons">
                         <button type="submit" class="btn left"><?php _e('Send', 'martinehooptopbeter'); ?></button>

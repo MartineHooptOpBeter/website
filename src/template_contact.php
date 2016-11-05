@@ -8,6 +8,8 @@
 
     $configuration = new Configuration();
 
+	session_start();
+
 	$contactPage = new ContactPage($configuration);
 	$contactPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
