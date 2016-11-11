@@ -48,7 +48,7 @@
                 $userdata .= $_SERVER['REMOTE_ADDR'];
 
             // Generate token
-            $token = base64_encode(time() . $userdata . $this->_generateRandomString());
+            $token = hash('sha512', time() . $userdata . $this->_generateRandomString());
 
             // Store the token in the session
             $_SESSION[$this->_sessionKey] = $token;
