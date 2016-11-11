@@ -118,6 +118,11 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .content .meta                              { color: $accentColor; margin-bottom: 20px; }
 .size-martinehooptopbeter_fullwidth         { display: block; width: 100%; height: auto; margin-bottom: 20px; }
 
+.content blockquote                         { display: inline-block; font-style: italic; font-size: 120%; line-height: 160%; position: relative; margin: 1em 4em 2em 4em; padding: 2em; color: $accentColor; background-color: lighten($darkColorLight, 5); border-radius: 8px; }
+.content blockquote::before                 { content: "“"; position: absolute; left: 0; font-size: 300%; }
+.content blockquote::after                  { content: "„"; position: absolute; right: 0.2em; bottom: 0.7em; font-size: 300%; }
+.content blockquote p                       { margin: 0; }
+
 .pagenavigation                             { margin-bottom: 20px; }
 .pagenavigation a,
 .pagenavigation span                        { padding: 0 6px; }
@@ -340,5 +345,7 @@ a.btn:active								{ text-decoration: none; }
 }
 
 @media (max-width: 479px) {
+    .content blockquote                     { margin: 1em 1em 2em 1em; }
     ul.sponsors li                          { width: 100%; }
+    
 }
