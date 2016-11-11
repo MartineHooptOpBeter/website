@@ -73,6 +73,8 @@
 
 		$goalValue = $configuration->getDonationsGoalValue();
 		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
+		
+		$startdate = $configuration->getDonationsStartDate();
 
 		if ($totalCount > 0) :
 
@@ -93,9 +95,17 @@
 						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s', 'martinehooptopbeter')), array('<a href="' . __('/donations/', 'martinehooptopbeter') . '">' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</a>')); ?></span>
 					<?php endif; ?>
 					<?php if ($totalCount == 1) : ?>
-						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php if ($startdate != null) : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+						<?php else : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php endif; ?>
 					<?php else : ?>
-						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php if ($startdate != null) : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+						<?php else : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php endif; ?>
 					<?php endif; ?>
 				</div>
 				

@@ -37,6 +37,8 @@
 		$page = $page > 0 ? $page : 1;
 		$page = $page > $pageMax ? $pageMax : $page;
 
+		$startdate = $configuration->getDonationsStartDate();
+
 		$items = $donations->getDonationsList(($page - 1) * $pageSize, $pageSize, 'DESC');
 
 ?>			<?php if (count($items) < 1) : ?>
@@ -54,9 +56,17 @@
 						<span class="value"><?php echo vsprintf(esc_attr(__('Total: %1$s', 'martinehooptopbeter')), array('<strong>' . esc_attr(Donation::formatEuroPrice($totalValue)) . '</strong>')); ?></span>
 					<?php endif; ?>
 					<?php if ($totalCount == 1) : ?>
-						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php if ($startdate != null) : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+						<?php else : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php endif; ?>
 					<?php else : ?>
-						<span class="number"><?php echo esc_attr(vsprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php if ($startdate != null) : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+						<?php else : ?>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
+						<?php endif; ?>
 					<?php endif; ?>
 				</div>
 

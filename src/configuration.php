@@ -31,6 +31,10 @@
             return $this->_config['donate_goal'];
         }
 
+		public function getDonationsStartDate() {
+			return $this->_config['donate_startdate'];
+		}
+
         public function getDonationMinimumAmount() {
             return $this->_config['donate_minamount'];
         }

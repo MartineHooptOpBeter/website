@@ -276,6 +276,10 @@ a.btn:active								{ text-decoration: none; }
 @media (max-width: 1023px) {
 	.navigation .logo						{ margin-left: 20px; }
     .navigation nav label					{ margin-right: 20px; }
+
+	.metertext								{ font-size: 100%; }
+	.metertext span.value,
+	.metertext span.number					{ float: left; clear: both; }
 }
 
 @media (max-width: 767px) {
@@ -331,10 +335,6 @@ a.btn:active								{ text-decoration: none; }
 
     .pagenavigation span                    { padding: 0 6px; background-color: $accentColor; color: #fff; }
 		
-	.metertext								{ font-size: 100%; }
-	.metertext span.value,
-	.metertext span.number					{ float: left; clear: both; }
-
     ul.sponsors li                          { width: 50%; }
 
 }
