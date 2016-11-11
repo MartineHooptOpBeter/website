@@ -8,6 +8,8 @@
 	
 	$configuration = new Configuration();
 	
+	session_start();
+
 	$donationPage = new DonationPage($configuration);
 	$donationPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
