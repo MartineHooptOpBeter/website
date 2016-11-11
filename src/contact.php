@@ -58,8 +58,7 @@
 
 				$token = isset($post[$this->_xsrf->getSessionKey()]) ? trim($post[$this->_xsrf->getSessionKey()]) : '';
 				if (!$this->_xsrf->verifyToken($token)) {
-					$this->errorMessage = __('The posted data could not be validated. Please try again.', 'martinehooptopbeter');
-					$this->missingfields[$this->_xsrf->getSessionKey()] = $this->errorMessage; 
+					$this->missingfields[$this->_xsrf->getSessionKey()] = __('The posted data could not be validated. Please try again.', 'martinehooptopbeter'); 
 				}
 
 				if (count($this->missingfields) == 0) {
@@ -135,6 +134,9 @@
                     </fieldset>
 
 					<input type="hidden" name="<?php echo esc_attr($this->_xsrf->getSessionKey()); ?>" value="<?php echo esc_attr($this->_xsrf->generateToken()); ?>" />
+                    <?php if (isset($this->missingfields[$this->_xsrf->getSessionKey()])) : ?>
+						<p class="error"><?php echo esc_attr($this->missingfields[$this->_xsrf->getSessionKey()]); ?></p>
+					<?php endif; ?>
 
                     <div class="buttons">
                         <button type="submit" class="btn left"><?php _e('Send', 'martinehooptopbeter'); ?></button>
