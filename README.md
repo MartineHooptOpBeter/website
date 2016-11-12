@@ -142,8 +142,49 @@ De bestanden van de logo's moeten ook in in de folder `wwwroot/wp-content/themes
 De logo's van de sponsors worden weergegeven op de pagina welke gebruik maakt van de **Sponsors Page** template.
 
 # Ontwikkelen
-Om het WordPress theme zelf te kunnen aanpassen kan Gulp worden gebruikt tijdens het ontwikkelen. Een ontwikkelversie van het theme
-kan simpelweg worden gegenereerd met Gulp zonder extra opties:
+
+## Aanmaken eigen fork
+Om het WordPress theme zelf te kunnen aanpassen is het verstandig om eerst een eigen fork van het project te maken op Github. Ga hiervoor naar de [repository van de Martine Hoopt Op Beter website](https://github.com/MartineHooptOpBeter/website) op Github en zorg dat je bent ingelogd met je eigen account. Klik dan op de **Fork** knop om het project te forken naar je eigen account. Klik nu op de **Clone or download** knop om de clone URL van jouw eigen fork van de repository te zien / kopieren naar het clipboard. Deze repository kun je vervolgens clonen naar je lokale computer met het commando:
+
+```
+git clone https://github.com/JouwAccountNaam/website ./
+``` 
+
+Als je een eigen fork maakt van het project dan ontvang je niet automatisch wijzigigen en updates die door ons worden doorgevoerd nadat je de fork hebt gemaakt. Om dit wel mogelijk te maken kun je een extra remote toevoegen met de URL van de originele repository. Hiervan kun je dan op het moment dat je wilt de wijzigingen middels de `git fetch` en `git merge` of `git pull` commando's in je eigen fork integreren. Het aanmaken van de extra remote kan met het volgende git commando:
+
+```
+git remote add upstream https://github.com/MartineHooptOpBeter/website.git
+```
+
+Met het `git remote -v` commando kun je nu de twee remotes zien.
+
+Het integreren van de wijzigingen van de originele Martine Hoopt Op Beter website repository begint met een fetch commando:
+
+```
+git fetch upstream
+```
+
+Om de wijzigingen van de laatste release uit de master branch te integrereren doe je eerst een checkout van de master branch in je lokale repository gevolgd door een merge vanaf de upstream remote:
+
+```
+git checkout master
+git merge upstream/master
+```
+
+Een `fetch` en `merge` kunnen ook worden gecombineerd in één commando:
+
+```
+git pull upstream/master
+```
+
+De wijzigingen zijn nu in je lokale repository gemerged. Met een `git push origin master` commando kunnen deze wijzigingen nu ook naar je eigen Github repository worden gepushed.
+
+## Pull requests
+Als je zelf verbeteringen maakt die je met ons wilt delen of als je bugs hebt gevonden en de bugfixes hiervoor wilt maken dan accepteren we uiteraard ook pull requests. Maak hiervoor altijd een eigen branch vanaf de `develop` branch en wijzig alleen de bestanden die nodig zijn voor specifiek die wijziging of bugfix. Commit de wijzigingen in één of meerdere commits en push deze naar je eigen Github repository. Vanaf Github kun je nu voor deze branch een Pull request naar ons sturen. 
+
+## Gulp
+Het Martine Hoopt Op beter Wordpress Theme maakt ook gebruik van Gulp tijdens het ontwikkelen. Een ontwikkelversie van het theme
+kan simpelweg worden gegenereerd met het `gulp` commando zonder extra opties:
 
 ```
 gulp
