@@ -144,6 +144,12 @@ msgstr "%1$s donaties"
 msgid "%1$s donation"
 msgstr "%1$s donatie"
 
+msgid "%1$s donations since %2$s"
+msgstr "%1$s donaties sinds %2$s"
+
+msgid "%1$s donation since %2$s"
+"msgstr "%1$s donatie sinds %2$s
+
 msgid "Total: %1$s of %2$s"
 msgstr "Totaal: %1$s van %2$s"
 
@@ -236,3 +242,6 @@ msgstr "/donaties/"
 
 msgid "/donate/"
 msgstr "/doneren/"
+
+msgid "The posted data could not be validated. Please try again."
+msgstr "De verstuurde data kon niet worden gevalideerd. Probeer het nogmaals."

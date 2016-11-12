@@ -39,7 +39,7 @@ p                                           { margin: 0 0 1.2em 0; }
 
 #menu-toggle								{ display: none; }
 
-ul.social                                   { float: right; clear: right; margin: 10px 0 0 0; padding: 0; font-family: 'icons'; font-size: 36px; list-style: none; }
+ul.social                                   { float: right; clear: right; margin: 4px 0 0 0; padding: 0; font-family: 'icons'; font-size: 36px; list-style: none; }
 ul.social li                                { display: inline; padding-left: 6px; font-style: normal; font-weight: normal; vertical-align: middle; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 ul.social li a:link,
 ul.social li a:visited                      { color: $accentColor; text-decoration: none; }
@@ -117,6 +117,11 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 
 .content .meta                              { color: $accentColor; margin-bottom: 20px; }
 .size-martinehooptopbeter_fullwidth         { display: block; width: 100%; height: auto; margin-bottom: 20px; }
+
+.content blockquote                         { display: inline-block; font-style: italic; font-size: 120%; line-height: 160%; position: relative; margin: 1em 4em 2em 4em; padding: 2em; color: $accentColor; background-color: lighten($darkColorLight, 5); border-radius: 8px; }
+.content blockquote::before                 { content: "“"; position: absolute; left: 0; font-size: 300%; }
+.content blockquote::after                  { content: "„"; position: absolute; right: 0.2em; bottom: 0.7em; font-size: 300%; }
+.content blockquote p                       { margin: 0; }
 
 .pagenavigation                             { margin-bottom: 20px; }
 .pagenavigation a,
@@ -276,6 +281,10 @@ a.btn:active								{ text-decoration: none; }
 @media (max-width: 1023px) {
 	.navigation .logo						{ margin-left: 20px; }
     .navigation nav label					{ margin-right: 20px; }
+
+	.metertext								{ font-size: 100%; }
+	.metertext span.value,
+	.metertext span.number					{ float: left; clear: both; }
 }
 
 @media (max-width: 767px) {
@@ -331,14 +340,12 @@ a.btn:active								{ text-decoration: none; }
 
     .pagenavigation span                    { padding: 0 6px; background-color: $accentColor; color: #fff; }
 		
-	.metertext								{ font-size: 100%; }
-	.metertext span.value,
-	.metertext span.number					{ float: left; clear: both; }
-
     ul.sponsors li                          { width: 50%; }
 
 }
 
 @media (max-width: 479px) {
+    .content blockquote                     { margin: 1em 1em 2em 1em; }
     ul.sponsors li                          { width: 100%; }
+    
 }

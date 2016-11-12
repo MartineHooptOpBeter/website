@@ -24,6 +24,9 @@
 	/* Het doelbedrag op te halen met donaties (in euro centen) */
 	$config['donate_goal'] = 1000000;
 
+	/* De startdatum van de actie */
+	$config['donate_startdate'] = mktime(0, 0, 0, 12, 31, 2015);
+
 	/* Het minimumbedrag van een donatie (in euro centen) */
 	$config['donate_minamount'] = 500;
 	
