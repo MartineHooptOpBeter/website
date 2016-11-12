@@ -41,7 +41,7 @@ Kopieer het bestand `sponsors.json` uit de root folder naar de folder  `wwwroot/
 # Database
 Alhoewel het niet noodzakelijk is, is het verstandig om voor de tabel voor de donaties en voor de WordPress tabellen twee aparte databases aan te maken. Maar de tabellen kunnen eventueel ook in dezelfde database worden geplaatst. De tabellen voor WordPress worden door WordPress zelf aangemaakt bij het [installeren van WordPress](https://codex.wordpress.org/nl:Installatie). Open hiervoor de homepage van jouw website in een browser en WordPress zal de installatie starten.
 
-De tabel voor de donaties kan worden aangemaakt met het SQL script `database/donations.sql`. Maak eerst een nieuwe database aan in MySQL en maak een gebruikersaccount aan welke `DELETE, INSERT, SELECT, UPDATE` rechten heeft in deze database. Open vervolgens het script in MySQL Workbench (of een ander database management tool voor MySQL) en voer dit uit in de zojuist aangemaakte database. De tabel voor de donaties wordt nu aangemaakt. 
+De tabel voor de donaties kan worden aangemaakt met het SQL script `database/donations.sql`. Maak eerst een nieuwe database aan in MySQL en maak een gebruikersaccount aan welke `INSERT, SELECT, UPDATE` rechten heeft in deze database. Open vervolgens het script in MySQL Workbench (of een ander database management tool voor MySQL) en voer dit uit in de zojuist aangemaakte database. De tabel voor de donaties wordt nu aangemaakt. 
 
 # Configuratie
 De configuratie wordt gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/config.php`. Een voorbeeldbestand `config.php` staat in de root folder van het project.
