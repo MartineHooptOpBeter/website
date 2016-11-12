@@ -65,7 +65,7 @@ Er wordt gebruik gemaakt van online betalingen via [Mollie](https://www.mollie.c
 | Parameter | Verplicht | Standaardwaarde | Omschrijving |
 | --------- | --------- | --------------- | ------------ |
 | `$config['mollie_apikey']` | Ja | *Geen* | Dit is de API key welke door Mollie wordt gegeven voor de aangemaakte website. Mollie geeft per websites twee type key's, een test key en een live key. De test key begint altijd met de letter `test_` en de live key begint altijd met de letter `live_`. Let op dat je de juiste key gebruikt voor testen en voor de live website! |
-| `$config['mollie_webhookurl']` | Ja | *Geen* | De webhook URL welke door Mollie zal worden aangeroepen op het moment dat er een statuswijziging is in één van de lopende betalingen. Deze meot verwijzen naar het bestand `mollie-webhook.php` in de WordPress theme folder. Let op dat je hier de volledige URL inclusief domeinnaam en folder vermeld. Als je website gebruik maakt van HTTPS dan is het verstandig om deze webhook ook over HTTPS te laten aanroepen. |
+| `$config['mollie_webhookurl']` | Ja | *Geen* | De webhook URL welke door Mollie zal worden aangeroepen op het moment dat er een statuswijziging is in één van de lopende betalingen. Deze moet verwijzen naar het bestand `mollie-webhook.php` in de WordPress theme folder. Let op dat je hier de volledige URL inclusief domeinnaam en folder vermeld. Als je website gebruik maakt van HTTPS dan is het verstandig om deze webhook ook over HTTPS te laten aanroepen. |
 
 Als je gebruik wilt maken van Google Analytics kan je de Tracking ID configureren welke door Google wordt gegeven.
 
