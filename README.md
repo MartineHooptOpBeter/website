@@ -34,9 +34,9 @@ gulp --build=production
 
 Het theme zal nu worden gegenereerd in de folder `wwwroot/wp-content/themes/martinehooptopbeter/`. Dit theme is geschikt om gebruikt te worden op een live website.
 
-Kopieer het bestand `config.php` uit de root folder naar de folder  `wwwroot/wp-content/themes/martinehooptopbeter/`. Open dit bestand uit deze folder in je favoriete teksteditor en pas de configuratie voor zover nodig aan. Met name de configuratie voor het verbinden met de database moet worden ingevuld. Zie de hoofdstukken [Database](#database) en [Configuratie](#configuratie) voor meer informatie.
+Kopieer het bestand `config.php` uit de root folder naar de folder  `wwwroot/wp-content/themes/martinehooptopbeter/`. Open dit bestand in deze folder in je favoriete teksteditor en pas de configuratie voor zover nodig aan. Met name de configuratie voor het verbinden met de database moet worden ingevuld. Zie de hoofdstukken [Database](#database) en [Configuratie](#configuratie) voor meer informatie.
 
-Kopieer het bestand `sponsors.json` uit de root folder naar de folder  `wwwroot/wp-content/themes/martinehooptopbeter/sponsors/`. Open dit bestand uit deze folder in je favoriete teksteditor en pas het voor zover nodig aan. In dit bestand kunnen in JSON formaat de logo's van de sponsors worden gedefinieerd. Zie het hoofdstuk [Sponsors](#sponsors) voor meer informatie.
+Kopieer het bestand `sponsors.json` uit de root folder naar de folder  `wwwroot/wp-content/themes/martinehooptopbeter/sponsors/`. Open dit bestand in deze folder in je favoriete teksteditor en pas het voor zover nodig aan. In dit bestand kunnen in JSON formaat de logo's van de sponsors worden gedefinieerd. Zie het hoofdstuk [Sponsors](#sponsors) voor meer informatie.
 
 # Database
 Alhoewel het niet noodzakelijk is, is het verstandig om voor de tabel voor de donaties en voor de WordPress tabellen twee aparte databases aan te maken. Maar de tabellen kunnen eventueel ook in dezelfde database worden geplaatst. De tabellen voor WordPress worden door WordPress zelf aangemaakt bij het [installeren van WordPress](https://codex.wordpress.org/nl:Installatie). Open hiervoor de homepage van jouw website in een browser en WordPress zal de installatie starten.
