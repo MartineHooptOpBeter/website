@@ -18,7 +18,7 @@
 		public $locale;
 		public $timestamp;
 
-        function Donation($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $paymentMethod = '', $paymentId = null, $paymentStatus = null, $showNoAmount = false, $showAnonymous = false, $locale = '', $timestamp = null)
+        function __construct($id, $amount = 0, $emailAddress = '', $name = '', $message = '', $paymentVerification = '', $paymentMethod = '', $paymentId = null, $paymentStatus = null, $showNoAmount = false, $showAnonymous = false, $locale = '', $timestamp = null)
         {
             $this->id = $id;
             $this->amount = $amount;
@@ -97,7 +97,7 @@
         private $username;
         private $password;
 
-        function Donations($dsn, $username, $password = '')
+        function __construct($dsn, $username, $password = '')
         {
             $this->dsn = $dsn;
             $this->username = $username;
