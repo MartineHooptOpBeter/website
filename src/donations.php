@@ -3,7 +3,7 @@
     @@HEADER@@
 
 	require_once 'configuration.php';
-	require_once 'donations-class.php';
+	require_once 'donations.class.php';
 
     function show_donations_page($donationsUrl, $page = 1)
     {

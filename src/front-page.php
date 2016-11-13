@@ -2,7 +2,7 @@
 
     @@HEADER@@
 
-	require_once 'donations-class.php';
+	require_once 'donations.class.php';
 	require_once 'configuration.php';
 
 	function martinehooptopbeter_show_excerpt_title() {

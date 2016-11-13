@@ -2,7 +2,7 @@
 
     @@HEADER@@
 	
-	require_once 'donations-class.php';
+	require_once 'donations.class.php';
 	require_once 'Mollie/API/Autoloader.php';
 
 	require_once 'xsrf.php';
