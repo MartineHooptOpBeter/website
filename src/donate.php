@@ -104,7 +104,7 @@
 										'locale'      => $donation->locale,
 										'method'      => $donation->paymentMethod,
 										'metadata'    => array(
-											'donation_id' => $donation->id,
+											'payment_id' => $donation->id,
 											'payment_verification' => $donation->paymentVerification
 										)
 									)
