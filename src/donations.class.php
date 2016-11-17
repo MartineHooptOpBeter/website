@@ -24,7 +24,7 @@
 
         public static function withPayment($payment)
         {
-            $instance = new self($payment->id, $payment->amount, $payment->userid, '', '', $payment->paymentVerification, $payment->paymentMethod, $payment->paymentId, $payment->paymentStatus, false, false, $payment->locale, $payment->timestamp);
+            $instance = new self($payment->id, $payment->amount, $payment->getUserId(), '', '', $payment->paymentVerification, $payment->paymentMethod, $payment->paymentId, $payment->paymentStatus, false, false, $payment->locale, $payment->timestamp);
             $instance->setData($payment->getData());
             $instance->deserializeData();
             return $instance;
