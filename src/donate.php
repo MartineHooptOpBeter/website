@@ -332,6 +332,7 @@
 									<input type="hidden" name="donate_no_amount" value="ON" />
 								<?php endif; ?>
 								<input type="hidden" name="donate_nosubmit" value="ON" />
+								<input type="hidden" name="<?php echo esc_attr($this->_xsrf->getSessionKey()); ?>" value="<?php echo esc_attr($this->_xsrf->generateToken()); ?>" />
 							<?php endif; ?>
 						</form>
 
