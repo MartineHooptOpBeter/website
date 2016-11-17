@@ -98,10 +98,12 @@
 
         public function getDonation($id, $verification)
         {
-            if (!$donation = $this->getPayment($id, $verification))
+            if (!$payment = $this->getPayment($id, $verification))
                 return null;
 
-            $donation->deserializeData();
+            if (!$donation = Donation::withPayment($payment))
+                return null; 
+
             return $donation;
         }
 
