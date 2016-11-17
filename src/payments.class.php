@@ -203,7 +203,7 @@
             $page = $this->validatePageNumber($page, null);
             $itemsPerPage = $this->validatePageSize($itemsPerPage);            
 
-            $offset = ($page - 1) * $pageSize;
+            $offset = ($page - 1) * $itemsPerPage;
 
             $orderBy = ($sortOrder == 'ASC') ? 'ASC' : 'DESC';
 
