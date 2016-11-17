@@ -28,18 +28,16 @@
 		}
 		
 		$goalValue = $configuration->getDonationsGoalValue();
-		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
+		$goalPercentage = $donations->getPercentageOfGoal($totalValue, $goalValue, 100.0);
 
 		$pageSize = 10;
-		$pageMax = intval(($itemCount - 1) / $pageSize) + 1;
 
-		$page = intval($page);
-		$page = $page > 0 ? $page : 1;
-		$page = $page > $pageMax ? $pageMax : $page;
+		$pageMax = $donations->getMaximumPageNumber($itemCount, $pageSize);
+		$page = $donations->validatePageNumber($page, $pageMax); 
 
 		$startdate = $configuration->getDonationsStartDate();
 
-		$items = $donations->getDonationsList(($page - 1) * $pageSize, $pageSize, 'DESC');
+		$items = $donations->getDonationsList($page, $pageSize, 'DESC');
 
 ?>			<?php if (count($items) < 1) : ?>
 				<p><?php _e('There are no donations made yet.', 'martinehooptopbeter'); ?></p>

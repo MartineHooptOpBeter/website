@@ -72,7 +72,7 @@
 		}
 
 		$goalValue = $configuration->getDonationsGoalValue();
-		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
+		$goalPercentage = $donations->getPercentageOfGoal($totalValue, $goalValue, 100.0);
 		
 		$startdate = $configuration->getDonationsStartDate();
 

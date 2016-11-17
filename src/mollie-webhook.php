@@ -25,7 +25,7 @@
 				$payment_verification = $payment->metadata->payment_verification;
 				
 				$donations = new Donations($configuration->getDonationsDatabaseDataSourceName(), $configuration->getDonationsDatabaseUsername(), $configuration->getDonationsDatabasePassword());
-				if (!$donations->updatePaymentStatus($donation_id, $payment_id, $payment_verification, $payment->status)) {
+				if (!$donations->updatePaymentStatus($donation_id, $payment_verification, $payment_id, $payment->status)) {
 					header('HTTP/1.1 403 Forbidden');
 					exit;
 				}

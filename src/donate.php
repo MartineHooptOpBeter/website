@@ -110,7 +110,7 @@
 									)
 								)) {
 								
-								if ($donations->updatePaymentId($donation->id, $payment->id)) {
+								if ($donations->updatePaymentId($donation->id, $donation->paymentVerification, $payment->id)) {
 									header("Location: " . $payment->getPaymentUrl());
 									exit;
 								}
