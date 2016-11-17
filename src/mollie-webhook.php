@@ -84,12 +84,12 @@
 		switch ($donation->locale) {
 
 			case 'nl_NL':
-				$message = vsprintf('Hallo %1$s,' . "\r\n\r\n" . 'Bedankt voor je donatie van %2$s aan de Stichting Martine Hoopt Op Beter. We hebben de donatie ontvangen.' . "\r\n\r\n" . 'We zouden het leuk vinden als je de website regelmatig blijft bezoeken voor updates over de behandeling van Martine: <https://www.martinehooptopbeter.nl/>' . "\r\n\r\n" . 'Bedankt voor je hulp, ook namens Martine!' . "\r\n\r\n", array($donation->name, Donation::formatEuroPrice($donation->amount)));
+				$message = vsprintf('Hallo %1$s,' . "\r\n\r\n" . 'Bedankt voor je donatie van %2$s aan de Stichting Martine Hoopt Op Beter. We hebben de donatie ontvangen.' . "\r\n\r\n" . 'We zouden het leuk vinden als je de website regelmatig blijft bezoeken voor updates over de behandeling van Martine: <https://www.martinehooptopbeter.nl/>' . "\r\n\r\n" . 'Bedankt voor je steun, ook namens Martine!' . "\r\n\r\n", array($donation->name, Donation::formatEuroPrice($donation->amount)));
 				$subject = "Bevestiging van jouw donatie aan de Stichting Martine Hoopt Op Beter";
 				break;
 
 			default:
-				$message = vsprintf('Hello %1$s,' . "\r\n\r\n" . 'Thank you for your donation of %2$s to the Martine Hoping For Better Foundation. We received the donation.' . "\r\n\r\n". 'We\'d love it if you continue to visit the website regularly for updates on the treatment of Martine: <https://www.martinehopingforbetter.com/>' . "\r\n\r\n" . 'Thanks for your help, also on behalf of Martine!' . "\r\n\r\n", array($donation->name, Donation::formatEuroPrice($donation->amount)));
+				$message = vsprintf('Hello %1$s,' . "\r\n\r\n" . 'Thank you for your donation of %2$s to the Martine Hoping For Better Foundation. We received the donation.' . "\r\n\r\n". 'We\'d love it if you continue to visit the website regularly for updates on the treatment of Martine: <https://www.martinehopingforbetter.com/>' . "\r\n\r\n" . 'Thanks for your support, also on behalf of Martine!' . "\r\n\r\n", array($donation->name, Donation::formatEuroPrice($donation->amount)));
 				$subject = "Confirmation of your donation to the Martine Hoping For Better Foundation";
 				break;
 		}
