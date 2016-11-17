@@ -77,7 +77,8 @@
             if (isset($array['showAnonymous'])) { $this->showAnonymous = $array['showAnonymous']; }
         }
 		
-		public static function validEMailAddress($emailaddress) {
+		public static function validEMailAddress($emailaddress)
+        {
 			return preg_match('/^([0-9a-zA-Z_]([-.\w\+]*[0-9a-zA-Z_])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,})$/', $emailaddress);
 		}
     }
@@ -129,8 +130,8 @@
             return $this->getTotalPaymentsAmount(PaymentTypes::Donation, 'paid');
         }
 
-		public function getPercentageOfGoal($current, $goal, $max) {
-			
+		public function getPercentageOfGoal($current, $goal, $max)
+        {
 			$goalPercentage = 0;
 			
 			if ($goal > 0) {
