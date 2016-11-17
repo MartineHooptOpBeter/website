@@ -34,9 +34,9 @@
             foreach($allDonations as $donation) {
                 if (!$this->addDonation($donation))
                 {
-                    echo sprintf("Donatie met ID %1$s kan niet worden geconverteerd!", $donation->id);
+                    echo sprintf('Donatie met ID %1$s kan niet worden geconverteerd!' . "\n", $donation->id);
                 } else {
-                    echo sprintf("Donatie met ID %1$s is geconverteerd\n", $donation->id);
+                    echo sprintf('Donatie met ID %1$s is geconverteerd' . "\n", $donation->id);
                 }
             }
 
