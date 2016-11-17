@@ -391,6 +391,8 @@
 
         public function validatePageNumber($page, $maxPage)
         {
+            $page = intval($page);
+
             if (!$page || !is_numeric($page) || ($page < 1))
                 $page = 1;
 
