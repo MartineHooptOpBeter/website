@@ -21,7 +21,7 @@
             {
                 if ($mollie_payment = $mollie->payments->create(
                         array(
-                            'amount'      => Donation::formatDecimal($payment->amount),
+                            'amount'      => Payment::formatDecimal($payment->amount),
                             'description' => $description,
                             'redirectUrl' => $returnurl,
                             'webhookUrl'  => $this->_configuration->getMollieWebhookUrl(),
