@@ -32,7 +32,7 @@
 				
 				if (($payment_id != null) && ($payment_verification != null)) {
 
-					$payments = new Payments($configuration->getDonationsDatabaseDataSourceName(), $configuration->getDonationsDatabaseUsername(), $configuration->getDonationsDatabasePassword());
+					$payments = new Payments($configuration->getPaymentsDatabaseDataSourceName(), $configuration->getPaymentsDatabaseUsername(), $configuration->getPaymentsDatabasePassword());
 					if (!$payments->updatePaymentStatus($payment_id, $payment_verification, $mollie_payment_id, $mollie_payment->status)) {
 						header('HTTP/1.1 403 Forbidden');
 						exit;

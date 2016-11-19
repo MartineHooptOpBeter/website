@@ -16,7 +16,7 @@
 <?php
 
 		$configuration = new Configuration();
-		$donations = new Donations($configuration->getDonationsDatabaseDataSourceName(), $configuration->getDonationsDatabaseUsername(), $configuration->getDonationsDatabasePassword());
+		$donations = new Donations($configuration->getPaymentsDatabaseDataSourceName(), $configuration->getPaymentsDatabaseUsername(), $configuration->getPaymentsDatabasePassword());
 		
 		$itemCount = $donations->getDonationsListCount();
 		$totalCount = $itemCount;

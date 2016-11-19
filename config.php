@@ -8,18 +8,23 @@
     $config  = [];
 
 
+    // ==========
+    // BETALINGEN
+    // ==========
+
+    /* Database data source name */
+    $config['payments_dsn'] = '';
+
+    /* Gebruikersnaam om in te loggen op database server */
+    $config['payments_username'] = '';
+
+    /* Wachtwoord om in te loggen op database server */
+    $config['payments_password'] = '';
+
+
     // ========
     // DONATIES
     // ========
-
-    /* Database data source name */
-    $config['donate_dsn'] = '';
-
-    /* Gebruikersnaam om in te loggen op database server */
-    $config['donate_username'] = '';
-
-    /* Wachtwoord om in te loggen op database server */
-    $config['donate_password'] = '';
 	
 	/* Het doelbedrag op te halen met donaties (in euro centen) */
 	$config['donate_goal'] = 1000000;

@@ -87,7 +87,7 @@
 
 					$d = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, $this->_configuration->getCurrentLocale(), null);
 
-					$donations = new Donations($this->_configuration->getDonationsDatabaseDataSourceName(), $this->_configuration->getDonationsDatabaseUsername(), $this->_configuration->getDonationsDatabasePassword());
+					$donations = new Donations($this->_configuration->getPaymentsDatabaseDataSourceName(), $this->_configuration->getPaymentsDatabaseUsername(), $this->_configuration->getPaymentsDatabasePassword());
 					if ($donation = $donations->addDonation($d)) {
 						
 						$mollie = new Mollie_API_Client;
@@ -136,7 +136,7 @@
 
 				if ($donationId && $paymentVerification) {
 
-					$donations = new Donations($this->_configuration->getDonationsDatabaseDataSourceName(), $this->_configuration->getDonationsDatabaseUsername(), $this->_configuration->getDonationsDatabasePassword());
+					$donations = new Donations($this->_configuration->getPaymentsDatabaseDataSourceName(), $this->_configuration->getPaymentsDatabaseUsername(), $this->_configuration->getPaymentsDatabasePassword());
 					if ($donation = $donations->getDonation($donationId, $paymentVerification)) {
 
 						$this->donate_id = $donation->id;

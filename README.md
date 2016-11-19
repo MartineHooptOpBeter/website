@@ -48,13 +48,18 @@ De tabel voor de donaties kan worden aangemaakt met het SQL script `database/don
 # Configuratie
 De configuratie wordt gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/config.php`. Een voorbeeldbestand `config.php` staat in de root folder van het project.
 
+Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op betalingen.
+
+| Parameter | Verplicht | Standaardwaarde | Omschrijving |
+| --------- | --------- | --------------- | ------------ |
+| `$config['payments_dsn']` | Ja | *Geen* | De **data source name** voor het verbinden met de MySQL database voor de betalingen. Bijvoorbeeld: `mysql:host=localhost;dbname=martinehooptopbeter` |
+| `$config['payments_username']` | Ja | *Geen* | De gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de betalingen. |
+| `$config['payments_password']` | Ja | *Geen* | Het wachtwoord van de gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de betalingen. |
+
 Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op de donaties.
 
 | Parameter | Verplicht | Standaardwaarde | Omschrijving |
 | --------- | --------- | --------------- | ------------ |
-| `$config['donate_dsn']` | Ja | *Geen* | De **data source name** voor het verbinden met de MySQL database voor de donaties. Bijvoorbeeld: `mysql:host=localhost;dbname=martinehooptopbeter` |
-| `$config['donate_username']` | Ja | *Geen* | De gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de donaties. |
-| `$config['donate_password']` | Ja | *Geen* | Het wachtwoord van de gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de donaties. |
 | `$config['donate_goal']` | Nee | 7500000 | Het doelbedrag op te halen met donaties (in euro centen). Dit bedrag is optioneel en als het niet is opgegeven wordt alleen het opgehaalde bedrag getoond zonder een doelbedrag en zonder een grafische weergave van hoeveel van het doelbedrag al is opgehaald. |
 | `$config['donate_startdate']` | Nee | `mktime(0, 0, 0, 12, 31, 2015)` | De startdatum van de actie. Deze datum is optioneel en kan op `null` worden gezet als deze niet gebruikt moet worden. Als deze is opgegeven wordt deze gebruikt om aan te geven hoeveel donaties er zijn gedaan sinds deze datum. Zie [mktime()](http://php.net/manual/en/function.mktime.php) voor uitleg van de parameters van deze functie. |
 | `$config['donate_minamount']` | Nee | 500 | Het minimumbedrag van een donatie (in euro centen). Als er geen minimumbedrag is opgegeven dan is dit 0. |
@@ -225,3 +230,5 @@ Browsesync zal de website ook via HTTPS proxy'en en de browser kan daarom een fo
 # Upgraden vanaf 1.x
 Als je upgrade vanaf een 1.x versie van dit theme zijn er een aantal zaken die gewijzigd.
 
+## Configuratie
+Enkele configuratie parameters zijn gewijzigd. Dit komt omdat de **donations** tabel / database zijn vervangen door meer generieke **payments** tabel. De configuratieparameters `$config['donate_dsn']`, `$config['donate_username']` en `$config['donate_password']` zijn vervangen door `$config['payments_dsn']`, `$config['payments_username']` en `$config['payments_password']`. De betekenis van de parameters is niet gewijzigd.

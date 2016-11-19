@@ -142,6 +142,6 @@
 
 	$configuration = new Configuration();
 
-    $dtp = new DonationsToPayments($configuration->getDonationsDatabaseDataSourceName(), $configuration->getDonationsDatabaseUsername(), $configuration->getDonationsDatabasePassword());
+    $dtp = new DonationsToPayments($configuration->getPaymentsDatabaseDataSourceName(), $configuration->getPaymentsDatabaseUsername(), $configuration->getPaymentsDatabasePassword());
     $dtp->convert();
     unset($dtp);

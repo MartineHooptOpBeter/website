@@ -15,16 +15,16 @@
 			$this->_setPhpLocale();
         }
 
-        public function getDonationsDatabaseDataSourceName() {
-            return $this->_config['donate_dsn'];
+        public function getPaymentsDatabaseDataSourceName() {
+            return $this->_config['payments_dsn'];
         }
 
-        public function getDonationsDatabaseUsername() {
-            return $this->_config['donate_username'];
+        public function getPaymentsDatabaseUsername() {
+            return $this->_config['payments_username'];
         }
 
-        public function getDonationsDatabasePassword() {
-            return $this->_config['donate_password'];
+        public function getPaymentsDatabasePassword() {
+            return $this->_config['payments_password'];
         }
 
         public function getDonationsGoalValue() {
