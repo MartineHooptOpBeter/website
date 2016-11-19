@@ -3,6 +3,7 @@
     @@HEADER@@
 	
 	require_once 'donations.class.php';
+	require_once 'donations-service.class.php';
 	require_once 'Mollie/API/Autoloader.php';
 
 	require_once 'xsrf.php';
@@ -85,46 +86,18 @@
 
 				if ((count($this->missingfields) == 0) && (!$noSubmit)) {
 
-					$d = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, $this->_configuration->getCurrentLocale(), null);
+					$donationsService = new DonationsService($this->_configuration);
 
-					$donations = new Donations($this->_configuration->getPaymentsDatabaseDataSourceName(), $this->_configuration->getPaymentsDatabaseUsername(), $this->_configuration->getPaymentsDatabasePassword());
-					if ($donation = $donations->addDonation($d)) {
-						
-						$mollie = new Mollie_API_Client;
-						$mollie->setApiKey($this->_configuration->getMollieApiKey());
-						
-						try
-						{
-							if ($payment = $mollie->payments->create(
-									array(
-										'amount'      => Donation::formatDecimal($donation->amount),
-										'description' => __('Donation', 'martinehooptopbeter'),
-										'redirectUrl' => $donateUrl . '?donationid=' . $donation->id . '&verification=' . $donation->paymentVerification,
-										'webhookUrl'  => $this->_configuration->getMollieWebhookUrl(),
-										'locale'      => $donation->locale,
-										'method'      => $donation->paymentMethod,
-										'metadata'    => array(
-											'payment_id' => $donation->id,
-											'payment_verification' => $donation->paymentVerification
-										)
-									)
-								)) {
-								
-								if ($donations->updatePaymentId($donation->id, $donation->paymentVerification, $payment->id)) {
-									header("Location: " . $payment->getPaymentUrl());
-									exit;
-								}
-							}
-							
-							$this->errorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
-						}
-						catch (Mollie_API_Exception $e)
-						{
-							$this->errorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
-						}
+					$donation = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, $this->_configuration->getCurrentLocale(), null);
+					$returnurl = $donateUrl . '?donationid=%1$s&verification=%2$s';
+
+					if ($redirecturl = $donationsService->createMolliePaymentForDonation($donation, $returnurl)) {
+
+                        header("Location: " . $redirecturl);
+                        exit;
 
 					} else {
-						$this->errorMessage = __('An error has occured while saving your donation.', 'martinehooptopbeter');
+						$this->errorMessage = $paymentService->lastErrorMessage;
 					}
 
 				}
