@@ -97,7 +97,7 @@
                         exit;
 
 					} else {
-						$this->errorMessage = $paymentService->lastErrorMessage;
+						$this->errorMessage = $donationsService->lastErrorMessage;
 					}
 
 				}
