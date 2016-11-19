@@ -40,7 +40,7 @@
                         return $mollie_payment->getPaymentUrl();
                     }
                 }
-                
+
                 $this->lastErrorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
             }
             catch (Mollie_API_Exception $e)

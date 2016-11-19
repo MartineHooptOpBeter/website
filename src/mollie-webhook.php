@@ -46,7 +46,7 @@
 							switch($payment->getType())
 							{
 								case PaymentTypes::Donation:
-									sendDonationConformationEMail($payment, $configuration);
+									sendDonationConfirmationEMail($payment, $configuration);
 									break;
 							}
 						
@@ -69,7 +69,7 @@
 	
 	}
 
-	function sendDonationConformationEMail($payment, $configuration)
+	function sendDonationConfirmationEMail($payment, $configuration)
 	{
 		if ($payment == null)
 			return false;
