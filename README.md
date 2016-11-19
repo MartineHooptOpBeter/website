@@ -2,6 +2,8 @@
 Deze repository bevat de bronbestanden voor het WordPress theme voor de website [www.martinehooptopbeter.nl](https://www.martinehooptopbeter.nl). Deze website is gratis ontwikkeld door [Marco Miltenburg](https://github.com/MarcoMiltenburg) van [Virtual Pages](http://www.virtualpages.nl) als sponsoring voor deze crowdfunding actie. Om ook andere MS-patienten de kans te geven om een website op te zetten voor crowdfunding is de broncode open source beschikbaar gemaakt onder de [MIT licentie](https://github.com/MartineHooptOpBeter/website/blob/develop/LICENSE). 
 
 # Installatie
+Als je upgrade van een 1.x versie van dit theme, kijk dan bij de hoofdstuk [Upgraden vanaf 1.x](#upgraden%20vanaf%201.x) voor meer informatie.
+
 De bestanden voor het WordPress theme worden gegenereerd met behulp van de Gulp task runner. De bestanden in de `src` folder is dus **NIET** het WordPress theme. Voor het generen van het WordPress theme is [Node en NPM (Node Package Manager)](https://nodejs.org/) vereist. 
 
 Maak een folder aan waar je de bestanden wilt plaatsen en zorg ervoor dat deze folder de huidige folder is. Clone de repository met GIT naar deze folder:
@@ -219,3 +221,7 @@ gulp --devhostname=www.mijnwebsite.nl --devhostsecure=yes
 ```
 
 Browsesync zal de website ook via HTTPS proxy'en en de browser kan daarom een foutmelding geven dat het certificaat van de site niet klopt. Je kunt hiervoor in de meeste browsers een tijdelijke (of permanente) uitzondering opgegeven. 
+
+# Upgraden vanaf 1.x
+Als je upgrade vanaf een 1.x versie van dit theme zijn er een aantal zaken die gewijzigd.
+
