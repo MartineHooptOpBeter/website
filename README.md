@@ -67,6 +67,17 @@ Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op de
 | `$config['donate_email_fromaddress']` | Nee | *Array* | Het e-mailadres waarmee een bevestigingse-mail wordt gestuurd na ontvangst van de donatie. Als er geen e-mailadres is gedefinieerd wordt er geen bevestigingse-mail verstuurd. In plaats van een `string` met een enkel e-mailadres kan ook een `array` worden opgegeven met verschillende e-mailadressen per locale (zie uitleg verderop). |
 | `$config['donate_email_fromname']` | Nee | *Array* | De afzender van de e-mail waarmee een bevestiging wordt gestuurd na ontvangst van de donatie. Als er geen naam is gedefinieerd dan zal alleen het e-mailadres worden gebruikt (`$config['donate_email_fromaddress']`). In plaats van een `string` met een enkele naam kan ook een `array` worden opgegeven met verschillende namen per locale (zie uitleg verderop). |
 
+Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op de Ponyspeeldag.
+
+| Parameter | Verplicht | Standaardwaarde | Omschrijving |
+| --------- | --------- | --------------- | ------------ |
+| `$config['ponyplayday_price']` | Nee | 1750 | De kosten per kind voor het inschrijven voor de ponyspeeldag (in euro centen). Dit bedrag is optioneel en als het niet is opgegeven wordt is het niet mogelijk om in te schrijven voor de ponyspeeldag. |
+| `$config['ponyplayday_events']` | Nee | '2036/1/19' | Een array met de start- en einddatum / tijd waarop de ponyspeeldag wordt gehouden. Zie het hoofdstuk [Ponyspeeldag](#ponyspeeldag) voor meer informatie over de syntax van deze parameter. | 
+| `$config['ponyplayday_minage']` | Nee | 6 | De minimumleeftijd voor kinderen om zich te mogen inschrijven voor de ponyspeeldag. |
+| `$config['ponyplayday_maxage']` | Nee | 12 | De maximumleeftijd voor kinderen om zich te mogen inschrijven voor de ponyspeeldag. |
+| `$config['ponyplayday_email_fromaddress']` | Nee | *Array* | Het e-mailadres waarmee een bevestigingse-mail wordt gestuurd na ontvangst van de inschrijving. Als er geen e-mailadres is gedefinieerd wordt er geen bevestigingse-mail verstuurd. In plaats van een `string` met een enkel e-mailadres kan ook een `array` worden opgegeven met verschillende e-mailadressen per locale (zie uitleg verderop). |
+| `$config['ponyplayday_email_fromname']` | Nee | *Array* | De afzender van de e-mail waarmee een bevestiging wordt gestuurd na ontvangst van de inschrijving. Als er geen naam is gedefinieerd dan zal alleen het e-mailadres worden gebruikt (`$config['ponyplayday_email_fromaddress']`). In plaats van een `string` met een enkele naam kan ook een `array` worden opgegeven met verschillende namen per locale (zie uitleg verderop). |
+
 Er wordt gebruik gemaakt van online betalingen via [Mollie](https://www.mollie.com/nl/). Hiervoor moet een account worden aangemaakt en een website worden gedefinieerd waarvan de volgende gegevens moeten worden ingevuld:
 
 | Parameter | Verplicht | Standaardwaarde | Omschrijving |
@@ -110,6 +121,40 @@ $config['contact_sendmailto'] = [
 ];
 ```
 Er kunnen meerdere locale's worden opgegeven of er kan een fallback worden opgegeven met een `*` welke voor iedere andere niet gespecificeerde locale zal worden gebruikt. De fallback met een `*` moet als laatste element in de array worden opgenomen. Als er geen match is met één van de opgegeven locale's dan is dit hetzelfde alsof er geen waarde is opgegeven.  
+
+# Ponyspeeldag
+Voor de crowdfunding actie van de Stichting Martine Hoopt Op Beter wordt er ook een Ponyspeeldag georganiseerd. Dit onderdeel kan echter ook voor andere evenementen worden gebruikt. 
+
+Voor de ponyspeeldag kan op verschillende manieren een datum en tijd worden opgegeven. De meest eenvoudige manier is een `string` voor als er maar een ponyspeeldag wordt georganiseerd. Deze string wordt dan letterlijk opgslagen als de datum/tijd bij de inschrijving. In plaats van een `string` kan ook een `array` worden opgegeven. De syntax voor deze array is:
+
+```
+[
+    'startdatetime' => mktime(10, 30, 0, 1, 19, 2032),
+    'enddatetime' => mktime(13, 0, 0, 1, 19, 2032),
+    'closedays' => 3
+]
+```
+
+De waarde van `closedays` bepaald wanneer de inschrijving voor de ponyspeeldag wordt gesloten. Bij de inschrijving wordt de opgegeven startdatum/tijd opgeslagen. De einddatum/tijd is alleen voor weergave op de website. 
+
+Als er meerdere ponyspeeldagen worden gehouden dan kan er ook een multidimensional array worden opgegeven:
+
+```
+[
+    [
+        'startdatetime' => mktime(10, 30, 0, 1, 19, 2032),
+        'enddatetime' => mktime(13, 0, 0, 1, 19, 2032),
+        'closedays' => 3
+    ],
+    [
+        'startdatetime' => mktime(14, 00, 0, 1, 26, 2032),
+        'enddatetime' => mktime(16, 30, 0, 1, 26, 2032),
+        'closedays' => 3
+    ]
+]
+```
+
+Als er meerdere ponyspeeldagen zijn opgegeven dan wordt er een meerkeuze getoond. 
 
 # Sponsors
 De sponsors worden gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/sponsors/sponsors.json`. Een voorbeeldbestand `sponsors.json` staat in de root folder van het project.

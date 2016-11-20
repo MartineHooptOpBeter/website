@@ -4,6 +4,7 @@
 
 	require_once 'configuration.php';
 	require_once 'donations.class.php';
+	require_once 'ponyplayday-registrations.class.php';
 	require_once 'Mollie/API/Autoloader.php';
 
 	mb_internal_encoding('UTF-8');
@@ -47,6 +48,10 @@
 							{
 								case PaymentTypes::Donation:
 									sendDonationConfirmationEMail($payment, $configuration);
+									break;
+
+								case PaymentTypes::PonyPlayDayRegistration:
+									sendPonyPlayDayConfirmationEMail($payment, $configuration);
 									break;
 							}
 						
@@ -106,6 +111,65 @@
 			}
 
 			mb_send_mail($donation->emailAddress, $subject, $message, implode("\r\n", $headers));
+
+			return true;
+		}
+	}
+
+	function sendPonyPlayDayConfirmationEMail($payment, $configuration)
+	{
+		if ($payment == null)
+			return false;
+
+		if ($configuration == null)
+			return null;
+
+		if (!$registration = PonyPlayDayRegistration::withPayment($payment))
+			return null;
+
+		switch ($registration->locale) {
+
+			case 'nl_NL':
+				$datetimefmt = '%1$s, %2$s';
+				break;
+
+			default:
+				$datetimefmt = '%1$s at %2$s';
+				break;
+		}
+
+		if ($eventdatetime = PonyPlayDayRegistration::parseEventDateTimeString($registration->eventDateTime)) {
+			$datetime = Utilities::formatShortDateTime($eventdatetime, $datetimefmt, $registration->locale);
+		} else {
+			$datetime = $registration->eventDateTime;
+		}
+
+		// This comment is here to force this page to be saved in UTF-8 because the next line will need to display a € sign correctly.
+		switch ($registration->locale) {
+
+			case 'nl_NL':
+				$message = sprintf('Bedankt voor de aanmelding van %1$s voor de ponyspeeldag bij Manege Rijnstein. We hebben de aanmelding en betaling ontvangen.' . "\r\n\r\n" . '%1$s is aangemeld voor: %2$s' . "\r\n\r\n", $registration->nameChild, $datetime);
+				$subject = sprintf('Bevestiging aanmelding van %1$s voor de ponyspeeldag', $registration->nameChild);
+				break;
+
+			default:
+				$message = sprintf('Thank you for the registration of %1$s for the pony play day at Manege Rijnstein. We have received the registration and the payment.' . "\r\n\r\n". '%1$s is now registered for: %2$s' . "\r\n\r\n", $registration->nameChild, $datetime); 
+				$subject = sprintf('Confirmation of the registration of %1$s for the pony play day', $registration->nameChild);
+				break;
+		}
+
+		$from_emailaddress = $configuration->getPonyPlayDayConfirmationFromEmailAddress();
+		$from_emailname = $configuration->getPonyPlayDayConfirmationFromName();
+
+		if ($from_emailaddress) {
+
+			if ($from_emailname) {
+				$headers[] = 'From: ' . mb_encode_mimeheader($from_emailname) . ' <' . $from_emailaddress . '>';
+			} else {
+				$headers[] = 'From: ' . mb_encode_mimeheader($from_emailaddress);
+			}
+
+			mb_send_mail($registration->emailAddress, $subject, $message, implode("\r\n", $headers));
 
 			return true;
 		}

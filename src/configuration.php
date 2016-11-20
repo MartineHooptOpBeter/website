@@ -53,6 +53,32 @@
             return $this->_getPropertyForLocale($locale, $this->_config['donate_email_fromname']);
         }
 
+        public function getPonyPlayDayPrice() {
+            return $this->_config['ponyplayday_price'];
+        }
+
+        public function getPonyPlayDayEvents() {
+            return $this->_config['ponyplayday_events'];
+        }
+
+        public function getPonyPlayDayMinimumAge() {
+            return $this->_config['ponyplayday_minage'];
+        }
+
+        public function getPonyPlayDayMaximumAge() {
+            return $this->_config['ponyplayday_maxage'];
+        }
+
+        public function getPonyPlayDayConfirmationFromEmailAddress() { 
+            $locale = $this->getCurrentLocale();
+            return $this->_getPropertyForLocale($locale, $this->_config['ponyplayday_email_fromaddress']);
+        }
+
+        public function getPonyPlayDayConfirmationFromName() { 
+            $locale = $this->getCurrentLocale();
+            return $this->_getPropertyForLocale($locale, $this->_config['ponyplayday_email_fromname']);
+        }
+
         public function getMollieApiKey() {
             return $this->_config['mollie_apikey'];
         }

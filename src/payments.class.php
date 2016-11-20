@@ -6,6 +6,7 @@
     {
         const NotDefined = 0;
         const Donation = 1;
+        const PonyPlayDayRegistration = 2;
     }
 
     class Payment
@@ -66,7 +67,14 @@
 			}
 			return 0;
 		}
-		
+
+        public static function parseInteger($int) {
+            if (is_numeric($int)) {
+                return (int)$int;
+            }
+            return 0;
+        }
+
 		public static function formatDecimal($amount) {
 			if (!is_numeric($amount))
 				$amount = 0.0;
