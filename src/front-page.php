@@ -4,6 +4,7 @@
 
 	require_once 'donations.class.php';
 	require_once 'configuration.php';
+	require_once 'utilities.class.php';
 
 	function martinehooptopbeter_show_excerpt_title() {
 
@@ -96,13 +97,13 @@
 					<?php endif; ?>
 					<?php if ($totalCount == 1) : ?>
 						<?php if ($startdate != null) : ?>
-							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate))); ?></span>
 						<?php else : ?>
 							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
 						<?php endif; ?>
 					<?php else : ?>
 						<?php if ($startdate != null) : ?>
-							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate))); ?></span>
 						<?php else : ?>
 							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
 						<?php endif; ?>

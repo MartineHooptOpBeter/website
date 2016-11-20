@@ -97,17 +97,6 @@
 
 			return ($symbolInFront ? $currencySymbol . ($spaceBeforeSymbol ? ' ' : '') : '') . Payment::formatPrice($amount) . (!$symbolInFront ? ($spaceBeforeSymbol ? ' ' : '') . $currencySymbol : '');
 		}
-		
-		public static function formatShortDate($datetime) {
-			$fmt_date = new IntlDateFormatter(get_locale(), IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-			return $fmt_date->format($datetime);
-		}
-
-		public static function formatShortDateTime($datetime, $format) {
-			$fmt_date = new IntlDateFormatter(get_locale(), IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-			$fmt_time = new IntlDateFormatter(get_locale(), IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
-			return sprintf($format, $fmt_date->format($datetime), $fmt_time->format($datetime));
-		}
     }
 
     class Payments
