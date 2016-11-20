@@ -56,13 +56,13 @@
 					<?php endif; ?>
 					<?php if ($totalCount == 1) : ?>
 						<?php if ($startdate != null) : ?>
-							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate))); ?></span>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate, get_locale()))); ?></span>
 						<?php else : ?>
 							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
 						<?php endif; ?>
 					<?php else : ?>
 						<?php if ($startdate != null) : ?>
-							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate))); ?></span>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate, get_locale()))); ?></span>
 						<?php else : ?>
 							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
 						<?php endif; ?>
@@ -76,7 +76,7 @@
 					<?php if (!$item->showNoAmount) : ?><em><?php echo Donation::formatEuroPrice($item->amount); ?></em><?php endif; ?>
 					<?php if ($item->showAnonymous) : ?><strong><?php _e('Anonymous', 'martinehooptopbeter'); ?></strong><?php else : ?><strong><?php echo esc_attr($item->name); ?></strong><?php endif; ?>
 					
-					<span><?php echo Utilities::formatShortDateTime($item->timestamp, __('%1$s at %2$s', 'martinehooptopbeter')); ?></span>
+					<span><?php echo Utilities::formatShortDateTime($item->timestamp, __('%1$s at %2$s', 'martinehooptopbeter'), get_locale()); ?></span>
 
 					<?php if ($item->message) : ?><p><?php echo nl2br(esc_attr($item->message)); ?></p><?php endif ?>
 					
