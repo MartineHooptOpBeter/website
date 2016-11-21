@@ -12,9 +12,11 @@
 	
 		protected $_configuration = null;
 		protected $_xsrf = null;
+		protected $_service = null;
 
         public $doShowPonyPlayDayForm = false;
         public $doShowPonyPlayDayConfirmation = false;
+		public $doShowPonyPlayDayRegistrationClosed = false;
 		
 		public $errorMessage = null;
 		public $missingfields = [];
@@ -29,10 +31,22 @@
 		function PonyPlayDayPage($configuration) {
 			$this->_configuration = $configuration;
 			$this->_xsrf = new XSRF();
+			$this->_service = new PonyPlayDayRegistrationsService($this->_configuration);
+		}
+
+		function isRegistrationPossible() {
+			if (!$this->_service->isRegistrationPossible()) {
+				$this->doShowPonyPlayDayRegistrationClosed = true;
+				return false;
+			}
+			return true;
 		}
 
 		function processRequest($registrationUrl, $server, $post, $get) {
 			
+			if (!$this->isRegistrationPossible())
+				return false;
+
 			// We show the form by default, unless we decide otherwise
 			$this->doShowPonyPlayDayForm = true;
 			
@@ -154,6 +168,9 @@
 		
 		function showPonyPlayDayForm()
 		{
+			if (!$this->isRegistrationPossible())
+				return false;
+
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
 
@@ -351,6 +368,22 @@
 
 <?php
 			
+		}
+
+		function showPonyPlayDayRegistrationClosed() {
+
+?>	<section class="content">
+		<div class="sitewidth clearfix">
+
+            <div class="text">
+				<p><?php _e('Sorry, registration for the pony play day has been closed.', 'martinehooptopbeter'); ?></p>
+			</div>
+
+        </div>
+    </section>
+
+<?php
+
 		}
 
 	}

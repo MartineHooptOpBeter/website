@@ -329,3 +329,6 @@ msgstr "Ponyspeeldag"
 
 msgid "An error has occured while saving your registration."
 msgstr "Er is een fout opgetreden bij het opslaan van de aanmelding."
+
+msgid "Sorry, registration for the pony play day has been closed."
+msgstr "Helaas, het is niet meer mogelijk om je aan te melden voor de ponyspeeldag."

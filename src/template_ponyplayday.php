@@ -83,6 +83,12 @@
 		
 	}
 
+	if ($ponyPlayDayPage->doShowPonyPlayDayRegistrationClosed) {
+
+		$ponyPlayDayPage->showPonyPlayDayRegistrationClosed();
+		
+	}
+
 ?>
 	
 <?php get_footer(); ?>
