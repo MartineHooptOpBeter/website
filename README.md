@@ -273,7 +273,10 @@ gulp --devhostname=www.mijnwebsite.nl --devhostsecure=yes
 Browsesync zal de website ook via HTTPS proxy'en en de browser kan daarom een foutmelding geven dat het certificaat van de site niet klopt. Je kunt hiervoor in de meeste browsers een tijdelijke (of permanente) uitzondering opgegeven. 
 
 # Upgraden vanaf 1.x
-Als je upgrade vanaf een 1.x versie van dit theme zijn er een aantal zaken die gewijzigd.
+Als je upgrade vanaf een 1.x versie van dit theme zijn er een aantal zaken gewijzigd.
 
 ## Configuratie
 Enkele configuratie parameters zijn gewijzigd. Dit komt omdat de **donations** tabel / database zijn vervangen door meer generieke **payments** tabel. De configuratieparameters `$config['donate_dsn']`, `$config['donate_username']` en `$config['donate_password']` zijn vervangen door `$config['payments_dsn']`, `$config['payments_username']` en `$config['payments_password']`. De betekenis van de parameters is niet gewijzigd.
+
+## Database
+De database tabel voor de donaties is vervangen door een meer generieke **payments** tabel. Hierin kunnen naast donaties ook betalingen en gegevens van andere type betalingen (zoals de ponyspeeldag) worden opgeslagen. Om de data van bestaande donaties over te zetten is er een script `convert-donations-to-payments.php` in folder `wwwroot/wp-content/themes/martinehoopoptbeter/ `welke de data van de tabel `tbl_donations` converteert naar de tabel `tbl_payments`. Het script moet worden uitgevoerd vanaf de commandline.
