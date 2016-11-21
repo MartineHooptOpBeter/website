@@ -262,7 +262,7 @@ msgid "Age child"
 msgstr "Leeftijd kind"
 
 msgid "Please specify the level of experience your child has with ponies / horses."
-msgstr "Geef hieronder aan hoeveel ervaring het kind met pony's en paarden."
+msgstr "Geef hieronder aan hoeveel ervaring het kind heeft met pony's en paarden."
 
 msgid "Experience level"
 msgstr "Ervaring"
