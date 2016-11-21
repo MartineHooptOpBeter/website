@@ -180,14 +180,14 @@
                         </p>
                         <p class="<?php if (isset($this->missingfields['registration_age'])) { echo 'error'; } ?>">
                             <label for="registration_age"><?php _e('Age child', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_age'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_age'])); ?>)</em><?php endif; ?></label>
-                            <input type="text" class="textinput numberinput" id="registration_age" name="registration_age" value="<?php echo esc_attr($this->registration_age); ?>" placeholder="<?php echo esc_attr(sprintf(__('%1$s till %2$s', 'martinehooptopbeter'), $this->_configuration->getPonyPlayDayMinimumAge(), $this->_configuration->getPonyPlayDayMaximumAge())); ?>"/>
+                            <input type="text" class="textinput numberinput" id="registration_age" name="registration_age" value="<?php echo esc_attr($this->registration_age); ?>" placeholder="<?php echo esc_attr(sprintf(__('%1$s through %2$s', 'martinehooptopbeter'), $this->_configuration->getPonyPlayDayMinimumAge(), $this->_configuration->getPonyPlayDayMaximumAge())); ?>"/>
                         </p>
 						<p><?php _e('Please specify the level of experience your child has with ponies / horses.', 'martinehooptopbeter'); ?>
                         <p class="<?php if (isset($this->missingfields['registration_experiencelevel'])) { echo 'error'; } ?>">
                             <label><?php _e('Experience level', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_experiencelevel'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_experiencelevel'])); ?>)</em><?php endif; ?></label>
                         </p>
                         <ul class="<?php if (isset($this->missingfields['registration_experiencelevel'])) { echo 'error'; } ?>">
-                            <li><input type="radio" class="radio" id="registration_experiencelevel_none" name="registration_experiencelevel" value="none"<?php if ($this->registration_experiencelevel == 'none') { echo ' checked="checked"'; } ?>><label for="registration_experiencelevel_none"><?php _e('No experience (or very little)', 'martinehooptopbeter'); ?></label></li>
+                            <li><input type="radio" class="radio" id="registration_experiencelevel_none" name="registration_experiencelevel" value="none"<?php if ($this->registration_experiencelevel == 'none') { echo ' checked="checked"'; } ?>><label for="registration_experiencelevel_none"><?php _e('No or very little experience', 'martinehooptopbeter'); ?></label></li>
                             <li><input type="radio" class="radio" id="registration_experiencelevel_some" name="registration_experiencelevel" value="some"<?php if ($this->registration_experiencelevel == 'some') { echo ' checked="checked"'; } ?>><label for="registration_experiencelevel_some"><?php _e('Some experience in caring for and riding ponnies', 'martinehooptopbeter'); ?></label></li>
                             <li><input type="radio" class="radio" id="registration_experiencelevel_high" name="registration_experiencelevel" value="high"<?php if ($this->registration_experiencelevel == 'high') { echo ' checked="checked"'; } ?>><label for="registration_experiencelevel_high"><?php _e('A lot of experience, has taken riding lessons', 'martinehooptopbeter'); ?></label></li>
                         </ul>
@@ -210,7 +210,7 @@
 									else:
 
 						?><p class="<?php if (isset($this->missingfields['registration_eventdatetime'])) { echo 'error'; } ?>">
-                            <label><?php _e('Choose date / time', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_eventdatetime'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_eventdatetime'])); ?>)</em><?php endif; ?></label>
+                            <label><?php _e('Choose date and time', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_eventdatetime'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_eventdatetime'])); ?>)</em><?php endif; ?></label>
                         </p>
                         <ul class="<?php if (isset($this->missingfields['registration_eventdatetime'])) { echo 'error'; } ?>">
 						<?php foreach($events as $event) : ?>
@@ -220,7 +220,7 @@
 								<?php endif; ?>
 							<?php endif; ?>
 						<?php endif; ?>
-                        <p><?php echo esc_attr(sprintf(__('The cost per child is %1$s. You can pay immediately online.', 'martinehooptopbeter'), PonyPlayDayRegistration::formatEuroPrice($this->_configuration->getPonyPlayDayPrice()))); ?>
+                        <p><?php echo esc_attr(sprintf(__('The cost per child is %1$s. You have to pay this immediately online using iDEAL or a Credit Card.', 'martinehooptopbeter'), PonyPlayDayRegistration::formatEuroPrice($this->_configuration->getPonyPlayDayPrice()))); ?>
                         <p class="<?php if (isset($this->missingfields['registration_payment_method'])) { echo 'error'; } ?>">
                             <label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_payment_method'])); ?>)</em><?php endif; ?></label>
                         </p>
@@ -292,14 +292,14 @@
 
 						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
 					
-						<p><?php _e('The payment of you registration for the Pony Play Day has been cancelled, expired or has failed. We did not receive your payment. Please press the \'Register Again\' button to retry your registration.', 'martinehooptopbeter'); ?></p>
+						<p><?php _e('The payment of your registration for the Pony Play Day has been cancelled, expired or has failed. We did not receive your payment. Please press the \'Register Again\' button to retry your registration and payment.', 'martinehooptopbeter'); ?></p>
 					
 					<?php elseif (($this->registration_payment_status == 'refunded') || ($this->registration_payment_status == 'charged_back')) :  ?>
 						<?php $showRegisterAgain = true; ?>
 						
 						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
 					
-						<p><?php _e('The payment of you registration for the Pony Play Day has been refunded or charged back. We did not receive your payment. Please press the \'Register Again\' button to retry your registration.', 'martinehooptopbeter'); ?></p>
+						<p><?php _e('The payment of you registration for the Pony Play Day has been refunded or charged back. We did not receive your payment. Please press the \'Register Again\' button to retry your registration and payment.', 'martinehooptopbeter'); ?></p>
 					
 					<?php else : ?>
 						<?php $showRefresh = true; ?>
