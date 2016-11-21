@@ -115,13 +115,13 @@ msgid "Because you paid with a creditcard it could take a little bit longer befo
 msgstr "Omdat je met een creditcard hebt betaald kan het wat langer duren voordat we een bevestiging ontvangen van je donatie."
 
 msgid "You can press the 'Refresh' button to reload the page to show the latest status of your donation. In case something went wrong, you can press the 'Donate Again' button to start a new donation."
-msgstr "Je kunt op de 'Verversen' knop drukken om de pagina opnieuw te laden en de laatste status van je donatie te zien. Als er iets mis is gegaan kun je ook op de knop 'Opnieuw doneren' klikken om een nieuwe donatie te starten."
+msgstr "Je kunt op de 'Verversen' knop drukken om de pagina opnieuw te laden en de laatste status van je donatie te zien. Als er iets mis is gegaan kun je ook op de knop 'Opnieuw Doneren' klikken om een nieuwe donatie te starten."
 
 msgid "Refresh"
 msgstr "Verversen"
 
 msgid "Donate Again"
-msgstr "Doneer Opnieuw"
+msgstr "Opnieuw Doneren"
 
 msgid "Sorry"
 msgstr "Sorry"
