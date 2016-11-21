@@ -2,6 +2,8 @@
 Deze repository bevat de bronbestanden voor het WordPress theme voor de website [www.martinehooptopbeter.nl](https://www.martinehooptopbeter.nl). Deze website is gratis ontwikkeld door [Marco Miltenburg](https://github.com/MarcoMiltenburg) van [Virtual Pages](http://www.virtualpages.nl) als sponsoring voor deze crowdfunding actie. Om ook andere MS-patienten de kans te geven om een website op te zetten voor crowdfunding is de broncode open source beschikbaar gemaakt onder de [MIT licentie](https://github.com/MartineHooptOpBeter/website/blob/develop/LICENSE). 
 
 # Installatie
+Als je upgrade van een 1.x versie van dit theme, kijk dan bij de hoofdstuk [Upgraden vanaf 1.x](#upgraden%20vanaf%201.x) voor meer informatie.
+
 De bestanden voor het WordPress theme worden gegenereerd met behulp van de Gulp task runner. De bestanden in de `src` folder is dus **NIET** het WordPress theme. Voor het generen van het WordPress theme is [Node en NPM (Node Package Manager)](https://nodejs.org/) vereist. 
 
 Maak een folder aan waar je de bestanden wilt plaatsen en zorg ervoor dat deze folder de huidige folder is. Clone de repository met GIT naar deze folder:
@@ -46,19 +48,35 @@ De tabel voor de donaties kan worden aangemaakt met het SQL script `database/don
 # Configuratie
 De configuratie wordt gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/config.php`. Een voorbeeldbestand `config.php` staat in de root folder van het project.
 
+Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op betalingen.
+
+| Parameter | Verplicht | Standaardwaarde | Omschrijving |
+| --------- | --------- | --------------- | ------------ |
+| `$config['payments_dsn']` | Ja | *Geen* | De **data source name** voor het verbinden met de MySQL database voor de betalingen. Bijvoorbeeld: `mysql:host=localhost;dbname=martinehooptopbeter` |
+| `$config['payments_username']` | Ja | *Geen* | De gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de betalingen. |
+| `$config['payments_password']` | Ja | *Geen* | Het wachtwoord van de gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de betalingen. |
+
 Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op de donaties.
 
 | Parameter | Verplicht | Standaardwaarde | Omschrijving |
 | --------- | --------- | --------------- | ------------ |
-| `$config['donate_dsn']` | Ja | *Geen* | De **data source name** voor het verbinden met de MySQL database voor de donaties. Bijvoorbeeld: `mysql:host=localhost;dbname=martinehooptopbeter` |
-| `$config['donate_username']` | Ja | *Geen* | De gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de donaties. |
-| `$config['donate_password']` | Ja | *Geen* | Het wachtwoord van de gebruikersnaam waarmee de applicatie moet inloggen op de database server voor de donaties. |
 | `$config['donate_goal']` | Nee | 7500000 | Het doelbedrag op te halen met donaties (in euro centen). Dit bedrag is optioneel en als het niet is opgegeven wordt alleen het opgehaalde bedrag getoond zonder een doelbedrag en zonder een grafische weergave van hoeveel van het doelbedrag al is opgehaald. |
 | `$config['donate_startdate']` | Nee | `mktime(0, 0, 0, 12, 31, 2015)` | De startdatum van de actie. Deze datum is optioneel en kan op `null` worden gezet als deze niet gebruikt moet worden. Als deze is opgegeven wordt deze gebruikt om aan te geven hoeveel donaties er zijn gedaan sinds deze datum. Zie [mktime()](http://php.net/manual/en/function.mktime.php) voor uitleg van de parameters van deze functie. |
 | `$config['donate_minamount']` | Nee | 500 | Het minimumbedrag van een donatie (in euro centen). Als er geen minimumbedrag is opgegeven dan is dit 0. |
 | `$config['donate_maxamount']` | Nee | 211200 | Het maximumbedrag van een donatie (in euro centen). Als er geen maximumbedrag is opgegeven dan geldt er geen maximum. |
 | `$config['donate_email_fromaddress']` | Nee | *Array* | Het e-mailadres waarmee een bevestigingse-mail wordt gestuurd na ontvangst van de donatie. Als er geen e-mailadres is gedefinieerd wordt er geen bevestigingse-mail verstuurd. In plaats van een `string` met een enkel e-mailadres kan ook een `array` worden opgegeven met verschillende e-mailadressen per locale (zie uitleg verderop). |
 | `$config['donate_email_fromname']` | Nee | *Array* | De afzender van de e-mail waarmee een bevestiging wordt gestuurd na ontvangst van de donatie. Als er geen naam is gedefinieerd dan zal alleen het e-mailadres worden gebruikt (`$config['donate_email_fromaddress']`). In plaats van een `string` met een enkele naam kan ook een `array` worden opgegeven met verschillende namen per locale (zie uitleg verderop). |
+
+Hieronder zijn alle configuratie opties beschreven welke betrekking hebben op de Ponyspeeldag.
+
+| Parameter | Verplicht | Standaardwaarde | Omschrijving |
+| --------- | --------- | --------------- | ------------ |
+| `$config['ponyplayday_price']` | Nee | 1750 | De kosten per kind voor het inschrijven voor de ponyspeeldag (in euro centen). Dit bedrag is optioneel en als het niet is opgegeven wordt is het niet mogelijk om in te schrijven voor de ponyspeeldag. |
+| `$config['ponyplayday_events']` | Nee | '2036/1/19' | Een array met de start- en einddatum / tijd waarop de ponyspeeldag wordt gehouden. Zie het hoofdstuk [Ponyspeeldag](#ponyspeeldag) voor meer informatie over de syntax van deze parameter. | 
+| `$config['ponyplayday_minage']` | Nee | 6 | De minimumleeftijd voor kinderen om zich te mogen inschrijven voor de ponyspeeldag. |
+| `$config['ponyplayday_maxage']` | Nee | 12 | De maximumleeftijd voor kinderen om zich te mogen inschrijven voor de ponyspeeldag. |
+| `$config['ponyplayday_email_fromaddress']` | Nee | *Array* | Het e-mailadres waarmee een bevestigingse-mail wordt gestuurd na ontvangst van de inschrijving. Als er geen e-mailadres is gedefinieerd wordt er geen bevestigingse-mail verstuurd. In plaats van een `string` met een enkel e-mailadres kan ook een `array` worden opgegeven met verschillende e-mailadressen per locale (zie uitleg verderop). |
+| `$config['ponyplayday_email_fromname']` | Nee | *Array* | De afzender van de e-mail waarmee een bevestiging wordt gestuurd na ontvangst van de inschrijving. Als er geen naam is gedefinieerd dan zal alleen het e-mailadres worden gebruikt (`$config['ponyplayday_email_fromaddress']`). In plaats van een `string` met een enkele naam kan ook een `array` worden opgegeven met verschillende namen per locale (zie uitleg verderop). |
 
 Er wordt gebruik gemaakt van online betalingen via [Mollie](https://www.mollie.com/nl/). Hiervoor moet een account worden aangemaakt en een website worden gedefinieerd waarvan de volgende gegevens moeten worden ingevuld:
 
@@ -103,6 +121,40 @@ $config['contact_sendmailto'] = [
 ];
 ```
 Er kunnen meerdere locale's worden opgegeven of er kan een fallback worden opgegeven met een `*` welke voor iedere andere niet gespecificeerde locale zal worden gebruikt. De fallback met een `*` moet als laatste element in de array worden opgenomen. Als er geen match is met één van de opgegeven locale's dan is dit hetzelfde alsof er geen waarde is opgegeven.  
+
+# Ponyspeeldag
+Voor de crowdfunding actie van de Stichting Martine Hoopt Op Beter wordt er ook een Ponyspeeldag georganiseerd. Dit onderdeel kan echter ook voor andere evenementen worden gebruikt waarvoor registratie vereist is. 
+
+Voor de ponyspeeldag kan op verschillende manieren een datum en tijd worden opgegeven. De meest eenvoudige manier is een `string` voor als er maar een ponyspeeldag wordt georganiseerd. Deze string wordt dan letterlijk opgslagen als de datum/tijd bij de inschrijving. In plaats van een `string` kan ook een `array` worden opgegeven. De syntax voor deze array is:
+
+```
+[
+    'startdatetime' => mktime(10, 30, 0, 1, 19, 2032),
+    'enddatetime' => mktime(13, 0, 0, 1, 19, 2032),
+    'closedays' => 3
+]
+```
+
+De waarde van `closedays` bepaald wanneer de inschrijving voor de ponyspeeldag wordt gesloten. Bij de inschrijving wordt de opgegeven startdatum/tijd opgeslagen. De einddatum/tijd is alleen voor weergave op de website. 
+
+Als er meerdere ponyspeeldagen worden gehouden dan kan er ook een multidimensional array worden opgegeven:
+
+```
+[
+    [
+        'startdatetime' => mktime(10, 30, 0, 1, 19, 2032),
+        'enddatetime' => mktime(13, 0, 0, 1, 19, 2032),
+        'closedays' => 3
+    ],
+    [
+        'startdatetime' => mktime(14, 00, 0, 1, 26, 2032),
+        'enddatetime' => mktime(16, 30, 0, 1, 26, 2032),
+        'closedays' => 3
+    ]
+]
+```
+
+Als er meerdere ponyspeeldagen zijn opgegeven dan wordt er een meerkeuze getoond en kan de bezoeker van de website een keuze maken uit de dag en tijd (mits nog beschikbaar). 
 
 # Sponsors
 De sponsors worden gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/sponsors/sponsors.json`. Een voorbeeldbestand `sponsors.json` staat in de root folder van het project.
@@ -219,3 +271,12 @@ gulp --devhostname=www.mijnwebsite.nl --devhostsecure=yes
 ```
 
 Browsesync zal de website ook via HTTPS proxy'en en de browser kan daarom een foutmelding geven dat het certificaat van de site niet klopt. Je kunt hiervoor in de meeste browsers een tijdelijke (of permanente) uitzondering opgegeven. 
+
+# Upgraden vanaf 1.x
+Als je upgrade vanaf een 1.x versie van dit theme zijn er een aantal zaken gewijzigd.
+
+## Configuratie
+Enkele configuratie parameters zijn gewijzigd. Dit komt omdat de **donations** tabel / database zijn vervangen door meer generieke **payments** tabel. De configuratieparameters `$config['donate_dsn']`, `$config['donate_username']` en `$config['donate_password']` zijn vervangen door `$config['payments_dsn']`, `$config['payments_username']` en `$config['payments_password']`. De betekenis van de parameters is niet gewijzigd.
+
+## Database
+De database tabel voor de donaties is vervangen door een meer generieke **payments** tabel. Hierin kunnen naast donaties ook betalingen en gegevens van andere type betalingen (zoals de ponyspeeldag) worden opgeslagen. Om de data van bestaande donaties over te zetten is er een script `convert-donations-to-payments.php` in folder `wwwroot/wp-content/themes/martinehoopoptbeter/ `welke de data van de tabel `tbl_donations` converteert naar de tabel `tbl_payments`. Het script moet worden uitgevoerd vanaf de commandline.

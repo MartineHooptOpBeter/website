@@ -2,8 +2,9 @@
 
     @@HEADER@@
 
-	require_once 'donations-class.php';
+	require_once 'donations.class.php';
 	require_once 'configuration.php';
+	require_once 'utilities.class.php';
 
 	function martinehooptopbeter_show_excerpt_title() {
 
@@ -60,7 +61,7 @@
 <?php
 
 		$configuration = new Configuration();
-		$donations = new Donations($configuration->getDonationsDatabaseDataSourceName(), $configuration->getDonationsDatabaseUsername(), $configuration->getDonationsDatabasePassword());
+		$donations = new Donations($configuration->getPaymentsDatabaseDataSourceName(), $configuration->getPaymentsDatabaseUsername(), $configuration->getPaymentsDatabasePassword());
 		
 		$itemCount = $donations->getDonationsListCount();
 		$totalCount = $itemCount;
@@ -72,7 +73,7 @@
 		}
 
 		$goalValue = $configuration->getDonationsGoalValue();
-		$goalPercentage = $donations->percentageOfGoal($totalValue, $goalValue, 100.0);
+		$goalPercentage = $donations->getPercentageOfGoal($totalValue, $goalValue, 100.0);
 		
 		$startdate = $configuration->getDonationsStartDate();
 
@@ -96,13 +97,13 @@
 					<?php endif; ?>
 					<?php if ($totalCount == 1) : ?>
 						<?php if ($startdate != null) : ?>
-							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate, get_locale()))); ?></span>
 						<?php else : ?>
 							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donation', 'martinehooptopbeter'), $totalCount)); ?></span>
 						<?php endif; ?>
 					<?php else : ?>
 						<?php if ($startdate != null) : ?>
-							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Donation::formatShortDate($startdate))); ?></span>
+							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations since %2$s', 'martinehooptopbeter'), $totalCount, Utilities::formatShortDate($startdate, get_locale()))); ?></span>
 						<?php else : ?>
 							<span class="number"><?php echo esc_attr(sprintf(__('%1$s donations', 'martinehooptopbeter'), $totalCount)); ?></span>
 						<?php endif; ?>
