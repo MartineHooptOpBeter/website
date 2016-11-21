@@ -15,16 +15,16 @@
 			$this->_setPhpLocale();
         }
 
-        public function getDonationsDatabaseDataSourceName() {
-            return $this->_config['donate_dsn'];
+        public function getPaymentsDatabaseDataSourceName() {
+            return $this->_config['payments_dsn'];
         }
 
-        public function getDonationsDatabaseUsername() {
-            return $this->_config['donate_username'];
+        public function getPaymentsDatabaseUsername() {
+            return $this->_config['payments_username'];
         }
 
-        public function getDonationsDatabasePassword() {
-            return $this->_config['donate_password'];
+        public function getPaymentsDatabasePassword() {
+            return $this->_config['payments_password'];
         }
 
         public function getDonationsGoalValue() {
@@ -51,6 +51,32 @@
         public function getDonationConfirmationFromName() { 
             $locale = $this->getCurrentLocale();
             return $this->_getPropertyForLocale($locale, $this->_config['donate_email_fromname']);
+        }
+
+        public function getPonyPlayDayPrice() {
+            return $this->_config['ponyplayday_price'];
+        }
+
+        public function getPonyPlayDayEvents() {
+            return $this->_config['ponyplayday_events'];
+        }
+
+        public function getPonyPlayDayMinimumAge() {
+            return $this->_config['ponyplayday_minage'];
+        }
+
+        public function getPonyPlayDayMaximumAge() {
+            return $this->_config['ponyplayday_maxage'];
+        }
+
+        public function getPonyPlayDayConfirmationFromEmailAddress() { 
+            $locale = $this->getCurrentLocale();
+            return $this->_getPropertyForLocale($locale, $this->_config['ponyplayday_email_fromaddress']);
+        }
+
+        public function getPonyPlayDayConfirmationFromName() { 
+            $locale = $this->getCurrentLocale();
+            return $this->_getPropertyForLocale($locale, $this->_config['ponyplayday_email_fromname']);
         }
 
         public function getMollieApiKey() {
