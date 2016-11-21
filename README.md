@@ -123,7 +123,7 @@ $config['contact_sendmailto'] = [
 Er kunnen meerdere locale's worden opgegeven of er kan een fallback worden opgegeven met een `*` welke voor iedere andere niet gespecificeerde locale zal worden gebruikt. De fallback met een `*` moet als laatste element in de array worden opgenomen. Als er geen match is met één van de opgegeven locale's dan is dit hetzelfde alsof er geen waarde is opgegeven.  
 
 # Ponyspeeldag
-Voor de crowdfunding actie van de Stichting Martine Hoopt Op Beter wordt er ook een Ponyspeeldag georganiseerd. Dit onderdeel kan echter ook voor andere evenementen worden gebruikt. 
+Voor de crowdfunding actie van de Stichting Martine Hoopt Op Beter wordt er ook een Ponyspeeldag georganiseerd. Dit onderdeel kan echter ook voor andere evenementen worden gebruikt waarvoor registratie vereist is. 
 
 Voor de ponyspeeldag kan op verschillende manieren een datum en tijd worden opgegeven. De meest eenvoudige manier is een `string` voor als er maar een ponyspeeldag wordt georganiseerd. Deze string wordt dan letterlijk opgslagen als de datum/tijd bij de inschrijving. In plaats van een `string` kan ook een `array` worden opgegeven. De syntax voor deze array is:
 
@@ -154,7 +154,7 @@ Als er meerdere ponyspeeldagen worden gehouden dan kan er ook een multidimension
 ]
 ```
 
-Als er meerdere ponyspeeldagen zijn opgegeven dan wordt er een meerkeuze getoond. 
+Als er meerdere ponyspeeldagen zijn opgegeven dan wordt er een meerkeuze getoond en kan de bezoeker van de website een keuze maken uit de dag en tijd (mits nog beschikbaar). 
 
 # Sponsors
 De sponsors worden gedefinieerd in het bestand `wwwroot/wp-content/themes/martinehooptopbeter/sponsors/sponsors.json`. Een voorbeeldbestand `sponsors.json` staat in de root folder van het project.
