@@ -303,8 +303,8 @@ msgstr "De opgegeven registratie kan niet worden gevonden."
 msgid "%1$s through %2$s"
 msgstr "%1$s t/m %2$s"
 
-msgid "The cost per child is %1$s. You have to pay this immediately online using iDEAL or a Credit Card."
-msgstr "De kosten per kind zijn %1$s. Dit moet direct bij aanmelden online worden betaald met iDEAL of een creditcard."
+msgid "The cost per child is %1$s."
+msgstr "De kosten per kind zijn %1$s."
 
 msgid "Register and Pay Online"
 msgstr "Aanmelden en Online Betalen"
