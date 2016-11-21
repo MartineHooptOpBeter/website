@@ -245,3 +245,87 @@ msgstr "/doneren/"
 
 msgid "The posted data could not be validated. Please try again."
 msgstr "De verstuurde data kon niet worden gevalideerd. Probeer het nogmaals."
+
+msgid "Your registration of %1$s for the Pony Play Day has been received. We also received your payment of %2$s."
+msgstr "De aanmelding van %1$s voor de ponyspeeldag is ontvangen. We hebben ook de betaling van %2$s ontvangen."
+
+msgid "Your registration of %1$s for the Pony Play Day has been received. However we have not received confirmation of your payment."
+msgstr "De aanmelding van %1$s voor de ponyspeeldag is ontvangen.  We hebben echter geen bevestiging ontvangen van de betaling van de inschrijving."
+
+msgid "Enter your and your child\'s details below. If you want to register more than one child please complete this form for each child separately."
+msgstr "Vul onderstaand de gegevens in van het kind. Als je meer dan één kind wilt aanmelden vul dan dit formulier voor ieder kind apart in."
+
+msgid "Name child"
+msgstr "Naam kind"
+
+msgid "Age child"
+msgstr "Leeftijd kind"
+
+msgid "Please specify the level of experience your child has with ponies / horses."
+msgstr "Geef hieronder aan hoeveel ervaring het kind met pony's en paarden."
+
+msgid "Experience level"
+msgstr "Ervaring"
+
+msgid "No or very little experience"
+msgstr "Geen of nauwelijks ervaring"
+
+msgid "Some experience in caring for and riding ponnies"
+msgstr "Enige ervaring met het omgaan en rijden van pony's"
+
+msgid "A lot of experience, has taken riding lessons"
+msgstr "Veel ervaring, heeft ook paardrijlessen gehad"
+
+msgid "Invalid age"
+msgstr "Onjuiste leeftijd"
+
+msgid "Minimum age is %1$s"
+msgstr "Minimum leeft is %1$s"
+
+msgid "Maximum age is %1$s"
+msgstr "Maximum leeftijd is %1$s"
+
+msgid "Invalid value"
+msgstr "Ongeldige waarde"
+
+msgid "You are registering for the Pony Play Day at %1$s."
+msgstr "Deze aanmelding is voor de ponyspeeldag op %1$s."
+
+msgid "Choose date and time"
+msgstr "Kies datum en tijd"
+
+msgid "Invalid date / time"
+msgstr "Ongeldige datum / tijd"
+
+msgid "The specified registration could not be found."
+msgstr "De opgegeven registratie kan niet worden gevonden."
+
+msgid "%1$s through %2$s"
+msgstr "%1$s t/m %2$s"
+
+msgid "The cost per child is %1$s. You have to pay this immediately online using iDEAL or a Credit Card."
+msgstr "De kosten per kind zijn %1$s. Dit moet direct bij aanmelden online worden betaald met iDEAL of een creditcard."
+
+msgid "Register and Pay Online"
+msgstr "Aanmelden en Online Betalen"
+
+msgid "The payment of your registration for the Pony Play Day has been cancelled, expired or has failed. We did not receive your payment. Please press the \'Register Again\' button to retry your registration and payment."
+msgstr "De betaling voor de aanmelding voor de ponyspeeldag is geannuleerd, verlopen of mislukt. Helaas hebben we je betaling dus niet ontvangen. Klik op de knop 'Opnieuw Aanmelden' om de aanmelding en betaling opnieuw te proberen."
+
+msgid "The payment of you registration for the Pony Play Day has been refunded or charged back. We did not receive your payment. Please press the \'Register Again\' button to retry your registration and payment."
+msgstr "De betaling voor de aanmelding voor de ponyspeeldag is gestorneerd of teruggevorderd. Helaas hebben we je betaling dus niet ontvangen. Klik op de knop 'Opnieuw Aanmelden' om de aanmelding en betaling opnieuw te proberen."
+
+msgid "You can press the \'Refresh\' button to reload the page to show the latest status of your payment. In case something went wrong, you can press the \'Register Again\' button to retry your registration."
+msgstr "Je kunt op de 'Verversen' knop drukken om de pagina opnieuw te laden en de laatste status van je betaling te zien. Als er iets mis is gegaan kun je ook op de knop 'Opnieuw Aanmelden' klikken om een nieuwe aanmelding en betaling te starten."
+
+msgid "Register Again"
+msgstr "Opnieuw Aanmelden"
+
+msgid "'%1$s, %2$s'"
+msgstr "'%1$s, %2$s'"
+
+msgid "Pony Play Day"
+msgstr "Ponyspeeldag"
+
+msgid "An error has occured while saving your registration."
+msgstr "Er is een fout opgetreden bij het opslaan van de aanmelding."
