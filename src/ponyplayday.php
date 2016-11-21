@@ -241,7 +241,7 @@
 								<?php endif; ?>
 							<?php endif; ?>
 						<?php endif; ?>
-                        <p><?php echo esc_attr(sprintf(__('The cost per child is %1$s. You have to pay this immediately online using iDEAL or a Credit Card.', 'martinehooptopbeter'), PonyPlayDayRegistration::formatEuroPrice($this->_configuration->getPonyPlayDayPrice()))); ?>
+                        <p><?php echo esc_attr(sprintf(__('The cost per child is %1$s.', 'martinehooptopbeter'), PonyPlayDayRegistration::formatEuroPrice($this->_configuration->getPonyPlayDayPrice()))); ?>
                         <p class="<?php if (isset($this->missingfields['registration_payment_method'])) { echo 'error'; } ?>">
                             <label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_payment_method'])); ?>)</em><?php endif; ?></label>
                         </p>
