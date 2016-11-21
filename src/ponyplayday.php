@@ -82,7 +82,7 @@
 						if ($eventdatetime != $this->registration_eventdatetime) {
 							$this->missingfields['registration_eventdatetime'] = __('Invalid value', 'martinehooptopbeter');
 						}
-					} elseif (!PonyPlayDayRegistration::isValidEventDateTime($this->registration_eventdatetime, $eventsdatetime)) {
+					} elseif (!PonyPlayDayRegistrationsService::isValidEventDateTime($this->registration_eventdatetime, $eventsdatetime)) {
 						$this->missingfields['registration_eventdatetime'] = __('Invalid date / time', 'martinehooptopbeter');
 					}
 				}
@@ -201,7 +201,7 @@
 
 							else:
 
-								if ($events = PonyPlayDayRegistration::getArrayWithEventsDateTimeOpenForRegistration($eventsdatetime)) :
+								if ($events = PonyPlayDayRegistrationsService::getArrayWithEventsDateTimeOpenForRegistration($eventsdatetime)) :
 									if (count($events) == 1) :
 
 						?><p class="<?php if (isset($this->missingfields['registration_eventdatetime'])) { echo 'error'; } ?>"><?php echo esc_attr(sprintf(__('You are registering for the Pony Play Day at %1$s.', 'martinehooptopbeter'), $events[0]['eventdatetimestring'])); ?></p>

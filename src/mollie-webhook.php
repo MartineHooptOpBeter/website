@@ -138,7 +138,7 @@
 				break;
 		}
 
-		if ($eventdatetime = PonyPlayDayRegistration::parseEventDateTimeString($registration->eventDateTime)) {
+		if ($eventdatetime = PonyPlayDayRegistrationsService::parseEventDateTimeString($registration->eventDateTime)) {
 			$datetime = Utilities::formatShortDateTime($eventdatetime, $datetimefmt, $registration->locale);
 		} else {
 			$datetime = $registration->eventDateTime;
