@@ -45,6 +45,17 @@
 			if (!is_array($eventsdatetime))
 				return false;
 
+            return true;
+        }
+
+        public function isRegistrationStillOpen() {
+
+            if (!$this->isRegistrationPossible())
+                return false;
+
+			$price = PonyPlayDayRegistration::parseAmount($this->_configuration->getPonyPlayDayPrice());
+			$eventsdatetime = $this->_configuration->getPonyPlayDayEvents();
+
             // If we get a non-multi-dimensional array, we make it multi-dimensional
             if (!is_array($eventsdatetime[0]))
                 $eventsdatetime = array($eventsdatetime);

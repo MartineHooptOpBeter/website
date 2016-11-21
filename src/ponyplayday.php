@@ -35,10 +35,14 @@
 		}
 
 		function isRegistrationPossible() {
-			if (!$this->_service->isRegistrationPossible()) {
+			if (!$this->_service->isRegistrationPossible())
+				return false;
+
+			if (!$this->_service->isRegistrationStillOpen()) {
 				$this->doShowPonyPlayDayRegistrationClosed = true;
 				return false;
 			}
+
 			return true;
 		}
 
