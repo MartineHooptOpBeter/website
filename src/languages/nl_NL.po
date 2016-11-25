@@ -332,3 +332,21 @@ msgstr "Er is een fout opgetreden bij het opslaan van de aanmelding."
 
 msgid "Sorry, registration for the pony play day has been closed."
 msgstr "Helaas, het is niet meer mogelijk om je aan te melden voor de ponyspeeldag."
+
+msgid "Want to comment?"
+msgstr "Wil je reageren?"
+
+msgid "Also want to comment?"
+msgstr "Wil je ook reageren?"
+
+msgid "You reply to %1$s"
+msgstr "Je reageert op %1$s"
+
+msgid "Comments are closed."
+msgstr "Reageren is niet meer mogelijk."
+
+msgid "There is %1$s comment"
+msgstr "Er is %1$s reactie"
+
+msgid "There are %1$s comments"
+msgstr "Er zijn %1$s reacties"

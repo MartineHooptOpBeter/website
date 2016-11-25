@@ -4,6 +4,8 @@
 html										{ height: 100%; overflow-x: hidden; }
 body,
 button,
+input.btn,
+span.btn,
 input.textinput,
 textarea									{ font-family: 'Montserrat', sans-serif;; font-weight: normal; font-size: 15px; line-height: 22px; color: $bodyTextColor; height: 100%; -webkit-text-size-adjust: 100%; }
 h1, h2, h3, h4, h5, h5, h6					{ margin: 0 0 10px 0; font-family: 'Roboto', sans-serif; color: $accentColor; }
@@ -148,6 +150,33 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .metertext span.number						{ float: right; }
 
 
+/*========================= BLOG =========================*/
+
+.blogpost									{ margin-bottom: 40px; }
+
+.comments-title,
+.comment-reply-title						{ font-size: 20px; line-height: 30px; margin-top: 20px; }
+.comment-reply-title						{ font-weight: bold; color: $accentColor; }
+.comment-respond							{ margin-top: 20px; }
+
+.comments .comment							{ background-color: $darkColorLight; padding: 10px; margin-bottom: 10px; }
+
+.comments .comment.depth-2					{ margin-left: 30px; }
+.comments .comment.depth-3					{ margin-left: 60px; }
+.comments .comment.depth-4					{ margin-left: 90px; }
+.comments .comment.depth-5,
+.comments .comment.depth-6,
+.comments .comment.depth-7,
+.comments .comment.depth-8,
+.comments .comment.depth-9					{ margin-left: 120px; }
+
+.comments .comment em						{ float: right; font-style: normal; color: $accentColor; }
+.comments .comment strong					{ display: block; }
+.comments .comment span  					{ display: block; }
+.comments .comment .comment-text			{ border-top: 1px dashed $accentColorLight; font-style: italic; margin: 10px 0 0 0; padding-top: 10px; }
+.comments .comment .comment-text p:last-child { margin-bottom: 0; }
+
+
 /*========================= SPONSORS =========================*/
 
 ul.sponsors                                 { padding: 0; margin: 0; list-style: none; }
@@ -195,6 +224,7 @@ ul.error label                              { color: $errorColor; }
 .buttons .right								{ float: right; }
 form .buttons                               { text-align: right; }
 
+input.btn,
 button.btn,
 a.btn										{ display: inline-block; padding: 10px 20px; background-color: $accentColor; color: #fff; border-radius: 5px; border: 0; }
 a.btn:link,
@@ -202,6 +232,12 @@ a.btn:viksited								{ text-decoration: none; color: #fff; }
 a.btn:hover,
 a.btn:active								{ text-decoration: none; color: #fff; }
 
+span.btn									{ margin-left: 30px; }
+span.btn a									{ display: inline-block; padding: 10px 20px; background-color: $accentColor; border-radius: 5px; border: 0; font-weight: normal; }
+span.btn a:link,
+span.btn a:visited							{ text-decoration: none; color: #fff; }
+span.btn a:hover,
+span.btn a:active							{ text-decoration: none; color: #fff; }
 
 /*========================= MISCELLANEOUS =========================*/
 .dark                                       { background-color: $darkColor; }
@@ -241,7 +277,10 @@ a.btn:active								{ text-decoration: none; color: #fff; }
 	.aboutms .index							{ position: static; width: 100%; padding: 20px 20px; transform: none; }
 	.aboutms .index ul li					{ float: left; width: 50%; }
 
-    .content .text                          { padding-left: 10px; padding-right: 10px; }
+    .content .text,
+	.comments .comment-respond,
+	.comments .comments-title,
+	.comments .comments-block				{ padding-left: 10px; padding-right: 10px; }
     .content.right .wp-post-image           { width: 40%; height: auto; }
     .content.left .wp-post-image            { width: 40%; height: auto; }
 }
@@ -329,7 +368,10 @@ a.btn:active								{ text-decoration: none; color: #fff; }
     .aboutms .text                          { width: 100%; padding: 20px 6px 30px 6px; margin: 0; }
     .aboutms .index                         { position: static; width: 100%; padding: 20px 10px; background-color: $accentColor; transform: none; }
 
-    .content .text                          { padding-left: 6px; padding-right: 6px; }
+    .content .text,
+	.comments .comment-respond,
+	.comments .comments-title,
+	.comments .comments-block				{ padding-left: 6px; padding-right: 6px; }
     .content .intro                         { font-size: 13pt; }
     .content.right .wp-post-image           { width: 100%; height: auto; margin-left: 0; float: left; }
     .content.right .text                    { float: left; }
@@ -338,6 +380,15 @@ a.btn:active								{ text-decoration: none; color: #fff; }
 
 	.content.intro .wp-post-image           { margin: 0; }
 
+	.comments .comment.depth-2				{ margin-left: 20px; }
+	.comments .comment.depth-3				{ margin-left: 40px; }
+	.comments .comment.depth-4				{ margin-left: 60px; }
+	.comments .comment.depth-5,
+	.comments .comment.depth-6,
+	.comments .comment.depth-7,
+	.comments .comment.depth-8,
+	.comments .comment.depth-9				{ margin-left: 80px; }
+	
     .pagenavigation span                    { padding: 0 6px; background-color: $accentColor; color: #fff; }
 		
     ul.sponsors li                          { width: 50%; }
