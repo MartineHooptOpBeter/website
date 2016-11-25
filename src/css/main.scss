@@ -198,9 +198,9 @@ form .buttons                               { text-align: right; }
 button.btn,
 a.btn										{ display: inline-block; padding: 10px 20px; background-color: $accentColor; color: #fff; border-radius: 5px; border: 0; }
 a.btn:link,
-a.btn:viksited								{ text-decoration: none; }
+a.btn:viksited								{ text-decoration: none; color: #fff; }
 a.btn:hover,
-a.btn:active								{ text-decoration: none; }
+a.btn:active								{ text-decoration: none; color: #fff; }
 
 
 /*========================= MISCELLANEOUS =========================*/
