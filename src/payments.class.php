@@ -418,32 +418,4 @@
             return $itemsPerPage;
         }
 
-        public function showMySQLDebugInfo()
-        {
-            if ($conn = $this->openConnection()) {
-
-                try {
-                    $sql = 'show variables like \'char%\'';
-                    $query = $conn->prepare($sql);
-
-                    if ($query->execute()) {
-
-                        echo '<pre>';
-
-						while ($row = $query->fetch(PDO::FETCH_NUM)) {
-							echo htmlentities($row[0]) . ' = ' . htmlentities($row[1]) . "\n";
-						}
-
-                        echo '</pre>';
-                    }
-                }
-                catch(PDOException $ex)
-                { }
-
-                unset($conn);
-            }
-
-            return $result;
-        }
-
     }
