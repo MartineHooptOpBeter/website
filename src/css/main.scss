@@ -72,7 +72,7 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .crowdfunding								{ background-color: $darkColor; }
 
 .crowdfunding .sitewidth					{ display: flex; }
-.crowdfunding .photo						{ flex: 1; background-color: #f00; width: 40%; background: url(../img/clinica-ruiz.jpg) no-repeat right 0; background-size: cover; }
+.crowdfunding .photo						{ flex: 1; width: 40%; background: url(../img/clinica-ruiz.jpg) no-repeat right 0; background-size: cover; }
 .crowdfunding .photo img					{ display: none; }
 .crowdfunding .text							{ flex: 1; width: 60%; box-sizing: border-box; padding: 20px 0 30px 20px; }
 
