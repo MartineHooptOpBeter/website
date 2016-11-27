@@ -72,7 +72,7 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .crowdfunding								{ background-color: $darkColor; }
 
 .crowdfunding .sitewidth					{ display: flex; }
-.crowdfunding .photo						{ flex: 1; background-color: #f00; width: 40%; background: url(../img/clinica-ruiz.jpg) no-repeat right 0; background-size: cover; }
+.crowdfunding .photo						{ flex: 1; width: 40%; background: url(../img/clinica-ruiz.jpg) no-repeat right 0; background-size: cover; }
 .crowdfunding .photo img					{ display: none; }
 .crowdfunding .text							{ flex: 1; width: 60%; box-sizing: border-box; padding: 20px 0 30px 20px; }
 
@@ -96,6 +96,19 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .aboutms .text								{ box-sizing: border-box; width: 80%; margin-left: 20%; padding: 20px 260px 40px 20px; background: #fff url(../img/traplift.jpg) no-repeat right 0; }
 .aboutms .index								{ position: absolute; width: 20%; box-sizing: border-box; padding-right: 40px; left: 20px; top: 50%; transform: translate(0, -50%); }
 
+/*========================= LATEST BLOG =========================*/
+.bloglatest                                 { background-color: $darkColor; }
+.bloglatest ul								{ color: $accentColor; }
+.bloglatest .photo  						{ float: left; width: 300px; }
+.bloglatest .photo img                      { display: block; width: 100%; height: auto; }
+.bloglatest .text							{ float: left; box-sizing: border-box; padding: 20px 0 30px 40px; }
+.bloglatest .action                         { float: right; padding-top: 70px; width: 20%; }
+.bloglatest .action p                       { color: $accentColor; font-size: 20px; margin: 0; }
+.bloglatest a:link,
+.bloglatest a:visited                       { color: #fff; }
+.bloglatest a:hover,
+.bloglatest a:active                        { color: $accentColor; } 
+.bloglatest .buttons                        { margin-top: 20px; }
 
 /*========================= CONTENT PAGES =========================*/
 .content                                    { margin-bottom: 20px; }
@@ -324,6 +337,10 @@ span.btn a:active							{ text-decoration: none; color: #fff; }
 	.metertext								{ font-size: 100%; }
 	.metertext span.value,
 	.metertext span.number					{ float: left; clear: both; }
+
+    .bloglatest .action                     { clear: both; float: left; box-sizing: border-box; width: 100%; padding: 20px 6px; background-color: #fff; }
+    .bloglatest .action p                   { float: left; }
+    .bloglatest .action .buttons            { float: right; clear: none; margin: 0; text-align: right; }
 }
 
 @media (max-width: 767px) {
@@ -368,6 +385,10 @@ span.btn a:active							{ text-decoration: none; color: #fff; }
     .aboutms .text                          { width: 100%; padding: 20px 6px 30px 6px; margin: 0; }
     .aboutms .index                         { position: static; width: 100%; padding: 20px 10px; background-color: $accentColor; transform: none; }
 
+    .bloglatest .photo  					{ float: left; width: 100%; }
+    .bloglatest .text                       { padding: 20px 6px; }
+    .bloglatest .action .buttons            { float: left; clear: both; margin-top: 20px; }
+
     .content .text,
 	.comments .comment-respond,
 	.comments .comments-title,
@@ -398,5 +419,5 @@ span.btn a:active							{ text-decoration: none; color: #fff; }
 @media (max-width: 479px) {
     .content blockquote                     { margin: 1em 1em 2em 1em; }
     ul.sponsors li                          { width: 100%; }
-    
+   
 }

@@ -3,6 +3,7 @@
     @@HEADER@@
 
 	require_once 'donations.class.php';
+	require_once 'ponyplayday-registrations-service.class.php';
 	require_once 'configuration.php';
 	require_once 'utilities.class.php';
 
@@ -224,5 +225,65 @@
 		<?php endswitch; ?>
 
 	<?php endwhile; ?>
+
+<?php
+
+	$args = array('numberposts' => 6);
+	$recent_posts = wp_get_recent_posts($args);
+	
+	if ($recent_posts && (count($recent_posts) > 0)) {
+
+		foreach($recent_posts as $recent) {
+			if (has_post_thumbnail($recent["ID"])) {
+				$latest_thumbnail = get_the_post_thumbnail($recent["ID"], 'martinehooptopbeter_square-400', '');
+				break;
+			}
+		}
+
+?>	<section class="bloglatest">
+		<div class="sitewidth clearfix">
+
+			<div class="photo"><?php echo $latest_thumbnail; ?></div>
+
+			<div class="text">
+
+				<h2><?php _e('Latest blog postings', 'martinehooptopbeter'); ?></h2>
+
+				<ul>
+				<?php foreach($recent_posts as $recent): ?>
+					<li><a href="<?php echo get_permalink($recent["ID"]); ?>"><?php echo esc_attr($recent["post_title"]); ?></a>
+				<?php endforeach; ?>
+				</ul>
+
+				<div class="buttons">
+					<a href="/blog/" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
+				</div>
+
+			</div>
+
+<?php
+
+		$ponyplaydayservice = new PonyPlayDayRegistrationsService($configuration);
+		if ($ponyplaydayservice->isRegistrationPossible() && $ponyplaydayservice->isRegistrationStillOpen()) {
+
+?>			<div class="action">
+			
+				<p><?php _e('Register for Pony Play Day', 'martinehooptopbeter'); ?></p>
+				<div class="buttons">
+					<a href="<?php _e('/ponyspeeldag/', 'martinehooptopbeter'); ?>" class="btn"><?php _e('Register', 'martinehooptopbeter'); ?></a>
+				</div>
+				
+			</div>
+
+<?php
+
+		}
+
+?>		</div>
+	</section>
+
+	<?php } ?>
+
+	<?php wp_reset_query(); ?>
 
 <?php get_footer(); ?>

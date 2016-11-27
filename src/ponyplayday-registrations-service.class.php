@@ -3,6 +3,7 @@
     @@HEADER@@
 
 	require_once 'payments-service.class.php';
+    require_once 'ponyplayday-registrations.class.php';
 
     class PonyPlayDayRegistrationsService extends PaymentsService {
 
