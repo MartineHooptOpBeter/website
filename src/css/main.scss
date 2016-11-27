@@ -105,9 +105,9 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .bloglatest .action                         { float: right; padding-top: 70px; width: 20%; }
 .bloglatest .action p                       { color: $accentColor; font-size: 20px; margin: 0; }
 .bloglatest a:link,
-.bloglatest a:visited                       { color: #fff; }
+.bloglatest a:visited                       { color: #fff; text-decoration: none; }
 .bloglatest a:hover,
-.bloglatest a:active                        { color: $accentColor; } 
+.bloglatest a:active                        { color: #fff; text-decoration: underline; } 
 .bloglatest .buttons                        { margin-top: 20px; }
 
 /*========================= CONTENT PAGES =========================*/
