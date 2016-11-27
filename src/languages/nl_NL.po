@@ -350,3 +350,12 @@ msgstr "Er is %1$s reactie"
 
 msgid "There are %1$s comments"
 msgstr "Er zijn %1$s reacties"
+
+msgid "Register for Pony Play Day"
+msgstr "Inschrijven voor de Ponyspeeldag"
+
+msgid "Register"
+msgstr "Inschrijven"
+
+msgid "Latest blog postings"
+msgstr "Nieuwste blog postings"
