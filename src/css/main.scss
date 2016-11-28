@@ -218,7 +218,7 @@ form fieldset span                          { clear: both; float: left; line-hei
 .content .text form ul li *                         { flex-grow: 1; }
 .content .text form ul li input                     { flex-grow: 0; } 
 .content .text form ul.paymentmethods li			{ margin: 0 0 20px 0; }
-.content .text form ul.paymentmethods li label img	{ display: block; height: 40px; margin-top: 4px; }
+.content .text form ul.paymentmethods li label img	{ display: block; height: 40px; max-width: 100%; margin-top: 4px; }
 
 label                                       { display: block; font-weight: bold; float: left; }
 input.textinput,
