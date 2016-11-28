@@ -7,6 +7,7 @@ var defaultDevelopmentServerHostName = '127.0.0.1';
 var defaultdevelopmentServerHostIsSecure = false; 
 var defaultMinifyCss = false;
 var defaultMinifyJs = false;
+var defaultCreateIconFont = false;
 
 
 /*******************************************************************************
@@ -70,6 +71,9 @@ var minifyCss = isEnabled(util.env.minifycss) || defaultMinifyCss || isProductio
 
 // Minify Javascript
 var minifyJs = isEnabled(util.env.minifyjs) || defaultMinifyJs || isProductionBuild;
+
+// Create icon font
+var createIconFont = isEnabled(util.env.createiconfont) || defaultCreateIconFont || isProductionBuild;
 
 var reload = browsersync.reload;
 
@@ -263,6 +267,9 @@ gulp.task(copy_img, function() {
 
 var font_icon = 'font-icon';
 gulp.task(font_icon, function() {
+	if (!createIconFont)
+		return;
+
     return gulp.src(files.font_icon_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(iconfont({
