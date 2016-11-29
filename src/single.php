@@ -59,7 +59,7 @@
 
 		<div class="comments-title">
 			<?php $comments_number = get_comments_number(); ?>
-			<?php if ($totalCount == 1) : ?>
+			<?php if ($comments_number == 1) : ?>
 				<?php echo esc_attr(sprintf( __('There is %1$s comment', 'martinehooptopbeter'), number_format_i18n($comments_number))); ?>
 			<?php else: ?>
 				<?php echo esc_attr(sprintf( __('There are %1$s comments', 'martinehooptopbeter'), number_format_i18n($comments_number))); ?>
