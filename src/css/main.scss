@@ -146,7 +146,7 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 
 /*========================= DONATIONS =========================*/
 
-.donations article							{ background-color: $darkColorLight; padding: 10px; margin-bottom: 10px; }
+.donations article							{ background-color: $darkColorLight; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
 
 .donations article em						{ float: right; font-style: normal; color: $accentColor; }
 .donations article strong					{ display: block; }
@@ -172,7 +172,7 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .comment-reply-title						{ font-weight: bold; color: $accentColor; }
 .comment-respond							{ margin-top: 20px; }
 
-.comments .comment							{ background-color: $darkColorLight; padding: 10px; margin-bottom: 10px; }
+.comments .comment							{ background-color: $darkColorLight; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
 
 .comments .comment.depth-2					{ margin-left: 30px; }
 .comments .comment.depth-3					{ margin-left: 60px; }
