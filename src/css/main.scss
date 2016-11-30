@@ -260,6 +260,10 @@ span.btn a:active							{ text-decoration: none; color: #fff; }
 
 .divider                                    { border-top: solid 4px $accentColor; }
 
+.responsivemedia                            { position: relative; height: 0; overflow: hidden; padding-bottom: 56.25%; /* 16:9 ratio by default */ }
+.responsivemedia.ratio4x3                   { padding-bottom: 75%; }
+.responsivemedia iframe                     { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
 .clearfix:before,
 .clearfix:after								{ content: " "; display: table; }
 .clearfix:after								{ clear: both; }
