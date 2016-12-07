@@ -228,7 +228,7 @@
 
 <?php
 
-	$args = array('numberposts' => 6);
+	$args = array('numberposts' => 6, 'post_status' => 'publish');
 	$recent_posts = wp_get_recent_posts($args);
 	
 	if ($recent_posts && (count($recent_posts) > 0)) {
