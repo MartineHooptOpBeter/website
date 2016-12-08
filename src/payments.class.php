@@ -379,7 +379,7 @@
 
         private function validatePaymentType($type)
         {
-            if (!type || !is_numeric($type))
+            if (!$type || !is_numeric($type))
                 $type = PaymentTypes::NotDefined;
 
             return $type;
