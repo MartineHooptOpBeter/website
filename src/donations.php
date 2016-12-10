@@ -38,7 +38,7 @@
 
 		$startdate = $configuration->getDonationsStartDate();
 
-		$items = $donations->getDonationsList($page, $pageSize, 'DESC');
+		$items = $donations->getDonationsList(null, $page, $pageSize, 'DESC');
 
 ?>			<?php if (count($items) < 1) : ?>
 				<p><?php _e('There are no donations made yet.', 'martinehooptopbeter'); ?></p>
