@@ -30,49 +30,65 @@
 
     header('Content-type: application/json;charset=utf-8');
 
+    // Get ID of the last donation that the requester has already received
     $afterDonationId = isset($_GET['last']) && is_numeric($_GET['last']) ? $_GET['last'] : null;
+
+    // Set defaults for page and page size
     $page = 1;
     $pageSize = 20;
 
 	$configuration = new Configuration();
+
+    // Get the donations
     $donations = new Donations($configuration->getPaymentsDatabaseDataSourceName(), $configuration->getPaymentsDatabaseUsername(), $configuration->getPaymentsDatabasePassword());
-
-    $totalCount = $donations->getDonationsListCount();
-    $totalValue = $donations->getTotalDonationsAmount();
-
-    $goalValue = $configuration->getDonationsGoalValue();
-
     $items = $donations->getDonationsList($afterDonationId, $page, $pageSize, 'DESC');
 
-    $jsonDonationsTotal = new JsonDonationsTotal();
-    $jsonDonationsTotal->nr_of_donations = $totalCount;
-    $jsonDonationsTotal->total_amount = $totalValue;
-    $jsonDonationsTotal->goal_amount = $goalValue;
-    $jsonDonationsTotal->goal_percentage = $donations->getPercentageOfGoal($totalValue, $goalValue, 100.0);
-    $jsonDonationsTotal->since_date = date('c', $configuration->getDonationsStartDate()); 
+    // We only report the totals when no last ID is provided 
+    if (!$afterDonationId || ($afterDonationId == 0)) {
 
+        $totalCount = $donations->getDonationsListCount();
+        $totalValue = $donations->getTotalDonationsAmount();
+
+        $goalValue = $configuration->getDonationsGoalValue();
+
+        $jsonDonationsTotal = new JsonDonationsTotal();
+        $jsonDonationsTotal->nr_of_donations = $totalCount;
+        $jsonDonationsTotal->total_amount = $totalValue;
+        $jsonDonationsTotal->goal_amount = $goalValue;
+        $jsonDonationsTotal->goal_percentage = $donations->getPercentageOfGoal($totalValue, $goalValue, 100.0);
+        $jsonDonationsTotal->since_date = date('c', $configuration->getDonationsStartDate());
+    } else
+        $jsonDonationsTotal = null;
+
+    // Cretae the object that we are going to return and set the totals
     $jsonDonations = new JsonDonations();
     $jsonDonations->total = $jsonDonationsTotal;
 
-    foreach($items as $item) {
+    // Loop through each item we retrieved from the database to add it to the result
+    if ($items) {
+        foreach($items as $item) {
 
-        $jsonDonation = new JsonDonation();
-        $jsonDonation->id = $item->id;
-        $jsonDonation->showAnonymous = $item->showAnonymous;
-        if (!$jsonDonation->showAnonymous) {
-            $jsonDonation->name = $item->name;
+            $jsonDonation = new JsonDonation();
+            $jsonDonation->id = $item->id;
+
+            // We don't show the name if the user choose to be anonymous
+            $jsonDonation->showAnonymous = $item->showAnonymous;
+            if (!$jsonDonation->showAnonymous) {
+                $jsonDonation->name = $item->name;
+            }
+
+            // We don't show the amount of the user choose not to
+            $jsonDonation->showNoAmount = $item->showNoAmount;
+            if (!$jsonDonation->showNoAmount) {
+                $jsonDonation->amount = $item->amount;
+            }
+
+            $jsonDonation->message = $item->message;
+            $jsonDonation->timestamp = date('c', $item->timestamp);
+
+            $jsonDonations->donations[] = $jsonDonation;
         }
-        $jsonDonation->message = $item->message;
-        $jsonDonation->showNoAmount = $item->showNoAmount;
-        if (!$jsonDonation->showNoAmount) {
-            $jsonDonation->amount = $item->amount;
-        }
-        $jsonDonation->timestamp = date('c', $item->timestamp);
-
-        $jsonDonations->donations[] = $jsonDonation;
-
     }
 
+    // Result the result in JSON
     echo json_encode($jsonDonations);
-
-?>
