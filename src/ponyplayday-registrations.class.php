@@ -109,11 +109,11 @@
             return $registration;
         }
 
-        public function getPonyPlayDayRegistrationsList($afterPonyPlayDayRegistrationId, $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC')
+        public function getPonyPlayDayRegistrationsList($lastPonyPlayDayRegistrationId, $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC')
         {
             $registrations = [];
 
-            if (!$payments = $this->getPaymentsList(PaymentTypes::PonyPlayDayRegistration, 'paid', $afterPonyPlayDayRegistrationId, $page, $itemsPerPage, $sortOrder))
+            if (!$payments = $this->getPaymentsList(PaymentTypes::PonyPlayDayRegistration, 'paid', $lastPonyPlayDayRegistrationId, $page, $itemsPerPage, $sortOrder))
                 return null;
 
             foreach($payments as $payment) {

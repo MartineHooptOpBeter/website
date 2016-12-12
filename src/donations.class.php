@@ -107,11 +107,11 @@
             return $donation;
         }
 
-        public function getDonationsList($afterDonationId, $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC')
+        public function getDonationsList($lastDonationId, $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC')
         {
             $donations = [];
 
-            if (!$payments = $this->getPaymentsList(PaymentTypes::Donation, 'paid', $afterDonationId, $page, $itemsPerPage, $sortOrder))
+            if (!$payments = $this->getPaymentsList(PaymentTypes::Donation, 'paid', $lastDonationId, $page, $itemsPerPage, $sortOrder))
                 return null;
 
             foreach($payments as $payment) {

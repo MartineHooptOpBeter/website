@@ -31,7 +31,7 @@
     header('Content-type: application/json;charset=utf-8');
 
     // Get ID of the last donation that the requester has already received
-    $afterDonationId = isset($_GET['last']) && is_numeric($_GET['last']) ? $_GET['last'] : null;
+    $lastDonationId = isset($_GET['last']) && is_numeric($_GET['last']) ? $_GET['last'] : null;
 
     // Set defaults for page and page size
     $page = 1;
@@ -41,10 +41,10 @@
 
     // Get the donations
     $donations = new Donations($configuration->getPaymentsDatabaseDataSourceName(), $configuration->getPaymentsDatabaseUsername(), $configuration->getPaymentsDatabasePassword());
-    $items = $donations->getDonationsList($afterDonationId, $page, $pageSize, 'DESC');
+    $items = $donations->getDonationsList($lastDonationId, $page, $pageSize, 'DESC');
 
     // We only report the totals when no last ID is provided 
-    if (!$afterDonationId || ($afterDonationId == 0)) {
+    if (!$lastDonationId || ($lastDonationId == 0)) {
 
         $totalCount = $donations->getDonationsListCount();
         $totalValue = $donations->getTotalDonationsAmount();

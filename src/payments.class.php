@@ -190,7 +190,7 @@
             return $result;
         }
         
-        public function getPaymentsList($type, $paymentStatus = 'paid', $afterPaymentId = 0, $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC') {
+        public function getPaymentsList($type, $paymentStatus = 'paid', $lastPaymentId = 0, $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC') {
 
             $result = null;
 
@@ -207,7 +207,7 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    if ($afterPaymentId != 0) {
+                    if ($lastPaymentId != 0) {
                         $sql = 'SELECT id, type, amount, userid, payment_method, payment_status, locale, data, timestamp FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status) AND (id ' . ($orderBy == 'DESC' ? '<' : '>') . ' :after_payment_id) ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
                     } else {
                         $sql = 'SELECT id, type, amount, userid, payment_method, payment_status, locale, data, timestamp FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status) ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
@@ -216,8 +216,8 @@
 					
                     $query->bindValue(':type', $type);            
                     $query->bindValue(':payment_status', $paymentStatus);
-                    if ($afterPaymentId != 0) {
-                        $query->bindValue(':after_payment_id', $afterPaymentId);
+                    if ($lastPaymentId != 0) {
+                        $query->bindValue(':after_payment_id', $lastPaymentId);
                     }            
                     $query->bindValue(':offset', $offset);            
                     $query->bindValue(':numberOfItems', $itemsPerPage);            
