@@ -6,12 +6,16 @@
     require_once 'donations.class.php';
 
     class JsonDonations {
-        public $total_donations;
+        public $total;
+        public $donations; 
+    }
+
+    class JsonDonationsTotal {
+        public $nr_of_donations;
         public $total_amount;
         public $goal_amount;
         public $goal_percentage;
         public $since_date;
-        public $donations; 
     }
 
     class JsonDonation {
@@ -40,12 +44,15 @@
 
     $items = $donations->getDonationsList($afterDonationId, $page, $pageSize, 'DESC');
 
+    $jsonDonationsTotal = new JsonDonationsTotal();
+    $jsonDonationsTotal->nr_of_donations = $totalCount;
+    $jsonDonationsTotal->total_amount = $totalValue;
+    $jsonDonationsTotal->goal_amount = $goalValue;
+    $jsonDonationsTotal->goal_percentage = $donations->getPercentageOfGoal($totalValue, $goalValue, 100.0);
+    $jsonDonationsTotal->since_date = date('c', $configuration->getDonationsStartDate()); 
+
     $jsonDonations = new JsonDonations();
-    $jsonDonations->total_donations = $totalCount;
-    $jsonDonations->total_amount = $totalValue;
-    $jsonDonations->goal_amount = $goalValue;
-    $jsonDonations->goal_percentage = $donations->getPercentageOfGoal($totalValue, $goalValue, 100.0);
-    $jsonDonations->since_date = $configuration->getDonationsStartDate(); 
+    $jsonDonations->total = $jsonDonationsTotal;
 
     foreach($items as $item) {
 
