@@ -2,6 +2,8 @@
 
     @@HEADER@@
 
+    require_once 'Mollie/API/Autoloader.php';
+
     class PaymentsService {
 
         public $lastErrorMessage = ''; 
