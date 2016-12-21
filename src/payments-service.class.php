@@ -3,6 +3,7 @@
     @@HEADER@@
 
     require_once 'Mollie/API/Autoloader.php';
+    require_once 'idealstatus.class.php';
 
     class PaymentsService {
 
@@ -51,6 +52,28 @@
             }
 
             return false;
+        }
+
+        public function getIdealIssuersWithStatus()
+        {
+            $ideal = [];
+
+            $idealstatus = new IdealStatus();
+
+            $mollie = new Mollie_API_Client;
+            $mollie->setApiKey($this->_configuration->getMollieApiKey());
+
+            $issuers = $mollie->issuers->all();
+
+            foreach ($issuers as $issuer)
+            {
+                if ($issuer->method == Mollie_API_Object_Method::IDEAL)
+                {
+                    $ideal[] = array('id' => $issuer->id, 'name' => $issuer->name, 'showwarning' => !$idealstatus->statusForIssuer($issuer->id));
+                }
+            }
+
+            return $ideal;
         }
 
     }
