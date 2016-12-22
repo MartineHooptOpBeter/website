@@ -25,6 +25,7 @@
 		public $donate_amount = '';
 		public $donate_amount_decimal = 0.0;
 		public $donate_payment_method = '';
+		public $donate_payment_method_ideal = '';
 		public $donate_payment_status = '';
 		public $donate_anonymous = false;
 		public $donate_no_amount = false;
@@ -49,6 +50,7 @@
 				$this->donate_message = isset($post['donate_message']) ? trim($post['donate_message']) : $this->donate_message;
 				$this->donate_amount = isset($post['donate_amount']) ? trim($post['donate_amount']) : $this->donate_amount;
 				$this->donate_payment_method = isset($post['donate_payment_method']) ? trim($post['donate_payment_method']) : $this->donate_payment_method;
+				$this->donate_payment_method_ideal = isset($post['donate_payment_method_ideal']) ? trim($post['donate_payment_method_ideal']) : $this->donate_payment_method_ideal;
 				$this->donate_anonymous = isset($post['donate_anonymous']);
 				$this->donate_no_amount = isset($post['donate_no_amount']);
 				$noSubmit = isset($post['donate_nosubmit']);
@@ -77,6 +79,8 @@
 
 				if (($this->donate_payment_method != 'ideal') && ($this->donate_payment_method != 'creditcard')) {
 					$this->missingfields['donate_payment_method'] = __('Required field', 'martinehooptopbeter');
+				} elseif (($this->donate_payment_method != 'ideal') & empty($this->donate_payment_method_ideal)) {
+					$this->missingfields['donate_payment_method_ideal'] = __('Required field', 'martinehooptopbeter');
 				}
 
 				$token = isset($post[$this->_xsrf->getSessionKey()]) ? trim($post[$this->_xsrf->getSessionKey()]) : '';
@@ -91,7 +95,7 @@
 					$donation = new Donation(0, $this->donate_amount_decimal, $this->donate_email, $this->donate_name, $this->donate_message, '', $this->donate_payment_method, null, null, $this->donate_no_amount, $this->donate_anonymous, $this->_configuration->getCurrentLocale(), null);
 					$returnurl = $donateUrl . '?donationid=%1$s&verification=%2$s';
 
-					if ($redirecturl = $donationsService->createMolliePaymentForDonation($donation, $returnurl)) {
+					if ($redirecturl = $donationsService->createMolliePaymentForDonation($donation, $this->donate_payment_method_ideal, $returnurl)) {
 
                         header("Location: " . $redirecturl);
                         exit;
@@ -141,6 +145,9 @@
 		
 		function showDonationForm()
 		{
+			$donationsService = new DonationsService($this->_configuration);
+			$idealissuers = $donationsService->getIdealIssuersWithStatus();
+
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
 
@@ -184,8 +191,24 @@
                             <label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_payment_method'])); ?>)</em><?php endif; ?></label>
                         </p>
                         <ul class="paymentmethods <?php if (isset($this->missingfields['donate_payment_method'])) { echo 'error'; } ?>">
-                            <li><input type="radio" class="radio" id="donate_payment_method_ideal" name="donate_payment_method" value="ideal"<?php if ($this->donate_payment_method == 'ideal') { echo ' checked="checked"'; } ?>><label for="donate_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/ideal.svg'); ?>" alt="<?php _e('iDEAL', 'martinehooptopbeter'); ?>" /></label></li>
-                            <li><input type="radio" class="radio" id="donate_payment_method_creditcard" name="donate_payment_method" value="creditcard"<?php if ($this->donate_payment_method == 'creditcard') { echo ' checked="checked"'; } ?>><label for="donate_payment_method_creditcard"><?php _e('Credit Card', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/creditcards.svg'); ?>" alt="<?php _e('Credit Card', 'martinehooptopbeter'); ?>" /></label></li>
+                            <li><input type="radio" class="radio" id="donate_payment_method_ideal" name="donate_payment_method" value="ideal"<?php if ($this->donate_payment_method == 'ideal') { echo ' checked="checked"'; } ?> onchange="onPaymentMethodChanged(this)"><label for="donate_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/ideal.svg'); ?>" alt="<?php _e('iDEAL', 'martinehooptopbeter'); ?>" /></label>
+							<?php if ($idealissuers) : ?>
+							<div id="donate_payment_method_ideal_options" style="display: <?php echo ($this->donate_payment_method == 'ideal') ? "block" : "none"; ?>">
+								<label for="donate_payment_method_ideal_options_bank"><?php _e('Choose your bank', 'martinehooptopbeter'); ?></label>
+								<select name="donate_payment_method_ideal" onchange="onIdealIssuerChanged(this)">
+									<option value=""> - </option>
+									<?php foreach($idealissuers as $idealissuer) : ?>
+										<?php $isSelected = ($this->donate_payment_method_ideal == $idealissuer['id']); ?>
+										<?php $isSelectedShowWarning = $isSelected && $idealissuer['showwarning']; ?>
+										<option <?php if ($isSelected) { echo ' selected="selected"'; } ?>value="<?php echo esc_attr($idealissuer['id']); ?>" data-show-warning='<?php echo $idealissuer['showwarning'] ? '1' : '0'; ?>'><?php echo esc_attr($idealissuer['name']); ?></option>
+									<?php endforeach; ?>
+								</select>
+								<div id="donate_payment_method_ideal_warning" style="display: <?php echo ($isSelectedShowWarning) ? "block" : "none"; ?>">
+									<p><?php _e('There have been known problems with iDEAL transaction with this bank during the last hour. If you experience any problem please try again later.', 'martinehooptopbeter'); ?></p>									
+								</div>
+							</div><?php endif; ?>
+							</li>
+                            <li><input type="radio" class="radio" id="donate_payment_method_creditcard" name="donate_payment_method" value="creditcard"<?php if ($this->donate_payment_method == 'creditcard') { echo ' checked="checked"'; } ?> onchange="onPaymentMethodChanged(this)"><label for="donate_payment_method_creditcard"><?php _e('Credit Card', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/creditcards.svg'); ?>" alt="<?php _e('Credit Card', 'martinehooptopbeter'); ?>" /></label></li>
                         </ul>
                         <p><?php _e('Do you want to support Martine?  Leave her a message that will show up on the website.', 'martinehooptopbeter'); ?></p>
                         <p class="<?php if (isset($this->missingfields['donate_message'])) { echo 'error'; } ?>">
