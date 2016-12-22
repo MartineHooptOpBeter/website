@@ -14,7 +14,7 @@
             $this->_configuration = $configuration;
         }
 
-        public function createMolliePayment($payment, $description, $returnurl)
+        public function createMolliePayment($payment, $idealissuer, $description, $returnurl)
         {
 
             $mollie = new Mollie_API_Client;
@@ -22,21 +22,24 @@
 
             try
             {
-                if ($mollie_payment = $mollie->payments->create(
-                        array(
-                            'amount'      => Payment::formatDecimal($payment->amount),
-                            'description' => $description,
-                            'redirectUrl' => $returnurl,
-                            'webhookUrl'  => $this->_configuration->getMollieWebhookUrl(),
-                            'locale'      => $payment->locale,
-                            'method'      => $payment->paymentMethod,
-                            'metadata'    => array(
-                                'payment_id' => $payment->id,
-                                'payment_verification' => $payment->paymentVerification
-                            )
-                        )
-                    ))
-                {
+                $options = array(
+                    'amount'      => Payment::formatDecimal($payment->amount),
+                    'description' => $description,
+                    'redirectUrl' => $returnurl,
+                    'webhookUrl'  => $this->_configuration->getMollieWebhookUrl(),
+                    'locale'      => $payment->locale,
+                    'method'      => $payment->paymentMethod,
+                    'metadata'    => array(
+                        'payment_id' => $payment->id,
+                        'payment_verification' => $payment->paymentVerification
+                    )
+                );
+
+                if ($payment->paymentMethod == 'ideal') {
+                    $options['issuer'] = $idealissuer;
+                }
+
+                if ($mollie_payment = $mollie->payments->create($options)) {
                     $payments = new Payments($this->_configuration->getPaymentsDatabaseDataSourceName(), $this->_configuration->getPaymentsDatabaseUsername(), $this->_configuration->getPaymentsDatabasePassword());
 
                     if ($payments->updatePaymentId($payment->id, $payment->paymentVerification, $mollie_payment->id)) {
