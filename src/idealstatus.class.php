@@ -14,13 +14,15 @@
         public function statusForIssuer($issuer)
         {
             if (!$this->issuersstatus)
-                return false;
+                return true;
             
             foreach($this->issuersstatus as $issuerstatus)
             {
                 if ($issuer == ('ideal_' . $issuerstatus['issuer_bic']))
                     return (strtoupper($issuerstatus['status']) === 'OK');
             }
+
+            return true;
         }
 
         protected function _loadIssuersStatus()
