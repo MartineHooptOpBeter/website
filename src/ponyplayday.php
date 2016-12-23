@@ -2,9 +2,10 @@
 
     @@HEADER@@
 	
+	require_once 'vendor/autoload.php';
+
 	require_once 'ponyplayday-registrations.class.php';
 	require_once 'ponyplayday-registrations-service.class.php';
-	require_once 'Mollie/API/Autoloader.php';
 
 	require_once 'xsrf.php';
 	

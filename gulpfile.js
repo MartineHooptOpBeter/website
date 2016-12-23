@@ -88,14 +88,15 @@ var srcJsDir = srcDir + 'js/';
 var srcCssDir = srcDir + 'css/';
 var srcCssFontDir = srcCssDir + 'fonts/';
 
+var vendorsDir = 'vendor/';
+
 var dstDir = 'wwwroot/';
 var themeDir = dstDir + 'wp-content/themes/martinehooptopbeter/';
 var themeJsDir = themeDir + 'js/';
 var themeCssDir = themeDir + 'css/';
 var themeImgDir = themeDir + 'img/';
 var themeFontDir = themeDir + 'fonts/';
-
-var vendorsDir = 'vendor/';
+var themeVendorDir = themeDir + vendorsDir;
 
 var sponsorsSrcDir = srcDir + 'sponsors/';
 var sponsorsDstDir = themeDir + 'sponsors/';
@@ -107,8 +108,8 @@ var files = {
 	php_files_dest : themeDir,
 	
 	/* Vendor folders */
-	vendors_src : [vendorsDir + 'mollie/mollie-api-php/src/**/*'],
-	vendors_dest : themeDir,
+	vendors_src : [vendorsDir + '/**/*'],
+	vendors_dest : themeVendorDir,
 
 	/* Locale files */
 	localization_src : [srcDir + 'languages/*.po'],

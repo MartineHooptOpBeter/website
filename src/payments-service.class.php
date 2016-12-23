@@ -2,7 +2,8 @@
 
     @@HEADER@@
 
-    require_once 'Mollie/API/Autoloader.php';
+	require_once 'vendor/autoload.php';
+
     require_once 'idealstatus.class.php';
 
     class PaymentsService {
