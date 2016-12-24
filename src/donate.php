@@ -80,7 +80,7 @@
 
 				if (($this->donate_payment_method != 'ideal') && ($this->donate_payment_method != 'creditcard')) {
 					$this->missingfields['donate_payment_method'] = __('Required field', 'martinehooptopbeter');
-				} elseif (($this->donate_payment_method != 'ideal') & empty($this->donate_payment_method_ideal)) {
+				} elseif (($this->donate_payment_method == 'ideal') && empty($this->donate_payment_method_ideal)) {
 					$this->missingfields['donate_payment_method_ideal'] = __('Required field', 'martinehooptopbeter');
 				}
 
