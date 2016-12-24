@@ -222,9 +222,9 @@ form fieldset span                          { clear: both; float: left; line-hei
 .content .text form ul.paymentmethods li			{ margin: 0 0 20px 0; }
 .content .text form ul.paymentmethods li label img	{ display: block; height: 40px; max-width: 100%; margin-top: 4px; }
 
-#donate_payment_method_ideal_options                { margin-left: 40px; }
-#donate_payment_method_ideal_options select         { max-width: 300px; }
-#donate_payment_method_ideal_warning                { clear: both; padding-top: 10px; color: #c00; }
+#payment_method_ideal_options               { margin-left: 40px; }
+#payment_method_ideal_options select        { max-width: 300px; }
+#payment_method_ideal_warning               { clear: both; padding-top: 10px; color: #c00; }
 
 label                                       { display: block; font-weight: bold; float: left; }
 input.textinput,
@@ -236,10 +236,10 @@ input.checkbox                              { margin-right: 0.5em; margin-top: 0
 input.radio                                 { margin-right: 0.5em; margin-top: 0.25em; }
 form ul label                               { font-weight: normal; }
 
-p.error                                     { color: $errorColor; font-weight: bold; }
-p.error input.textinput,
-p.error textarea                            { border: 1px solid $errorColor; background-color: $errorColorLight; }
-ul.error label                              { color: $errorColor; }
+.error                                      { color: $errorColor; font-weight: bold; }
+.error input.textinput,
+.error textarea                             { border: 1px solid $errorColor; background-color: $errorColorLight; }
+.error label                                { color: $errorColor; }
 
 .buttons									{ clear: both; }
 .buttons .left								{ float: left; }

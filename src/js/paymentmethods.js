@@ -1,6 +1,6 @@
 
-    var IdealIssuersElement = document.querySelectorAll('#donate_payment_method_ideal_options')[0];
-    var IdealWarningElement = document.querySelectorAll('#donate_payment_method_ideal_warning')[0];
+    var IdealIssuersElement = document.querySelectorAll('#payment_method_ideal_options')[0];
+    var IdealWarningElement = document.querySelectorAll('#payment_method_ideal_warning')[0];
 
     function onPaymentMethodChanged(el)
     {

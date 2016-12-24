@@ -13,6 +13,8 @@
 	$ponyPlayDayPage = new PonyPlayDayPage($configuration);
 	$ponyPlayDayPage->processRequest(get_permalink(), $_SERVER, $_POST, $_GET);
 
+	wp_enqueue_script('script', get_template_directory_uri() . '/js/paymentmethods.js', null, '<%= release.version %>', true);
+
 ?><?php get_header(); ?>
 
 	<?php if (have_posts()) : the_post(); ?>

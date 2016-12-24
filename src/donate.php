@@ -188,13 +188,13 @@
                         <ul>
                             <li><input type="checkbox" class="checkbox" id="donate_no_amount" name="donate_no_amount"<?php if ($this->donate_no_amount) { echo ' checked="checked"'; } ?> /><label for="donate_no_amount"><?php _e('Do not show the amount that I donate on the website.', 'martinehooptopbeter'); ?></label></li>
                         </ul>
-                        <p class="<?php if (isset($this->missingfields['donate_payment_method'])) { echo 'error'; } ?>">
-                            <label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_payment_method'])); ?>)</em><?php endif; ?></label>
+                        <p class="<?php if (isset($this->missingfields['donate_payment_method']) || isset($this->missingfields['donate_payment_method_ideal'])) { echo 'error'; } ?>">
+							<label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['donate_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_payment_method'])); ?>)</em><?php elseif (isset($this->missingfields['donate_payment_method_ideal'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['donate_payment_method_ideal'])); ?>)</em><?php endif; ?></label>
                         </p>
-                        <ul class="paymentmethods <?php if (isset($this->missingfields['donate_payment_method'])) { echo 'error'; } ?>">
+                        <ul class="paymentmethods <?php if (isset($this->missingfields['donate_payment_method']) || isset($this->missingfields['donate_payment_method_ideal'])) { echo 'error'; } ?>">
                             <li><input type="radio" class="radio" id="donate_payment_method_ideal" name="donate_payment_method" value="ideal"<?php if ($this->donate_payment_method == 'ideal') { echo ' checked="checked"'; } ?> onchange="onPaymentMethodChanged(this)"><label for="donate_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/ideal.svg'); ?>" alt="<?php _e('iDEAL', 'martinehooptopbeter'); ?>" /></label>
 							<?php if ($idealissuers) : ?>
-							<div id="donate_payment_method_ideal_options" style="display: <?php echo ($this->donate_payment_method == 'ideal') ? "block" : "none"; ?>">
+							<div id="payment_method_ideal_options" style="display: <?php echo ($this->donate_payment_method == 'ideal') ? "block" : "none"; ?>">
 								<label for="donate_payment_method_ideal_options_bank"><?php _e('Choose your bank', 'martinehooptopbeter'); ?></label>
 								<select name="donate_payment_method_ideal" onchange="onIdealIssuerChanged(this)">
 									<option value=""> - </option>
@@ -204,7 +204,7 @@
 										<option <?php if ($isSelected) { echo ' selected="selected"'; } ?>value="<?php echo esc_attr($idealissuer['id']); ?>" data-show-warning='<?php echo $idealissuer['showwarning'] ? '1' : '0'; ?>'><?php echo esc_attr($idealissuer['name']); ?></option>
 									<?php endforeach; ?>
 								</select>
-								<div id="donate_payment_method_ideal_warning" style="display: <?php echo ($isSelectedShowWarning) ? "block" : "none"; ?>">
+								<div id="payment_method_ideal_warning" style="display: <?php echo ($isSelectedShowWarning) ? "block" : "none"; ?>">
 									<p><?php _e('There have been known problems with iDEAL transaction with this bank during the last hour. If you experience any problem please try again later.', 'martinehooptopbeter'); ?></p>									
 								</div>
 							</div><?php endif; ?>
