@@ -216,12 +216,19 @@ form fieldset span                          { clear: both; float: left; line-hei
 .content .text form ul                              { width: 100%; box-sizing: border-box; margin: 0 0 20px 0; padding: 0 0 0 5px; list-style: none; }
 .content .text form ul li                           { display: flex; margin: 0; padding: 0; width: 100%; }
 .content .text form ul li *                         { flex-grow: 1; }
-.content .text form ul li input                     { flex-grow: 0; } 
+.content .text form ul li input,
+.content .text form ul li select,
+.content .text form ul li label                     { flex-grow: 0; } 
 .content .text form ul.paymentmethods li			{ margin: 0 0 20px 0; }
 .content .text form ul.paymentmethods li label img	{ display: block; height: 40px; max-width: 100%; margin-top: 4px; }
 
+#payment_method_ideal_options               { margin-left: 40px; }
+#payment_method_ideal_options select        { max-width: 300px; }
+#payment_method_ideal_warning               { clear: both; padding-top: 10px; color: #c00; }
+
 label                                       { display: block; font-weight: bold; float: left; }
 input.textinput,
+select,
 textarea                                    { clear: both; float: left; box-sizing: border-box; border: 1px solid $hoverColor; color: $accentColor; font-size: 18px; padding: 3px 6px; width: 100%; max-width: 600px; }
 input.clearnone                             { clear: none; }
 input.numberinput                           { width: 40%; max-width: 200px; }
@@ -229,10 +236,10 @@ input.checkbox                              { margin-right: 0.5em; margin-top: 0
 input.radio                                 { margin-right: 0.5em; margin-top: 0.25em; }
 form ul label                               { font-weight: normal; }
 
-p.error                                     { color: $errorColor; font-weight: bold; }
-p.error input.textinput,
-p.error textarea                            { border: 1px solid $errorColor; background-color: $errorColorLight; }
-ul.error label                              { color: $errorColor; }
+.error                                      { color: $errorColor; font-weight: bold; }
+.error input.textinput,
+.error textarea                             { border: 1px solid $errorColor; background-color: $errorColorLight; }
+.error label                                { color: $errorColor; }
 
 .buttons									{ clear: both; }
 .buttons .left								{ float: left; }

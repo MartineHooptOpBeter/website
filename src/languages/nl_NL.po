@@ -359,3 +359,9 @@ msgstr "Inschrijven"
 
 msgid "Latest blog postings"
 msgstr "Nieuwste blog postings"
+
+msgid "Choose your bank"
+msgstr "Kies jouw bank"
+
+msgid "There have been known problems with iDEAL transaction with this bank during the last hour. If you experience any problem please try again later."
+msgstr "Er zijn gedurende het laatste uur problemen geweest met iDEAL betalingen bij deze bank. Mocht de betaling niet lukken, probeer het dan later nog een keer."

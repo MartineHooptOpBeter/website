@@ -11,7 +11,7 @@
             parent::__construct($configuration);
         }
 
-        public function createMolliePaymentForDonation($donation, $returnurl)
+        public function createMolliePaymentForDonation($donation, $idealissuer, $returnurl)
         {
             if (!$donation || !($donation instanceof Donation))
                 throw new InvalidArgumentException('No or invalid donation!');
@@ -22,7 +22,7 @@
                 $description = __('Donation', 'martinehooptopbeter');
                 $returnurl = sprintf($returnurl, $donation->id, $donation->paymentVerification);
 
-                return $this->createMolliePayment($donation, $description, $returnurl);
+                return $this->createMolliePayment($donation, $idealissuer, $description, $returnurl);
 
             } else {
                 $this->lastErrorMessage = __('An error has occured while saving your donation.', 'martinehooptopbeter');

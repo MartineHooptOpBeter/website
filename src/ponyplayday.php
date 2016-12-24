@@ -2,9 +2,10 @@
 
     @@HEADER@@
 	
+	require_once 'vendor/autoload.php';
+
 	require_once 'ponyplayday-registrations.class.php';
 	require_once 'ponyplayday-registrations-service.class.php';
-	require_once 'Mollie/API/Autoloader.php';
 
 	require_once 'xsrf.php';
 	
@@ -64,6 +65,7 @@
 				$this->registration_experiencelevel = isset($post['registration_experiencelevel']) ? trim($post['registration_experiencelevel']) : $this->registration_experiencelevel;
 				$this->registration_eventdatetime = isset($post['registration_eventdatetime']) ? trim($post['registration_eventdatetime']) : $this->registration_eventdatetime;
 				$this->registration_payment_method = isset($post['registration_payment_method']) ? trim($post['registration_payment_method']) : $this->registration_paymentmethod;
+				$this->registration_payment_method_ideal = isset($post['registration_payment_method_ideal']) ? trim($post['registration_payment_method_ideal']) : $this->registration_payment_method_ideal;
 				$noSubmit = isset($post['registration_nosubmit']);
 
 				if (empty($this->registration_emailparent)) {
@@ -107,6 +109,8 @@
 
 				if (($this->registration_payment_method != 'ideal') && ($this->registration_payment_method != 'creditcard')) {
 					$this->missingfields['registration_payment_method'] = __('Required field', 'martinehooptopbeter');
+				} elseif (($this->registration_payment_method == 'ideal') && empty($this->registration_payment_method_ideal)) {
+					$this->missingfields['registration_payment_method_ideal'] = __('Required field', 'martinehooptopbeter');
 				}
 
 				$token = isset($post[$this->_xsrf->getSessionKey()]) ? trim($post[$this->_xsrf->getSessionKey()]) : '';
@@ -121,7 +125,7 @@
 					$registration = new PonyPlayDayRegistration(0, $this->_configuration->getPonyPlayDayPrice(), $this->registration_emailparent, $this->registration_namechild, $this->registration_age, $this->registration_experiencelevel, $this->registration_eventdatetime, '', $this->registration_payment_method, null, null, $this->_configuration->getCurrentLocale(), null);
 					$returnurl = $registrationUrl . '?registrationid=%1$s&verification=%2$s';
 
-					if ($redirecturl = $registrationsService->createMolliePaymentForPonyPlayDayRegistration($registration, $returnurl)) {
+					if ($redirecturl = $registrationsService->createMolliePaymentForPonyPlayDayRegistration($registration, $this->registration_payment_method_ideal, $returnurl)) {
 
                         header("Location: " . $redirecturl);
                         exit;
@@ -174,6 +178,9 @@
 		{
 			if (!$this->isRegistrationPossible())
 				return false;
+
+			$registrationService = new PonyPlayDayRegistrationsService($this->_configuration);
+			$idealissuers = $registrationService->getIdealIssuersWithStatus();
 
 ?>	<section class="content">
 		<div class="sitewidth clearfix">
@@ -242,12 +249,27 @@
 							<?php endif; ?>
 						<?php endif; ?>
                         <p><?php echo esc_attr(sprintf(__('The cost per child is %1$s.', 'martinehooptopbeter'), PonyPlayDayRegistration::formatEuroPrice($this->_configuration->getPonyPlayDayPrice()))); ?>
-                        <p class="<?php if (isset($this->missingfields['registration_payment_method'])) { echo 'error'; } ?>">
-                            <label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_payment_method'])); ?>)</em><?php endif; ?></label>
+                        <p class="<?php if (isset($this->missingfields['registration_payment_method']) || isset($this->missingfields['registration_payment_method_ideal'])) { echo 'error'; } ?>">
+							<label><?php _e('Payment method', 'martinehooptopbeter'); ?><?php if (isset($this->missingfields['registration_payment_method'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_payment_method'])); ?>)</em><?php elseif (isset($this->missingfields['registration_payment_method_ideal'])) : ?> <em>(<?php echo esc_attr(strtolower($this->missingfields['registration_payment_method_ideal'])); ?>)</em><?php endif; ?></label>
                         </p>
-                        <ul class="paymentmethods <?php if (isset($this->missingfields['registration_payment_method'])) { echo 'error'; } ?>">
-                            <li><input type="radio" class="radio" id="registration_payment_method_ideal" name="registration_payment_method" value="ideal"<?php if ($this->registration_payment_method == 'ideal') { echo ' checked="checked"'; } ?>><label for="registration_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/ideal.svg'); ?>" alt="<?php _e('iDEAL', 'martinehooptopbeter'); ?>" /></label></li>
-                            <li><input type="radio" class="radio" id="registration_payment_method_creditcard" name="registration_payment_method" value="creditcard"<?php if ($this->registration_payment_method == 'creditcard') { echo ' checked="checked"'; } ?>><label for="registration_payment_method_creditcard"><?php _e('Credit Card', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/creditcards.svg'); ?>" alt="<?php _e('Credit Card', 'martinehooptopbeter'); ?>" /></label></li>
+                        <ul class="paymentmethods <?php if (isset($this->missingfields['registration_payment_method']) || isset($this->missingfields['registration_payment_method_ideal'])) { echo 'error'; } ?>">
+                            <li><input type="radio" class="radio" id="registration_payment_method_ideal" name="registration_payment_method" value="ideal"<?php if ($this->registration_payment_method == 'ideal') { echo ' checked="checked"'; } ?> onchange="onPaymentMethodChanged(this)"><label for="registration_payment_method_ideal"><?php _e('iDEAL', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/ideal.svg'); ?>" alt="<?php _e('iDEAL', 'martinehooptopbeter'); ?>" /></label>
+							<?php if ($idealissuers) : ?>
+							<div id="payment_method_ideal_options" style="display: <?php echo ($this->registration_payment_method == 'ideal') ? "block" : "none"; ?>">
+								<label for="registration_payment_method_ideal_options_bank"><?php _e('Choose your bank', 'martinehooptopbeter'); ?></label>
+								<select name="registration_payment_method_ideal" onchange="onIdealIssuerChanged(this)">
+									<option value=""> - </option>
+									<?php foreach($idealissuers as $idealissuer) : ?>
+										<?php $isSelected = ($this->registration_payment_method_ideal == $idealissuer['id']); ?>
+										<?php $isSelectedShowWarning = $isSelected && $idealissuer['showwarning']; ?>
+										<option <?php if ($isSelected) { echo ' selected="selected"'; } ?>value="<?php echo esc_attr($idealissuer['id']); ?>" data-show-warning='<?php echo $idealissuer['showwarning'] ? '1' : '0'; ?>'><?php echo esc_attr($idealissuer['name']); ?></option>
+									<?php endforeach; ?>
+								</select>
+								<div id="payment_method_ideal_warning" style="display: <?php echo ($isSelectedShowWarning) ? "block" : "none"; ?>">
+									<p><?php _e('There have been known problems with iDEAL transaction with this bank during the last hour. If you experience any problem please try again later.', 'martinehooptopbeter'); ?></p>									
+								</div>
+							</div><?php endif; ?></li>
+                            <li><input type="radio" class="radio" id="registration_payment_method_creditcard" name="registration_payment_method" value="creditcard"<?php if ($this->registration_payment_method == 'creditcard') { echo ' checked="checked"'; } ?> onchange="onPaymentMethodChanged(this)"><label for="registration_payment_method_creditcard"><?php _e('Credit Card', 'martinehooptopbeter'); ?><img src="<?php echo esc_attr(get_bloginfo('template_url') . '/img/creditcards.svg'); ?>" alt="<?php _e('Credit Card', 'martinehooptopbeter'); ?>" /></label></li>
                         </ul>
                     </fieldset>
 

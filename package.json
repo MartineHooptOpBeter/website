@@ -1,6 +1,6 @@
 {
   "name": "martinehooptopbeter",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Martine Hoopt Op Beter WordPress Theme",
   "main": "/",
   "scripts": {
@@ -33,6 +33,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.10",
     "lodash": "^4.16.3"

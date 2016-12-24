@@ -2,11 +2,12 @@
 
     @@HEADER@@
 
+	require_once 'vendor/autoload.php';
+
 	require_once 'configuration.php';
 	require_once 'donations.class.php';
 	require_once 'ponyplayday-registrations.class.php';
 	require_once 'ponyplayday-registrations-service.class.php';
-	require_once 'Mollie/API/Autoloader.php';
 
 	mb_internal_encoding('UTF-8');
 	

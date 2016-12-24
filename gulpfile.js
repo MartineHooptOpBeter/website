@@ -28,6 +28,7 @@ var watch = require('gulp-watch');
 var gulpif = require('gulp-if');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
 var replace = require('gulp-replace');
 var gulpejs = require('gulp-ejs');
 var gettext = require('gulp-gettext');
@@ -83,16 +84,19 @@ var reload = browsersync.reload;
 *******************************************************************************/
 
 var srcDir = 'src/';
+var srcJsDir = srcDir + 'js/';
 var srcCssDir = srcDir + 'css/';
 var srcCssFontDir = srcCssDir + 'fonts/';
 
+var vendorsDir = 'vendor/';
+
 var dstDir = 'wwwroot/';
 var themeDir = dstDir + 'wp-content/themes/martinehooptopbeter/';
+var themeJsDir = themeDir + 'js/';
 var themeCssDir = themeDir + 'css/';
 var themeImgDir = themeDir + 'img/';
 var themeFontDir = themeDir + 'fonts/';
-
-var vendorsDir = 'vendor/';
+var themeVendorDir = themeDir + vendorsDir;
 
 var sponsorsSrcDir = srcDir + 'sponsors/';
 var sponsorsDstDir = themeDir + 'sponsors/';
@@ -104,8 +108,8 @@ var files = {
 	php_files_dest : themeDir,
 	
 	/* Vendor folders */
-	vendors_src : [vendorsDir + 'mollie/mollie-api-php/src/**/*'],
-	vendors_dest : themeDir,
+	vendors_src : [vendorsDir + '/**/*'],
+	vendors_dest : themeVendorDir,
 
 	/* Locale files */
 	localization_src : [srcDir + 'languages/*.po'],
@@ -132,6 +136,10 @@ var files = {
 	allpages_css_dep : [],
 	allpages_css_out : 'allpages.css',
 	allpages_css_dest : themeCssDir,
+
+	/* Javascript files */
+	all_js_src : [srcJsDir + 'paymentmethods.js'],
+	all_js_dest : themeJsDir,
 
 	/* Icon font */
 	font_icon_src : srcDir + 'fonts/icons/*.svg',
@@ -319,6 +327,21 @@ gulp.task(allpages_css, [font_icon], function() {
 });
 
 
+
+
+/*******************************************************************************
+** JS TASKS                                                                   **
+*******************************************************************************/
+
+var all_js = 'all_js';
+gulp.task(all_js, function() {
+    return gulp.src(files.all_js_src)
+		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+		.pipe(gulpif(minifyJs, uglify()))
+        .pipe(gulp.dest(files.all_js_dest));
+});
+
+
 /*******************************************************************************
 ** LICENSE FILE                                                               **
 *******************************************************************************/
@@ -339,7 +362,7 @@ gulp.task(license, function() {
 *******************************************************************************/
 
 // Set up default task dependencies (i.e. the tasks we want to run by default)
-var defaultTaskDependencies = [license, php_files, vendors, localization, sponsors, root_img, copy_img, style_css, font_icon, allpages_css];
+var defaultTaskDependencies = [license, php_files, vendors, localization, sponsors, root_img, copy_img, style_css, font_icon, allpages_css, all_js];
 
 // Run default task
 gulp.task('default', defaultTaskDependencies, function() {
@@ -352,6 +375,7 @@ gulp.task('default', defaultTaskDependencies, function() {
 		gulp.watch(files.sponsors_src, [sponsors]);
 		gulp.watch(files.copy_img_src, [copy_img]).on('change', browsersync.reload);
 		gulp.watch(files.allpages_css_dep, [allpages_css]);
+		gulp.watch(files.all_js_src, [all_js]).on('change', browsersync.reload);
 	}
 	
 });
