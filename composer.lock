@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b6eac2fc81fc02a41a90ba88e4817bd",
+    "content-hash": "de0401940dc43a77c1d4d2a31c845e43",
     "packages": [
         {
             "name": "mollie/mollie-api-php",
@@ -74,21 +74,15 @@
                 "sofortbanking",
                 "subscriptions"
             ],
-            "time": "2016-08-22 08:26:47"
+            "time": "2016-08-22T08:26:47+00:00"
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "5.0.12",
+            "version": "dev-final",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "add3c3d7eb9ab7d65d16f1747768b4884379d31a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/add3c3d7eb9ab7d65d16f1747768b4884379d31a",
-                "reference": "add3c3d7eb9ab7d65d16f1747768b4884379d31a",
-                "shasum": ""
+                "reference": "bd7058dfd0798bcbe6c53fc3638693739f5df772"
             },
             "require": {
                 "ext-json": "*",
@@ -96,14 +90,6 @@
                 "phpfastcache/phpssdb": "~1.0.0",
                 "predis/predis": "~1.1.0",
                 "psr/cache": "~1.0.0"
-            },
-            "provide": {
-                "ext-apc": "*",
-                "ext-memcache": "*",
-                "ext-memcached": "*",
-                "ext-predis": "*",
-                "ext-redis": "*",
-                "ext-sqlite": "*"
             },
             "suggest": {
                 "ext-apc": "*",
@@ -121,7 +107,6 @@
                     "phpFastCache\\": "src/phpFastCache/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -143,6 +128,8 @@
             "homepage": "http://www.phpfastcache.com",
             "keywords": [
                 "LevelDb",
+                "Ssdb",
+                "Wincache",
                 "apc",
                 "apcu",
                 "cache",
@@ -159,7 +146,6 @@
                 "php cache",
                 "predis",
                 "redis",
-                "ssdb",
                 "wincache",
                 "xcache",
                 "zend",
@@ -168,7 +154,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2016-12-13 22:50:48"
+            "time": "2016-12-24 01:41:32"
         },
         {
             "name": "phpfastcache/phpssdb",
@@ -218,7 +204,7 @@
                 "driver",
                 "ssdb"
             ],
-            "time": "2016-07-02 12:58:46"
+            "time": "2016-07-02T12:58:46+00:00"
         },
         {
             "name": "predis/predis",
@@ -268,7 +254,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2016-06-16 16:22:20"
+            "time": "2016-06-16T16:22:20+00:00"
         },
         {
             "name": "psr/cache",
@@ -314,13 +300,15 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2016-08-06 20:24:11"
+            "time": "2016-08-06T20:24:11+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "phpfastcache/phpfastcache": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
