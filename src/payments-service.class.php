@@ -6,6 +6,8 @@
 
     require_once 'idealstatus.class.php';
 
+    use phpFastCache\CacheManager;
+
     class PaymentsService {
 
         public $lastErrorMessage = ''; 
@@ -60,21 +62,35 @@
 
         public function getIdealIssuersWithStatus()
         {
-            $ideal = [];
+            $cache = CacheManager::Apcu();
 
-            $idealstatus = new IdealStatus();
+            $cachedItem = $cache->getItem("martinehooptopbeter_idealissuerswithstatus");
 
-            $mollie = new Mollie_API_Client;
-            $mollie->setApiKey($this->_configuration->getMollieApiKey());
+            if (!$cachedItem->isHit()) {
 
-            $issuers = $mollie->issuers->all();
+                $ideal = [];
 
-            foreach ($issuers as $issuer)
-            {
-                if ($issuer->method == Mollie_API_Object_Method::IDEAL)
+                $idealstatus = new IdealStatus();
+
+                $mollie = new Mollie_API_Client;
+                $mollie->setApiKey($this->_configuration->getMollieApiKey());
+
+                $issuers = $mollie->issuers->all();
+
+                foreach ($issuers as $issuer)
                 {
-                    $ideal[] = array('id' => $issuer->id, 'name' => $issuer->name, 'showwarning' => !$idealstatus->statusForIssuer($issuer->id));
+                    if ($issuer->method == Mollie_API_Object_Method::IDEAL)
+                    {
+                        $ideal[] = array('id' => $issuer->id, 'name' => $issuer->name, 'showwarning' => !$idealstatus->statusForIssuer($issuer->id));
+                    }
                 }
+
+                $cachedItem->set($ideal);
+                $cachedItem->expiresAfter(15 * 60);
+                $cache->save($cachedItem);
+
+            } else {
+                $ideal = $cachedItem->get();
             }
 
             return $ideal;
