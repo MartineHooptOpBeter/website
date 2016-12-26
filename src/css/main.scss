@@ -118,6 +118,10 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .content .text ol li                        { margin-bottom: 0.5em; }
 .content .text h2							{ margin-top: 30px; }
 .content .text h2:first-child				{ margin-top: 0; }
+
+.content .text div.wp-caption               { width: auto !important; max-width: 100%; background-color: $darkColorLight; border-radius: 0 0 4px 4px; }
+.content .text div.wp-caption p             { color: $accentColor; font-style: italic; padding: 4px 4px 8px 4px; }
+
 .content .text img.size-thumbnail,
 .content .text img.size-medium,
 .content .text img.size-large,
