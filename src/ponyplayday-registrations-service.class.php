@@ -12,7 +12,7 @@
             parent::__construct($configuration);
         }
 
-        public function createMolliePaymentForPonyPlayDayRegistration($registration, $returnurl)
+        public function createMolliePaymentForPonyPlayDayRegistration($registration, $idealissuer, $returnurl)
         {
             if (!$registration || !($registration instanceof PonyPlayDayRegistration))
                 throw new InvalidArgumentException('No or invalid pony play day registration!');
@@ -23,7 +23,7 @@
                 $description = __('Pony Play Day', 'martinehooptopbeter');
                 $returnurl = sprintf($returnurl, $registration->id, $registration->paymentVerification);
 
-                return $this->createMolliePayment($registration, $description, $returnurl);
+                return $this->createMolliePayment($registration, $idealissuer, $description, $returnurl);
 
             } else {
                 $this->lastErrorMessage = __('An error has occured while saving your registration.', 'martinehooptopbeter');
