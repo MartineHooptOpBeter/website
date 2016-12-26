@@ -35,6 +35,11 @@
 		add_image_size( 'martinehooptopbeter_square-400', 400, 400, true );
 		add_image_size( 'martinehooptopbeter_fullwidth', 1200, 600, true );
 
+		// Disable auto CSS for galleries
+		add_filter('use_default_gallery_style', '__return_false');
+
+		// We support HTML5 tags
+		add_theme_support('html5', array('gallery', 'caption'));
 	}
 	add_action( 'after_setup_theme', 'martinehooptopbeter_setup' );
 

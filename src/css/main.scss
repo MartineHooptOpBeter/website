@@ -118,12 +118,22 @@ ul.social li a:active                       { color: $accentColorLight; text-dec
 .content .text ol li                        { margin-bottom: 0.5em; }
 .content .text h2							{ margin-top: 30px; }
 .content .text h2:first-child				{ margin-top: 0; }
+
+.content figcaption                         { text-align: center; font-style: italic; color: $accentColorLight; }
+.content .text figure                       { margin-bottom: 20px; width: auto !important; }
+
+.content .text figure,
 .content .text img.size-thumbnail,
 .content .text img.size-medium,
 .content .text img.size-large,
 .content .text img.size-full                { max-width: 100%; height: auto; }
 .content .wp-post-image            			{ margin-bottom: 20px; }
 .content.intro .wp-post-image            	{ margin-bottom: 0; margin-left: 20px; }
+
+.content .gallery-item                      { float: left; }
+.content .gallery-icon                      { text-align: center; }
+.content .gallery-columns-2 figure              { box-sizing: border-box; width: calc(50% - 20px) !important; margin: 0px 20px 30px 0; }
+.content .gallery-columns-2 figure:nth-child(2n) { margin: 0 0px 30px 20px; }
 
 .content.intro .text                        { padding-top: 20px; }
 .content.intro p                            { font-family: 'Open Sans', sans-serif; color: $accentColor; font-size: 18px; line-height: 130%; }
@@ -341,6 +351,9 @@ span.btn a:active							{ text-decoration: none; color: #fff; }
     ul.social                               { clear: none; margin: 0 40px 0 0; }
 
 	#menu-toggle:checked + #mainnav			{ position: absolute; z-index: 1; display: block; box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.5); }
+
+    .content .gallery-columns-2 figure               { width: calc(50% - 10px) !important; margin: 0px 10px 14px 0; }
+    .content .gallery-columns-2 figure:nth-child(2n) { margin: 0 0px 14px 10px; }
 }
 
 @media (max-width: 1023px) {
@@ -433,4 +446,6 @@ span.btn a:active							{ text-decoration: none; color: #fff; }
     .content blockquote                     { margin: 1em 1em 2em 1em; }
     ul.sponsors li                          { width: 100%; }
    
+    .content .gallery-columns-2 figure,
+    .content .gallery-columns-2 figure:nth-child(2n) { width: 100% !important; margin: 0 0 10px 0; }
 }
