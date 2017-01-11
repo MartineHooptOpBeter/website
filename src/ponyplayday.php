@@ -307,7 +307,7 @@
 					<p class="error"><?php echo esc_attr($this->errorMessage); ?></p>
 				<?php else : ?>
 			
-					<?php if (($this->registration_payment_status == 'paid') || ($this->registration_payment_status == 'paidout')) :  ?>
+					<?php if (($this->registration_payment_status == PaymentStatus::Paid) || ($this->registration_payment_status == PaymentStatus::PaidOut)) :  ?>
 					
 						<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
 						

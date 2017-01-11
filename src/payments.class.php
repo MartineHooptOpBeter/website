@@ -9,6 +9,20 @@
         const PonyPlayDayRegistration = 2;
     }
 
+    class PaymentStatus
+    {
+        const Open = 'open';
+        const Cancelled = 'cancelled';
+        const Pending = 'pending';
+        const Expired = 'expired';
+        const Failed = 'failed';
+        const Paid = 'paid';
+        const PaidOut = 'paidout';
+        const Paid_Or_PaidOut = array('paid', 'paidout');
+        const Refunded = 'refunded';
+        const ChargedBack = 'charged_back';
+    }
+
     class Payment
     {
         public $id;
@@ -190,7 +204,7 @@
             return $result;
         }
         
-        public function getPaymentsList($type, $paymentStatus = 'paid', $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC') {
+        public function getPaymentsList($type, $paymentStatus, $page = 1, $itemsPerPage = 10, $sortOrder = 'DESC') {
 
             $result = null;
 
@@ -207,11 +221,20 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT id, type, amount, userid, payment_method, payment_status, locale, data, timestamp FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status) ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
+                    if (is_array($paymentStatus)) {
+                        $sql = 'SELECT id, type, amount, userid, payment_method, payment_status, locale, data, timestamp FROM tbl_payments WHERE (type = :type) AND (payment_status IN (' . $this->getInClauseForArray(':payment_status_%d', $paymentStatus) . ')) ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
+                    } else {
+                        $sql = 'SELECT id, type, amount, userid, payment_method, payment_status, locale, data, timestamp FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status) ORDER BY timestamp ' . $orderBy . ' LIMIT :numberOfItems OFFSET :offset';
+                    }
                     $query = $conn->prepare($sql);
-					
-                    $query->bindValue(':type', $type);            
-                    $query->bindValue(':payment_status', $paymentStatus);            
+
+                    if (is_array($paymentStatus)) {
+                        $this->bindValueForArray($query, ':payment_status_%d', $paymentStatus);
+                    } else {
+                        $query->bindValue(':payment_status', $paymentStatus);
+                    }
+
+                    $query->bindValue(':type', $type);
                     $query->bindValue(':offset', $offset);            
                     $query->bindValue(':numberOfItems', $itemsPerPage);            
                     if ($query->execute()) {
@@ -235,7 +258,7 @@
             return $result;
         }
 
-		public function getPaymentsListCount($type, $paymentStatus = 'paid')
+		public function getPaymentsListCount($type, $paymentStatus)
         {
             $result = null;
 
@@ -245,11 +268,21 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT COUNT(*) as total_payments FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status)';
+                    if (is_array($paymentStatus)) {
+                        $sql = 'SELECT COUNT(*) as total_payments FROM tbl_payments WHERE (type = :type) AND (payment_status IN (' . $this->getInClauseForArray(':payment_status_%d', $paymentStatus) . '))';
+                    } else {
+                        $sql = 'SELECT COUNT(*) as total_payments FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status)';
+                    }
+
                     $query = $conn->prepare($sql);
 
+                    if (is_array($paymentStatus)) {
+                        $this->bindValueForArray($query, ':payment_status_%d', $paymentStatus);
+                    } else {
+                        $query->bindValue(':payment_status', $paymentStatus);
+                    }            
+
                     $query->bindValue(':type', $type);            
-                    $query->bindValue(':payment_status', $paymentStatus);            
                     if ($query->execute()) {
 						if ($row = $query->fetch(PDO::FETCH_NUM)) {
 
@@ -267,7 +300,7 @@
             return $result;
 		}
 
-		public function getTotalPaymentsAmount($type, $paymentStatus = 'paid')
+		public function getTotalPaymentsAmount($type, $paymentStatus)
         {
             $result = null;
 
@@ -277,11 +310,20 @@
             if ($conn = $this->openConnection()) {
 
                 try {
-                    $sql = 'SELECT SUM(amount) as total_amount FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status)';
+                    if (is_array($paymentStatus)) {
+                        $sql = 'SELECT SUM(amount) as total_amount FROM tbl_payments WHERE (type = :type) AND (payment_status IN (' . $this->getInClauseForArray(':payment_status_%d', $paymentStatus) . '))';
+                    } else {
+                        $sql = 'SELECT SUM(amount) as total_amount FROM tbl_payments WHERE (type = :type) AND (payment_status = :payment_status)';
+                    }
                     $query = $conn->prepare($sql);
 
+                    if (is_array($paymentStatus)) {
+                        $this->bindValueForArray($query, ':payment_status_%d', $paymentStatus);
+                    } else {
+                        $query->bindValue(':payment_status', $paymentStatus);            
+                    }
+
                     $query->bindValue(':type', $type);            
-                    $query->bindValue(':payment_status', $paymentStatus);            
                     if ($query->execute()) {
 						if ($row = $query->fetch(PDO::FETCH_NUM)) {
 
@@ -380,7 +422,7 @@
 
         private function validatePaymentStatus($paymentStatus)
         {
-            if (!$paymentStatus || !is_string($paymentStatus))
+            if (!$paymentStatus || (!is_array($paymentStatus) && !is_string($paymentStatus)))
                 $paymentStatus = 'paid';
 
             return $paymentStatus;
@@ -416,6 +458,24 @@
                 $itemsPerPage = 10;
 
             return $itemsPerPage;
+        }
+
+        public function getInClauseForArray($format, $parametersArray)
+        {
+            if (!is_string($format) || !is_array($parametersArray))
+                return '';
+
+            return implode(',', array_map(function($n) use ($format) { return sprintf($format, $n); }, range(1, count($parametersArray))));
+        }
+
+        public function bindValueForArray($query, $format, $parametersArray)
+        {
+            if (!$query || !is_string($format) || !is_array($parametersArray))
+                return;
+
+            for($i = 1; $i <= count($parametersArray); $i++) {
+                $query->bindValue(sprintf(':payment_status_%d', $i), $parametersArray[$i - 1]);
+            }
         }
 
     }

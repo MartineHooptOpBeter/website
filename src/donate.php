@@ -252,7 +252,7 @@
 					<p class="error"><?php echo esc_attr($this->errorMessage); ?></p>
 				<?php else : ?>
 			
-					<?php if (($this->donate_payment_status == 'paid') || ($this->donate_payment_status == 'paidout')) :  ?>
+					<?php if (($this->donate_payment_status == PaymentStatus::Paid) || ($this->donate_payment_status == PaymentStatus::PaidOut)) :  ?>
 					
 						<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
 						
