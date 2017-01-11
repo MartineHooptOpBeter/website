@@ -111,7 +111,7 @@
         {
             $donations = [];
 
-            if (!$payments = $this->getPaymentsList(PaymentTypes::Donation, 'paid', $page, $itemsPerPage, $sortOrder))
+            if (!$payments = $this->getPaymentsList(PaymentTypes::Donation, PaymentStatus::Paid_Or_PaidOut, $page, $itemsPerPage, $sortOrder))
                 return null;
 
             foreach($payments as $payment) {
@@ -124,12 +124,12 @@
 		
 		public function getDonationsListCount()
         {
-            return $this->getPaymentsListCount(PaymentTypes::Donation, 'paid');
+            return $this->getPaymentsListCount(PaymentTypes::Donation, PaymentStatus::Paid_Or_PaidOut);
 		}
 		
 		public function getTotalDonationsAmount()
         {
-            return $this->getTotalPaymentsAmount(PaymentTypes::Donation, 'paid');
+            return $this->getTotalPaymentsAmount(PaymentTypes::Donation, PaymentStatus::Paid_Or_PaidOut);
         }
 
 		public function getPercentageOfGoal($current, $goal, $max)
