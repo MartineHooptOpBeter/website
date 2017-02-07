@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "de0401940dc43a77c1d4d2a31c845e43",
+    "content-hash": "88f5c0c03f73c97b0dd717751faa0d51",
     "packages": [
         {
             "name": "mollie/mollie-api-php",
@@ -78,11 +78,17 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "dev-final",
+            "version": "5.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "bd7058dfd0798bcbe6c53fc3638693739f5df772"
+                "reference": "f9c09668b313dd53a6417be42e4af02649914a89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/f9c09668b313dd53a6417be42e4af02649914a89",
+                "reference": "f9c09668b313dd53a6417be42e4af02649914a89",
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -107,6 +113,7 @@
                     "phpFastCache\\": "src/phpFastCache/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -128,8 +135,6 @@
             "homepage": "http://www.phpfastcache.com",
             "keywords": [
                 "LevelDb",
-                "Ssdb",
-                "Wincache",
                 "apc",
                 "apcu",
                 "cache",
@@ -146,6 +151,7 @@
                 "php cache",
                 "predis",
                 "redis",
+                "ssdb",
                 "wincache",
                 "xcache",
                 "zend",
@@ -154,7 +160,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2016-12-24 01:41:32"
+            "time": "2017-02-04T01:09:40+00:00"
         },
         {
             "name": "phpfastcache/phpssdb",
@@ -205,6 +211,66 @@
                 "ssdb"
             ],
             "time": "2016-07-02T12:58:46+00:00"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "v5.2.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/b18cb98131bd83103ccb26a888fdfe3177b8a663",
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "*",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "suggest": {
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "class.phpmailer.php",
+                    "class.phpmaileroauth.php",
+                    "class.phpmaileroauthgoogle.php",
+                    "class.smtp.php",
+                    "class.pop3.php",
+                    "extras/EasyPeasyICS.php",
+                    "extras/ntlm_sasl_client.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2017-01-09T09:33:47+00:00"
         },
         {
             "name": "predis/predis",
@@ -306,9 +372,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "phpfastcache/phpfastcache": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

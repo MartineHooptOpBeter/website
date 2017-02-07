@@ -2,6 +2,7 @@
 
     @@HEADER@@
 
+	require_once 'utilities.class.php';
 	require_once 'xsrf.php';
 
 	class ContactPage {
@@ -92,12 +93,14 @@
 		}
 
         function sendContactEMail() {
-
-			$to      = $this->_configuration->getContactSendMailTo();
-			$subject = __('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter');
-			$headers[] = 'From: ' . mb_encode_mimeheader($this->contact_name) . ' <' . $this->contact_email . '>';
-
-			return mb_send_mail($to, $subject, $this->contact_message, implode("\r\n", $headers));
+			return Utilities::sendEmail(
+				$this->contact_name,
+				$this->contact_email,
+				'',
+				$this->_configuration->getContactSendMailTo(),
+				__('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter'),
+				$this->contact_message
+			);
         }
 		
 		function showContactForm()

@@ -105,16 +105,14 @@
 		$from_emailname = $configuration->getDonationConfirmationFromName();
 
 		if ($from_emailaddress) {
-
-			if ($from_emailname) {
-				$headers[] = 'From: ' . mb_encode_mimeheader($from_emailname) . ' <' . $from_emailaddress . '>';
-			} else {
-				$headers[] = 'From: ' . mb_encode_mimeheader($from_emailaddress);
-			}
-
-			mb_send_mail($donation->emailAddress, $subject, $message, implode("\r\n", $headers));
-
-			return true;
+			return Utilities::sendEmail(
+				$from_emailname,
+				$from_emailaddress,
+				'',
+				$donation->emailAddress,
+				$subject,
+				$message
+			);
 		}
 	}
 
@@ -164,15 +162,13 @@
 		$from_emailname = $configuration->getPonyPlayDayConfirmationFromName();
 
 		if ($from_emailaddress) {
-
-			if ($from_emailname) {
-				$headers[] = 'From: ' . mb_encode_mimeheader($from_emailname) . ' <' . $from_emailaddress . '>';
-			} else {
-				$headers[] = 'From: ' . mb_encode_mimeheader($from_emailaddress);
-			}
-
-			mb_send_mail($registration->emailAddress, $subject, $message, implode("\r\n", $headers));
-
-			return true;
+			return Utilities::sendEmail(
+				$from_emailname,
+				$from_emailaddress,
+				'',
+				$registration->emailAddress,
+				$subject,
+				$message
+			);
 		}
 	}

@@ -1,13 +1,8 @@
 {
 	"name": "martinehooptopbeter/website",
-	"repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/PHPSocialNetwork/phpfastcache.git"
-        }
-    ],
 	"require": {
 		"mollie/mollie-api-php": "1.6.*",
-		"phpFastCache/phpFastCache": "dev-final"
+		"phpFastCache/phpFastCache": "5.0.*",
+		"phpmailer/phpmailer": "^5.2"
 	}
 }
