@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "de0401940dc43a77c1d4d2a31c845e43",
+    "content-hash": "76609ab684e57e696484eb8a6e4bc608",
     "packages": [
         {
             "name": "mollie/mollie-api-php",
@@ -78,11 +78,17 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "dev-final",
+            "version": "5.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
                 "reference": "f9c09668b313dd53a6417be42e4af02649914a89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/f9c09668b313dd53a6417be42e4af02649914a89",
+                "reference": "f9c09668b313dd53a6417be42e4af02649914a89",
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -107,6 +113,7 @@
                     "phpFastCache\\": "src/phpFastCache/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -128,8 +135,6 @@
             "homepage": "http://www.phpfastcache.com",
             "keywords": [
                 "LevelDb",
-                "Ssdb",
-                "Wincache",
                 "apc",
                 "apcu",
                 "cache",
@@ -146,6 +151,7 @@
                 "php cache",
                 "predis",
                 "redis",
+                "ssdb",
                 "wincache",
                 "xcache",
                 "zend",
@@ -154,7 +160,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2017-02-04 01:09:40"
+            "time": "2017-02-04T01:09:40+00:00"
         },
         {
             "name": "phpfastcache/phpssdb",
@@ -306,9 +312,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "phpfastcache/phpfastcache": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
