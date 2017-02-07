@@ -98,7 +98,7 @@
 				$this->contact_email,
 				'',
 				$this->_configuration->getContactSendMailTo(),
-				__('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter');
+				__('Contact through website Martine Hoopt Op Beter', 'martinehooptopbeter'),
 				$this->contact_message
 			);
         }
