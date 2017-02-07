@@ -2,6 +2,7 @@
 	"name": "martinehooptopbeter/website",
 	"require": {
 		"mollie/mollie-api-php": "1.6.*",
-		"phpFastCache/phpFastCache": "5.0.*"
+		"phpFastCache/phpFastCache": "5.0.*",
+		"phpmailer/phpmailer": "^5.2"
 	}
 }
