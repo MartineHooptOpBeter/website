@@ -25,10 +25,12 @@
 		public static function sendEmail($fromName, $fromEmailAddress, $toName, $toEmailAddress, $subject, $message)
 		{
 			$mail = new PHPMailer;
+			$mail->CharSet = 'UTF-8';
+			$mail->Encoding = 'quoted-printable';
 			$mail->isMail();
+			$mail->isHTML(false);
 			$mail->setFrom($fromEmailAddress, $fromName);
 			$mail->addAddress($toEmailAddress, $toName);
-			$mail->isHTML(false);
 			$mail->Subject = $subject;
 			$mail->Body = $message;
 			return $mail->send();
