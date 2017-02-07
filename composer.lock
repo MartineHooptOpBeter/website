@@ -82,7 +82,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "bd7058dfd0798bcbe6c53fc3638693739f5df772"
+                "reference": "f9c09668b313dd53a6417be42e4af02649914a89"
             },
             "require": {
                 "ext-json": "*",
@@ -154,7 +154,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2016-12-24 01:41:32"
+            "time": "2017-02-04 01:09:40"
         },
         {
             "name": "phpfastcache/phpssdb",
