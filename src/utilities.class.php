@@ -2,6 +2,8 @@
 
     @@HEADER@@
 
+	require_once 'vendor/autoload.php';
+
     class Utilities {
 
 		public static function formatShortDate($datetime, $locale) {
@@ -18,6 +20,18 @@
 			$fmt_date = new IntlDateFormatter($locale, IntlDateFormatter::LONG, IntlDateFormatter::NONE);
 			$fmt_time = new IntlDateFormatter($locale, IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
 			return sprintf($format, $fmt_date->format($datetime), $fmt_time->format($datetime));
+		}
+
+		public static function sendEmail($fromName, $fromEmailAddress, $toName, $toEmailAddress, $subject, $message)
+		{
+			$mail = new PHPMailer;
+			$mail->isMail();
+			$mail->setFrom($fromEmailAddress, $fromName);
+			$mail->addAddress($toEmailAddress, $toName);
+			$mail->isHTML(false);
+			$mail->Subject = $subject;
+			$mail->Body = $message;
+			return $mail->send();
 		}
 
     }
