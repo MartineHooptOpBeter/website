@@ -7,7 +7,7 @@
 		<div class="sitewidth clearfix">
 
 			<div class="text">
-				<?php the_title( '<h2>', '</h2>' ); ?>
+				<h2><?php echo esc_html(get_the_title()); ?></h2>
 				<?php the_content(); ?>
 			</div>
 

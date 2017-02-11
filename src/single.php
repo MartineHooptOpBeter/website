@@ -14,7 +14,7 @@
 			<?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'martinehooptopbeter_square-400' ); } ?>
 
 			<div class="text">
-				<?php the_title( '<h1>', '</h1>' ); ?>
+				<h1><?php echo esc_html(get_the_title()); ?></h1>
 				<div class="meta">
 					<?php the_date('l, j F Y', '<time datetime="' . esc_attr(date('c', time($post->post_date))) . '">', '</time>'); ?> door <?php the_author(); ?> 
 				</div>
