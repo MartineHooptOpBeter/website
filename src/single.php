@@ -19,7 +19,7 @@
 					<?php the_date('l, j F Y', '<time datetime="' . esc_attr(date('c', time($post->post_date))) . '">', '</time>'); ?> door <?php the_author(); ?> 
 				</div>
 				<?php if ($hasExcerpt) : ?>
-					<?php the_excerpt(); ?>
+					<?php echo esc_html(get_the_excerpt()); ?>
 				<?php endif; ?>
 			</div>
 
