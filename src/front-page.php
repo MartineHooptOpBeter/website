@@ -26,7 +26,7 @@
 
 				<?php if (have_posts()) : ?>
 					<?php the_post(); ?>
-					<?php the_title( '<h1>', '</h1>' ); ?>
+					<h1><?php echo esc_html(get_the_title()); ?></h1>
 					<?php the_content(); ?>
 				<?php endif ?>
 				
@@ -145,7 +145,7 @@
 			<div class="text">
 
 				<?php martinehooptopbeter_show_excerpt_title(); ?>
-				<?php the_excerpt(); ?>
+				<?php echo apply_filters('the_excerpt', esc_html(get_the_excerpt())); ?>
 			
 				<div class="buttons">
 					<a href="<?php echo get_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
@@ -169,7 +169,7 @@
 			<div class="text">
 
 				<?php martinehooptopbeter_show_excerpt_title(); ?>
-				<?php the_excerpt(); ?>
+				<?php echo apply_filters('the_excerpt', esc_html(get_the_excerpt())); ?>
 				
 				<div class="buttons">
 					<a href="<?php echo get_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
@@ -208,7 +208,7 @@
 			<div class="text">
 			
 				<?php martinehooptopbeter_show_excerpt_title(); ?>
-				<?php the_excerpt(); ?>
+				<?php echo apply_filters('the_excerpt', esc_html(get_the_excerpt())); ?>
 				
 				<div class="buttons">
 					<a href="<?php echo get_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>

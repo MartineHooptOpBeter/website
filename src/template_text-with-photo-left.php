@@ -9,7 +9,7 @@
 			<?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'martinehooptopbeter_square-400' ); } ?>
 
 			<div class="text">
-				<?php the_title( '<h2>', '</h2>' ); ?>
+				<h2><?php echo esc_html(get_the_title()); ?></h2>
 				<?php the_content(); ?>
 			</div>
 
