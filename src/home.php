@@ -37,7 +37,7 @@
 					<div class="meta">
 						<?php echo the_time('l, j F Y', '<time datetime="' . esc_attr(date('c', time($post->post_date))) . '">', '</time>'); ?> door <?php the_author(); ?> 
 					</div>
-					<?php echo esc_html(get_the_excerpt()); ?>
+					<p><?php echo apply_filters('the_excerpt', esc_html(get_the_excerpt())); ?></p>
 					<a href="<?php the_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
 				</div>
 
