@@ -23,7 +23,17 @@
 	</section>
 
 	<?php endif; ?>
+	
+	<?php if (function_exists('mc4wp_show_form')) : ?>
 
+	<section class="content right">
+		<div class="sitewidth clearfix">
+			<?php mc4wp_show_form(543); ?>
+		</div>
+	</section>
+
+	<?php endif; ?>
+		
 	<?php while ( have_posts() ) : the_post(); ?>
 
 	<article class="blogpost">
