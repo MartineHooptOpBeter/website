@@ -35,7 +35,7 @@
 				<div class="text">
 					<h2><a href="<?php echo esc_html(get_the_permalink()); ?>"><?php echo esc_html(get_the_title()); ?></a></h2>
 					<div class="meta">
-						<?php echo the_time('l, j F Y', '<time datetime="' . esc_attr(date('c', time($post->post_date))) . '">', '</time>'); ?> door <?php the_author(); ?> 
+						<?php echo esc_html( sprintf( __( '%1$s by %2$s', 'martinehooptopbeter' ), get_the_time('l, j F Y'), get_the_author() ) ); ?> 
 					</div>
 					<p><?php echo apply_filters('the_excerpt', esc_html(get_the_excerpt())); ?></p>
 					<a href="<?php the_permalink() ?>" class="btn"><?php _e('Read more', 'martinehooptopbeter'); ?></a>
