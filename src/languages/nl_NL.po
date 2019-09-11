@@ -351,6 +351,9 @@ msgstr "Er is %1$s reactie"
 msgid "There are %1$s comments"
 msgstr "Er zijn %1$s reacties"
 
+msgid "%1$s by %2$s"
+msgstr "%1$s door %2$s"
+
 msgid "Register for Pony Play Day"
 msgstr "Inschrijven voor de Ponyspeeldag"
 
