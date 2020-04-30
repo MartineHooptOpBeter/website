@@ -1,6 +1,6 @@
 {
   "name": "martinehooptopbeter",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "description": "Martine Hoopt Op Beter WordPress Theme",
   "main": "/",
   "scripts": {
@@ -16,26 +16,31 @@
     "url": "https://github.com/MartineHooptOpBeter/website/issues"
   },
   "homepage": "https://github.com/MartineHooptOpBeter/website#readme",
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ],
   "devDependencies": {
-    "browser-sync": "^2.17.0",
-    "dateformat": "^1.0.12",
-    "ejs": "^2.5.2",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-clean-css": "^2.0.13",
-    "gulp-concat": "^2.6.0",
+    "browser-sync": "^2.26.7",
+    "dateformat": "^3.0.3",
+    "ejs": "^3.1.2",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
     "gulp-consolidate": "^0.2.0",
-    "gulp-ejs": "^2.2.1",
+    "gulp-ejs": "^5.1.0",
     "gulp-gettext": "^0.3.0",
-    "gulp-iconfont": "^8.0.1",
-    "gulp-if": "^2.0.1",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^2.0.0",
-    "gulp-util": "^3.0.7",
-    "gulp-watch": "^4.3.10",
-    "lodash": "^4.16.3"
+    "gulp-iconfont": "^10.0.3",
+    "gulp-if": "^3.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.5"
   }
 }

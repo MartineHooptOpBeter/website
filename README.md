@@ -31,7 +31,7 @@ Alle dependencies zijn nu geinstalleerd.
 Het WordPress theme kan nu met Gulp worden gegenereerd met het volgende commando:
 
 ```
-gulp --build=production
+gulp build
 ```
 
 Het theme zal nu worden gegenereerd in de folder `wwwroot/wp-content/themes/martinehooptopbeter/`. Dit theme is geschikt om gebruikt te worden op een live website.
