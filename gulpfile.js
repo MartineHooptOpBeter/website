@@ -15,18 +15,16 @@ var defaultCreateIconFont = false;
 *******************************************************************************/
 
 var gulp = require('gulp');
-var lodash = require('lodash');
-
-var ejs = require('ejs');
-var dateformat = require('dateformat');
+var gulpif = require('gulp-if');
+var argument = require('minimist')(process.argv.slice(2));
 
 var browsersync = require('browser-sync').create();
 
-var util = require('gulp-util');
+var ejs = require('ejs');
 var sass = require('gulp-sass')
 var watch = require('gulp-watch');
-var gulpif = require('gulp-if');
 var concat = require('gulp-concat');
+var lodash = require('lodash');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var replace = require('gulp-replace');
@@ -35,6 +33,7 @@ var gettext = require('gulp-gettext');
 var plumber = require('gulp-plumber');
 var iconfont = require('gulp-iconfont');
 var cleancss = require('gulp-clean-css');
+var dateformat = require('dateformat');
 var consolidate = require('gulp-consolidate');
 var autoprefixer = require('gulp-autoprefixer');
 
@@ -53,30 +52,28 @@ function isEnabled(s) {
 *******************************************************************************/
 
 // Production build
-var isProductionBuild = util.env.build === 'production';
+var isProductionBuild = argument.build === 'production';
 var isDevelopmentBuild = !isProductionBuild
 
 // Is development server secure?
-var developmentServerHostIsSecure = defaultdevelopmentServerHostIsSecure || isEnabled(util.env.devhostsecure);
+var developmentServerHostIsSecure = defaultdevelopmentServerHostIsSecure || isEnabled(argument.devhostsecure);
 
 // Development Server
 var developmentServerHostName = '';
-if (!(developmentServerHostName = (util.env.devhostname ? util.env.devhostname : defaultDevelopmentServerHostName))) {
+if (!(developmentServerHostName = (argument.devhostname ? argument.devhostname : defaultDevelopmentServerHostName))) {
 	console.log('ERROR: Specify development hostname using: --devhostname=<hostname>');
 	process.exit(1);
 }
 var developmentServerHostURL = 'http' + (developmentServerHostIsSecure ? 's' : '') + '://' + developmentServerHostName + '/';
 
 // Minify CSS
-var minifyCss = isEnabled(util.env.minifycss) || defaultMinifyCss || isProductionBuild;
+var minifyCss = isEnabled(argument.minifycss) || defaultMinifyCss || isProductionBuild;
 
 // Minify Javascript
-var minifyJs = isEnabled(util.env.minifyjs) || defaultMinifyJs || isProductionBuild;
+var minifyJs = isEnabled(argument.minifyjs) || defaultMinifyJs || isProductionBuild;
 
 // Create icon font
-var createIconFont = isEnabled(util.env.createiconfont) || defaultCreateIconFont || isProductionBuild;
-
-var reload = browsersync.reload;
+var createIconFont = isEnabled(argument.createiconfont) || defaultCreateIconFont || isProductionBuild;
 
 
 /*******************************************************************************
@@ -200,83 +197,90 @@ files.allpages_css_dep.push(srcCssDir + 'colors.scss');
 
 
 /*******************************************************************************
-** PHP TASKS                                                                  **
+** LICENSE FILE                                                               **
 *******************************************************************************/
 
-var php_files = 'php_files';
-gulp.task(php_files, function() {
+const task_license = () => {
+    return gulp.src(files.license_src)
+		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
+		.pipe(replace('@@LICENSE@@', license_text))
+		.pipe(gulpejs({ release : release }))
+        .pipe(gulp.dest('./'))
+		.pipe(gulp.dest(themeDir));
+};
+
+
+/*******************************************************************************
+** PHP FILES                                                                  **
+*******************************************************************************/
+
+const task_php_files = () => {
     return gulp.src(files.php_files_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(replace('@@HEADER@@', php_header_text))
 		.pipe(gulpejs({ release : release }))
         .pipe(gulp.dest(files.php_files_dest));
-});
+};
 
 
 /*******************************************************************************
 ** VENDOR FOLDERS                                                             **
 *******************************************************************************/
 
-var vendors = 'vendors';
-gulp.task(vendors, function() {
+const task_vendors = () => {
     return gulp.src(files.vendors_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
         .pipe(gulp.dest(files.vendors_dest));
-});
+};
 
 
 /*******************************************************************************
-** LOCALIZATION TASKS                                                         **
+** LOCALIZATION                                                               **
 *******************************************************************************/
 
-var localization = 'localization';
-gulp.task(localization, function() {
+const task_localization = () => {
     return gulp.src(files.localization_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(gettext())
         .pipe(gulp.dest(files.localization_dest));
-});
+};
 
 
 /*******************************************************************************
-** SPONSOR TASK                                                               **
+** SPONSORS                                                                   **
 *******************************************************************************/
 
-var sponsors = 'sponsors';
-gulp.task(sponsors, function() {
+const task_sponsors = () => {
     return gulp.src(files.sponsors_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
         .pipe(gulp.dest(files.sponsors_dest));
-});
+};
 
 
 /*******************************************************************************
-** IMAGE TASKS                                                                **
+** IMAGES                                                                     **
 *******************************************************************************/
 
-var root_img = 'root_img';
-gulp.task(root_img, function() {
+const task_root_img = () => {
     return gulp.src(files.root_img_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
         .pipe(gulp.dest(files.root_img_dest));
-});
+};
 
-var copy_img = 'copy_img';
-gulp.task(copy_img, function() {
+const task_copy_img = () => {
     return gulp.src(files.copy_img_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
         .pipe(gulp.dest(files.copy_img_dest));
-});
+};
 
 
 /*******************************************************************************
-** FONT TASKS                                                                 **
+** FONTS                                                                      **
 *******************************************************************************/
 
-var font_icon = 'font-icon';
-gulp.task(font_icon, function() {
+const task_font_icon = (done) => {
 	if (!createIconFont)
-		return;
+		done();
 
     return gulp.src(files.font_icon_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
@@ -300,82 +304,110 @@ gulp.task(font_icon, function() {
 				.pipe(gulp.dest(files.font_css_dest));
 		})
 		.pipe(gulp.dest(files.font_dest));
-});
+};
 
 
 /*******************************************************************************
-** CSS TASKS                                                                  **
+** CSS                                                                        **
 *******************************************************************************/
 
-var style_css = 'style_css';
-gulp.task(style_css, function() {
+const task_style_css = () => {
     return gulp.src(files.style_css_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
         .pipe(gulp.dest(files.style_css_dest));
-});
+};
 
-var allpages_css = 'allpages_css';
-gulp.task(allpages_css, [font_icon], function() {
+const task_allpages_css_function = () => {
     return gulp.src(files.allpages_css_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(sass())
-		.pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
+		.pipe(autoprefixer())
         .pipe(gulpif(minifyCss, cleancss({ rebase: false })))
         .pipe(concat(files.allpages_css_out))
         .pipe(gulp.dest(files.allpages_css_dest))
-        .pipe(reload({ stream: true }));
-});
+        .pipe(browsersync.stream({ match: files.allpages_css_dep }));
+};
 
-
+const task_allpages_css = gulp.series(task_font_icon, task_allpages_css_function);
 
 
 /*******************************************************************************
-** JS TASKS                                                                   **
+** JAVASCRIPT                                                                 **
 *******************************************************************************/
 
-var all_js = 'all_js';
-gulp.task(all_js, function() {
+var task_all_js = () => {
     return gulp.src(files.all_js_src)
 		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
 		.pipe(gulpif(minifyJs, uglify()))
         .pipe(gulp.dest(files.all_js_dest));
-});
+};
 
 
 /*******************************************************************************
-** LICENSE FILE                                                               **
+** WATCH TASKS
 *******************************************************************************/
 
-var license = 'license';
-gulp.task(license, function() {
-    return gulp.src(files.license_src)
-		.pipe(plumber({ errorHandler: function (err) { console.log(err); this.emit('end'); }}))
-		.pipe(replace('@@LICENSE@@', license_text))
-		.pipe(gulpejs({ release : release }))
-        .pipe(gulp.dest('./'))
-		.pipe(gulp.dest(themeDir));
-});
+const reload_browser =(done) => {
+	console.log('Reloading');
+	browsersync.reload();
+	done()
+}
+
+const watch_php_files = () => {
+	gulp.watch(files.php_files_src, gulp.series(task_php_files, reload_browser));
+}
+
+const watch_css_allpages = () => {
+	gulp.watch(files.allpages_css_dep, gulp.series(task_allpages_css));
+}
+
+const watch_js_all = () => {
+	gulp.watch(files.all_js_src, gulp.series(task_all_js, reload_browser));
+}
+
+const watch_localization = () => {
+	gulp.watch(files.localization_src, gulp.series(task_localization, reload_browser));
+}
+
+const watch_sponsors = () => {
+	gulp.watch(files.sponsors_src, gulp.series(task_sponsors, reload_browser));
+}
+
+const watch_copy_img = () => {
+	gulp.watch(files.copy_img_src, gulp.series(task_copy_img, reload_browser));
+}
+
+
+/*******************************************************************************
+** BROWSERSYNC TASK
+*******************************************************************************/
+
+const browser_sync = () => {
+	browsersync.init({ proxy: developmentServerHostURL });
+}
 
 
 /*******************************************************************************
 ** GULP TASKS                                                                 **
 *******************************************************************************/
 
-// Set up default task dependencies (i.e. the tasks we want to run by default)
-var defaultTaskDependencies = [license, php_files, vendors, localization, sponsors, root_img, copy_img, style_css, font_icon, allpages_css, all_js];
+// Set up build task
+const productionTask = (done) => {
+	isProductionBuild = true;
+	done();
+}
+
+// Set up compile task with all compilation tasks
+const compileTask = gulp.series(task_license, task_php_files, task_vendors, task_localization, task_sponsors, task_root_img, task_copy_img, task_style_css, task_allpages_css, task_all_js);
+
+// Set up serve task
+const serveTask = gulp.series(compileTask, browser_sync);
+
+// Set up watch task
+const watchTask = gulp.parallel(watch_php_files, watch_css_allpages, watch_js_all,  watch_localization, watch_sponsors, watch_copy_img);
+
+// Set up build task
+gulp.task('build', gulp.series(productionTask, compileTask));
 
 // Run default task
-gulp.task('default', defaultTaskDependencies, function() {
-
-	/* Start watch tasks for development environment only */
-	if (isDevelopmentBuild) {
-		browsersync.init({ proxy: developmentServerHostURL, secure: developmentServerHostIsSecure });
-		gulp.watch(files.php_files_src, [php_files]).on('change', browsersync.reload);
-		gulp.watch(files.localization_src, [localization]).on('change', browsersync.reload);
-		gulp.watch(files.sponsors_src, [sponsors]);
-		gulp.watch(files.copy_img_src, [copy_img]).on('change', browsersync.reload);
-		gulp.watch(files.allpages_css_dep, [allpages_css]);
-		gulp.watch(files.all_js_src, [all_js]).on('change', browsersync.reload);
-	}
-	
-});
+gulp.task('default', gulp.series(serveTask, watchTask));

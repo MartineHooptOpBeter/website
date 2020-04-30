@@ -16,7 +16,7 @@
 			<div class="text">
 				<h1><?php echo esc_html(get_the_title()); ?></h1>
 				<div class="meta">
-					<?php the_date('l, j F Y', '<time datetime="' . esc_attr(date('c', time($post->post_date))) . '">', '</time>'); ?> door <?php the_author(); ?> 
+					<?php the_date('l, j F Y', '<time datetime="' . get_the_date( 'c', $post ) . '">', '</time>'); ?> door <?php the_author(); ?> 
 				</div>
 				<?php if ($hasExcerpt) : ?>
 					<?php echo apply_filters('the_excerpt', esc_html(get_the_excerpt())); ?>
