@@ -75,8 +75,6 @@ var minifyJs = isEnabled(argument.minifyjs) || defaultMinifyJs || isProductionBu
 // Create icon font
 var createIconFont = isEnabled(argument.createiconfont) || defaultCreateIconFont || isProductionBuild;
 
-var reload = browsersync.reload;
-
 
 /*******************************************************************************
 ** FILE NAMES                                                                 **
@@ -327,7 +325,7 @@ const task_allpages_css_function = () => {
         .pipe(gulpif(minifyCss, cleancss({ rebase: false })))
         .pipe(concat(files.allpages_css_out))
         .pipe(gulp.dest(files.allpages_css_dest))
-        .pipe(reload({ stream: true }));
+        .pipe(browsersync.stream({ match: files.allpages_css_dep }));
 };
 
 const task_allpages_css = gulp.series(task_font_icon, task_allpages_css_function);
@@ -349,8 +347,14 @@ var task_all_js = () => {
 ** WATCH TASKS
 *******************************************************************************/
 
+const reload_browser =(done) => {
+	console.log('Reloading');
+	browsersync.reload();
+	done()
+}
+
 const watch_php_files = () => {
-	gulp.watch(files.php_files_src, gulp.series(task_php_files));
+	gulp.watch(files.php_files_src, gulp.series(task_php_files, reload_browser));
 }
 
 const watch_css_allpages = () => {
@@ -358,19 +362,19 @@ const watch_css_allpages = () => {
 }
 
 const watch_js_all = () => {
-	gulp.watch(files.all_js_src, gulp.series(task_all_js));
+	gulp.watch(files.all_js_src, gulp.series(task_all_js, reload_browser));
 }
 
 const watch_localization = () => {
-	gulp.watch(files.localization_src, gulp.series(task_localization));
+	gulp.watch(files.localization_src, gulp.series(task_localization, reload_browser));
 }
 
 const watch_sponsors = () => {
-	gulp.watch(files.sponsors_src, gulp.series(task_sponsors));
+	gulp.watch(files.sponsors_src, gulp.series(task_sponsors, reload_browser));
 }
 
 const watch_copy_img = () => {
-	gulp.watch(files.copy_img_src, gulp.series(task_copy_img));
+	gulp.watch(files.copy_img_src, gulp.series(task_copy_img, reload_browser));
 }
 
 
