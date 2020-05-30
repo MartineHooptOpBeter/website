@@ -12,10 +12,10 @@ Maak een folder aan waar je de bestanden wilt plaatsen en zorg ervoor dat deze f
 git clone https://github.com/MartineHooptOpBeter/website ./
 ```
 
-Installeer vervolgens de dependencies met Composer:
+Voor zover nodig, download en installeer de [Composer Dependancy Manager](https://getcomposer.org/download/). Installeer vervolgens de dependencies met Composer:
 
 ```
-php composer.phar install
+composer install
 ```
 
 Installeer tenslotte de NodeJS modules met NPM:
