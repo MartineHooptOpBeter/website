@@ -68,6 +68,7 @@
 
 ?>
 	
-	<?php show_donations_page($donationsUrl, $_GET['donationpage']) ?>
+    <?php $donationPage = isset($_GET['donationpage']) ? $_GET['donationpage'] : 1; ?>
+	<?php show_donations_page($donationsUrl, $donationPage) ?>
 	
 <?php get_footer(); ?>
