@@ -53,7 +53,7 @@
 
                 $this->lastErrorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
             }
-            catch (Mollie_API_Exception $e)
+            catch (\Mollie\Api\Exceptions\ApiException $e)
             {
                 $this->lastErrorMessage = __('An error has occured while starting your payment.', 'martinehooptopbeter');
             }
@@ -67,17 +67,14 @@
 
             $idealstatus = new IdealStatus();
 
-            $mollie = new Mollie_API_Client;
+            $mollie = new \Mollie\Api\MollieApiClient();
             $mollie->setApiKey($this->_configuration->getMollieApiKey());
 
-            $issuers = $mollie->issuers->all();
+            $idealPaymentMethod = $mollie->methods->get(\Mollie\Api\Types\PaymentMethod::IDEAL, ["include" => "issuers"]);
 
-            foreach ($issuers as $issuer)
+            foreach ($idealPaymentMethod->issuers as $issuer)
             {
-                if ($issuer->method == Mollie_API_Object_Method::IDEAL)
-                {
-                    $ideal[] = array('id' => $issuer->id, 'name' => $issuer->name, 'showwarning' => !$idealstatus->statusForIssuer($issuer->id));
-                }
+                $ideal[] = array('id' => $issuer->id, 'name' => $issuer->name, 'showwarning' => !$idealstatus->statusForIssuer($issuer->id));
             }
 
             return $ideal;

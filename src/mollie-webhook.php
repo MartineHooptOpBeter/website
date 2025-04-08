@@ -68,7 +68,7 @@
 			header('HTTP/1.1 404 Not Found');
 			exit;
 		}
-		catch (Mollie_API_Exception $e)
+		catch (\Mollie\Api\Exceptions\ApiException $e)
 		{
 			header('HTTP/1.1 500 Internal Server Error');
 			exit;
