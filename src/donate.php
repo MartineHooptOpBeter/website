@@ -32,7 +32,7 @@
 		public $donate_no_amount = false;
 		public $donate_locale = '';
 		
-		function DonationPage($configuration) {
+		function __construct($configuration) {
 			$this->_configuration = $configuration;
 			$this->_xsrf = new XSRF();
 		}
