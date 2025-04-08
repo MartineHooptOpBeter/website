@@ -354,27 +354,27 @@ const reload_browser =(done) => {
 }
 
 const watch_php_files = () => {
-	gulp.watch(files.php_files_src, gulp.series(task_php_files, reload_browser));
+	return gulp.watch(files.php_files_src, gulp.series(task_php_files, reload_browser));
 }
 
 const watch_css_allpages = () => {
-	gulp.watch(files.allpages_css_dep, gulp.series(task_allpages_css));
+	return gulp.watch(files.allpages_css_dep, gulp.series(task_allpages_css));
 }
 
 const watch_js_all = () => {
-	gulp.watch(files.all_js_src, gulp.series(task_all_js, reload_browser));
+	return gulp.watch(files.all_js_src, gulp.series(task_all_js, reload_browser));
 }
 
 const watch_localization = () => {
-	gulp.watch(files.localization_src, gulp.series(task_localization, reload_browser));
+	return gulp.watch(files.localization_src, gulp.series(task_localization, reload_browser));
 }
 
 const watch_sponsors = () => {
-	gulp.watch(files.sponsors_src, gulp.series(task_sponsors, reload_browser));
+	return gulp.watch(files.sponsors_src, gulp.series(task_sponsors, reload_browser));
 }
 
 const watch_copy_img = () => {
-	gulp.watch(files.copy_img_src, gulp.series(task_copy_img, reload_browser));
+	return gulp.watch(files.copy_img_src, gulp.series(task_copy_img, reload_browser));
 }
 
 
@@ -400,14 +400,14 @@ const productionTask = (done) => {
 // Set up compile task with all compilation tasks
 const compileTask = gulp.series(task_license, task_php_files, task_vendors, task_localization, task_sponsors, task_root_img, task_copy_img, task_style_css, task_allpages_css, task_all_js);
 
-// Set up serve task
-const serveTask = gulp.series(compileTask, browser_sync);
-
 // Set up watch task
 const watchTask = gulp.parallel(watch_php_files, watch_css_allpages, watch_js_all,  watch_localization, watch_sponsors, watch_copy_img);
+
+// Set up serve task
+const serveTask = gulp.parallel(browser_sync, watchTask);
 
 // Set up build task
 gulp.task('build', gulp.series(productionTask, compileTask));
 
 // Run default task
-gulp.task('default', gulp.series(serveTask, watchTask));
+gulp.task('default', gulp.series(compileTask, serveTask));
