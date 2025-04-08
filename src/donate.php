@@ -39,8 +39,12 @@
 
 		function processRequest($donateUrl, $server, $post, $get) {
 			
-			// We show the form by default, unless we decide otherwise
-			$this->doShowDonationForm = true;
+            // Do we accepts donations?  Otherwise exit
+            if (!$this->_configuration->getAcceptDonations())
+                return;
+            
+			// We do not show the form by default, unless we decide otherwise
+			$this->doShowDonationForm = false;
 			
 			if ($server['REQUEST_METHOD'] == "POST") {
 				
@@ -346,6 +350,20 @@
 			
 		}
 
+        function showDontAcceptDonations() {
+            
+?>  <section class="content">
+		<div class="sitewidth clearfix">
+        
+            <h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
+            <p><?php _e('Donations are not accepted anymore. We would like to thank all donors for their donations.', 'martinehooptopbeter'); ?></p>
+            
+        </div>
+    </section>
+
+<?php
+            
+        }
 	}
 
 ?>

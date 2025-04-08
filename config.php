@@ -26,6 +26,9 @@
     // DONATIES
     // ========
 	
+    /* Zet op 'true' om betalingen voor donaties in te schakelen, of 'false' om ze uit te schakelen */
+    $config['donate_accept'] = true;
+    
 	/* Het doelbedrag op te halen met donaties (in euro centen) */
 	$config['donate_goal'] = 1000000;
 

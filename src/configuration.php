@@ -27,6 +27,10 @@
             return $this->_config['payments_password'];
         }
 
+        public function getAcceptDonations() {
+            return $this->_config['donate_accept'] == true;
+        }
+        
         public function getDonationsGoalValue() {
             return $this->_config['donate_goal'];
         }

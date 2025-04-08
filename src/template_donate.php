@@ -41,44 +41,49 @@
 
 <?php 
 
-	if ($donationPage->doShowDonationForm) {
+    if (!$configuration->getAcceptDonations()) {
+        $donationPage->showDontAcceptDonations();
+    } else {
 
-		$blocks = new WP_Query( array( 'post_parent' => $post->ID, 'post_type' => 'page', 'orderby' => 'menu_order', 'order' => 'ASC' ) ); 
-		if ($blocks->have_posts()) {
+        if ($donationPage->doShowDonationForm) {
 
-			$showDivider = !$hasContent;
+            $blocks = new WP_Query( array( 'post_parent' => $post->ID, 'post_type' => 'page', 'orderby' => 'menu_order', 'order' => 'ASC' ) ); 
+            if ($blocks->have_posts()) {
 
-			while ($blocks->have_posts()) {
-				$blocks->the_post();
+                $showDivider = !$hasContent;
 
-				switch (get_post_meta( $post->ID, '_wp_page_template', true )) {
+                while ($blocks->have_posts()) {
+                    $blocks->the_post();
 
-					case "template_text-with-large-photo.php":
-						include "template_text-with-large-photo.php";
-						break;
+                    switch (get_post_meta( $post->ID, '_wp_page_template', true )) {
 
-					case "template_text-with-photo-right.php":
-						include "template_text-with-photo-right.php";
-						break;
+                        case "template_text-with-large-photo.php":
+                            include "template_text-with-large-photo.php";
+                            break;
 
-					case "template_text-with-photo-left.php":
-						include "template_text-with-photo-left.php";
-						break;
+                        case "template_text-with-photo-right.php":
+                            include "template_text-with-photo-right.php";
+                            break;
 
-					case "template_text-only.php":
-						include "template_text-only.php";
-						break;
+                        case "template_text-with-photo-left.php":
+                            include "template_text-with-photo-left.php";
+                            break;
 
-				}
+                        case "template_text-only.php":
+                            include "template_text-only.php";
+                            break;
 
-				$showDivider = false;
-			} 
+                    }
 
-		}
-		
-		$donationPage->showDonationForm();
-	}
+                    $showDivider = false;
+                } 
 
+            }
+
+            $donationPage->showDonationForm();
+        }
+    }
+    
 	if ($donationPage->doShowDonationConfirmation) {
 
 		$donationPage->showDonationConfirmation();

@@ -1,13 +1,13 @@
 #
 # Martine Hoopt Op Beter Website Translations
-# Copyright (C) 2016, Marco Miltenburg
+# Copyright (C) 2016-2025, Marco Miltenburg
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: MrtineHooptOpBeterWebsite\n"
 "Report-Msgid-Bugs-To: martinehooptopbeter@gmail.com\n"
 "POT-Creation-Date: 2016-09-10 13:35+0100\n"
-"PO-Revision-Date: 2016-09-10 13:35+0100\n"
+"PO-Revision-Date: 2025-04-08 21:47+0100\n"
 "Last-Translator: Marco Miltenburg <marco.miltenburg@gmail.com>\n"
 "Language-Team: Dutch <martinehooptopbeter@gmail.com>\n"
 "Language: nl_NL\n"
@@ -368,3 +368,6 @@ msgstr "Kies jouw bank"
 
 msgid "There have been known problems with iDEAL transaction with this bank during the last hour. If you experience any problem please try again later."
 msgstr "Er zijn gedurende het laatste uur problemen geweest met iDEAL betalingen bij deze bank. Mocht de betaling niet lukken, probeer het dan later nog een keer."
+
+msgid "Donations are not accepted anymore. We would like to thank all donors for their donations."
+msgstr "Donaties worden niet meer geaccepteerd. We willen alle donateurs bedanken voor hun donaties."
