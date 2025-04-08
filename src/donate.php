@@ -256,7 +256,7 @@
 					<p class="error"><?php echo esc_attr($this->errorMessage); ?></p>
 				<?php else : ?>
 			
-					<?php if (($this->donate_payment_status == PaymentStatus::Paid) || ($this->donate_payment_status == PaymentStatus::PaidOut)) :  ?>
+					<?php if (($this->donate_payment_status == PaymentStatus::Paid)) :  ?>
 					
 						<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
 						
@@ -279,7 +279,7 @@
 						</script>
 						<?php endif; ?>
 						
-					<?php elseif (($this->donate_payment_status == 'cancelled') || ($this->donate_payment_status == 'expired') || ($this->donate_payment_status == 'failed')) :  ?>
+					<?php elseif (($this->donate_payment_status == 'canceled') || ($this->donate_payment_status == 'expired') || ($this->donate_payment_status == 'failed')) :  ?>
 						<?php $showDonateAgain = true; ?>
 
 						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
