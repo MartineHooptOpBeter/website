@@ -113,7 +113,7 @@
         {
             $registrations = [];
 
-            if (!$payments = $this->getPaymentsList(PaymentTypes::PonyPlayDayRegistration, PaymentStatus::Paid_Or_PaidOut, $page, $itemsPerPage, $sortOrder))
+            if (!$payments = $this->getPaymentsList(PaymentTypes::PonyPlayDayRegistration, PaymentStatus::Paid, $page, $itemsPerPage, $sortOrder))
                 return null;
 
             foreach($payments as $payment) {
@@ -126,12 +126,12 @@
 		
 		public function getPonyPlayDayRegistrationsListCount()
         {
-            return $this->getPaymentsListCount(PaymentTypes::PonyPlayDayRegistration, PaymentStatus::Paid_Or_PaidOut);
+            return $this->getPaymentsListCount(PaymentTypes::PonyPlayDayRegistration, PaymentStatus::Paid);
 		}
 		
 		public function getTotalPonyPlayDayRegistrationsAmount()
         {
-            return $this->getTotalPaymentsAmount(PaymentTypes::PonyPlayDayRegistration, PaymentStatus::Paid_Or_PaidOut);
+            return $this->getTotalPaymentsAmount(PaymentTypes::PonyPlayDayRegistration, PaymentStatus::Paid);
         }
 
     }

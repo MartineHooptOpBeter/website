@@ -18,13 +18,16 @@
         public function createMolliePayment($payment, $idealissuer, $description, $returnurl)
         {
 
-            $mollie = new Mollie_API_Client;
+            $mollie = new \Mollie\Api\MollieApiClient();
             $mollie->setApiKey($this->_configuration->getMollieApiKey());
 
             try
             {
                 $options = array(
-                    'amount'      => Payment::formatDecimal($payment->amount),
+                    'amount'      => array(
+                        'value' => Payment::formatDecimal($payment->amount),
+                        'currency' => 'EUR'
+                    ),
                     'description' => $description,
                     'redirectUrl' => $returnurl,
                     'webhookUrl'  => $this->_configuration->getMollieWebhookUrl(),
@@ -44,7 +47,7 @@
                     $payments = new Payments($this->_configuration->getPaymentsDatabaseDataSourceName(), $this->_configuration->getPaymentsDatabaseUsername(), $this->_configuration->getPaymentsDatabasePassword());
 
                     if ($payments->updatePaymentId($payment->id, $payment->paymentVerification, $mollie_payment->id)) {
-                        return $mollie_payment->getPaymentUrl();
+                        return $mollie_payment->_links->checkout->href;
                     }
                 }
 

@@ -15,7 +15,7 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		
-		$mollie = new Mollie_API_Client;
+		$mollie = new \Mollie\Api\MollieApiClient();
 		$mollie->setApiKey($configuration->getMollieApiKey());
 
 		try {

@@ -307,7 +307,7 @@
 					<p class="error"><?php echo esc_attr($this->errorMessage); ?></p>
 				<?php else : ?>
 			
-					<?php if (($this->registration_payment_status == PaymentStatus::Paid) || ($this->registration_payment_status == PaymentStatus::PaidOut)) :  ?>
+					<?php if ($this->registration_payment_status == PaymentStatus::Paid) :  ?>
 					
 						<h2><?php _e('Thank You', 'martinehooptopbeter'); ?></h2>
 						
@@ -330,7 +330,7 @@
 						</script>
 						<?php endif; ?>
 						
-					<?php elseif (($this->registration_payment_status == 'cancelled') || ($this->registration_payment_status == 'expired') || ($this->registration_payment_status == 'failed')) :  ?>
+					<?php elseif (($this->registration_payment_status == 'canceled') || ($this->registration_payment_status == 'expired') || ($this->registration_payment_status == 'failed')) :  ?>
 						<?php $showRegisterAgain = true; ?>
 
 						<h2><?php _e('Sorry', 'martinehooptopbeter'); ?></h2>
